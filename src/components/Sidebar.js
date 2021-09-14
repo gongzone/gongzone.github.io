@@ -8,10 +8,18 @@ import {
 } from "react-icons/fa";
 import styled from "styled-components";
 
+const Backdrop = (props) => {
+  return (
+    <BackdropWrapper isOpen={props.isOpen}>
+      <div className="click-range" onClick={props.onClick}></div>
+    </BackdropWrapper>
+  );
+};
+
 const Sidebar = (props) => {
   return (
     <>
-      <Backdrop isOpen={props.isOpen} />
+      <Backdrop isOpen={props.isOpen} onClick={props.controlSidebar} />
       <Wrapper isOpen={props.isOpen}>
         <button className="close-button" onClick={props.controlSidebar}>
           <FaTimes />
@@ -19,19 +27,19 @@ const Sidebar = (props) => {
         <div className="sidebar-links">
           <ul>
             <li>
-              <Link to="/">
+              <Link to="/" onClick={props.controlSidebar}>
                 <FaHouseDamage />
                 <span className="link-text">Home</span>
               </Link>
             </li>
             <li>
-              <Link to="/about">
+              <Link to="/about" onClick={props.controlSidebar}>
                 <FaCommentDots />
                 <span className="link-text">About</span>
               </Link>
             </li>
             <li>
-              <Link to="/search">
+              <Link to="/search" onClick={props.controlSidebar}>
                 <FaSearch />
                 <span className="link-text">Search</span>
               </Link>
@@ -43,7 +51,7 @@ const Sidebar = (props) => {
   );
 };
 
-const Backdrop = styled.div`
+const BackdropWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -54,6 +62,11 @@ const Backdrop = styled.div`
   transition: all 0.8s ease;
   background: ${(props) =>
     props.isOpen ? "rgba(0, 0, 0, 29%)" : "rgba(0, 0, 0, 0%)"};
+
+  .click-range {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Wrapper = styled.aside`
@@ -68,7 +81,7 @@ const Wrapper = styled.aside`
   transition: all 0.8s ease;
   transform: ${(props) =>
     props.isOpen ? "translateX(0)" : "translateX(100%)"};
-  filter: drop-shadow(-0.3rem 0 0.4rem rgba(0, 0, 0, 25%));
+  box-shadow: -0.3rem 0 0.4rem rgba(0, 0, 0, 25%);
 
   .close-button {
     position: absolute;

@@ -18,13 +18,15 @@ const Header = ({ controlSidebar }) => {
 };
 
 const Wrapper = styled.header`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 7rem;
   background-color: #fff5dd;
-  filter: drop-shadow(0 0.2rem 0.5rem rgba(0, 0, 0, 25%));
+  z-index: 77;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 35%);
 
   .logo {
     margin-left: 2rem;
