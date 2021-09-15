@@ -6,6 +6,8 @@ const Card = (props) => {
     <Wrapper
       width={props.w}
       height={props.h}
+      display={props.display}
+      justify={props.justify}
       background={props.background}
       border={props.border}
       borderRadius={props.borderRadius}
@@ -17,8 +19,8 @@ const Card = (props) => {
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: ${(props) => props.display || "block"};
+  justify-content: ${(props) => props.justify || "none"};
   align-items: center;
   width: ${(props) => props.width};
   height: ${(props) => props.height};

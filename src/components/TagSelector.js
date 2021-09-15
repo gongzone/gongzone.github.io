@@ -1,21 +1,14 @@
 import React from "react";
 import { BsTriangleFill } from "react-icons/bs";
 import styled from "styled-components";
-import Card from "./UI/Card";
 
 const TagSelector = () => {
   return (
     <Wrapper>
-      <Card
-        w="83.3%"
-        h="4.8rem"
-        border="0.2rem solid #E25050"
-        borderRadius="1rem"
-        boxShadow="on"
-      >
+      <div className="selector-box">
         <span className="current-tag">Tag: ALL</span>
         <BsTriangleFill className="triangle-down" />
-      </Card>
+      </div>
     </Wrapper>
   );
 };
@@ -28,6 +21,17 @@ const Wrapper = styled.div`
   height: 10rem;
   font-size: 1.9rem;
   border-bottom: 0.1rem solid rgba(0, 0, 0, 15%);
+
+  .selector-box {
+    width: 83.3%;
+    height: 4.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0.2rem solid #e25050;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 25%);
+  }
 
   .current-tag {
     font-family: imprima, arial, sans-serif;
