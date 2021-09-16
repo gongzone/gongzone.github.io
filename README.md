@@ -4,3 +4,4 @@
 2. Header Component 작업완료, 사이드바 슬라이드 기능 추가, 백드롭 구현
 3. Hero Component 작업완료, Tag Selector UI만 구현(기능 설계 나중에)
 4. 홈페이지에 graphql을 이용하여 post 목록 display 완료, createPage API를 이용하여 template page 구현 완료.
+5. Customizing Markdown Components 환경 구축 완료-MDX Provider-(Code Highlight까지 완료)

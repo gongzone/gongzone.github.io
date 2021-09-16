@@ -19,7 +19,7 @@ const Post = ({ frontmatter }) => {
         <Link to={`/${slug}`}>
           <h3>{title}</h3>
         </Link>
-        <p>{description}</p>
+        <p className="description">{description}</p>
         <div className="tag-container">
           {tags.map((tag, index) => {
             return (
@@ -55,6 +55,10 @@ const Wrapper = styled.article`
     align-items: center;
     width: 90%;
     margin: 0 auto;
+  }
+  .description {
+    font-size: 1.6rem;
+    margin: 1.5rem 0 2rem 0;
   }
   .tag-container {
   }
