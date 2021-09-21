@@ -1,38 +1,47 @@
 import React from "react";
-import Layout from "../components/Layout";
 import { graphql } from "gatsby";
+import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import TagSelector from "../components/TagSelector";
 import Posts from "../components/Posts";
 
-const index = ({ data }) => {
+const TagTemplate = (props) => {
   const {
-    allMdx: { nodes: posts },
-  } = data;
+    data: {
+      allMdx: { nodes: posts },
+    },
+  } = props;
+
+  const {
+    pageContext: { tag },
+  } = props;
 
   return (
     <Layout>
       <Hero />
-      <TagSelector tag="ALL" />
+      <TagSelector tag={tag} />
       <Posts posts={posts} />
     </Layout>
   );
 };
 
 export const query = graphql`
-  {
-    allMdx(limit: 10, sort: { fields: frontmatter___date, order: DESC }) {
+  query GetPostByTag($tag: String) {
+    allMdx(
+      sort: { fields: frontmatter___date, order: DESC }
+      filter: { frontmatter: { tags: { eq: $tag } } }
+    ) {
       nodes {
         id
         frontmatter {
           title
-          description
           tags
           slug
+          description
           date(formatString: "YYYY년 MM월 DD일")
           image {
             childImageSharp {
-              gatsbyImageData(placeholder: TRACED_SVG)
+              gatsbyImageData
             }
           }
         }
@@ -41,4 +50,4 @@ export const query = graphql`
   }
 `;
 
-export default index;
+export default TagTemplate;

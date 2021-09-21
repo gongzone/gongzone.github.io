@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsTriangleFill } from "react-icons/bs";
 import styled from "styled-components";
+import TagModal from "./TagModal";
 
-const TagSelector = () => {
+const TagSelector = ({ tag }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const clickHandler = () => {
+    setShowModal(!showModal);
+  };
+
   return (
-    <Wrapper>
-      <div className="selector-box">
-        <span className="current-tag">Tag: ALL</span>
-        <BsTriangleFill className="triangle-down" />
-      </div>
-    </Wrapper>
+    <>
+      {showModal && <TagModal onClick={clickHandler} />}
+      <Wrapper>
+        <div className="selector-box" onClick={clickHandler}>
+          <span className="current-tag">Tag: {tag}</span>
+          <BsTriangleFill className="triangle-down" />
+        </div>
+      </Wrapper>
+    </>
   );
 };
 
