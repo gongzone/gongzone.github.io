@@ -12,23 +12,40 @@ const query = graphql`
   }
 `;
 
-const TagModal = ({ onClick }) => {
+const TagModal = ({ onClick, tag }) => {
   const {
     allMdx: { distinct: tags },
   } = useStaticQuery(query);
 
+  const allTags = ["ALL", ...tags];
+
   const [isSelected, setIsSelected] = useState([]);
   const [selectedTag, setSelectedTag] = useState("");
 
-  useEffect(() => {
-    const selectedIndex = isSelected.indexOf(true);
-    setSelectedTag(tags[selectedIndex - 1] || "");
-  }, [isSelected]);
-
   const ulRef = useRef(null);
-  const liRefs = Array.from({ length: tags.length + 1 }, () =>
+  const liRefs = Array.from({ length: allTags.length }, () =>
     React.createRef()
   );
+
+  useEffect(() => {
+    const selectedIndex = isSelected.indexOf(true);
+    const tag = allTags[selectedIndex] === "ALL" ? "" : allTags[selectedIndex];
+
+    setSelectedTag(tag);
+  }, [isSelected]);
+
+  useEffect(() => {
+    const selectedTagIndex = allTags.indexOf(tag);
+    const defaultPosition =
+      liRefs[0].current.offsetLeft + liRefs[0].current.offsetWidth / 2;
+
+    if (selectedTagIndex !== 0) {
+      ulRef.current.scrollLeft =
+        liRefs[selectedTagIndex].current.offsetLeft -
+        defaultPosition +
+        liRefs[selectedTagIndex].current.offsetWidth / 2;
+    }
+  }, [tag]);
 
   const onScrollHandler = () => {
     const selectorPosition = ulRef.current.offsetWidth / 2;
@@ -44,7 +61,6 @@ const TagModal = ({ onClick }) => {
         liRefs[i].current.offsetWidth / 2 >=
         Math.abs(ElementCenter - selectorPosition);
     }
-    console.log("start");
     setIsSelected(selectedArray);
   };
 
@@ -61,15 +77,12 @@ const TagModal = ({ onClick }) => {
       <BsCaretRightFill className="selector" />
       <div className="modal-main">
         <ul className="tags" ref={ulRef} onScroll={onScrollHandler}>
-          <li className={`tag ${isSelected[0] && "active"}`} ref={liRefs[0]}>
-            ALL
-          </li>
-          {tags.map((tag, index) => {
+          {allTags.map((tag, index) => {
             return (
               <li
-                className={`tag ${isSelected[index + 1] && "active"}`}
+                className={`tag ${isSelected[index] && "active"}`}
                 key={index}
-                ref={liRefs[index + 1]}
+                ref={liRefs[index]}
               >
                 {tag}
               </li>

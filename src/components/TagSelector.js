@@ -12,7 +12,7 @@ const TagSelector = ({ tag }) => {
 
   return (
     <>
-      {showModal && <TagModal onClick={clickHandler} />}
+      {showModal && <TagModal onClick={clickHandler} tag={tag} />}
       <Wrapper>
         <div className="selector-box" onClick={clickHandler}>
           <span className="current-tag">Tag: {tag}</span>
