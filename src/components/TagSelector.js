@@ -14,10 +14,10 @@ const TagSelector = ({ tag }) => {
     <>
       {showModal && <TagModal onClick={clickHandler} tag={tag} />}
       <Wrapper>
-        <div className="selector-box" onClick={clickHandler}>
+        <button className="selector-box" onClick={clickHandler}>
           <span className="current-tag">Tag: {tag}</span>
           <BsTriangleFill className="triangle-down" />
-        </div>
+        </button>
       </Wrapper>
     </>
   );
@@ -36,6 +36,7 @@ const Wrapper = styled.div`
     width: 83.3%;
     height: 4.8rem;
     display: flex;
+    background: transparent;
     justify-content: space-between;
     align-items: center;
     border: 0.2rem solid #e25050;

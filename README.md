@@ -6,3 +6,5 @@
 4. 홈페이지에 graphql을 이용하여 post 목록 display 완료, createPage API를 이용하여 template page 구현 완료.
 5. Customizing Markdown Components 환경 구축 완료-MDX Provider-(Code Highlight까지 완료)
 6. 태그 셀렉터 scroll snapping 적용, 특정 태그 선택시 해당 태그 템플레이트로 이동 구현 완료
+7. 변화 된 태그에 따라 태그 셀렉터 상 그 위치로 이동하는 로직 구현
+8. pagination 구현 완료 (graphql gatsbyimage error가 간헐적으로 발생한다... 무슨 이유일까??)

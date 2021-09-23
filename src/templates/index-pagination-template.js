@@ -1,11 +1,12 @@
 import React from "react";
-import { graphql } from "gatsby";
 import Layout from "../components/Layout";
+import { graphql } from "gatsby";
 import Hero from "../components/Hero";
 import TagSelector from "../components/TagSelector";
 import Posts from "../components/Posts";
+import Pagination from "../components/Pagination";
 
-const TagTemplate = (props) => {
+const IndexPaginationTemplate = (props) => {
   const {
     data: {
       allMdx: { nodes: posts },
@@ -13,35 +14,37 @@ const TagTemplate = (props) => {
   } = props;
 
   const {
-    pageContext: { tag },
+    pageContext: { currentPage, totalPagination },
   } = props;
 
   return (
     <Layout>
       <Hero />
-      <TagSelector tag={tag} />
+      <TagSelector tag="ALL" />
       <Posts posts={posts} />
+      <Pagination currentPage={currentPage} totalPagination={totalPagination} />
     </Layout>
   );
 };
 
 export const query = graphql`
-  query GetPostByTag($tag: String) {
+  query GetPostByPagination($limit: Int, $skip: Int) {
     allMdx(
+      limit: $limit
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { tags: { eq: $tag } } }
+      skip: $skip
     ) {
       nodes {
         id
         frontmatter {
           title
+          description
           tags
           slug
-          description
           date(formatString: "YYYY년 MM월 DD일")
           image {
             childImageSharp {
-              gatsbyImageData
+              gatsbyImageData(placeholder: TRACED_SVG)
             }
           }
         }
@@ -50,4 +53,4 @@ export const query = graphql`
   }
 `;
 
-export default TagTemplate;
+export default IndexPaginationTemplate;

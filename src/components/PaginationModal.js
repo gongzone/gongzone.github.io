@@ -1,55 +1,46 @@
 import React, { useRef, useState, useEffect } from "react";
-import { graphql, useStaticQuery } from "gatsby";
 import SelectorModal from "./UI/SelectorModal";
 
-const query = graphql`
-  {
-    allMdx {
-      distinct(field: frontmatter___tags)
-    }
-  }
-`;
-
-const TagModal = ({ onClick, tag }) => {
-  const {
-    allMdx: { distinct: tags },
-  } = useStaticQuery(query);
-
-  const allTags = ["ALL", ...tags];
-
+const PaginationModal = ({ tag, onClick, currentPage, totalPagination }) => {
   const [isSelected, setIsSelected] = useState([]);
-  const [selectedTag, setSelectedTag] = useState("");
+  const [selectedPage, setSelectedPage] = useState(1);
+
+  const pageNumbers = [];
+
+  for (let i = 1; i <= totalPagination; i++) {
+    pageNumbers.push(i);
+  }
 
   const ulRef = useRef(null);
-  const liRefs = Array.from({ length: allTags.length }, () =>
+  const liRefs = Array.from({ length: totalPagination }, () =>
     React.createRef()
   );
 
   useEffect(() => {
     const selectedIndex = isSelected.indexOf(true);
-    const tag = allTags[selectedIndex] === "ALL" ? "" : allTags[selectedIndex];
+    const pageNumber = pageNumbers[selectedIndex];
 
-    setSelectedTag(tag);
+    setSelectedPage(pageNumber);
   }, [isSelected]);
 
   useEffect(() => {
-    const selectedTagIndex = allTags.indexOf(tag);
+    const currentIndex = +currentPage - 1;
     const defaultPosition =
       liRefs[0].current.offsetLeft + liRefs[0].current.offsetWidth / 2;
 
-    if (selectedTagIndex !== 0) {
+    if (currentIndex !== 0) {
       ulRef.current.scrollLeft =
-        liRefs[selectedTagIndex].current.offsetLeft -
+        liRefs[currentIndex].current.offsetLeft -
         defaultPosition +
-        liRefs[selectedTagIndex].current.offsetWidth / 2;
+        liRefs[currentIndex].current.offsetWidth / 2;
     }
-  }, [tag]);
+  }, [currentPage]);
 
   const onScrollHandler = () => {
     const selectorPosition = ulRef.current.offsetWidth / 2;
     const selectedArray = [];
 
-    for (let i = 0; i < allTags.length; i++) {
+    for (let i = 0; i < pageNumbers.length; i++) {
       const ElementCenter =
         liRefs[i].current.offsetLeft +
         liRefs[i].current.offsetWidth / 2 -
@@ -62,15 +53,21 @@ const TagModal = ({ onClick, tag }) => {
     setIsSelected(selectedArray);
   };
 
+  let selectedURL = tag ? `${tag}/${selectedPage}` : `${selectedPage}`;
+
+  if (selectedPage === 1) {
+    selectedURL = tag ? `${tag}` : "";
+  }
+
   return (
     <>
       <SelectorModal
-        title="Tag"
-        selected={selectedTag}
+        title="Page"
+        selected={selectedURL}
         onClickHandler={onClick}
         ulRef={ulRef}
         onScrollHandler={onScrollHandler}
-        allLists={allTags}
+        allLists={pageNumbers}
         isSelected={isSelected}
         liRefs={liRefs}
       />
@@ -78,4 +75,4 @@ const TagModal = ({ onClick, tag }) => {
   );
 };
 
-export default TagModal;
+export default PaginationModal;
