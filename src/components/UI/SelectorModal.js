@@ -49,7 +49,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 88;
+  z-index: 999;
   border-radius: 1rem;
   transform: translate(-50%, -50%);
   max-width: 52.5rem;

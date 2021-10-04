@@ -16,6 +16,7 @@ const Posts = ({ posts }) => {
 
 const Wrapper = styled.section`
   width: 90vw;
+  max-width: 50.7rem;
   margin: 2rem auto;
 `;
 

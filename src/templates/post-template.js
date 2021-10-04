@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import SEO from "../components/SEO";
+import Utterance from "../components/Utterance";
 
 const PostTemplate = ({ data }) => {
   const {
@@ -15,6 +17,7 @@ const PostTemplate = ({ data }) => {
 
   return (
     <Layout>
+      <SEO title={title} />
       <Wrapper>
         <article className="post-header">
           <GatsbyImage
@@ -29,6 +32,7 @@ const PostTemplate = ({ data }) => {
         <article>
           <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
         </article>
+        <Utterance />
       </Wrapper>
     </Layout>
   );

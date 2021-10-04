@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BsTriangleFill } from "react-icons/bs";
 import styled from "styled-components";
 import TagModal from "./TagModal";
+import RoundedBox from "./UI/RoundedBox";
+import { FaSearch } from "react-icons/fa";
 
 const TagSelector = ({ tag }) => {
   const [showModal, setShowModal] = useState(false);
@@ -14,36 +16,89 @@ const TagSelector = ({ tag }) => {
     <>
       {showModal && <TagModal onClick={clickHandler} tag={tag} />}
       <Wrapper>
-        <button className="selector-box" onClick={clickHandler}>
-          <span className="current-tag">Tag: {tag}</span>
-          <BsTriangleFill className="triangle-down" />
-        </button>
+        <div className="title-container">
+          <span className="title">GongZone DevBlog</span>
+          <div className="highlight"></div>
+        </div>
+        <RoundedBox>
+          <button className="tag-selector" type="button" onClick={clickHandler}>
+            <span className="current-tag">Tag: {tag}</span>
+            <BsTriangleFill className="triangle-down" />
+          </button>
+        </RoundedBox>
+        <RoundedBox flex>
+          <label htmlFor="search" className="searchLabel"></label>
+          <input
+            className="searchbar"
+            type="text"
+            placeholder="Search..."
+            name="search"
+            id="search"
+          />
+
+          <div className="search-icon">
+            <FaSearch />
+          </div>
+        </RoundedBox>
       </Wrapper>
     </>
   );
 };
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 10rem;
+  height: 20rem;
   font-size: 1.9rem;
+  margin-top: 1.5rem;
   border-bottom: 0.1rem solid rgba(0, 0, 0, 15%);
 
-  .selector-box {
-    width: 83.3%;
-    height: 4.8rem;
+  .title-container {
+    position: relative;
     display: flex;
-    background: transparent;
-    justify-content: space-between;
-    align-items: center;
-    border: 0.2rem solid #e25050;
-    border-radius: 1rem;
-    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 25%);
+    justify-content: center;
+  }
+  .title {
+    font-family: "Carrois Gothic SC", arial, sans-serif;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 0 2px #cc7474, 0 0 2px #cc7474, 0 0 2px #cc7474,
+      0 0 2px #cc7474, 0 0 2px #cc7474, 0 0 2px #cc7474, 0 0 2px #cc7474,
+      0 0 2px #cc7474, 0 0 2px #cc7474, 0 0 2px #cc7474, 0 0 2px #cc7474,
+      0 0 2px #cc7474, 0 0 2px #cc7474, 0 0 2px #cc7474, 0 0 2px #cc7474,
+      0 0 2px #cc7474;
   }
 
+  .highlight {
+    position: absolute;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 29.5rem;
+    height: 1.9rem;
+    background: rgba(135, 88, 157, 20%);
+  }
+  .searchLabel {
+    position: absolute;
+    z-index: 99;
+    width: 83.3vw;
+    height: 5rem;
+  }
+
+  .tag-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background: transparent;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+  }
   .current-tag {
     font-family: imprima, arial, sans-serif;
     margin-left: 2rem;
@@ -53,6 +108,26 @@ const Wrapper = styled.div`
     transform: rotate(180deg);
     color: #d83232;
     margin-right: 2rem;
+  }
+
+  .searchbar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-family: imprima, arial, sans-serif;
+    padding-left: 2rem;
+    outline: none;
+    border: none;
+  }
+  .search-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 2.5rem;
+    height: 100%;
+    font-size: 2rem;
+    color: #d83232;
   }
 `;
 

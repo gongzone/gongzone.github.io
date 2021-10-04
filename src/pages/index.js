@@ -5,6 +5,7 @@ import Hero from "../components/Hero";
 import TagSelector from "../components/TagSelector";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
+import SEO from "../components/SEO";
 
 const index = ({ data }) => {
   const {
@@ -20,6 +21,7 @@ const index = ({ data }) => {
 
   return (
     <Layout>
+      <SEO title="Home" />
       <Hero />
       <TagSelector tag="ALL" />
       <Posts posts={posts} />

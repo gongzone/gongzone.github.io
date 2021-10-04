@@ -5,6 +5,7 @@ import Hero from "../components/Hero";
 import TagSelector from "../components/TagSelector";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
+import SEO from "../components/SEO";
 
 const PaginationTemplate = (props) => {
   const {
@@ -19,6 +20,7 @@ const PaginationTemplate = (props) => {
 
   return (
     <Layout>
+      <SEO title={tag} />
       <Hero />
       <TagSelector tag={tag} />
       <Posts posts={posts} />

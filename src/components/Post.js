@@ -43,6 +43,7 @@ const Wrapper = styled.article`
   border: 0.1rem solid rgba(0, 0, 0, 15%);
   border-radius: 1rem;
   box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 25%);
+  background: white;
 
   .post-image {
     border-radius: 0.8rem;

@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
     <>
       <Header controlSidebar={controlSidebar} />
       <Sidebar controlSidebar={controlSidebar} isOpen={isOpen} />
-      <main>{children}</main>
+      <main className="main">{children}</main>
     </>
   );
 };

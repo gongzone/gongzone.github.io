@@ -57,7 +57,7 @@ const BackdropWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 88;
+  z-index: 888;
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
   transition: all 0.8s ease;
   background: ${(props) =>
@@ -76,7 +76,7 @@ const Wrapper = styled.aside`
   height: 100vh;
   width: 27rem;
   background-color: #fff5dd;
-  z-index: 99;
+  z-index: 999;
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
   transition: all 0.8s ease;
   transform: ${(props) =>

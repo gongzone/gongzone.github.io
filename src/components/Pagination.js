@@ -9,10 +9,11 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
   const [showButton, setShowButton] = useState({ prev: true, next: true });
 
   useEffect(() => {
-    if (+currentPage === 1) {
+    if (+currentPage === 1 && +currentPage === totalPagination) {
+      setShowButton({ prev: false, next: false });
+    } else if (+currentPage === 1) {
       setShowButton({ prev: false, next: true });
-    }
-    if (+currentPage === totalPagination) {
+    } else if (+currentPage === totalPagination) {
       setShowButton({ prev: true, next: false });
     }
   }, [currentPage, totalPagination]);
@@ -66,7 +67,9 @@ const Wrapper = styled.div`
   top: -1rem;
   width: 88vw;
   height: 4.6rem;
-  margin: 0 auto 2rem auto;
+  max-width: 50rem;
+  margin: 0 auto 0 auto;
+  padding-bottom: 2rem;
 
   .card {
     position: absolute;
