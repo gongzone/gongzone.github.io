@@ -97,6 +97,7 @@ const Wrapper = styled.div`
     background: #fcfcfc;
     width: 100%;
     height: 100%;
+    scroll-snap-type: x proximity;
     overflow-x: scroll;
     position: absolute;
     top: 50%;
@@ -124,13 +125,13 @@ const Wrapper = styled.div`
   }
 
   .tag:first-child {
-    margin-left: 56%;
+    margin-left: 42%;
   }
 
   .tag:last-child:after {
     content: "";
     position: absolute;
-    right: -18rem;
+    right: -12.5rem;
     width: 100%;
     height: 100%;
   }
