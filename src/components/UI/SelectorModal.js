@@ -54,7 +54,7 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
   max-width: 52.5rem;
   max-height: 45rem;
-  width: 90vw;
+  width: 32.4rem;
   height: 41vh;
   box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 25%);
 
@@ -97,7 +97,6 @@ const Wrapper = styled.div`
     background: #fcfcfc;
     width: 100%;
     height: 100%;
-    scroll-snap-type: x proximity;
     overflow-x: scroll;
     position: absolute;
     top: 50%;
@@ -135,7 +134,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100%;
   }
-  @media screen and (min-width: 400px) {
+  /* @media screen and (min-width: 400px) {
     .tag:last-child:after {
       right: -21rem;
     }
@@ -157,7 +156,7 @@ const Wrapper = styled.div`
     .tag:last-child:after {
       right: -29rem;
     }
-  }
+  } */
 `;
 
 export default SelectorModal;
