@@ -9,4 +9,4 @@
 7. 변화 된 태그에 따라 태그 셀렉터 상 그 위치로 이동하는 로직 구현
 8. pagination 구현 완료 (graphql gatsbyimage error가 간헐적으로 발생한다... 무슨 이유일까??)
 9. 댓글 시스템 구축(utterance), hero 이미지 변경, search input 박스 생성
-10. 해야할 것: 모바일 뷰포트? responsive design
+10.

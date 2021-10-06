@@ -107,6 +107,7 @@ const Wrapper = styled.div`
     margin: 0;
   }
   .tag {
+    position: relative;
     color: #3d3d3d;
     font-weight: bold;
     transition: all 0.8s ease;
@@ -124,10 +125,38 @@ const Wrapper = styled.div`
   }
 
   .tag:first-child {
-    margin-left: 46%;
+    margin-left: 56%;
   }
-  .tag:last-child {
-    margin-right: 45%;
+
+  .tag:last-child:after {
+    content: "";
+    position: absolute;
+    right: -18rem;
+    width: 100%;
+    height: 100%;
+  }
+  @media screen and (min-width: 400px) {
+    .tag:last-child:after {
+      right: -21rem;
+    }
+  }
+
+  @media screen and (min-width: 450px) {
+    .tag:last-child:after {
+      right: -24rem;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    .tag:last-child:after {
+      right: -27rem;
+    }
+  }
+
+  @media screen and (min-width: 550px) {
+    .tag:last-child:after {
+      right: -29rem;
+    }
   }
 `;
 
