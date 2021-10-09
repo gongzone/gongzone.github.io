@@ -47,12 +47,3 @@ input::placeholder {
 .main {
   background: #f5f5f6;
 }
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #202b38;
-  }
-  .main {
-    background: #202b38;
-  }
-}

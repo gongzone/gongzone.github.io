@@ -90,12 +90,6 @@ const Wrapper = styled.article`
     margin-right: 0.5rem;
     color: #e25050;
   }
-  @media (prefers-color-scheme: dark) {
-    .tag {
-      background: #00564d;
-      color: #f6f6f6;
-    }
-  }
 `;
 
 export default Post;

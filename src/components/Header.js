@@ -41,10 +41,5 @@ const Wrapper = styled.header`
     background: transparent;
     cursor: pointer;
   }
-  @media (prefers-color-scheme: dark) {
-    & {
-      background-color: #00564d;
-    }
-  }
 `;
 export default Header;
