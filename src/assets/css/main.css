@@ -52,4 +52,7 @@ input::placeholder {
   body {
     background: #202b38;
   }
+  .main {
+    background: #202b38;
+  }
 }
