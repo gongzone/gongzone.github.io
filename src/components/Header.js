@@ -4,13 +4,13 @@ import { Link } from "gatsby";
 import { IoIosMenu } from "react-icons/io";
 import logo from "../assets/images/logo.svg";
 
-const Header = ({ controlSidebar }) => {
+const Header = ({ onSidebar }) => {
   return (
     <Wrapper>
       <Link to="/" className="logo">
         <img src={logo} alt="logo" />
       </Link>
-      <button className="hamburger-menu" onClick={controlSidebar}>
+      <button className="hamburger-menu" onClick={onSidebar}>
         <IoIosMenu />
       </button>
     </Wrapper>

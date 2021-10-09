@@ -18,8 +18,12 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
     }
   }, [currentPage, totalPagination]);
 
-  const clickHandler = () => {
-    setShowModal(!showModal);
+  const onModal = () => {
+    setShowModal(true);
+  };
+
+  const offModal = () => {
+    setShowModal(false);
   };
 
   const nextUrl = tag ? `/${tag}/${+currentPage + 1}` : `/${+currentPage + 1}`;
@@ -34,7 +38,7 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
       {showModal && (
         <PaginationModal
           tag={tag}
-          onClick={clickHandler}
+          offModal={offModal}
           currentPage={currentPage}
           totalPagination={totalPagination}
         />
@@ -47,7 +51,7 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
             </Link>
           </button>
         )}
-        <button className="card pagination-selector" onClick={clickHandler}>
+        <button className="card pagination-selector" onClick={onModal}>
           {currentPage}/{totalPagination}
         </button>
         {showButton.next && (

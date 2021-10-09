@@ -8,20 +8,26 @@ import { FaSearch } from "react-icons/fa";
 const TagSelector = ({ tag }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const clickHandler = () => {
-    setShowModal(!showModal);
+  const onModal = () => {
+    setShowModal(true);
+  };
+
+  const offModal = () => {
+    setShowModal(false);
   };
 
   return (
     <>
-      {showModal && <TagModal onClick={clickHandler} tag={tag} />}
+      {showModal && (
+        <TagModal onModal={onModal} offModal={offModal} tag={tag} />
+      )}
       <Wrapper>
         <div className="title-container">
           <span className="title">GongZone DevBlog</span>
           <div className="highlight"></div>
         </div>
         <RoundedBox>
-          <button className="tag-selector" type="button" onClick={clickHandler}>
+          <button className="tag-selector" type="button" onClick={onModal}>
             <span className="current-tag">Tag: {tag}</span>
             <BsTriangleFill className="triangle-down" />
           </button>

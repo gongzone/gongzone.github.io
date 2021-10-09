@@ -19,27 +19,27 @@ const Backdrop = (props) => {
 const Sidebar = (props) => {
   return (
     <>
-      <Backdrop isOpen={props.isOpen} onClick={props.controlSidebar} />
+      <Backdrop isOpen={props.isOpen} onClick={props.offSidebar} />
       <Wrapper isOpen={props.isOpen}>
-        <button className="close-button" onClick={props.controlSidebar}>
+        <button className="close-button" onClick={props.offSidebar}>
           <FaTimes />
         </button>
         <div className="sidebar-links">
           <ul>
             <li>
-              <Link to="/" onClick={props.controlSidebar}>
+              <Link to="/" onClick={props.offSidebar}>
                 <FaHouseDamage />
                 <span className="link-text">Home</span>
               </Link>
             </li>
             <li>
-              <Link to="/about" onClick={props.controlSidebar}>
+              <Link to="/about" onClick={props.offSidebar}>
                 <FaCommentDots />
                 <span className="link-text">About</span>
               </Link>
             </li>
             <li>
-              <Link to="/search" onClick={props.controlSidebar}>
+              <Link to="/search" onClick={props.offSidebar}>
                 <FaSearch />
                 <span className="link-text">Search</span>
               </Link>
@@ -59,9 +59,9 @@ const BackdropWrapper = styled.div`
   height: 100vh;
   z-index: 888;
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
-  transition: all 0.8s ease;
   background: ${(props) =>
     props.isOpen ? "rgba(0, 0, 0, 29%)" : "rgba(0, 0, 0, 0%)"};
+  transition: all 0.8s ease;
 
   .click-range {
     width: 100%;

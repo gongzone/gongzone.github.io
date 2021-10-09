@@ -5,14 +5,18 @@ import Sidebar from "./Sidebar";
 const Layout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const controlSidebar = () => {
-    setIsOpen(!isOpen);
+  const onSidebar = () => {
+    setIsOpen(true);
+  };
+
+  const offSidebar = () => {
+    setIsOpen(false);
   };
 
   return (
     <>
-      <Header controlSidebar={controlSidebar} />
-      <Sidebar controlSidebar={controlSidebar} isOpen={isOpen} />
+      <Header onSidebar={onSidebar} />
+      <Sidebar offSidebar={offSidebar} isOpen={isOpen} />
       <main className="main">{children}</main>
     </>
   );
