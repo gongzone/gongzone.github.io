@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Hero from "../components/Hero";
-import TagSelector from "../components/TagSelector";
+import Navigation from "../components/Navigation";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
 import SEO from "../components/SEO";
@@ -22,7 +22,7 @@ const PaginationTemplate = (props) => {
     <Layout>
       <SEO title={tag} />
       <Hero />
-      <TagSelector tag={tag} />
+      <Navigation tag={tag} />
       <Posts posts={posts} />
       <Pagination
         tag={tag}

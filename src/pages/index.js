@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import { graphql } from "gatsby";
 import Hero from "../components/Hero";
-import TagSelector from "../components/TagSelector";
+import Navigation from "../components/Navigation";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
 import SEO from "../components/SEO";
@@ -23,7 +23,7 @@ const index = ({ data }) => {
     <Layout>
       <SEO title="Home" />
       <Hero />
-      <TagSelector tag="ALL" />
+      <Navigation tag="ALL" />
       <Posts posts={posts} />
       <Pagination
         currentPage="1"

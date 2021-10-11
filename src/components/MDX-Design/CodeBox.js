@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/nightOwlLight";
 
-const Example = (props) => {
+const CodeBox = (props) => {
   const code = props.children.props.children.trim();
   const language = props.children.props.className.split("-")[1];
 
@@ -31,7 +31,7 @@ const Pre = styled.pre`
   margin: 3rem 0;
   font-size: 1.5rem;
   font-family: "Fira Code", imprima, arial, monospace;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   .token-line {
     line-height: 1.5;
@@ -48,4 +48,4 @@ const Pre = styled.pre`
   }
 `;
 
-export default Example;
+export default CodeBox;

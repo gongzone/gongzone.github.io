@@ -1,4 +1,5 @@
 import "@fontsource/noto-sans-kr";
+import "@fontsource/noto-sans";
 import "@fontsource/imprima";
 import "@fontsource/fira-code";
 import "@fontsource/carrois-gothic-sc";

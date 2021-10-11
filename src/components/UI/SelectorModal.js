@@ -5,9 +5,17 @@ import styled from "styled-components";
 import { useDebouncedCallback } from "use-debounce";
 
 const SelectorModal = (props) => {
-  const { title, lists, currentState, offModal, tag } = props;
+  const { title, lists, offModal, tag } = props;
 
-  const [isSelected, setIsSelected] = useState([true]);
+  const initialSelected = lists.map((list, index) => {
+    if (index === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  const [isSelected, setIsSelected] = useState(initialSelected);
   const [selectedList, setSelectedList] = useState("");
   const [marginLeft, setMarginLeft] = useState(0);
   const [marginRight, setMarginRight] = useState(0);
@@ -80,6 +88,7 @@ const SelectorModal = (props) => {
   const onScrollHandler = () => {
     const selectorPosition = ulRef.current.offsetWidth / 2;
     const selectedArray = [];
+    let isSameArray = true;
 
     for (let i = 0; i < lists.length; i++) {
       const listCenterPosition =
@@ -91,7 +100,20 @@ const SelectorModal = (props) => {
         liRefs[i].current.offsetWidth / 2 >=
         Math.abs(listCenterPosition - selectorPosition);
     }
-    setIsSelected(selectedArray);
+
+    for (let i = 0; i < lists.length; i++) {
+      const isSameList = selectedArray[i] === isSelected[i];
+      if (isSameList) {
+        continue;
+      } else {
+        isSameArray = false;
+        break;
+      }
+    }
+
+    if (!isSameArray) {
+      setIsSelected(selectedArray);
+    }
   };
 
   const alert = () => {
@@ -231,6 +253,7 @@ const Wrapper = styled.div`
     align-items: center;
     margin: 0;
   }
+
   .tag {
     position: relative;
     color: #3d3d3d;
@@ -262,19 +285,6 @@ const Wrapper = styled.div`
     height: 100%;
     content: "";
   }
-
-  /*
-  @media screen and (min-width: 500px) {
-    .tag:last-child:after {
-      right: -27rem;
-    }
-  }
-
-  @media screen and (min-width: 550px) {
-    .tag:last-child:after {
-      right: -29rem;
-    }
-  } */
 `;
 
 export default SelectorModal;

@@ -41,5 +41,20 @@ const Wrapper = styled.header`
     background: transparent;
     cursor: pointer;
   }
+
+  @media screen and (min-width: 768px) {
+    & {
+      height: 8rem;
+    }
+    .logo {
+      transform: scale(1.18);
+      margin-left: 6.5rem;
+    }
+    .hamburger-menu {
+      margin-top: 0.5rem;
+      font-size: 4rem;
+      margin-right: 6.5rem;
+    }
+  }
 `;
 export default Header;

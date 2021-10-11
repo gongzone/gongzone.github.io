@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Header from "./Header";
+import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
 const Layout = ({ children }) => {
@@ -18,6 +19,7 @@ const Layout = ({ children }) => {
       <Header onSidebar={onSidebar} />
       <Sidebar offSidebar={offSidebar} isOpen={isOpen} />
       <main className="main">{children}</main>
+      <Footer />
     </>
   );
 };

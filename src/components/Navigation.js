@@ -5,7 +5,7 @@ import TagModal from "./TagModal";
 import RoundedBox from "./UI/RoundedBox";
 import { FaSearch } from "react-icons/fa";
 
-const TagSelector = ({ tag }) => {
+const Navigation = ({ tag }) => {
   const [showModal, setShowModal] = useState(false);
 
   const onModal = () => {
@@ -93,6 +93,7 @@ const Wrapper = styled.div`
     z-index: 99;
     width: 83.3vw;
     height: 5rem;
+    cursor: pointer;
   }
 
   .tag-selector {
@@ -104,6 +105,7 @@ const Wrapper = styled.div`
     z-index: 99;
     width: 100%;
     height: 100%;
+    cursor: pointer;
   }
   .current-tag {
     font-family: imprima, arial, sans-serif;
@@ -124,6 +126,7 @@ const Wrapper = styled.div`
     padding-left: 2rem;
     outline: none;
     border: none;
+    cursor: pointer;
   }
   .search-icon {
     display: flex;
@@ -137,4 +140,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default TagSelector;
+export default Navigation;

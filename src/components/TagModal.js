@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import SelectorModal from "./UI/SelectorModal";
+import SelectorModalPC from "./UI/SelectorModalPC";
+import { isMobile } from "react-device-detect";
 
 const query = graphql`
   {
@@ -19,12 +21,12 @@ const TagModal = ({ offModal, tag }) => {
 
   return (
     <>
-      <SelectorModal
-        title="Tag"
-        lists={allTags}
-        currentState={tag}
-        offModal={offModal}
-      />
+      {isMobile && (
+        <SelectorModal title="Tag" lists={allTags} offModal={offModal} />
+      )}
+      {!isMobile && (
+        <SelectorModalPC title="Tag" lists={allTags} offModal={offModal} />
+      )}
     </>
   );
 };

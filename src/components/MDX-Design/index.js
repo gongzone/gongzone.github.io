@@ -1,6 +1,7 @@
 import * as Headings from "./Headings";
 import Code from "./Code";
 import DecoDiv from "./DecoDiv";
-import Example from "./Example";
+import CodeBox from "./CodeBox";
+import Paragraph from "./Paragraph";
 
-export { Headings, Code, DecoDiv, Example };
+export { Headings, Code, DecoDiv, CodeBox, Paragraph };

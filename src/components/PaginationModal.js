@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import SelectorModal from "./UI/SelectorModal";
+import SelectorModalPC from "./UI/SelectorModalPC";
+import { isMobile } from "react-device-detect";
 
 const PaginationModal = ({ tag, offModal, currentPage, totalPagination }) => {
   const pageNumbers = [];
@@ -10,13 +12,22 @@ const PaginationModal = ({ tag, offModal, currentPage, totalPagination }) => {
 
   return (
     <>
-      <SelectorModal
-        title="Page"
-        lists={pageNumbers}
-        currentState={+currentPage}
-        offModal={offModal}
-        tag={tag}
-      />
+      {isMobile && (
+        <SelectorModal
+          title="Page"
+          lists={pageNumbers}
+          offModal={offModal}
+          tag={tag}
+        />
+      )}
+      {!isMobile && pageNumbers.length > 1 && (
+        <SelectorModalPC
+          title="Page"
+          lists={pageNumbers}
+          offModal={offModal}
+          tag={tag}
+        />
+      )}
     </>
   );
 };

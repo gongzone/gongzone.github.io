@@ -8,16 +8,17 @@ const Post = ({ frontmatter }) => {
   const { title, description, slug, date, image, tags } = frontmatter;
   return (
     <Wrapper>
-      <Link to={`/${slug}`}>
+      <Link to={`/${slug}`} className="image-link">
         <GatsbyImage
           image={getImage(image)}
           alt={title}
           className="post-image"
         />
       </Link>
+
       <div className="post-info">
         <Link to={`/${slug}`}>
-          <h3>{title}</h3>
+          <h3 className="title">{title}</h3>
         </Link>
         <p className="description">{description}</p>
         <div className="tag-container">
@@ -45,10 +46,15 @@ const Wrapper = styled.article`
   box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 25%);
   background: white;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   .post-image {
     border-radius: 0.8rem;
     margin-bottom: 2rem;
   }
+
   .post-info {
     display: flex;
     flex-direction: column;
@@ -57,15 +63,17 @@ const Wrapper = styled.article`
     width: 90%;
     margin: 0 auto;
   }
+
   .description {
     font-size: 1.6rem;
+    line-height: 1.3;
     margin: 1.5rem 0 2rem 0;
+    word-break: break-all;
   }
-  .tag-container {
-  }
+
   .tag {
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: 1.26rem;
     font-weight: bold;
     color: #2a90ef;
     background: #f6f6f6;
@@ -89,6 +97,46 @@ const Wrapper = styled.article`
     margin-top: 0.1rem;
     margin-right: 0.5rem;
     color: #e25050;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    width: 70rem;
+
+    .post-image {
+      width: 25rem;
+      min-height: 25rem;
+      height: 100%;
+      margin-bottom: 0rem;
+    }
+
+    .title {
+      font-size: 1.9rem;
+      margin: 2rem 4rem;
+    }
+
+    .description {
+      font-size: 1.65rem;
+      margin: 0 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .post-date {
+      font-size: 1.45rem;
+      margin-bottom: 2rem;
+    }
+
+    .tag-container {
+      margin: 0 2.5rem;
+    }
+
+    .tag {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 85rem;
   }
 `;
 

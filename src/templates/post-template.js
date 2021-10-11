@@ -39,14 +39,16 @@ const PostTemplate = ({ data }) => {
 };
 
 const Wrapper = styled.section`
+  max-width: 70rem;
   width: 90vw;
-  margin: 2rem auto;
+  margin: 3rem auto;
 
   .post-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 6rem;
   }
 
   .post-image {
@@ -55,18 +57,19 @@ const Wrapper = styled.section`
   }
 
   .post-title {
+    font-size: 2rem;
     max-width: 90%;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .post-date {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: rgba(97, 125, 152, 69%);
     margin-bottom: 1rem;
   }
 
   .underline {
-    width: 15rem;
+    width: 18rem;
     height: 0.1rem;
     background: rgba(0, 0, 0, 8%);
   }

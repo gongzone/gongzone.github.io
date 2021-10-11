@@ -73,7 +73,7 @@ const Wrapper = styled.div`
   height: 4.6rem;
   max-width: 50rem;
   margin: 0 auto 0 auto;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem;
 
   .card {
     position: absolute;
@@ -87,6 +87,7 @@ const Wrapper = styled.div`
   }
 
   .card.pagination-selector {
+    cursor: pointer;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -107,6 +108,14 @@ const Wrapper = styled.div`
     margin-left: 0.6rem;
     font-size: 1.4rem;
     transform: rotate(90deg);
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 70rem;
+  }
+
+  @media screen and (min-width: 1200px) {
+    max-width: 85rem;
   }
 `;
 
