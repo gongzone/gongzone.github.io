@@ -11,7 +11,12 @@ import styled from "styled-components";
 const Backdrop = (props) => {
   return (
     <BackdropWrapper isOpen={props.isOpen}>
-      <div className="click-range" onClick={props.onClick}></div>
+      <div
+        role="button"
+        className="click-range"
+        onClick={props.onClick}
+        onKeyDown={props.onClick}
+      ></div>
     </BackdropWrapper>
   );
 };

@@ -1,17 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const RoundedBox = ({ children, flex }) => {
-  return <Wrapper flex={flex}>{children}</Wrapper>;
+const RoundedBox = ({ children, marginBottom }) => {
+  return <Wrapper marginBottom={marginBottom}>{children}</Wrapper>;
 };
 
 const Wrapper = styled.div`
   position: relative;
   display: flex;
+  margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : "0")};
   max-width: 46rem;
-  justify-content: ${(props) => (props.flex ? "space-between" : "none")};
-  align-items: ${(props) => (props.flex ? "center" : "none")};
-  margin-bottom: ${(props) => (props.flex ? "2.5rem" : "0")};
   width: 83.3%;
   height: 4.8rem;
   background: white;

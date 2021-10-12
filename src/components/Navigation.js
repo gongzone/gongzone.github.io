@@ -32,19 +32,19 @@ const Navigation = ({ tag }) => {
             <BsTriangleFill className="triangle-down" />
           </button>
         </RoundedBox>
-        <RoundedBox flex>
-          <label htmlFor="search" className="searchLabel"></label>
-          <input
-            className="searchbar"
-            type="text"
-            placeholder="Search..."
-            name="search"
-            id="search"
-          />
-
-          <div className="search-icon">
-            <FaSearch />
-          </div>
+        <RoundedBox marginBottom="2.5rem">
+          <label htmlFor="search" className="searchLabel">
+            <input
+              className="searchbar"
+              type="text"
+              placeholder="Search..."
+              name="search"
+              id="search"
+            />
+            <div className="search-icon">
+              <FaSearch />
+            </div>
+          </label>
         </RoundedBox>
       </Wrapper>
     </>
@@ -89,10 +89,14 @@ const Wrapper = styled.div`
     background: rgba(135, 88, 157, 20%);
   }
   .searchLabel {
-    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     z-index: 99;
+    max-width: 46rem;
     width: 83.3vw;
     height: 5rem;
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
   }
 
@@ -102,11 +106,17 @@ const Wrapper = styled.div`
     align-items: center;
     position: relative;
     background: transparent;
+    -webkit-tap-highlight-color: transparent;
     z-index: 99;
     width: 100%;
     height: 100%;
     cursor: pointer;
   }
+
+  .tag-selector:focus {
+    outline: none;
+  }
+
   .current-tag {
     font-family: imprima, arial, sans-serif;
     margin-left: 2rem;

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import SelectorModal from "./UI/SelectorModal";
 import SelectorModalPC from "./UI/SelectorModalPC";
 import { isMobile } from "react-device-detect";
