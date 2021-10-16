@@ -21,7 +21,7 @@ const index = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Home" index={true} />
       <Hero />
       <Navigation tag="ALL" />
       <Posts posts={posts} />
