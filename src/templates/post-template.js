@@ -73,6 +73,19 @@ const Wrapper = styled.section`
     height: 0.1rem;
     background: rgba(0, 0, 0, 8%);
   }
+
+  @media screen and (min-width: 2000px) {
+    max-width: 85rem;
+
+    .post-title {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .post-date {
+      font-size: 1.9rem;
+      margin-bottom: 1.5rem;
+    }
+  }
 `;
 
 export const query = graphql`

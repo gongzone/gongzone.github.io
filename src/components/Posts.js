@@ -23,10 +23,10 @@ const Wrapper = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 70rem;
+    max-width: 85rem;
   }
-  @media screen and (min-width: 1200px) {
-    max-width: 100rem;
+  @media screen and (min-width: 2000px) {
+    max-width: 105rem;
   }
 `;
 

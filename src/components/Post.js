@@ -101,7 +101,8 @@ const Wrapper = styled.article`
 
   @media screen and (min-width: 768px) {
     display: flex;
-    width: 70rem;
+    max-width: 85rem;
+    width: 90vw;
 
     .post-image {
       width: 25rem;
@@ -132,11 +133,44 @@ const Wrapper = styled.article`
 
     .tag {
       font-size: 1.5rem;
+      margin-right: 1.3rem;
+      margin-bottom: 1.3rem;
+      padding: 0.7rem 1rem;
     }
   }
 
-  @media screen and (min-width: 1200px) {
-    width: 85rem;
+  @media screen and (min-width: 2000px) {
+    max-width: 105rem;
+    .post-image {
+      width: 32rem;
+      min-height: 32rem;
+    }
+    .title {
+      font-size: 2.4rem;
+      margin: 2rem 5.5rem;
+    }
+
+    .description {
+      font-size: 2rem;
+      margin: 0 3.5rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .post-date {
+      font-size: 1.8rem;
+    }
+
+    .tag-container {
+      margin: 0 3.5rem;
+    }
+
+    .tag {
+      font-size: 1.75rem;
+      margin-right: 1.7rem;
+      margin-bottom: 1.7rem;
+      padding: 1rem 1.3rem;
+      border-radius: 0.6rem;
+    }
   }
 `;
 

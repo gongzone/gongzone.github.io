@@ -45,21 +45,17 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
       )}
       <Wrapper>
         {showButton.prev && (
-          <button className="card">
-            <Link to={prevUrl}>
-              Prev <BsTriangleFill className="prev-triangle" />
-            </Link>
-          </button>
+          <Link to={prevUrl} className="card">
+            Prev <BsTriangleFill className="prev-triangle" />
+          </Link>
         )}
         <button className="card pagination-selector" onClick={onModal}>
           {currentPage}/{totalPagination}
         </button>
         {showButton.next && (
-          <button className="card next">
-            <Link to={nextUrl}>
-              Next <BsTriangleFill className="next-triangle" />
-            </Link>
-          </button>
+          <Link to={nextUrl} className="card next">
+            Next <BsTriangleFill className="next-triangle" />
+          </Link>
         )}
       </Wrapper>
     </>
@@ -111,11 +107,15 @@ const Wrapper = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    max-width: 70rem;
+    max-width: 85rem;
   }
 
-  @media screen and (min-width: 1200px) {
-    max-width: 85rem;
+  @media screen and (min-width: 2000px) {
+    .card {
+      font-size: 2.3rem;
+      padding: 1.5rem 2.1rem;
+    }
+    max-width: 105rem;
   }
 `;
 

@@ -148,6 +148,30 @@ const Wrapper = styled.div`
     font-size: 2rem;
     color: #d83232;
   }
+
+  @media screen and (min-width: 2000px) {
+    margin-top: 2rem;
+    height: 24rem;
+
+    .title {
+      font-size: 3.5rem;
+    }
+
+    .highlight {
+      position: absolute;
+      top: 63%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 34.5rem;
+      height: 2.1rem;
+      background: rgba(135, 88, 157, 20%);
+    }
+
+    .searchLabel {
+      max-width: 55rem;
+      height: 6rem;
+    }
+  }
 `;
 
 export default Navigation;
