@@ -43,12 +43,6 @@ const Sidebar = (props) => {
                 <span className="link-text">About</span>
               </Link>
             </li>
-            <li>
-              <Link to="/search" onClick={props.offSidebar}>
-                <FaSearch />
-                <span className="link-text">Search</span>
-              </Link>
-            </li>
           </ul>
         </div>
       </Wrapper>

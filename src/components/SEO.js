@@ -25,6 +25,10 @@ const SEO = ({ title, description, image, article }) => {
 
   return (
     <Helmet title={seo.title} titleTemplate={titleTemplate}>
+      <meta
+        name="google-site-verification"
+        content="google-site-verification=d2FDp8nFncP3tkXHu3EBCTN7jK4jtyFirsh52Xz_gr8"
+      />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
@@ -66,7 +70,7 @@ const query = graphql`
         defaultTitle: title
         titleTemplate
         defaultDescription: description
-        siteUrl: url
+        siteUrl
         defaultImage: image
       }
     }

@@ -3,7 +3,7 @@ module.exports = {
     title: `GongZone DevBlog`,
     titleTemplate: `%s | GongZone`,
     description: "공존의 개발블로그입니다.",
-    url: "https://www.doe.com",
+    siteUrl: "https://gongzone.netlify.app",
     image: "/profile.png",
   },
   plugins: [
@@ -13,11 +13,20 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-mdx`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
         path: `${__dirname}/src/posts/`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://gongzone.netlify.app",
+        sitemap: "https://gongzone.netlify.app/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
       },
     },
   ],
