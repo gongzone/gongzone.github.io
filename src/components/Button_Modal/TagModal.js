@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import SelectorModal from "./UI/SelectorModal";
-import SelectorModalPC from "./UI/SelectorModalPC";
+import Tag_Pagi_Modal from "../UI/Tag_Pagi_Modal";
+import Tag_Pagi_Modal_PC from "../UI/Tag_Pagi_Modal_PC";
 import { isMobile } from "react-device-detect";
 
 const query = graphql`
@@ -12,7 +12,7 @@ const query = graphql`
   }
 `;
 
-const TagModal = ({ offModal, tag }) => {
+const TagModal = ({ offModal }) => {
   const {
     allMdx: { distinct: tags },
   } = useStaticQuery(query);
@@ -22,10 +22,10 @@ const TagModal = ({ offModal, tag }) => {
   return (
     <>
       {isMobile && (
-        <SelectorModal title="Tag" lists={allTags} offModal={offModal} />
+        <Tag_Pagi_Modal title="Tag" lists={allTags} offModal={offModal} />
       )}
       {!isMobile && (
-        <SelectorModalPC title="Tag" lists={allTags} offModal={offModal} />
+        <Tag_Pagi_Modal_PC title="Tag" lists={allTags} offModal={offModal} />
       )}
     </>
   );

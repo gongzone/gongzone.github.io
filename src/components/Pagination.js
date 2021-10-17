@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import { BsTriangleFill } from "react-icons/bs";
-import PaginationModal from "./PaginationModal";
+import PaginationButton from "./Button_Modal/PaginationButton";
 
 const Pagination = ({ tag, currentPage, totalPagination }) => {
-  const [showModal, setShowModal] = useState(false);
   const [showButton, setShowButton] = useState({ prev: true, next: true });
 
   useEffect(() => {
@@ -18,14 +17,6 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
     }
   }, [currentPage, totalPagination]);
 
-  const onModal = () => {
-    setShowModal(true);
-  };
-
-  const offModal = () => {
-    setShowModal(false);
-  };
-
   const nextUrl = tag ? `/${tag}/${+currentPage + 1}` : `/${+currentPage + 1}`;
   let prevUrl = tag ? `/${tag}/${+currentPage - 1}` : `/${+currentPage - 1}`;
 
@@ -34,31 +25,23 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
   }
 
   return (
-    <>
-      {showModal && (
-        <PaginationModal
-          tag={tag}
-          offModal={offModal}
-          currentPage={currentPage}
-          totalPagination={totalPagination}
-        />
+    <Wrapper>
+      {showButton.prev && (
+        <Link to={prevUrl} className="card">
+          Prev <BsTriangleFill className="prev-triangle" />
+        </Link>
       )}
-      <Wrapper>
-        {showButton.prev && (
-          <Link to={prevUrl} className="card">
-            Prev <BsTriangleFill className="prev-triangle" />
-          </Link>
-        )}
-        <button className="card pagination-selector" onClick={onModal}>
-          {currentPage}/{totalPagination}
-        </button>
-        {showButton.next && (
-          <Link to={nextUrl} className="card next">
-            Next <BsTriangleFill className="next-triangle" />
-          </Link>
-        )}
-      </Wrapper>
-    </>
+      <PaginationButton
+        tag={tag}
+        currentPage={currentPage}
+        totalPagination={totalPagination}
+      />
+      {showButton.next && (
+        <Link to={nextUrl} className="card next">
+          Next <BsTriangleFill className="next-triangle" />
+        </Link>
+      )}
+    </Wrapper>
   );
 };
 
@@ -80,12 +63,6 @@ const Wrapper = styled.div`
     padding: 1.3rem 1.9rem;
     border-radius: 0.7rem;
     box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 25%);
-  }
-
-  .card.pagination-selector {
-    cursor: pointer;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   .card.next {

@@ -4,10 +4,10 @@ import { Link } from "gatsby";
 import styled from "styled-components";
 import { useDebouncedCallback } from "use-debounce";
 
-const SelectorModal = (props) => {
+const Tag_Pagi_Modal = (props) => {
   const { title, lists, offModal, tag } = props;
 
-  const initialSelected = lists.map((list, index) => {
+  const initialSelected = lists.map((__, index) => {
     if (index === 0) {
       return true;
     } else {
@@ -16,7 +16,7 @@ const SelectorModal = (props) => {
   });
 
   const [isSelected, setIsSelected] = useState(initialSelected);
-  const [selectedList, setSelectedList] = useState("");
+  const [selectedPath, setSelectedPath] = useState("");
   const [marginLeft, setMarginLeft] = useState(0);
   const [marginRight, setMarginRight] = useState(0);
   const [resizeScale, setResizeScale] = useState({ x: 0, y: 0 });
@@ -48,40 +48,25 @@ const SelectorModal = (props) => {
     setMarginRight(margin_R);
   }, [resizeScale]);
 
-  //현재 선택되어 있는 상태에 따라 해당 li가 가운데 오도록 위치 조정
-  // useEffect(() => {
-  //   const selectedListIndex = lists.indexOf(currentState);
-  //   const firstListPosition =
-  //     liRefs[0].current.offsetLeft + liRefs[0].current.offsetWidth / 2;
-
-  //   if (selectedListIndex !== 0) {
-  //     const selectedListPosition =
-  //       liRefs[selectedListIndex].current.offsetLeft +
-  //       liRefs[selectedListIndex].current.offsetWidth / 2;
-
-  //     console.log(selectedListPosition - firstListPosition);
-  //     ulRef.current.scrollLeft = selectedListPosition - firstListPosition;
-  //     console.log(ulRef.current.scrollLeft);
-  //   }
-  // }, []);
-
   //선택된 li에 따라 해당 path로 변환 후 스테이트 업데이트
   useEffect(() => {
-    const selectedIndex = isSelected.indexOf(true);
-    let chosenList = lists[selectedIndex];
-    let url = "";
+    if (isSelected.indexOf(true) !== -1) {
+      const selectedIndex = isSelected.indexOf(true);
+      let chosenList = lists[selectedIndex];
+      let path = "";
 
-    if (title === "Tag") {
-      url = chosenList === "ALL" ? "" : chosenList;
-    }
-    if (title === "Page") {
-      url = tag ? `${tag}/${chosenList}` : `${chosenList}`;
-
-      if (chosenList === 1) {
-        url = tag ? `${tag}` : "";
+      if (title === "Tag") {
+        path = chosenList === "ALL" ? "" : chosenList;
       }
+      if (title === "Page") {
+        path = tag ? `${tag}/${chosenList}` : `${chosenList}`;
+
+        if (chosenList === 1) {
+          path = tag ? `${tag}` : "";
+        }
+      }
+      setSelectedPath(path);
     }
-    setSelectedList(url);
   }, [isSelected]);
 
   //스크롤 시 어떤 li가 선택되었는지를 찾는 이벤트 핸들러
@@ -116,10 +101,6 @@ const SelectorModal = (props) => {
     }
   };
 
-  const alert = () => {
-    console.log("태그를 선택해주세요");
-  };
-
   return (
     <Wrapper
       marginLeft={marginLeft}
@@ -127,31 +108,26 @@ const SelectorModal = (props) => {
       isSelected={isSelected}
     >
       <div className="modal-header">
-        <span className="header-title1">Select {title}</span>
+        <span className="header-info">Select {title}</span>
         <div className="header-buttons">
           <div className="select">
             {isSelected.indexOf(true) !== -1 && (
-              <Link className="select-link" to={`/${selectedList}`}></Link>
+              <Link className="select-link" to={`/${selectedPath}`}></Link>
             )}
-            <button
-              className="header-title2 select"
-              onClick={isSelected.indexOf(true) !== -1 ? offModal : alert}
-            >
-              선택
-            </button>
+            <button className="header-button select">선택</button>
           </div>
-          <button className="header-title2" onClick={offModal}>
+          <button className="header-button" onClick={offModal}>
             취소
           </button>
         </div>
       </div>
 
       <div className="modal-main">
-        <ul className="tags" ref={ulRef} onScroll={onScrollHandler}>
+        <ul className="main-lists" ref={ulRef} onScroll={onScrollHandler}>
           {lists.map((el, index) => {
             return (
               <li
-                className={`tag ${isSelected[index] && "active"}`}
+                className={`main-list ${isSelected[index] && "active"}`}
                 key={index}
                 ref={liRefs[index]}
               >
@@ -188,8 +164,9 @@ const Wrapper = styled.div`
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     background: #fff5dd;
+    font-size: 1.6rem;
   }
-  .header-title1 {
+  .header-info {
     font-weight: bold;
     margin-left: 2rem;
   }
@@ -210,7 +187,7 @@ const Wrapper = styled.div`
     height: 3.9rem;
   }
 
-  .header-title2 {
+  .header-button {
     border-radius: 0.5rem;
     background: #44b4cc;
     color: white;
@@ -218,7 +195,7 @@ const Wrapper = styled.div`
     padding: 1rem 2rem;
   }
 
-  .header-title2.select {
+  .header-button.select {
     background: ${(props) =>
       props.isSelected.indexOf(true) !== -1
         ? "#44b4cc"
@@ -226,22 +203,12 @@ const Wrapper = styled.div`
     transition: background 0.8s ease;
   }
 
-  .selector {
-    position: absolute;
-    z-index: 30;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-90deg);
-    font-size: 2.5rem;
-    color: rgba(216, 50, 50, 63%);
-  }
-
   .modal-main {
     position: relative;
     height: 77%;
   }
 
-  .tags {
+  .main-lists {
     display: flex;
     width: 100%;
     height: 100%;
@@ -254,7 +221,7 @@ const Wrapper = styled.div`
     margin: 0;
   }
 
-  .tag {
+  .main-list {
     position: relative;
     color: #3d3d3d;
     font-weight: bold;
@@ -266,17 +233,27 @@ const Wrapper = styled.div`
     margin-right: 2rem;
   }
 
+  .selector {
+    position: absolute;
+    z-index: 30;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    font-size: 2.5rem;
+    color: rgba(216, 50, 50, 63%);
+  }
+
   .active {
     color: #2a90ef;
     transition: all 0.8s ease;
   }
 
-  .tag:first-child {
+  .main-list:first-child {
     margin-left: ${(props) =>
       props.marginLeft !== 0 ? `${props.marginLeft}px` : "50%"};
   }
 
-  .tag:last-child:after {
+  .main-list:last-child:after {
     position: absolute;
     padding-left: 1rem;
     padding-right: ${(props) => (props.marginRight !== 0 ? `0` : "50%")};
@@ -287,4 +264,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default SelectorModal;
+export default Tag_Pagi_Modal;

@@ -1,27 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
-import { BsCaretRightFill, BsExclamationSquareFill } from "react-icons/bs";
+import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-const setUrl = (chosenList, title, tag) => {
-  let url = "";
+const setPath = (chosenList, title, tag) => {
+  let path = "";
 
   if (title === "Tag") {
-    return (url = chosenList === "ALL" ? "" : chosenList);
+    return (path = chosenList === "ALL" ? "" : chosenList);
   }
 
   if (title === "Page") {
     if (chosenList === 1) {
-      return (url = tag ? `${tag}` : "");
+      return (path = tag ? `${tag}` : "");
     }
-    return (url = tag ? `${tag}/${chosenList}` : `${chosenList}`);
+
+    return (path = tag ? `${tag}/${chosenList}` : `${chosenList}`);
   }
 };
 
-const SelectorModalPC = (props) => {
+const Tag_Pagi_Modal_PC = (props) => {
   const { title, lists, offModal, tag } = props;
   const [selectedList, setSelectedList] = useState(false);
-  let selectedUrl = setUrl(selectedList, title, tag);
+  let selectedPath = setPath(selectedList, title, tag);
 
   //외부 스크롤 불가능하게 만들기
   useEffect(() => {
@@ -48,7 +48,7 @@ const SelectorModalPC = (props) => {
         <span className="header-info">Select {title}</span>
         <div className="header-buttons">
           {selectedList && (
-            <Link className="select-link" to={`/${selectedUrl}`}></Link>
+            <Link className="select-link" to={`/${selectedPath}`}></Link>
           )}
           <button className="header-button select" onClick={offModal}>
             선택
@@ -105,6 +105,7 @@ const Wrapper = styled.div`
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     background: #fff5dd;
+    font-size: 1.6rem;
   }
   .header-info {
     font-weight: bold;
@@ -175,4 +176,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default SelectorModalPC;
+export default Tag_Pagi_Modal_PC;

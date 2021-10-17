@@ -29,5 +29,12 @@ module.exports = {
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-PSX7X3K",
+        includeInDevelopment: false,
+      },
+    },
   ],
 };

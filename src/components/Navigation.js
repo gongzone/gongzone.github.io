@@ -1,53 +1,18 @@
-import React, { useState } from "react";
-import { BsTriangleFill } from "react-icons/bs";
+import React from "react";
 import styled from "styled-components";
-import TagModal from "./TagModal";
-import RoundedBox from "./UI/RoundedBox";
-import { FaSearch } from "react-icons/fa";
+import TagButton from "./Button_Modal/TagButton";
+import SearchButton from "./Button_Modal/SearchButton";
 
 const Navigation = ({ tag }) => {
-  const [showModal, setShowModal] = useState(false);
-
-  const onModal = () => {
-    setShowModal(true);
-  };
-
-  const offModal = () => {
-    setShowModal(false);
-  };
-
   return (
-    <>
-      {showModal && (
-        <TagModal onModal={onModal} offModal={offModal} tag={tag} />
-      )}
-      <Wrapper>
-        <div className="title-container">
-          <span className="title">GongZone DevBlog</span>
-          <div className="highlight"></div>
-        </div>
-        <RoundedBox>
-          <button className="tag-selector" type="button" onClick={onModal}>
-            <span className="current-tag">Tag: {tag}</span>
-            <BsTriangleFill className="triangle-down" />
-          </button>
-        </RoundedBox>
-        <RoundedBox marginBottom="2.5rem">
-          <label htmlFor="search" className="searchLabel">
-            <input
-              className="searchbar"
-              type="text"
-              placeholder="Search..."
-              name="search"
-              id="search"
-            />
-            <div className="search-icon">
-              <FaSearch />
-            </div>
-          </label>
-        </RoundedBox>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <div className="title-container">
+        <span className="title">GongZone DevBlog</span>
+        <div className="highlight"></div>
+      </div>
+      <TagButton tag={tag} />
+      <SearchButton />
+    </Wrapper>
   );
 };
 
@@ -88,66 +53,6 @@ const Wrapper = styled.div`
     height: 1.9rem;
     background: rgba(135, 88, 157, 20%);
   }
-  .searchLabel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 99;
-    max-width: 46rem;
-    width: 83.3vw;
-    height: 5rem;
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
-  }
-
-  .tag-selector {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    background: transparent;
-    -webkit-tap-highlight-color: transparent;
-    z-index: 99;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-
-  .tag-selector:focus {
-    outline: none;
-  }
-
-  .current-tag {
-    font-family: imprima, arial, sans-serif;
-    margin-left: 2rem;
-  }
-
-  .triangle-down {
-    transform: rotate(180deg);
-    color: #d83232;
-    margin-right: 2rem;
-  }
-
-  .searchbar {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    font-family: imprima, arial, sans-serif;
-    padding-left: 2rem;
-    outline: none;
-    border: none;
-    cursor: pointer;
-  }
-  .search-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 1rem;
-    margin-right: 2.5rem;
-    height: 100%;
-    font-size: 2rem;
-    color: #d83232;
-  }
 
   @media screen and (min-width: 2000px) {
     margin-top: 2rem;
@@ -165,11 +70,6 @@ const Wrapper = styled.div`
       width: 34.5rem;
       height: 2.1rem;
       background: rgba(135, 88, 157, 20%);
-    }
-
-    .searchLabel {
-      max-width: 55rem;
-      height: 6rem;
     }
   }
 `;

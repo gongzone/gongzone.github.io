@@ -1,9 +1,9 @@
 import React from "react";
-import SelectorModal from "./UI/SelectorModal";
-import SelectorModalPC from "./UI/SelectorModalPC";
+import Tag_Pagi_Modal from "../UI/Tag_Pagi_Modal";
+import Tag_Pagi_Modal_PC from "../UI/Tag_Pagi_Modal_PC";
 import { isMobile } from "react-device-detect";
 
-const PaginationModal = ({ tag, offModal, currentPage, totalPagination }) => {
+const PaginationModal = ({ tag, offModal, totalPagination }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= totalPagination; i++) {
@@ -13,7 +13,7 @@ const PaginationModal = ({ tag, offModal, currentPage, totalPagination }) => {
   return (
     <>
       {isMobile && (
-        <SelectorModal
+        <Tag_Pagi_Modal
           title="Page"
           lists={pageNumbers}
           offModal={offModal}
@@ -21,7 +21,7 @@ const PaginationModal = ({ tag, offModal, currentPage, totalPagination }) => {
         />
       )}
       {!isMobile && pageNumbers.length > 1 && (
-        <SelectorModalPC
+        <Tag_Pagi_Modal_PC
           title="Page"
           lists={pageNumbers}
           offModal={offModal}
