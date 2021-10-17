@@ -8,7 +8,7 @@ const SelectorButton = ({ tag, onModal, icon }) => {
     <Wrapper icon={icon}>
       <button className="button" type="button" onClick={onModal}>
         {tag && <span className="content">Tag: {tag}</span>}
-        {!tag && <span className="content">Search...</span>}
+        {!tag && <span className="content">Search</span>}
         {icon === "triangle" && <BsTriangleFill className="icon" />}
         {icon === "search" && <FaSearch className="icon" />}
       </button>
