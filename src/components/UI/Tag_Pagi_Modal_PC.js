@@ -88,7 +88,7 @@ const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   background: #fcfcfc;
-  z-index: 777;
+  z-index: 889;
   border-radius: 1rem;
   transform: translate(-50%, -50%);
   max-width: 48rem;

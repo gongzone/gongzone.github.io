@@ -18,6 +18,7 @@ const PaginationButton = ({ tag, currentPage, totalPagination }) => {
       {showModal && (
         <PaginationModal
           tag={tag}
+          showModal={showModal}
           offModal={offModal}
           totalPagination={totalPagination}
         />

@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import Tag_Pagi_Modal from "../UI/Tag_Pagi_Modal";
 import Tag_Pagi_Modal_PC from "../UI/Tag_Pagi_Modal_PC";
 import { isMobile } from "react-device-detect";
+import Backdrop from "../UI/Backdrop";
 
 const query = graphql`
   {
@@ -12,7 +13,7 @@ const query = graphql`
   }
 `;
 
-const TagModal = ({ offModal }) => {
+const TagModal = ({ showModal, offModal }) => {
   const {
     allMdx: { distinct: tags },
   } = useStaticQuery(query);
@@ -21,6 +22,7 @@ const TagModal = ({ offModal }) => {
 
   return (
     <>
+      <Backdrop isOpen={showModal} onClick={offModal} />
       {isMobile && (
         <Tag_Pagi_Modal title="Tag" lists={allTags} offModal={offModal} />
       )}

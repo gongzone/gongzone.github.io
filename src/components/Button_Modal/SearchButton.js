@@ -15,7 +15,7 @@ const SearchButton = () => {
 
   return (
     <>
-      {showModal && <SearchModal offModal={offModal} />}
+      {showModal && <SearchModal showModal={showModal} offModal={offModal} />}
       <SelectorButton onModal={onModal} icon="search"></SelectorButton>
     </>
   );

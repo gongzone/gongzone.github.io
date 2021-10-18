@@ -7,24 +7,16 @@ import {
   FaHouseDamage,
 } from "react-icons/fa";
 import styled from "styled-components";
-
-const Backdrop = (props) => {
-  return (
-    <BackdropWrapper isOpen={props.isOpen}>
-      <div
-        role="button"
-        className="click-range"
-        onClick={props.onClick}
-        onKeyDown={props.onClick}
-      ></div>
-    </BackdropWrapper>
-  );
-};
+import Backdrop from "./UI/Backdrop";
 
 const Sidebar = (props) => {
   return (
     <>
-      <Backdrop isOpen={props.isOpen} onClick={props.offSidebar} />
+      <Backdrop
+        isOpen={props.isOpen}
+        onClick={props.offSidebar}
+        transition="on"
+      />
       <Wrapper isOpen={props.isOpen}>
         <button className="close-button" onClick={props.offSidebar}>
           <FaTimes />
@@ -49,24 +41,6 @@ const Sidebar = (props) => {
     </>
   );
 };
-
-const BackdropWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 888;
-  visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
-  background: ${(props) =>
-    props.isOpen ? "rgba(0, 0, 0, 29%)" : "rgba(0, 0, 0, 0%)"};
-  transition: all 0.8s ease;
-
-  .click-range {
-    width: 100%;
-    height: 100%;
-  }
-`;
 
 const Wrapper = styled.aside`
   position: fixed;

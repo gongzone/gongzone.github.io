@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaTimes } from "react-icons/fa";
 import SearchModalList from "./SearchModalList";
+import Backdrop from "../UI/Backdrop";
 
-const SearchModal = ({ offModal }) => {
+const SearchModal = ({ showModal, offModal }) => {
   const [searchInput, setSearchInput] = useState("");
 
   const changeHandler = (e) => {
@@ -11,30 +12,34 @@ const SearchModal = ({ offModal }) => {
   };
 
   return (
-    <Wrapper>
-      <div className="container">
-        <header className="search-header">
-          <form className="search-form">
-            <label className="search-label" htmlFor="search">
-              <input
-                type="search"
-                name="search"
-                id="search"
-                className="search-input"
-                placeholder="Search..."
-                onChange={changeHandler}
-              />
-            </label>
-          </form>
-          <button className="cancel" onClick={offModal}>
-            <FaTimes />
-          </button>
-        </header>
-        <main className="search-main">
-          <SearchModalList searchInput={searchInput} />
-        </main>
-      </div>
-    </Wrapper>
+    <>
+      <Backdrop isOpen={showModal} onClick={offModal} />
+      <Wrapper>
+        <div className="container">
+          <header className="search-header">
+            <form className="search-form">
+              <label className="search-label" htmlFor="search">
+                <input
+                  type="search"
+                  name="search"
+                  id="search"
+                  className="search-input"
+                  placeholder="Search..."
+                  autocomplete="off"
+                  onChange={changeHandler}
+                />
+              </label>
+            </form>
+            <button className="cancel" onClick={offModal}>
+              <FaTimes />
+            </button>
+          </header>
+          <main className="search-main">
+            <SearchModalList searchInput={searchInput} />
+          </main>
+        </div>
+      </Wrapper>
+    </>
   );
 };
 
@@ -45,7 +50,7 @@ const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   background: #fcfcfc;
-  z-index: 999;
+  z-index: 889;
   border-radius: 1rem;
   transform: translate(-50%, -50%);
   max-width: 80rem;
@@ -66,7 +71,7 @@ const Wrapper = styled.div`
   }
 
   .search-form {
-    width: 100%;
+    width: 88%;
   }
 
   .search-label {
@@ -74,9 +79,8 @@ const Wrapper = styled.div`
   }
 
   .search-input {
-    width: 88%;
+    width: 100%;
     height: 5rem;
-    margin-left: 3.5rem;
     border: 0;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 15%);
   }

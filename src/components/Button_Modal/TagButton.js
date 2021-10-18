@@ -15,7 +15,7 @@ const TagButton = ({ tag }) => {
 
   return (
     <>
-      {showModal && <TagModal offModal={offModal} />}
+      {showModal && <TagModal showModal={showModal} offModal={offModal} />}
       <SelectorButton
         tag={tag}
         onModal={onModal}
