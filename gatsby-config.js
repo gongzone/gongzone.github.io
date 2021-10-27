@@ -25,7 +25,7 @@ module.exports = {
       resolve: "gatsby-plugin-robots-txt",
       options: {
         host: "https://gongzone.netlify.app",
-        sitemap: "https://gongzone.netlify.app/sitemap.xml",
+        sitemap: "https://gongzone.netlify.app/sitemap/sitemap-index.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
