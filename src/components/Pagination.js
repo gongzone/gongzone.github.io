@@ -8,11 +8,11 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
   const [showButton, setShowButton] = useState({ prev: true, next: true });
 
   useEffect(() => {
-    if (+currentPage === 1 && +currentPage === totalPagination) {
+    if (+currentPage === 1 && +totalPagination === 1) {
       setShowButton({ prev: false, next: false });
     } else if (+currentPage === 1) {
       setShowButton({ prev: false, next: true });
-    } else if (+currentPage === totalPagination) {
+    } else if (+currentPage === +totalPagination) {
       setShowButton({ prev: true, next: false });
     }
   }, [currentPage, totalPagination]);
