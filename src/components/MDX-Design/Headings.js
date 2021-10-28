@@ -13,14 +13,16 @@ const myH2 = ({ children, title }) => {
   return (
     <h2
       style={{
-        margin: "2rem 0",
-        color: "var(--clr-grey-5)",
+        marginTop: "3.5rem",
+        marginBottom: "3.5rem",
+        textAlign: "center",
       }}
     >
       {children}
     </h2>
   );
 };
+
 const HeadingTwo = styled.div`
   margin: 2rem 0;
   .underline {

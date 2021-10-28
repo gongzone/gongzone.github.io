@@ -4,10 +4,10 @@ const Code = ({ children }) => {
   return (
     <code
       style={{
-        background: "hsl(206, 33%, 96%)",
-        color: "hsl(210, 22%, 40%)",
-        padding: "1rem",
-        borderRadius: "0.25rem",
+        fontFamily: "Fira Code, imprima, arial, monospace",
+        background: "#efe9cf",
+        padding: "0.2rem",
+        borderRadius: "0.5rem",
       }}
     >
       {children}

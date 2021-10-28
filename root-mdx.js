@@ -6,6 +6,8 @@ import {
   DecoDiv,
   CodeBox,
   Paragraph,
+  Videos,
+  Link,
 } from "./src/components/MDX-Design";
 
 const components = {
@@ -14,6 +16,8 @@ const components = {
   inlineCode: Code,
   pre: CodeBox,
   p: Paragraph,
+  RegVideo: Videos.RegVideo,
+  a: Link,
 };
 
 export const wrapMDX = ({ element }) => {
