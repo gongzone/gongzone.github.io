@@ -42,7 +42,7 @@ const Wrapper = styled.section`
   max-width: 70rem;
   width: 90vw;
   margin: 3rem auto;
-  margin-bottom: 4.5rem;
+  margin-bottom: 5.5rem;
 
   .post-header {
     display: flex;
@@ -80,7 +80,7 @@ const Wrapper = styled.section`
   }
 
   @media screen and (min-width: 1920px) {
-    max-width: 85rem;
+    max-width: 75rem;
 
     .post-title {
       font-size: 2.5rem;
