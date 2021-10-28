@@ -29,7 +29,7 @@ const PostTemplate = ({ data }) => {
           <span className="post-date">Posted on: {date}</span>
           <div className="underline"></div>
         </article>
-        <article>
+        <article className="post-article">
           <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
         </article>
         <Utterance />
@@ -42,6 +42,7 @@ const Wrapper = styled.section`
   max-width: 70rem;
   width: 90vw;
   margin: 3rem auto;
+  margin-bottom: 4.5rem;
 
   .post-header {
     display: flex;
@@ -74,7 +75,11 @@ const Wrapper = styled.section`
     background: rgba(0, 0, 0, 8%);
   }
 
-  @media screen and (min-width: 2000px) {
+  .post-article {
+    margin-bottom: 4rem;
+  }
+
+  @media screen and (min-width: 1920px) {
     max-width: 85rem;
 
     .post-title {

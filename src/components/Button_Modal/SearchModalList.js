@@ -47,8 +47,6 @@ const SearchModalList = ({ searchInput }) => {
     }
   });
 
-  console.log(filteredPosts);
-
   return (
     <>
       {filteredPosts.length > 0 && (
