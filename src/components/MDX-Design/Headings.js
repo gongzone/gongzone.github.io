@@ -13,8 +13,8 @@ const myH2 = ({ children, title }) => {
   return (
     <h2
       style={{
-        marginTop: "3.5rem",
-        marginBottom: "3.5rem",
+        marginTop: "5rem",
+        marginBottom: "5rem",
         textAlign: "center",
       }}
     >
