@@ -7,7 +7,7 @@ import Backdrop from "../UI/Backdrop";
 const PaginationModal = ({ tag, showModal, offModal, totalPagination }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= totalPagination; i++) {
+  for (let i = 1; i <= +totalPagination; i++) {
     pageNumbers.push(i);
   }
 
@@ -22,7 +22,7 @@ const PaginationModal = ({ tag, showModal, offModal, totalPagination }) => {
           tag={tag}
         />
       )}
-      {!isMobile && pageNumbers.length > 1 && (
+      {!isMobile && (
         <Tag_Pagi_Modal_PC
           title="Page"
           lists={pageNumbers}
