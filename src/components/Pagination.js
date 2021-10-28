@@ -5,15 +5,15 @@ import { BsTriangleFill } from "react-icons/bs";
 import PaginationButton from "./Button_Modal/PaginationButton";
 
 const Pagination = ({ tag, currentPage, totalPagination }) => {
-  const [showButton, setShowButton] = useState({ prev: true, next: true });
+  const [showButton, setShowButton] = useState({ prev: false, next: false });
 
   useEffect(() => {
-    if (+currentPage === 1 && +totalPagination === 1) {
-      setShowButton({ prev: false, next: false });
-    } else if (+currentPage === 1) {
+    if (+currentPage === 1 && +totalPagination > 1) {
       setShowButton({ prev: false, next: true });
     } else if (+currentPage === +totalPagination) {
       setShowButton({ prev: true, next: false });
+    } else {
+      setShowButton({ prev: true, next: true });
     }
   }, [currentPage, totalPagination]);
 
