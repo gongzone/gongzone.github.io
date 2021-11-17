@@ -26,7 +26,7 @@ const DecoDiv = ({ children, display }) => {
   if (display === "default") {
     return (
       <Wrapper>
-        <div className="container default">{children}</div>
+        <div className="container">{children}</div>
       </Wrapper>
     );
   } else {
@@ -43,12 +43,16 @@ const DecoDiv = ({ children, display }) => {
 const Wrapper = styled.div`
   .container {
     padding: 2rem 1.5rem;
-    background: var(--clr-grey-10);
-    border-radius: var(--radius);
-    color: var(--clr-grey-1);
-    border-left: 3px solid var(--clr-grey-5);
+    background: #282c35;
+    font-weight: bold;
+    color: whitesmoke;
+    border-radius: 0.5rem;
+    border-left: 5px solid gray;
     position: relative;
     margin: 2rem 0;
+    font-size: 1.7rem;
+    line-height: 1.7;
+    letter-spacing: 0.05rem;
   }
   @media (min-width: 1170px) {
     .container {
