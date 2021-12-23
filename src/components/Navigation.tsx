@@ -3,7 +3,11 @@ import styled from "styled-components";
 import TagButton from "./Button_Modal/TagButton";
 import SearchButton from "./Button_Modal/SearchButton";
 
-const Navigation = ({ tag }) => {
+interface NavigationProps {
+  tag: string;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ tag }) => {
   return (
     <Wrapper>
       <div className="title-container">

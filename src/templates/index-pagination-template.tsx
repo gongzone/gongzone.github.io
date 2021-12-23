@@ -1,31 +1,37 @@
 import React from "react";
-import { graphql } from "gatsby";
 import Layout from "../components/Layout";
+import { graphql, PageProps } from "gatsby";
 import Hero from "../components/Hero";
 import Navigation from "../components/Navigation";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
 import SEO from "../components/SEO";
 
-const PaginationTemplate = (props) => {
-  const {
-    data: {
-      allMdx: { nodes: posts },
-    },
-  } = props;
+import { AllMdxNodes } from "../interfaces/AllMdxNodes";
 
-  const {
-    pageContext: { tag, currentPage, totalPagination },
-  } = props;
+interface GraphQLResult {
+  allMdx: { nodes: AllMdxNodes[] };
+}
+
+interface PageContextProps {
+  currentPage: number;
+  totalPagination: number;
+}
+
+const IndexPaginationTemplate: React.FC<
+  PageProps<GraphQLResult, PageContextProps>
+> = ({ data, pageContext }) => {
+  const { nodes: posts } = data.allMdx;
+  const { currentPage, totalPagination } = pageContext;
 
   return (
     <Layout>
-      <SEO title={tag} />
+      <SEO title="Home" canonical={false} />
       <Hero />
-      <Navigation tag={tag} />
+      <Navigation tag="ALL" />
       <Posts posts={posts} />
       <Pagination
-        tag={tag}
+        tag={null}
         currentPage={currentPage}
         totalPagination={totalPagination}
       />
@@ -34,20 +40,19 @@ const PaginationTemplate = (props) => {
 };
 
 export const query = graphql`
-  query GetPostByTag($tag: String, $skip: Int, $limit: Int) {
+  query GetPostByPagination($limit: Int, $skip: Int) {
     allMdx(
-      sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { tags: { eq: $tag } } }
       limit: $limit
+      sort: { fields: frontmatter___date, order: DESC }
       skip: $skip
     ) {
       nodes {
         id
         frontmatter {
           title
+          description
           tags
           slug
-          description
           date(formatString: "YYYY년 MM월 DD일")
           image {
             childImageSharp {
@@ -60,4 +65,4 @@ export const query = graphql`
   }
 `;
 
-export default PaginationTemplate;
+export default IndexPaginationTemplate;

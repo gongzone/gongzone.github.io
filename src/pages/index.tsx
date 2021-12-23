@@ -1,41 +1,48 @@
 import React from "react";
+import { graphql, PageProps } from "gatsby";
+
 import Layout from "../components/Layout";
-import { graphql } from "gatsby";
 import Hero from "../components/Hero";
 import Navigation from "../components/Navigation";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
 import SEO from "../components/SEO";
 
-const IndexPaginationTemplate = (props) => {
-  const {
-    data: {
-      allMdx: { nodes: posts },
-    },
-  } = props;
+import { AllMdxNodes } from "../interfaces/AllMdxNodes";
 
-  const {
-    pageContext: { currentPage, totalPagination },
-  } = props;
+interface QueryTypes {
+  allMdx: {
+    totalCount: number;
+    nodes: AllMdxNodes[];
+  };
+}
+
+const IndexPage: React.FC<PageProps<QueryTypes>> = ({ data }) => {
+  const { nodes: posts } = data.allMdx;
+  const { totalCount } = data.allMdx;
+
+  const postsPerPage = 10;
+  const totalPagination = Math.ceil(totalCount / postsPerPage);
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="GongZone DevBlog" />
       <Hero />
       <Navigation tag="ALL" />
       <Posts posts={posts} />
-      <Pagination currentPage={currentPage} totalPagination={totalPagination} />
+      <Pagination
+        tag={null}
+        currentPage={1}
+        totalPagination={totalPagination}
+      />
     </Layout>
   );
 };
 
 export const query = graphql`
-  query GetPostByPagination($limit: Int, $skip: Int) {
-    allMdx(
-      limit: $limit
-      sort: { fields: frontmatter___date, order: DESC }
-      skip: $skip
-    ) {
+  {
+    allMdx(limit: 10, sort: { fields: frontmatter___date, order: DESC }) {
+      totalCount
       nodes {
         id
         frontmatter {
@@ -55,4 +62,4 @@ export const query = graphql`
   }
 `;
 
-export default IndexPaginationTemplate;
+export default IndexPage;

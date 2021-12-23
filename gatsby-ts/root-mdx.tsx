@@ -1,5 +1,6 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
+import { GatsbyBrowser } from "gatsby";
 import {
   Headings,
   Code,
@@ -8,7 +9,7 @@ import {
   Paragraph,
   Videos,
   Link,
-} from "./src/components/MDX-Design";
+} from "../src/components/MDX-Design";
 
 const components = {
   DecoDiv,
@@ -20,6 +21,6 @@ const components = {
   a: Link,
 };
 
-export const wrapMDX = ({ element }) => {
+export const wrapMDX: GatsbyBrowser["wrapRootElement"] = ({ element }) => {
   return <MDXProvider components={components}>{element}</MDXProvider>;
 };

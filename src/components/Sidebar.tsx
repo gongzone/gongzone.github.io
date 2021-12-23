@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "gatsby";
-import {
-  FaTimes,
-  FaCommentDots,
-  FaSearch,
-  FaHouseDamage,
-} from "react-icons/fa";
+import { FaTimes, FaCommentDots, FaHouseDamage } from "react-icons/fa";
 import styled from "styled-components";
 import Backdrop from "./UI/Backdrop";
 
-const Sidebar = (props) => {
+interface SidebarProps {
+  isOpen: boolean;
+  offSidebar: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = (props) => {
   return (
     <>
       <Backdrop
@@ -50,7 +50,8 @@ const Wrapper = styled.aside`
   width: 27rem;
   background-color: #fff5dd;
   z-index: 999;
-  visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
+  visibility: ${(props: { isOpen: boolean }) =>
+    props.isOpen ? "visible" : "hidden"};
   transition: all 0.8s ease;
   transform: ${(props) =>
     props.isOpen ? "translateX(0)" : "translateX(100%)"};

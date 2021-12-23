@@ -3,7 +3,13 @@ import styled from "styled-components";
 import { BsTriangleFill } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 
-const SelectorButton = ({ tag, onModal, icon }) => {
+interface SelectButton {
+  tag: string;
+  onModal: () => void;
+  icon: string;
+}
+
+const SelectorButton: React.FC<SelectButton> = ({ tag, onModal, icon }) => {
   return (
     <Wrapper icon={icon}>
       <button className="button" type="button" onClick={onModal}>
@@ -19,7 +25,8 @@ const SelectorButton = ({ tag, onModal, icon }) => {
 const Wrapper = styled.div`
   position: relative;
   display: flex;
-  margin-bottom: ${(props) => (props.icon === "search" ? "2.5rem" : "0")};
+  margin-bottom: ${(props: { icon: string }) =>
+    props.icon === "search" ? "2.5rem" : "0"};
   max-width: 46rem;
   width: 83.3%;
   height: 4.8rem;

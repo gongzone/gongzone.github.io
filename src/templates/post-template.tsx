@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -7,17 +7,26 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import SEO from "../components/SEO";
 import Utterance from "../components/Utterance";
 
-const PostTemplate = ({ data }) => {
+import { frontmatter } from "../interfaces/frontmatter";
+
+interface GraphQLResult {
+  mdx: {
+    body: string;
+    frontmatter: frontmatter;
+  };
+}
+
+const PostTemplate: React.FC<PageProps<GraphQLResult>> = ({ data }) => {
   const {
     mdx: {
-      frontmatter: { title, date, image, embeddedImages },
+      frontmatter: { title, description, date, image, embeddedImages },
       body,
     },
   } = data;
 
   return (
     <Layout>
-      <SEO title={title} />
+      <SEO title={title} description={description} article={true} />
       <Wrapper>
         <article className="post-header">
           <GatsbyImage
@@ -96,8 +105,10 @@ const Wrapper = styled.section`
 export const query = graphql`
   query GetSinglePost($slug: String) {
     mdx(frontmatter: { slug: { eq: $slug } }) {
+      body
       frontmatter {
         title
+        description
         date(formatString: "YYYY년 MM월 DD일")
         tags
         slug
@@ -112,7 +123,6 @@ export const query = graphql`
           }
         }
       }
-      body
     }
   }
 `;

@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Post from "./Post";
 
-const Posts = ({ posts }) => {
+import { AllMdxNodes } from "../interfaces/AllMdxNodes";
+
+interface PostsProps {
+  posts: AllMdxNodes[];
+}
+
+const Posts: React.FC<PostsProps> = ({ posts }) => {
   return (
     <Wrapper>
       {posts.map((post) => {

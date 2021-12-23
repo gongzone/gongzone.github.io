@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
-const Layout = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Layout: React.FC<{ children?: ReactNode }> = ({ children }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onSidebar = () => {
     setIsOpen(true);

@@ -4,7 +4,14 @@ import { Link } from "gatsby";
 import styled from "styled-components";
 import { useDebouncedCallback } from "use-debounce";
 
-const Tag_Pagi_Modal = (props) => {
+interface Props {
+  title: string;
+  lists: string[] | number[];
+  offModal: () => void;
+  tag: string;
+}
+
+const Tag_Pagi_Modal: React.FC<Props> = (props) => {
   const { title, lists, offModal, tag } = props;
 
   const initialSelected = lists.map((__, index) => {
@@ -16,13 +23,15 @@ const Tag_Pagi_Modal = (props) => {
   });
 
   const [isSelected, setIsSelected] = useState(initialSelected);
-  const [selectedPath, setSelectedPath] = useState("");
+  const [selectedPath, setSelectedPath] = useState<string | number>("");
   const [marginLeft, setMarginLeft] = useState(0);
   const [marginRight, setMarginRight] = useState(0);
   const [resizeScale, setResizeScale] = useState({ x: 0, y: 0 });
 
-  const ulRef = useRef(null);
-  const liRefs = Array.from({ length: lists.length }, () => React.createRef());
+  const ulRef = useRef<HTMLUListElement>(null);
+  const liRefs = Array.from({ length: lists.length }, () =>
+    React.createRef<HTMLLIElement>()
+  );
 
   const resizeHandler = useDebouncedCallback(() => {
     setResizeScale({ x: window.innerWidth, y: window.innerHeight });
@@ -39,10 +48,10 @@ const Tag_Pagi_Modal = (props) => {
   //first li와 last li를 위한 margin 크기 계산(반응형을 위해)
   useEffect(() => {
     const margin_L =
-      ulRef.current.offsetWidth / 2 - liRefs[0].current.offsetWidth / 2;
+      ulRef.current!.offsetWidth / 2 - liRefs[0].current!.offsetWidth / 2;
     const margin_R =
-      ulRef.current.offsetWidth / 2 -
-      liRefs[liRefs.length - 1].current.offsetWidth / 2;
+      ulRef.current!.offsetWidth / 2 -
+      liRefs[liRefs.length - 1].current!.offsetWidth / 2;
 
     setMarginLeft(margin_L);
     setMarginRight(margin_R);
@@ -53,7 +62,7 @@ const Tag_Pagi_Modal = (props) => {
     if (isSelected.indexOf(true) !== -1) {
       const selectedIndex = isSelected.indexOf(true);
       let chosenList = lists[selectedIndex];
-      let path = "";
+      let path: string | number = "";
 
       if (title === "Tag") {
         path = chosenList === "ALL" ? "" : chosenList;
@@ -71,18 +80,18 @@ const Tag_Pagi_Modal = (props) => {
 
   //스크롤 시 어떤 li가 선택되었는지를 찾는 이벤트 핸들러
   const onScrollHandler = () => {
-    const selectorPosition = ulRef.current.offsetWidth / 2;
-    const selectedArray = [];
+    const selectorPosition = ulRef.current!.offsetWidth / 2;
+    const selectedArray: boolean[] = [];
     let isSameArray = true;
 
     for (let i = 0; i < lists.length; i++) {
       const listCenterPosition =
-        liRefs[i].current.offsetLeft +
-        liRefs[i].current.offsetWidth / 2 -
-        ulRef.current.scrollLeft;
+        liRefs[i].current!.offsetLeft +
+        liRefs[i].current!.offsetWidth / 2 -
+        ulRef.current!.scrollLeft;
 
       selectedArray[i] =
-        liRefs[i].current.offsetWidth / 2 >=
+        liRefs[i].current!.offsetWidth / 2 >=
         Math.abs(listCenterPosition - selectorPosition);
     }
 
@@ -196,7 +205,11 @@ const Wrapper = styled.div`
   }
 
   .header-button.select {
-    background: ${(props) =>
+    background: ${(props: {
+      isSelected: boolean[];
+      marginLeft: number;
+      marginRight: number;
+    }) =>
       props.isSelected.indexOf(true) !== -1
         ? "#44b4cc"
         : "rgba(216,50,50,63%)"};

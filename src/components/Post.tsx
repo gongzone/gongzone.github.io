@@ -1,10 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import { BsCalendar } from "react-icons/bs";
 
-const Post = ({ frontmatter }) => {
+interface frontmatterProps {
+  title: string;
+  description: string;
+  tags: string[];
+  slug: string;
+  date: string;
+  image: ImageDataLike;
+}
+
+const Post: React.FC<{ frontmatter: frontmatterProps }> = ({ frontmatter }) => {
   const { title, description, slug, date, image, tags } = frontmatter;
   return (
     <Wrapper>

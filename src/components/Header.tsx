@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import { IoIosMenu } from "react-icons/io";
-import logo from "../assets/images/logo.svg";
+import logo from "../assets/svg/logo.svg";
 
-const Header = ({ onSidebar }) => {
+interface HeaderProps {
+  onSidebar: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onSidebar }) => {
   return (
     <Wrapper>
       <Link to="/" className="logo">

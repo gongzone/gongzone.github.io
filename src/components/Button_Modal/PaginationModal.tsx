@@ -4,10 +4,22 @@ import Tag_Pagi_Modal_PC from "../UI/Tag_Pagi_Modal_PC";
 import { isMobile } from "react-device-detect";
 import Backdrop from "../UI/Backdrop";
 
-const PaginationModal = ({ tag, showModal, offModal, totalPagination }) => {
+interface paginationModal {
+  tag: string | null;
+  showModal: boolean;
+  offModal: () => void;
+  totalPagination: number;
+}
+
+const PaginationModal: React.FC<paginationModal> = ({
+  tag,
+  showModal,
+  offModal,
+  totalPagination,
+}) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= +totalPagination; i++) {
+  for (let i = 1; i <= totalPagination; i++) {
     pageNumbers.push(i);
   }
 

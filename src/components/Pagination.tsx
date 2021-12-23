@@ -4,15 +4,21 @@ import styled from "styled-components";
 import { BsTriangleFill } from "react-icons/bs";
 import PaginationButton from "./Button_Modal/PaginationButton";
 
-const Pagination = ({ tag, currentPage, totalPagination }) => {
+import { pagination } from "../interfaces/pagination";
+
+const Pagination: React.FC<pagination> = ({
+  tag,
+  currentPage,
+  totalPagination,
+}) => {
   const [showButton, setShowButton] = useState({ prev: false, next: false });
 
   useEffect(() => {
-    if (+currentPage === 1 && +totalPagination > 1) {
+    if (currentPage === 1 && totalPagination > 1) {
       setShowButton({ prev: false, next: true });
-    } else if (+currentPage === +totalPagination && +totalPagination > 1) {
+    } else if (currentPage === totalPagination && totalPagination > 1) {
       setShowButton({ prev: true, next: false });
-    } else if (+currentPage === 1) {
+    } else if (currentPage === 1) {
       setShowButton({ prev: false, next: false });
     } else {
       setShowButton({ prev: true, next: true });
@@ -22,7 +28,7 @@ const Pagination = ({ tag, currentPage, totalPagination }) => {
   const nextUrl = tag ? `/${tag}/${+currentPage + 1}` : `/${+currentPage + 1}`;
   let prevUrl = tag ? `/${tag}/${+currentPage - 1}` : `/${+currentPage - 1}`;
 
-  if (+currentPage - 1 === 1) {
+  if (currentPage - 1 === 1) {
     prevUrl = tag ? `/${tag}` : `/`;
   }
 

@@ -1,7 +1,7 @@
 import React, { createRef, useEffect } from "react";
 
 const Utterance = () => {
-  const commentRef = createRef();
+  const commentRef: React.RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
     const utterances = document.createElement("script");
@@ -15,10 +15,10 @@ const Utterance = () => {
       async: true,
     };
     Object.entries(attributes).forEach(([key, value]) => {
-      utterances.setAttribute(key, value);
+      utterances.setAttribute(key, value.toString());
     });
 
-    commentRef.current.appendChild(utterances);
+    commentRef.current?.appendChild(utterances);
   }, []);
 
   return <div className="comments" ref={commentRef}></div>;

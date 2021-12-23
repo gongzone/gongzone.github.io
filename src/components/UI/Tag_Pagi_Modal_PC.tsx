@@ -2,8 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-const setPath = (chosenList, title, tag) => {
-  let path = "";
+interface Props {
+  title: string;
+  lists: string[] | number[];
+  offModal: () => void;
+  tag: string;
+}
+
+const setPath = (
+  chosenList: string | number | boolean,
+  title: string,
+  tag: string
+) => {
+  let path: string | number | boolean = "";
 
   if (title === "Tag") {
     return (path = chosenList === "ALL" ? "" : chosenList);
@@ -18,27 +29,29 @@ const setPath = (chosenList, title, tag) => {
   }
 };
 
-const Tag_Pagi_Modal_PC = (props) => {
+const Tag_Pagi_Modal_PC: React.FC<Props> = (props) => {
   const { title, lists, offModal, tag } = props;
-  const [selectedList, setSelectedList] = useState(false);
+  const [selectedList, setSelectedList] = useState<boolean | string | number>(
+    false
+  );
   let selectedPath = setPath(selectedList, title, tag);
 
   //외부 스크롤 불가능하게 만들기
   useEffect(() => {
     const top = document.documentElement.scrollTop || document.body.scrollTop;
     document.body.style.position = "fixed";
-    document.body.style["overflow-y"] = "scroll";
+    (document.body.style as any)["overflow-y"] = "scroll";
     document.body.style.top = `${-top}px`;
     document.body.style.width = "100%";
 
     return () => {
       document.body.style.position = "unset";
-      document.body.style["overflow-y"] = "unset";
+      (document.body.style as any)["overflow-y"] = "unset";
       document.documentElement.scrollTop = top;
     };
   }, []);
 
-  const onClickHandler = (list) => {
+  const onClickHandler = (list: boolean | string | number) => {
     setSelectedList(list);
   };
 

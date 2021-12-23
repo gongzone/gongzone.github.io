@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import PaginationModal from "./PaginationModal";
 
-const PaginationButton = ({ tag, currentPage, totalPagination }) => {
-  const [showModal, setShowModal] = useState(false);
+import { pagination } from "../../interfaces/pagination";
+
+const PaginationButton: React.FC<pagination> = ({
+  tag,
+  currentPage,
+  totalPagination,
+}) => {
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const onModal = () => {
     setShowModal(true);
