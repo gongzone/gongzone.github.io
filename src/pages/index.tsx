@@ -10,14 +10,14 @@ import SEO from "../components/SEO";
 
 import { AllMdxNodes } from "../interfaces/AllMdxNodes";
 
-interface QueryTypes {
+interface QueryType {
   allMdx: {
     totalCount: number;
     nodes: AllMdxNodes[];
   };
 }
 
-const IndexPage: React.FC<PageProps<QueryTypes>> = ({ data }) => {
+const IndexPage: React.FC<PageProps<QueryType>> = ({ data }) => {
   const { nodes: posts } = data.allMdx;
   const { totalCount } = data.allMdx;
 

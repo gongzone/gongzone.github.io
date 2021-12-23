@@ -1,1 +1,5 @@
-module.exports = require("./gatsby-ts/gatsby-node.ts");
+const createPages = require("./gatsby-ts/gatsby-node.ts").createPages;
+
+module.exports = {
+  createPages,
+};

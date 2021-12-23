@@ -9,35 +9,34 @@ import SEO from "../components/SEO";
 
 import { AllMdxNodes } from "../interfaces/AllMdxNodes";
 
-interface GraphQLResult {
+interface QueryType {
   allMdx: { nodes: AllMdxNodes[] };
 }
 
-interface PageContextProps {
+interface PageContextType {
   currentPage: number;
   totalPagination: number;
 }
 
-const IndexPaginationTemplate: React.FC<
-  PageProps<GraphQLResult, PageContextProps>
-> = ({ data, pageContext }) => {
-  const { nodes: posts } = data.allMdx;
-  const { currentPage, totalPagination } = pageContext;
+const IndexPaginationTemplate: React.FC<PageProps<QueryType, PageContextType>> =
+  ({ data, pageContext }) => {
+    const { nodes: posts } = data.allMdx;
+    const { currentPage, totalPagination } = pageContext;
 
-  return (
-    <Layout>
-      <SEO title="Home" canonical={false} />
-      <Hero />
-      <Navigation tag="ALL" />
-      <Posts posts={posts} />
-      <Pagination
-        tag={null}
-        currentPage={currentPage}
-        totalPagination={totalPagination}
-      />
-    </Layout>
-  );
-};
+    return (
+      <Layout>
+        <SEO title="GongZone DevBlog" canonical={false} />
+        <Hero />
+        <Navigation tag="ALL" />
+        <Posts posts={posts} />
+        <Pagination
+          tag={null}
+          currentPage={currentPage}
+          totalPagination={totalPagination}
+        />
+      </Layout>
+    );
+  };
 
 export const query = graphql`
   query GetPostByPagination($limit: Int, $skip: Int) {

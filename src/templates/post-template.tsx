@@ -7,20 +7,20 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import SEO from "../components/SEO";
 import Utterance from "../components/Utterance";
 
-import { frontmatter } from "../interfaces/frontmatter";
+import { MdxFrontmatter } from "../interfaces/MdxFrontmatter";
 
-interface GraphQLResult {
+interface QueryType {
   mdx: {
     body: string;
-    frontmatter: frontmatter;
+    frontmatter: MdxFrontmatter;
   };
 }
 
-const PostTemplate: React.FC<PageProps<GraphQLResult>> = ({ data }) => {
+const PostTemplate: React.FC<PageProps<QueryType>> = ({ data }) => {
   const {
     mdx: {
-      frontmatter: { title, description, date, image, embeddedImages },
       body,
+      frontmatter: { title, description, date, image, embeddedImages },
     },
   } = data;
 
@@ -39,7 +39,9 @@ const PostTemplate: React.FC<PageProps<GraphQLResult>> = ({ data }) => {
           <div className="underline"></div>
         </article>
         <article className="post-article">
-          <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
+          <MDXRenderer embeddedImages={getImage(embeddedImages)}>
+            {body}
+          </MDXRenderer>
         </article>
         <Utterance />
       </Wrapper>

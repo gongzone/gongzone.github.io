@@ -1,10 +1,10 @@
-import * as path from "path";
+import path from "path";
 
 const topPath = path.join(__dirname, "..");
 
 export const siteMetadata = {
   title: `GongZone DevBlog`,
-  description: `웹 개발자를 지향하는 공존의 개발 블로그입니다.`,
+  description: `웹 개발자 공존의 기술 블로그입니다. 여러가지 실험을 좋아합니다.`,
   siteUrl: `https://gongzone.netlify.app`,
   image: `/profile.png`,
 };
