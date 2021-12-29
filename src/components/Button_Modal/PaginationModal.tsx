@@ -17,7 +17,7 @@ const PaginationModal: React.FC<paginationModal> = ({
   offModal,
   totalPagination,
 }) => {
-  const pageNumbers = [];
+  const pageNumbers: number[] = [];
 
   for (let i = 1; i <= totalPagination; i++) {
     pageNumbers.push(i);

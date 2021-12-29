@@ -25,7 +25,7 @@ const SearchModal = ({ showModal, offModal }) => {
                   id="search"
                   className="search-input"
                   placeholder="Search..."
-                  autocomplete="off"
+                  autoComplete="off"
                   onChange={changeHandler}
                 />
               </label>

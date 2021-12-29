@@ -8,7 +8,7 @@ interface Props {
   title: string;
   lists: string[] | number[];
   offModal: () => void;
-  tag: string;
+  tag?: string | null;
 }
 
 const Tag_Pagi_Modal: React.FC<Props> = (props) => {

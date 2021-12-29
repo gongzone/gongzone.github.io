@@ -6,13 +6,13 @@ interface Props {
   title: string;
   lists: string[] | number[];
   offModal: () => void;
-  tag: string;
+  tag?: string | null;
 }
 
 const setPath = (
   chosenList: string | number | boolean,
   title: string,
-  tag: string
+  tag?: string | null
 ) => {
   let path: string | number | boolean = "";
 

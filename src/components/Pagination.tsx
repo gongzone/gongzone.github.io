@@ -4,14 +4,17 @@ import styled from "styled-components";
 import { BsTriangleFill } from "react-icons/bs";
 import PaginationButton from "./Button_Modal/PaginationButton";
 
-import { pagination } from "../interfaces/pagination";
+import { PaginationProps } from "../interfaces/PaginationProps";
 
-const Pagination: React.FC<pagination> = ({
+const Pagination: React.FC<PaginationProps> = ({
   tag,
   currentPage,
   totalPagination,
 }) => {
-  const [showButton, setShowButton] = useState({ prev: false, next: false });
+  const [showButton, setShowButton] = useState<{
+    prev: boolean;
+    next: boolean;
+  }>({ prev: false, next: false });
 
   useEffect(() => {
     if (currentPage === 1 && totalPagination > 1) {

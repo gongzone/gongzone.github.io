@@ -4,7 +4,7 @@ import { BsTriangleFill } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 
 interface SelectButton {
-  tag: string;
+  tag?: string;
   onModal: () => void;
   icon: string;
 }

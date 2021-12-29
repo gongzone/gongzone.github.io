@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import PaginationModal from "./PaginationModal";
 
-import { pagination } from "../../interfaces/pagination";
+import { PaginationProps } from "../../interfaces/PaginationProps";
 
-const PaginationButton: React.FC<pagination> = ({
+const PaginationButton: React.FC<PaginationProps> = ({
   tag,
   currentPage,
   totalPagination,
