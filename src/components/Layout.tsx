@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
-const Layout: React.FC<{ children?: ReactNode }> = ({ children }) => {
+const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onSidebar = () => {

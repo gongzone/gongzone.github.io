@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
-import { BsTriangleFill } from "react-icons/bs";
+
 import PaginationButton from "./Button_Modal/PaginationButton";
+import { BsTriangleFill } from "react-icons/bs";
 
 import { PaginationProps } from "../interfaces/PaginationProps";
 
@@ -11,33 +12,31 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPagination,
 }) => {
-  const [showButton, setShowButton] = useState<{
-    prev: boolean;
-    next: boolean;
-  }>({ prev: false, next: false });
+  const [showPrev, setShowPrev] = useState(false);
+  const [showNext, setShowNext] = useState(false);
 
-  useEffect(() => {
-    if (currentPage === 1 && totalPagination > 1) {
-      setShowButton({ prev: false, next: true });
-    } else if (currentPage === totalPagination && totalPagination > 1) {
-      setShowButton({ prev: true, next: false });
-    } else if (currentPage === 1) {
-      setShowButton({ prev: false, next: false });
-    } else {
-      setShowButton({ prev: true, next: true });
+  const changeShowStates = () => {
+    if (currentPage > 1) {
+      setShowPrev(true);
     }
-  }, [currentPage, totalPagination]);
 
-  const nextUrl = tag ? `/${tag}/${+currentPage + 1}` : `/${+currentPage + 1}`;
-  let prevUrl = tag ? `/${tag}/${+currentPage - 1}` : `/${+currentPage - 1}`;
+    if (currentPage < totalPagination) {
+      setShowNext(true);
+    }
+  };
 
-  if (currentPage - 1 === 1) {
+  useEffect(changeShowStates, [currentPage, totalPagination]);
+
+  const nextUrl = tag ? `/${tag}/${currentPage + 1}` : `/${currentPage + 1}`;
+  let prevUrl = tag ? `/${tag}/${currentPage - 1}` : `/${currentPage - 1}`;
+
+  if (currentPage === 2) {
     prevUrl = tag ? `/${tag}` : `/`;
   }
 
   return (
     <Wrapper>
-      {showButton.prev && (
+      {showPrev && (
         <Link to={prevUrl} className="card">
           Prev <BsTriangleFill className="prev-triangle" />
         </Link>
@@ -47,7 +46,7 @@ const Pagination: React.FC<PaginationProps> = ({
         currentPage={currentPage}
         totalPagination={totalPagination}
       />
-      {showButton.next && (
+      {showNext && (
         <Link to={nextUrl} className="card next">
           Next <BsTriangleFill className="next-triangle" />
         </Link>

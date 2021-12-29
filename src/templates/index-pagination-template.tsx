@@ -1,6 +1,7 @@
 import React from "react";
-import Layout from "../components/Layout";
 import { graphql, PageProps } from "gatsby";
+
+import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import Navigation from "../components/Navigation";
 import Posts from "../components/Posts";
@@ -30,7 +31,6 @@ const IndexPaginationTemplate: React.FC<PageProps<QueryType, PageContextType>> =
         <Navigation tag="ALL" />
         <Posts posts={posts} />
         <Pagination
-          tag={null}
           currentPage={currentPage}
           totalPagination={totalPagination}
         />
@@ -39,11 +39,11 @@ const IndexPaginationTemplate: React.FC<PageProps<QueryType, PageContextType>> =
   };
 
 export const query = graphql`
-  query GetPostByPagination($limit: Int, $skip: Int) {
+  query GetPosts($limit: Int, $skip: Int) {
     allMdx(
       limit: $limit
-      sort: { fields: frontmatter___date, order: DESC }
       skip: $skip
+      sort: { fields: frontmatter___date, order: DESC }
     ) {
       nodes {
         id

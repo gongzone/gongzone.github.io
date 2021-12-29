@@ -19,4 +19,4 @@
 
 - 다크모드 관련 디자인 조정, 퍼포먼스 최적화, 구글 서치엔진 최적화, 검색기능 백드롭, 어바웃 페이지
 
-// update: 전체파일 typescript 적용, SEO 적용(link rel =canonical)
+// update: 전체파일 typescript 적용, SEO 수정, dependencies 최신화.

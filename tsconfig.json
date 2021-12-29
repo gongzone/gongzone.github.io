@@ -1,17 +1,24 @@
 {
-  "include": ["./src/**/*", "custom.d.ts"],
-  "exclude": ["node_modules", "public", ".cache"],
+  "include": ["./src/**/*", "custom.d.ts", "root-mdx.tsx"],
+  "exclude": [
+    "node_modules",
+    "public",
+    ".cache",
+    "gatsby-node.js",
+    "gatsby-config.js"
+  ],
   "compilerOptions": {
-    "target": "es2019",
     "module": "commonjs",
-    "lib": ["dom", "es2020"],
-    "jsx": "react",
+    "target": "es6",
+    "jsx": "preserve",
+    "lib": ["dom", "es2015", "es2017"],
     "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "noImplicitAny": false,
-    "resolveJsonModule": true
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false
   }
 }

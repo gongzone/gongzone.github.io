@@ -6,6 +6,6 @@ import "@fontsource/carrois-gothic-sc";
 import "./src/assets/css/normalize.css";
 import "./src/assets/css/main.css";
 
-import { wrapMDX } from "./gatsby-ts/root-mdx";
+import { wrapMDX } from "./root-mdx";
 
 export const wrapRootElement = wrapMDX;

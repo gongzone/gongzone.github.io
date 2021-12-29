@@ -9,7 +9,7 @@ import {
   Paragraph,
   Videos,
   Link,
-} from "../src/components/MDX-Design";
+} from "./src/components/MDX-Design";
 
 const components = {
   DecoDiv,

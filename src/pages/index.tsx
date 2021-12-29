@@ -30,11 +30,7 @@ const IndexPage: React.FC<PageProps<QueryType>> = ({ data }) => {
       <Hero />
       <Navigation tag="ALL" />
       <Posts posts={posts} />
-      <Pagination
-        tag={null}
-        currentPage={1}
-        totalPagination={totalPagination}
-      />
+      <Pagination currentPage={1} totalPagination={totalPagination} />
     </Layout>
   );
 };

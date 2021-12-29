@@ -1,5 +1,5 @@
 export interface PaginationProps {
-  tag: string | null;
+  tag?: string;
   currentPage: number;
   totalPagination: number;
 }
