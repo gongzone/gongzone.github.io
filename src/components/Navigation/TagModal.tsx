@@ -1,9 +1,14 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import Tag_Pagi_Modal from "../UI/Tag_Pagi_Modal";
-import Tag_Pagi_Modal_PC from "../UI/Tag_Pagi_Modal_PC";
+import MobileModal from "../UI/MobileModal";
+import DesktopModal from "../UI/DesktopModal";
 import { isMobile } from "react-device-detect";
 import Backdrop from "../UI/Backdrop";
+
+interface TagModalProps {
+  showModal: boolean;
+  offModal: () => void;
+}
 
 const query = graphql`
   {
@@ -13,7 +18,7 @@ const query = graphql`
   }
 `;
 
-const TagModal = ({ showModal, offModal }) => {
+const TagModal: React.FC<TagModalProps> = ({ showModal, offModal }) => {
   const {
     allMdx: { distinct: tags },
   } = useStaticQuery(query);
@@ -22,12 +27,10 @@ const TagModal = ({ showModal, offModal }) => {
 
   return (
     <>
-      <Backdrop isOpen={showModal} onClick={offModal} />
-      {isMobile && (
-        <Tag_Pagi_Modal title="Tag" lists={allTags} offModal={offModal} />
-      )}
+      <Backdrop isOpen={showModal} offModal={offModal} />
+      {/*{isMobile && <MobileModal usedFor="Tag" lists={allTags} />}*/}
       {!isMobile && (
-        <Tag_Pagi_Modal_PC title="Tag" lists={allTags} offModal={offModal} />
+        <DesktopModal usedFor="Tag" lists={allTags} offModal={offModal} />
       )}
     </>
   );

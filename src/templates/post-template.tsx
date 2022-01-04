@@ -20,7 +20,7 @@ const PostTemplate: React.FC<PageProps<QueryType>> = ({ data }) => {
   const {
     mdx: {
       body,
-      frontmatter: { title, description, date, image, embeddedImages },
+      frontmatter: { title, description, date, image, embeddedImages, tags },
     },
   } = data;
 
@@ -34,9 +34,18 @@ const PostTemplate: React.FC<PageProps<QueryType>> = ({ data }) => {
             alt={title}
             className="post-image"
           />
-          <h3 className="post-title">{title}</h3>
+          <h2 className="post-title">{title}</h2>
           <span className="post-date">Posted on: {date}</span>
           <div className="underline"></div>
+          <ul className="post-ul">
+            {tags.map((tag, index) => {
+              return (
+                <li className="post-tag" key={index}>
+                  {tag}
+                </li>
+              );
+            })}
+          </ul>
         </article>
         <article className="post-article">
           <MDXRenderer embeddedImages={getImage(embeddedImages)}>
@@ -50,7 +59,7 @@ const PostTemplate: React.FC<PageProps<QueryType>> = ({ data }) => {
 };
 
 const Wrapper = styled.section`
-  max-width: 70rem;
+  max-width: 75rem;
   width: 90vw;
   margin: 3rem auto;
   margin-bottom: 5.5rem;
@@ -60,46 +69,88 @@ const Wrapper = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 6rem;
   }
 
   .post-image {
+    max-width: 60rem;
     border-radius: 1rem;
-    margin-bottom: 2rem;
   }
 
   .post-title {
-    font-size: 2rem;
+    font-family: "Dongle";
+    font-weight: lighter;
+    font-size: 3rem;
     max-width: 90%;
-    margin-bottom: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .post-date {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: rgba(97, 125, 152, 69%);
     margin-bottom: 1rem;
   }
 
   .underline {
-    width: 18rem;
+    width: 14em;
     height: 0.1rem;
-    background: rgba(0, 0, 0, 8%);
+    background: rgba(0, 0, 0, 12%);
+  }
+
+  .post-ul {
+    margin: 1rem;
+  }
+  .post-tag {
+    display: inline-block;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #fcfcfc;
+    background: #be3535;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.3rem;
   }
 
   .post-article {
+    border-radius: 2rem;
+    background-color: #ffffff;
     margin-bottom: 4rem;
   }
 
+  @media screen and (min-width: 768px) {
+    .post-title {
+      font-size: 4.2rem;
+    }
+    .post-date {
+      font-size: 1.8rem;
+    }
+    .post-tag {
+      font-size: 1.35rem;
+      padding: 0.8rem 1.1rem;
+    }
+    .post-article {
+      margin-top: 2rem;
+      padding: 4rem 5rem 4rem 5rem;
+      box-shadow: 0rem 0rem 0.4rem rgba(0, 0, 0, 25%);
+    }
+  }
+
   @media screen and (min-width: 1920px) {
-    max-width: 75rem;
+    max-width: 85rem;
 
     .post-title {
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
+      font-size: 4.5rem;
+    }
+    .post-image {
+      max-width: 68rem;
     }
     .post-date {
       font-size: 1.9rem;
       margin-bottom: 1.5rem;
+    }
+    .post-tag {
+      font-size: 1.45rem;
     }
   }
 `;

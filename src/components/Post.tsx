@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import { BsCalendar } from "react-icons/bs";
+import { BsCalendar3 } from "react-icons/bs";
 
 interface frontmatterProps {
   title: string;
@@ -17,33 +17,30 @@ const Post: React.FC<{ frontmatter: frontmatterProps }> = ({ frontmatter }) => {
   const { title, description, slug, date, image, tags } = frontmatter;
   return (
     <Wrapper>
-      <Link to={`/${slug}`} className="image-link">
+      <Link to={`/${slug}`} className="post-link">
         <GatsbyImage
           image={getImage(image)}
           alt={title}
           className="post-image"
         />
-      </Link>
-
-      <div className="post-info">
-        <Link to={`/${slug}`}>
+        <div className="post-info">
           <h3 className="title">{title}</h3>
-        </Link>
-        <p className="description">{description}</p>
-        <div className="tag-container">
-          {tags.map((tag, index) => {
-            return (
-              <span className="tag" key={index}>
-                {tag}
-              </span>
-            );
-          })}
+          <p className="description">{description}</p>
+          <div className="tag-container">
+            {tags.map((tag, index) => {
+              return (
+                <span className="tag" key={index}>
+                  {tag}
+                </span>
+              );
+            })}
+          </div>
+          <div className="post-date">
+            <BsCalendar3 className="date-icon" />
+            <span>{date} 작성</span>
+          </div>
         </div>
-        <div className="post-date">
-          <BsCalendar className="date-icon" />
-          <span>{date} 작성</span>
-        </div>
-      </div>
+      </Link>
     </Wrapper>
   );
 };
@@ -53,10 +50,17 @@ const Wrapper = styled.article`
   border: 0.1rem solid rgba(0, 0, 0, 15%);
   border-radius: 1rem;
   box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 25%);
-  background: white;
+  background: #ffffff;
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  .post-link {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
   }
 
   .post-image {
@@ -109,10 +113,18 @@ const Wrapper = styled.article`
   }
 
   @media screen and (min-width: 768px) {
-    display: flex;
     max-width: 85rem;
     width: 90vw;
 
+    .post-link {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+    }
+    .post-info {
+      width: auto;
+    }
     .post-image {
       width: 25rem;
       min-height: 25rem;
@@ -148,7 +160,7 @@ const Wrapper = styled.article`
     }
   }
 
-  @media screen and (min-width: 2000px) {
+  @media screen and (min-width: 1920px) {
     max-width: 105rem;
     .post-image {
       width: 32rem;

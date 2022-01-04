@@ -97,7 +97,7 @@ const Wrapper = styled.div`
     max-width: 85rem;
   }
 
-  @media screen and (min-width: 2000px) {
+  @media screen and (min-width: 1920px) {
     .card {
       font-size: 2.3rem;
       padding: 1.5rem 2.1rem;

@@ -11,7 +11,7 @@ interface Props {
   tag?: string | null;
 }
 
-const Tag_Pagi_Modal: React.FC<Props> = (props) => {
+const MobileModal: React.FC<Props> = (props) => {
   const { title, lists, offModal, tag } = props;
 
   const initialSelected = lists.map((__, index) => {
@@ -277,4 +277,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default Tag_Pagi_Modal;
+export default MobileModal;

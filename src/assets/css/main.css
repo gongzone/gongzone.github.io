@@ -4,7 +4,7 @@ body {
   min-height: 100vh;
   margin: 0px;
   padding: 0px;
-  background: #f5f5f6;
+  background: #ffffff;
   box-sizing: border-box;
   font-family: "Noto Sans", "Noto Sans KR", arial, sans-serif;
   color: #3d3d3d;
@@ -55,5 +55,5 @@ input::placeholder {
 }
 
 .main {
-  background: #f5f5f6;
+  background: inherit;
 }

@@ -3,16 +3,20 @@ import styled from "styled-components";
 import { BsTriangleFill } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 
-interface SelectButton {
+interface SelectButtonProps {
   tag?: string;
-  onModal: () => void;
   icon: string;
+  onClick: () => void;
 }
 
-const SelectorButton: React.FC<SelectButton> = ({ tag, onModal, icon }) => {
+const SelectorButton: React.FC<SelectButtonProps> = ({
+  tag,
+  icon,
+  onClick,
+}) => {
   return (
     <Wrapper icon={icon}>
-      <button className="button" type="button" onClick={onModal}>
+      <button className="button" type="button" onClick={onClick}>
         {tag && <span className="content">Tag: {tag}</span>}
         {!tag && <span className="content">Search</span>}
         {icon === "triangle" && <BsTriangleFill className="icon" />}
@@ -53,7 +57,7 @@ const Wrapper = styled.div`
   }
 
   .content {
-    font-family: imprima, arial, sans-serif;
+    font-family: "imprima", arial, sans-serif;
     margin-left: 2rem;
   }
 
@@ -64,7 +68,7 @@ const Wrapper = styled.div`
     margin-right: 2rem;
   }
 
-  @media screen and (min-width: 2000px) {
+  @media screen and (min-width: 1920px) {
     max-width: 55rem;
     height: 6rem;
     margin-bottom: ${(props) => (props.icon === "search" ? "3rem" : "0")};

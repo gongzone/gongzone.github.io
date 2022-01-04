@@ -18,7 +18,7 @@ const Footer = () => {
       <div className="footer-box">
         <span className="footer-description"></span>
         <span className="footer-description">
-          Made by GongZone with Gatsby &copy; 2021
+          Made by GongZone with Gatsby &copy; 2022
         </span>
       </div>
     </Wrapper>

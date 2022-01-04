@@ -3,18 +3,22 @@ import styled from "styled-components";
 
 interface BackdropProps {
   isOpen: boolean;
-  onClick: () => void;
   transition?: string;
+  offModal: () => void;
 }
 
-const Backdrop: React.FC<BackdropProps> = (props) => {
+const Backdrop: React.FC<BackdropProps> = ({
+  isOpen,
+  transition,
+  offModal,
+}) => {
   return (
     <Wrapper
-      isOpen={props.isOpen}
+      isOpen={isOpen}
       role="button"
-      onClick={props.onClick}
-      onKeyDown={props.onClick}
-      transition={props.transition}
+      onClick={offModal}
+      onKeyDown={offModal}
+      transition={transition}
     ></Wrapper>
   );
 };

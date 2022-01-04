@@ -2,7 +2,7 @@ import React from "react";
 import { graphql, PageProps } from "gatsby";
 import Layout from "../components/Layout";
 import Hero from "../components/Hero";
-import Navigation from "../components/Navigation";
+import Navigation from "../components/Navigation/Navigation";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
 import SEO from "../components/SEO";

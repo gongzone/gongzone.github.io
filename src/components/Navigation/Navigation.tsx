@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import TagButton from "./Button_Modal/TagButton";
-import SearchButton from "./Button_Modal/SearchButton";
+import TagModal from "./TagModal";
+import SearchModal from "./SearchModal";
+import SelectorButton from "../UI/SelectorButton";
 
 const Navigation: React.FC<{ tag: string }> = ({ tag }) => {
+  const [tagShowModal, setTagShowModal] = useState(false);
+  const [searchShowModal, setSearchShowModal] = useState(false);
+
+  const tagShowModalHandler = () => {
+    setTagShowModal(!tagShowModal);
+  };
+
+  const searchShowModalHandler = () => {
+    setSearchShowModal(!searchShowModal);
+  };
+
   return (
     <Wrapper>
       <div className="title-container">
         <span className="title">GongZone DevBlog</span>
         <div className="highlight"></div>
       </div>
-      <TagButton tag={tag} />
-      <SearchButton />
+      {tagShowModal && (
+        <TagModal showModal={tagShowModal} offModal={tagShowModalHandler} />
+      )}
+      {/*{searchShowModal && <SearchModal />}*/}
+      <SelectorButton
+        tag={tag}
+        icon="triangle"
+        onClick={tagShowModalHandler}
+      ></SelectorButton>
+      <SelectorButton
+        icon="search"
+        onClick={searchShowModalHandler}
+      ></SelectorButton>
     </Wrapper>
   );
 };
@@ -52,25 +75,6 @@ const Wrapper = styled.div`
     width: 29.5rem;
     height: 1.9rem;
     background: rgba(135, 88, 157, 20%);
-  }
-
-  @media screen and (min-width: 2000px) {
-    margin-top: 2rem;
-    height: 24rem;
-
-    .title {
-      font-size: 3.5rem;
-    }
-
-    .highlight {
-      position: absolute;
-      top: 63%;
-      left: 50%;
-      transform: translate(-50%, 0);
-      width: 34.5rem;
-      height: 2.1rem;
-      background: rgba(135, 88, 157, 20%);
-    }
   }
 `;
 

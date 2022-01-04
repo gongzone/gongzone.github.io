@@ -3,7 +3,7 @@ import { graphql, PageProps } from "gatsby";
 
 import Layout from "../components/Layout";
 import Hero from "../components/Hero";
-import Navigation from "../components/Navigation";
+import Navigation from "../components/Navigation/Navigation";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
 import SEO from "../components/SEO";
@@ -19,24 +19,22 @@ interface PageContextType {
   totalPagination: number;
 }
 
-const IndexPaginationTemplate: React.FC<PageProps<QueryType, PageContextType>> =
-  ({ data, pageContext }) => {
-    const { nodes: posts } = data.allMdx;
-    const { currentPage, totalPagination } = pageContext;
+const IndexPaginationTemplate: React.FC<
+  PageProps<QueryType, PageContextType>
+> = ({ data, pageContext }) => {
+  const { nodes: posts } = data.allMdx;
+  const { currentPage, totalPagination } = pageContext;
 
-    return (
-      <Layout>
-        <SEO title="GongZone DevBlog" canonical={false} />
-        <Hero />
-        <Navigation tag="ALL" />
-        <Posts posts={posts} />
-        <Pagination
-          currentPage={currentPage}
-          totalPagination={totalPagination}
-        />
-      </Layout>
-    );
-  };
+  return (
+    <Layout>
+      <SEO title="GongZone DevBlog" canonical={false} />
+      <Hero />
+      <Navigation tag="ALL" />
+      <Posts posts={posts} />
+      <Pagination currentPage={currentPage} totalPagination={totalPagination} />
+    </Layout>
+  );
+};
 
 export const query = graphql`
   query GetPosts($limit: Int, $skip: Int) {

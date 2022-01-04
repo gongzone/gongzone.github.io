@@ -2,39 +2,41 @@ import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-interface Props {
-  title: string;
+interface DesktopModalProps {
+  usedFor: string;
   lists: string[] | number[];
   offModal: () => void;
-  tag?: string | null;
+  tag?: string;
 }
 
-const setPath = (
-  chosenList: string | number | boolean,
-  title: string,
-  tag?: string | null
-) => {
-  let path: string | number | boolean = "";
+type selectedType = string | number | null;
 
-  if (title === "Tag") {
-    return (path = chosenList === "ALL" ? "" : chosenList);
+const setPath = (selected: selectedType, usedFor: string, tag?: string) => {
+  let path: string = "";
+
+  if (usedFor === "Tag") {
+    path = selected === "ALL" ? "" : `${selected}`;
   }
 
-  if (title === "Page") {
-    if (chosenList === 1) {
-      return (path = tag ? `${tag}` : "");
+  if (usedFor === "Pagination") {
+    if (selected === 1) {
+      path = tag ? `${tag}` : "";
     }
 
-    return (path = tag ? `${tag}/${chosenList}` : `${chosenList}`);
+    path = tag ? `${tag}/${selected}` : `${selected}`;
   }
+
+  return path;
 };
 
-const Tag_Pagi_Modal_PC: React.FC<Props> = (props) => {
-  const { title, lists, offModal, tag } = props;
-  const [selectedList, setSelectedList] = useState<boolean | string | number>(
-    false
-  );
-  let selectedPath = setPath(selectedList, title, tag);
+const DesktopModal: React.FC<DesktopModalProps> = ({
+  usedFor,
+  lists,
+  offModal,
+  tag,
+}) => {
+  const [selected, setSelected] = useState<selectedType>(null);
+  const selectedPath = setPath(selected, usedFor, tag);
 
   //외부 스크롤 불가능하게 만들기
   useEffect(() => {
@@ -51,16 +53,16 @@ const Tag_Pagi_Modal_PC: React.FC<Props> = (props) => {
     };
   }, []);
 
-  const onClickHandler = (list: boolean | string | number) => {
-    setSelectedList(list);
+  const onClickHandler = (selected: selectedType) => {
+    setSelected(selected);
   };
 
   return (
     <Wrapper>
       <div className="modal-header">
-        <span className="header-info">Select {title}</span>
+        <span className="header-info">Select {usedFor}</span>
         <div className="header-buttons">
-          {selectedList && (
+          {selected && (
             <Link className="select-link" to={`/${selectedPath}`}></Link>
           )}
           <button className="header-button select" onClick={offModal}>
@@ -75,18 +77,18 @@ const Tag_Pagi_Modal_PC: React.FC<Props> = (props) => {
 
       <div className="modal-main">
         <ul className="main-lists">
-          {lists.map((el, index) => {
+          {lists.map((element, index) => {
             return (
               <li
-                className={`main-list ${selectedList === el ? "active" : ""}`}
+                className={`main-list ${selected === element ? "active" : ""}`}
                 key={index}
                 onClick={() => {
-                  selectedList !== el
-                    ? onClickHandler(el)
-                    : onClickHandler(false);
+                  selected !== element
+                    ? onClickHandler(element)
+                    : onClickHandler(null);
                 }}
               >
-                {el}
+                {element}
               </li>
             );
           })}
@@ -189,4 +191,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default Tag_Pagi_Modal_PC;
+export default DesktopModal;

@@ -1,6 +1,6 @@
 import React from "react";
-import Tag_Pagi_Modal from "../UI/Tag_Pagi_Modal";
-import Tag_Pagi_Modal_PC from "../UI/Tag_Pagi_Modal_PC";
+import MobileModal from "../UI/MobileModal";
+import DesktopModal from "../UI/DesktopModal";
 import { isMobile } from "react-device-detect";
 import Backdrop from "../UI/Backdrop";
 
@@ -27,7 +27,7 @@ const PaginationModal: React.FC<paginationModal> = ({
     <>
       <Backdrop isOpen={showModal} onClick={offModal} />
       {isMobile && (
-        <Tag_Pagi_Modal
+        <MobileModal
           title="Page"
           lists={pageNumbers}
           offModal={offModal}
@@ -35,7 +35,7 @@ const PaginationModal: React.FC<paginationModal> = ({
         />
       )}
       {!isMobile && (
-        <Tag_Pagi_Modal_PC
+        <DesktopModal
           title="Page"
           lists={pageNumbers}
           offModal={offModal}
