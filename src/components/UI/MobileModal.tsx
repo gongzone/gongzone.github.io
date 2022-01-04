@@ -4,22 +4,21 @@ import { Link } from "gatsby";
 import styled from "styled-components";
 import { useDebouncedCallback } from "use-debounce";
 
-interface Props {
-  title: string;
+interface MobileModalProps {
+  usedFor: string;
   lists: string[] | number[];
   offModal: () => void;
   tag?: string | null;
 }
 
-const MobileModal: React.FC<Props> = (props) => {
-  const { title, lists, offModal, tag } = props;
-
+const MobileModal: React.FC<MobileModalProps> = ({
+  usedFor,
+  lists,
+  offModal,
+  tag,
+}) => {
   const initialSelected = lists.map((__, index) => {
-    if (index === 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return index === 0 ? true : false;
   });
 
   const [isSelected, setIsSelected] = useState(initialSelected);
@@ -33,10 +32,7 @@ const MobileModal: React.FC<Props> = (props) => {
     React.createRef<HTMLLIElement>()
   );
 
-  const resizeHandler = useDebouncedCallback(() => {
-    setResizeScale({ x: window.innerWidth, y: window.innerHeight });
-  }, 200);
-
+  // component mount 시 resize 리스너 적용
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
 
@@ -59,30 +55,32 @@ const MobileModal: React.FC<Props> = (props) => {
 
   //선택된 li에 따라 해당 path로 변환 후 스테이트 업데이트
   useEffect(() => {
-    if (isSelected.indexOf(true) !== -1) {
-      const selectedIndex = isSelected.indexOf(true);
-      let chosenList = lists[selectedIndex];
-      let path: string | number = "";
+    const selectedIndex = isSelected.indexOf(true);
 
-      if (title === "Tag") {
-        path = chosenList === "ALL" ? "" : chosenList;
-      }
-      if (title === "Page") {
-        path = tag ? `${tag}/${chosenList}` : `${chosenList}`;
-
-        if (chosenList === 1) {
-          path = tag ? `${tag}` : "";
-        }
-      }
-      setSelectedPath(path);
+    if (selectedIndex === -1) {
+      return;
     }
+
+    let chosenList = lists[selectedIndex];
+    let path: string | number = "";
+
+    if (usedFor === "Tag") {
+      path = chosenList === "ALL" ? "" : chosenList;
+    }
+
+    if (usedFor === "Page") {
+      path = tag ? `${tag}/${chosenList}` : `${chosenList}`;
+
+      if (chosenList === 1) {
+        path = tag ? `${tag}` : "";
+      }
+    }
+    setSelectedPath(path);
   }, [isSelected]);
 
   //스크롤 시 어떤 li가 선택되었는지를 찾는 이벤트 핸들러
   const onScrollHandler = () => {
     const selectorPosition = ulRef.current!.offsetWidth / 2;
-    const selectedArray: boolean[] = [];
-    let isSameArray = true;
 
     for (let i = 0; i < lists.length; i++) {
       const listCenterPosition =
@@ -90,40 +88,41 @@ const MobileModal: React.FC<Props> = (props) => {
         liRefs[i].current!.offsetWidth / 2 -
         ulRef.current!.scrollLeft;
 
-      selectedArray[i] =
+      const selected =
         liRefs[i].current!.offsetWidth / 2 >=
         Math.abs(listCenterPosition - selectorPosition);
-    }
 
-    for (let i = 0; i < lists.length; i++) {
-      const isSameList = selectedArray[i] === isSelected[i];
-      if (isSameList) {
-        continue;
-      } else {
-        isSameArray = false;
-        break;
+      if (selected === true && isSelected[i] === true) {
+        return;
       }
-    }
 
-    if (!isSameArray) {
-      setIsSelected(selectedArray);
+      if (selected === true && isSelected[i] === false) {
+        setIsSelected((prevState) => {
+          const newState = prevState.map((__, index) => {
+            return index === i ? true : false;
+          });
+          return newState;
+        });
+      }
     }
   };
 
+  // resize 시 scale 측정(Debounce 적용)
+  const resizeHandler = useDebouncedCallback(() => {
+    setResizeScale({ x: window.innerWidth, y: window.innerHeight });
+  }, 200);
+
   return (
-    <Wrapper
-      marginLeft={marginLeft}
-      marginRight={marginRight}
-      isSelected={isSelected}
-    >
+    <Wrapper marginLeft={marginLeft} marginRight={marginRight}>
       <div className="modal-header">
-        <span className="header-info">Select {title}</span>
+        <span className="header-info">Select {usedFor}</span>
         <div className="header-buttons">
           <div className="select">
-            {isSelected.indexOf(true) !== -1 && (
-              <Link className="select-link" to={`/${selectedPath}`}></Link>
-            )}
-            <button className="header-button select">선택</button>
+            <Link className="select-link" to={`/${selectedPath}`}>
+              <button className="header-button" onClick={offModal}>
+                선택
+              </button>
+            </Link>
           </div>
           <button className="header-button" onClick={offModal}>
             취소
@@ -133,14 +132,14 @@ const MobileModal: React.FC<Props> = (props) => {
 
       <div className="modal-main">
         <ul className="main-lists" ref={ulRef} onScroll={onScrollHandler}>
-          {lists.map((el, index) => {
+          {lists.map((element, index) => {
             return (
               <li
                 className={`main-list ${isSelected[index] && "active"}`}
                 key={index}
                 ref={liRefs[index]}
               >
-                {el}
+                {element}
               </li>
             );
           })}
@@ -151,7 +150,10 @@ const MobileModal: React.FC<Props> = (props) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{
+  marginLeft: number;
+  marginRight: number;
+}>`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -169,7 +171,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 23%;
+    height: 6.5rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     background: #fff5dd;
@@ -184,16 +186,11 @@ const Wrapper = styled.div`
     display: flex;
   }
 
-  .select {
-    position: relative;
-  }
-
   .select-link {
     display: flex;
     z-index: 99;
-    position: absolute;
-    width: 7rem;
-    height: 3.9rem;
+    width: 100%;
+    height: 100%;
   }
 
   .header-button {
@@ -202,18 +199,6 @@ const Wrapper = styled.div`
     color: white;
     margin-right: 2rem;
     padding: 1rem 2rem;
-  }
-
-  .header-button.select {
-    background: ${(props: {
-      isSelected: boolean[];
-      marginLeft: number;
-      marginRight: number;
-    }) =>
-      props.isSelected.indexOf(true) !== -1
-        ? "#44b4cc"
-        : "rgba(216,50,50,63%)"};
-    transition: background 0.8s ease;
   }
 
   .modal-main {
@@ -244,6 +229,7 @@ const Wrapper = styled.div`
     border-radius: 0.7rem;
     background: #f2f2f2;
     margin-right: 2rem;
+    white-space: nowrap;
   }
 
   .selector {

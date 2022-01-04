@@ -4,14 +4,14 @@ import DesktopModal from "../UI/DesktopModal";
 import { isMobile } from "react-device-detect";
 import Backdrop from "../UI/Backdrop";
 
-interface paginationModal {
-  tag: string | null;
+interface PaginationModalProps {
+  tag?: string;
   showModal: boolean;
   offModal: () => void;
   totalPagination: number;
 }
 
-const PaginationModal: React.FC<paginationModal> = ({
+const PaginationModal: React.FC<PaginationModalProps> = ({
   tag,
   showModal,
   offModal,
@@ -25,10 +25,10 @@ const PaginationModal: React.FC<paginationModal> = ({
 
   return (
     <>
-      <Backdrop isOpen={showModal} onClick={offModal} />
+      <Backdrop isOpen={showModal} offModal={offModal} />
       {isMobile && (
         <MobileModal
-          title="Page"
+          usedFor="Page"
           lists={pageNumbers}
           offModal={offModal}
           tag={tag}
@@ -36,7 +36,7 @@ const PaginationModal: React.FC<paginationModal> = ({
       )}
       {!isMobile && (
         <DesktopModal
-          title="Page"
+          usedFor="Page"
           lists={pageNumbers}
           offModal={offModal}
           tag={tag}

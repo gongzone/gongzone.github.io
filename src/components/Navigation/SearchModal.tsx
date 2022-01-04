@@ -4,16 +4,21 @@ import { FaTimes } from "react-icons/fa";
 import SearchModalList from "./SearchModalList";
 import Backdrop from "../UI/Backdrop";
 
-const SearchModal = ({ showModal, offModal }) => {
+interface SearchModalProps {
+  showModal: boolean;
+  offModal: () => void;
+}
+
+const SearchModal: React.FC<SearchModalProps> = ({ showModal, offModal }) => {
   const [searchInput, setSearchInput] = useState("");
 
-  const changeHandler = (e) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
 
   return (
     <>
-      <Backdrop isOpen={showModal} onClick={offModal} />
+      <Backdrop isOpen={showModal} offModal={offModal} />
       <Wrapper>
         <div className="container">
           <header className="search-header">

@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-export const RegVideo = (props) => {
+export const RegVideo: React.FC<{ video: any; type: string }> = ({
+  video,
+  type,
+}) => {
   return (
     <RegVideoWrapper>
       <video controls muted>
-        <source src={props.video} type={`video/${props.type}`} />
+        <source src={video} type={`video/${type}`} />
       </video>
     </RegVideoWrapper>
   );

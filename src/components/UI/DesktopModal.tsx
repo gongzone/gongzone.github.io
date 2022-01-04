@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
+import { preventScroll } from "../Utils/prevent-scroll";
+
 interface DesktopModalProps {
   usedFor: string;
   lists: string[] | number[];
@@ -18,9 +20,10 @@ const setPath = (selected: selectedType, usedFor: string, tag?: string) => {
     path = selected === "ALL" ? "" : `${selected}`;
   }
 
-  if (usedFor === "Pagination") {
+  if (usedFor === "Page") {
     if (selected === 1) {
       path = tag ? `${tag}` : "";
+      return path;
     }
 
     path = tag ? `${tag}/${selected}` : `${selected}`;
@@ -39,19 +42,7 @@ const DesktopModal: React.FC<DesktopModalProps> = ({
   const selectedPath = setPath(selected, usedFor, tag);
 
   //외부 스크롤 불가능하게 만들기
-  useEffect(() => {
-    const top = document.documentElement.scrollTop || document.body.scrollTop;
-    document.body.style.position = "fixed";
-    (document.body.style as any)["overflow-y"] = "scroll";
-    document.body.style.top = `${-top}px`;
-    document.body.style.width = "100%";
-
-    return () => {
-      document.body.style.position = "unset";
-      (document.body.style as any)["overflow-y"] = "unset";
-      document.documentElement.scrollTop = top;
-    };
-  }, []);
+  useEffect(preventScroll, []);
 
   const onClickHandler = (selected: selectedType) => {
     setSelected(selected);
@@ -116,7 +107,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 23%;
+    height: 6.5rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     background: #fff5dd;

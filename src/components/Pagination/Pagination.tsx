@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-import PaginationButton from "./Button_Modal/PaginationButton";
+import PaginationModal from "./PaginationModal";
 import { BsTriangleFill } from "react-icons/bs";
 
-import { PaginationProps } from "../interfaces/PaginationProps";
+interface PaginationProps {
+  tag?: string;
+  currentPage: number;
+  totalPagination: number;
+}
 
 const Pagination: React.FC<PaginationProps> = ({
   tag,
@@ -14,18 +18,7 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const [showPrev, setShowPrev] = useState(false);
   const [showNext, setShowNext] = useState(false);
-
-  const changeShowStates = () => {
-    if (currentPage > 1) {
-      setShowPrev(true);
-    }
-
-    if (currentPage < totalPagination) {
-      setShowNext(true);
-    }
-  };
-
-  useEffect(changeShowStates, [currentPage, totalPagination]);
+  const [showModal, setShowModal] = useState(false);
 
   const nextUrl = tag ? `/${tag}/${currentPage + 1}` : `/${currentPage + 1}`;
   let prevUrl = tag ? `/${tag}/${currentPage - 1}` : `/${currentPage - 1}`;
@@ -34,6 +27,20 @@ const Pagination: React.FC<PaginationProps> = ({
     prevUrl = tag ? `/${tag}` : `/`;
   }
 
+  useEffect(() => {
+    if (currentPage > 1) {
+      setShowPrev(true);
+    }
+
+    if (currentPage < totalPagination) {
+      setShowNext(true);
+    }
+  }, [currentPage, totalPagination]);
+
+  const showModalHandler = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <Wrapper>
       {showPrev && (
@@ -41,11 +48,17 @@ const Pagination: React.FC<PaginationProps> = ({
           Prev <BsTriangleFill className="prev-triangle" />
         </Link>
       )}
-      <PaginationButton
-        tag={tag}
-        currentPage={currentPage}
-        totalPagination={totalPagination}
-      />
+      {showModal && (
+        <PaginationModal
+          tag={tag}
+          showModal={showModal}
+          offModal={showModalHandler}
+          totalPagination={totalPagination}
+        />
+      )}
+      <button className="card pagi-button" onClick={showModalHandler}>
+        {currentPage}/{totalPagination}
+      </button>
       {showNext && (
         <Link to={nextUrl} className="card next">
           Next <BsTriangleFill className="next-triangle" />
@@ -91,6 +104,13 @@ const Wrapper = styled.div`
     margin-left: 0.6rem;
     font-size: 1.4rem;
     transform: rotate(90deg);
+  }
+
+  .pagi-button {
+    cursor: pointer;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-tap-highlight-color: transparent;
   }
 
   @media screen and (min-width: 768px) {

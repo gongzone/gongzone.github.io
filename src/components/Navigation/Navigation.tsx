@@ -25,7 +25,12 @@ const Navigation: React.FC<{ tag: string }> = ({ tag }) => {
       {tagShowModal && (
         <TagModal showModal={tagShowModal} offModal={tagShowModalHandler} />
       )}
-      {/*{searchShowModal && <SearchModal />}*/}
+      {searchShowModal && searchShowModal && (
+        <SearchModal
+          showModal={searchShowModal}
+          offModal={searchShowModalHandler}
+        />
+      )}
       <SelectorButton
         tag={tag}
         icon="triangle"

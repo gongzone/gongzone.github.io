@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Link = ({ children, href }) => {
+const Link: React.FC<{ children: string; href: string }> = ({
+  children,
+  href,
+}) => {
   return <Wrapper href={href}>{children}</Wrapper>;
 };
 

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/nightOwlLight";
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/vsDark";
 
-const CodeBox = (props) => {
-  const code = props.children.props.children.trim();
-  const language = props.children.props.className.split("-")[1];
+const CodeBlock: React.FC<{ children: any }> = ({ children }) => {
+  const code: string = children.props.children;
+  const language = children.props.className.split("-")[1] as Language;
 
   return (
     <Highlight {...defaultProps} code={code} language={language} theme={theme}>
@@ -38,14 +38,15 @@ const Pre = styled.pre`
   }
 
   .language-tab {
+    color: #222222;
     display: inline-block;
     font-size: 1.6rem;
     font-weight: 700;
-    background: #ffb997;
+    background: #e24747;
     padding: 0.3rem 0.5rem;
     margin-bottom: 1rem;
     border-radius: 0.5rem;
   }
 `;
 
-export default CodeBox;
+export default CodeBlock;

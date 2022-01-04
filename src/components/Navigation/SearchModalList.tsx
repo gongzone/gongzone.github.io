@@ -3,6 +3,19 @@ import { graphql, useStaticQuery, Link } from "gatsby";
 import { CgList } from "react-icons/cg";
 import styled from "styled-components";
 
+import { preventScroll } from "../Utils/prevent-scroll";
+
+interface QueryType {
+  allMdx: {
+    nodes: {
+      frontmatter: {
+        title: string;
+        slug: string;
+      };
+    }[];
+  };
+}
+
 const query = graphql`
   {
     allMdx(sort: { fields: frontmatter___date, order: DESC }) {
@@ -16,35 +29,25 @@ const query = graphql`
   }
 `;
 
-const SearchModalList = ({ searchInput }) => {
+const SearchModalList: React.FC<{ searchInput: string }> = ({
+  searchInput,
+}) => {
   const {
     allMdx: { nodes: posts },
-  } = useStaticQuery(query);
+  } = useStaticQuery<QueryType>(query);
 
   //외부 스크롤 불가능하게 만들기
-  useEffect(() => {
-    const top = document.documentElement.scrollTop || document.body.scrollTop;
-    document.body.style.position = "fixed";
-    document.body.style["overflow-y"] = "scroll";
-    document.body.style.top = `${-top}px`;
-    document.body.style.width = "100%";
-
-    return () => {
-      document.body.style.position = "unset";
-      document.body.style["overflow-y"] = "unset";
-      document.documentElement.scrollTop = top;
-    };
-  }, []);
+  useEffect(preventScroll, []);
 
   const filteredPosts = posts.filter((post) => {
+    if (!searchInput) {
+      return;
+    }
+
     const postTitle = post.frontmatter.title.toUpperCase();
     const input = searchInput.toUpperCase();
 
-    if (searchInput) {
-      return postTitle.includes(input);
-    } else {
-      return;
-    }
+    return postTitle.includes(input);
   });
 
   return (
@@ -68,7 +71,9 @@ const SearchModalList = ({ searchInput }) => {
       )}
       {filteredPosts.length === 0 && (
         <Div>
-          <span className="info">검색 결과가 없습니다. 🙊</span>
+          <span className="info">
+            검색 결과가 없습니다. <span className="emoji">🙊</span>
+          </span>
           <span>There are no search results.</span>
         </Div>
       )}
@@ -148,6 +153,10 @@ const Div = styled.div`
   .info {
     margin-left: 1.2rem;
     margin-bottom: 1rem;
+  }
+
+  .emoji {
+    font-weight: normal;
   }
 `;
 

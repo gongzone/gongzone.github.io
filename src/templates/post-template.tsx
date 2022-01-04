@@ -34,7 +34,11 @@ const PostTemplate: React.FC<PageProps<QueryType>> = ({ data }) => {
             alt={title}
             className="post-image"
           />
-          <h2 className="post-title">{title}</h2>
+          <h1 className="post-title">{title}</h1>
+          <h2 className="post-description">
+            <span className="emoji">📝 </span>
+            {description}
+          </h2>
           <span className="post-date">Posted on: {date}</span>
           <div className="underline"></div>
           <ul className="post-ul">
@@ -79,10 +83,21 @@ const Wrapper = styled.section`
   .post-title {
     font-family: "Dongle";
     font-weight: lighter;
-    font-size: 3rem;
+    font-size: 3.5rem;
     max-width: 90%;
     margin-top: 2rem;
     margin-bottom: 1.5rem;
+  }
+
+  .post-description {
+    font-size: 1.7rem;
+    font-weight: bold;
+    max-width: 90%;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    .emoji {
+      font-weight: normal;
+    }
   }
 
   .post-date {
@@ -122,6 +137,11 @@ const Wrapper = styled.section`
     .post-title {
       font-size: 4.2rem;
     }
+
+    .post-description {
+      font-size: 1.8rem;
+    }
+
     .post-date {
       font-size: 1.8rem;
     }

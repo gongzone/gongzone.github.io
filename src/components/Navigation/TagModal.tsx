@@ -28,7 +28,9 @@ const TagModal: React.FC<TagModalProps> = ({ showModal, offModal }) => {
   return (
     <>
       <Backdrop isOpen={showModal} offModal={offModal} />
-      {/*{isMobile && <MobileModal usedFor="Tag" lists={allTags} />}*/}
+      {isMobile && (
+        <MobileModal usedFor="Tag" lists={allTags} offModal={offModal} />
+      )}
       {!isMobile && (
         <DesktopModal usedFor="Tag" lists={allTags} offModal={offModal} />
       )}

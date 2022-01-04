@@ -1,21 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
-const Paragraph = ({ children }) => {
+const Paragraph: React.FC<{ children: string }> = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;
 };
 
 const Wrapper = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   line-height: 1.7;
   letter-spacing: 0.05rem;
+  margin: 2.5rem 0rem;
 
   @media screen and (min-width: 768px) {
     font-size: 1.7rem;
+    margin: 2.75rem 0rem;
   }
 
   @media screen and (min-width: 1920px) {
-    font-size: 1.85rem;
+    font-size: 1.8rem;
   }
 `;
 

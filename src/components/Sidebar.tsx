@@ -9,28 +9,24 @@ interface SidebarProps {
   offSidebar: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = (props) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, offSidebar }) => {
   return (
     <>
-      <Backdrop
-        isOpen={props.isOpen}
-        onClick={props.offSidebar}
-        transition="on"
-      />
-      <Wrapper isOpen={props.isOpen}>
-        <button className="close-button" onClick={props.offSidebar}>
+      <Backdrop isOpen={isOpen} offModal={offSidebar} transition="on" />
+      <Wrapper isOpen={isOpen}>
+        <button className="close-button" onClick={offSidebar}>
           <FaTimes />
         </button>
         <div className="sidebar-links">
           <ul>
             <li>
-              <Link to="/" onClick={props.offSidebar}>
+              <Link to="/" onClick={offSidebar}>
                 <FaHouseDamage />
                 <span className="link-text">Home</span>
               </Link>
             </li>
             <li>
-              <Link to="/about" onClick={props.offSidebar}>
+              <Link to="/about" onClick={offSidebar}>
                 <FaCommentDots />
                 <span className="link-text">About</span>
               </Link>

@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import Navigation from "../components/Navigation/Navigation";
 import Posts from "../components/Posts";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/Pagination/Pagination";
 import SEO from "../components/SEO";
 
 import { AllMdxNodes } from "../interfaces/AllMdxNodes";

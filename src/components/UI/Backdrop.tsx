@@ -23,15 +23,14 @@ const Backdrop: React.FC<BackdropProps> = ({
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isOpen: boolean; transition?: string }>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   z-index: 888;
-  visibility: ${(props: { isOpen: boolean; transition?: string }) =>
-    props.isOpen ? "visible" : "hidden"};
+  visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
   background: ${(props) =>
     props.isOpen ? "rgba(0, 0, 0, 29%)" : "rgba(0, 0, 0, 0%)"};
   transition: ${(props) =>

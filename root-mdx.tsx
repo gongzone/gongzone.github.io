@@ -3,19 +3,19 @@ import { MDXProvider } from "@mdx-js/react";
 import { GatsbyBrowser } from "gatsby";
 import {
   Headings,
-  Code,
-  DecoDiv,
-  CodeBox,
+  HL,
+  Block,
+  CodeBlock,
   Paragraph,
   Videos,
   Link,
 } from "./src/components/MDX-Design";
 
 const components = {
-  DecoDiv,
-  h2: Headings.myH2,
-  inlineCode: Code,
-  pre: CodeBox,
+  Block,
+  inlineCode: HL,
+  h3: Headings.H3,
+  pre: CodeBlock,
   p: Paragraph,
   RegVideo: Videos.RegVideo,
   a: Link,
