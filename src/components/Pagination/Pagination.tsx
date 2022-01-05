@@ -116,14 +116,6 @@ const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
     max-width: 85rem;
   }
-
-  @media screen and (min-width: 1920px) {
-    .card {
-      font-size: 2.3rem;
-      padding: 1.5rem 2.1rem;
-    }
-    max-width: 105rem;
-  }
 `;
 
 export default Pagination;

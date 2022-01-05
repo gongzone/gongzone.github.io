@@ -67,12 +67,6 @@ const Wrapper = styled.div`
     color: #d83232;
     margin-right: 2rem;
   }
-
-  @media screen and (min-width: 1920px) {
-    max-width: 55rem;
-    height: 6rem;
-    margin-bottom: ${(props) => (props.icon === "search" ? "3rem" : "0")};
-  }
 `;
 
 export default SelectorButton;

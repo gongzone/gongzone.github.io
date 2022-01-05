@@ -31,9 +31,6 @@ const Wrapper = styled.section`
     justify-content: center;
     max-width: 85rem;
   }
-  @media screen and (min-width: 2000px) {
-    max-width: 105rem;
-  }
 `;
 
 export default Posts;

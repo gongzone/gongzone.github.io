@@ -160,40 +160,6 @@ const Wrapper = styled.article`
       padding: 0.7rem 1rem;
     }
   }
-
-  @media screen and (min-width: 1920px) {
-    max-width: 105rem;
-    .post-image {
-      width: 32rem;
-      min-height: 32rem;
-    }
-    .title {
-      font-size: 2.4rem;
-      margin: 2rem 5.5rem;
-    }
-
-    .description {
-      font-size: 2rem;
-      margin: 0 3.5rem;
-      margin-bottom: 2.2rem;
-    }
-
-    .post-date {
-      font-size: 1.8rem;
-    }
-
-    .tag-container {
-      margin: 0 3.5rem;
-    }
-
-    .tag {
-      font-size: 1.75rem;
-      margin-right: 1.7rem;
-      margin-bottom: 1.7rem;
-      padding: 1rem 1.3rem;
-      border-radius: 0.6rem;
-    }
-  }
 `;
 
 export default Post;
