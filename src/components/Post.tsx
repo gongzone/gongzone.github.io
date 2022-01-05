@@ -140,13 +140,12 @@ const Wrapper = styled.article`
       max-width: 25rem;
       min-width: 25rem;
       min-height: 25rem;
-      height: 100%;
       margin-bottom: 0rem;
     }
 
     .title {
       font-size: 1.9rem;
-      margin: 2rem 6rem;
+      margin: 4rem 6rem 2rem 6rem;
     }
 
     .description {
@@ -157,7 +156,7 @@ const Wrapper = styled.article`
 
     .post-date {
       font-size: 1.45rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .tag-container {
@@ -168,7 +167,7 @@ const Wrapper = styled.article`
       font-size: 1.5rem;
       margin-right: 1.3rem;
       margin-bottom: 1.3rem;
-      padding: 0.7rem 1rem;
+      padding: 0.6rem 0.9rem;
     }
   }
 `;
