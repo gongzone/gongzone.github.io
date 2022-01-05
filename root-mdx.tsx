@@ -9,16 +9,18 @@ import {
   Paragraph,
   Videos,
   Link,
+  Intro,
 } from "./src/components/MDX-Design";
 
 const components = {
   Block,
+  Intro,
   inlineCode: HL,
-  h3: Headings.H3,
   pre: CodeBlock,
   p: Paragraph,
-  RegVideo: Videos.RegVideo,
+  h3: Headings.H3,
   a: Link,
+  RegVideo: Videos.RegVideo,
 };
 
 export const wrapMDX: GatsbyBrowser["wrapRootElement"] = ({ element }) => {
