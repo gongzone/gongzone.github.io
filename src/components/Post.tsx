@@ -24,8 +24,8 @@ const Post: React.FC<{ frontmatter: frontmatterProps }> = ({ frontmatter }) => {
           className="post-image"
         />
         <div className="post-info">
-          <h2 className="title">{title}</h2>
-          <h3 className="description">{description}</h3>
+          <h1 className="title">{title}</h1>
+          <h2 className="description">{description}</h2>
           <div className="tag-container">
             {tags.map((tag, index) => {
               return (
@@ -51,6 +51,8 @@ const Wrapper = styled.article`
   border-radius: 1rem;
   box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 25%);
   background: #ffffff;
+  line-height: 1.7;
+  letter-spacing: 0.05rem;
 
   &:last-child {
     margin-bottom: 0;
@@ -75,6 +77,14 @@ const Wrapper = styled.article`
     align-items: center;
     width: 90%;
     margin: 0 auto;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    line-height: 1.6;
+    margin: 0rem;
+    word-break: break-all;
   }
 
   .description {
@@ -127,7 +137,8 @@ const Wrapper = styled.article`
       width: auto;
     }
     .post-image {
-      width: 25rem;
+      max-width: 25rem;
+      min-width: 25rem;
       min-height: 25rem;
       height: 100%;
       margin-bottom: 0rem;
@@ -135,7 +146,7 @@ const Wrapper = styled.article`
 
     .title {
       font-size: 1.9rem;
-      margin: 2rem 4rem;
+      margin: 2rem 6rem;
     }
 
     .description {

@@ -84,17 +84,19 @@ const Wrapper = styled.section`
     font-family: "Dongle";
     font-weight: lighter;
     font-size: 3.5rem;
-    max-width: 90%;
+    max-width: 54rem;
     margin-top: 2rem;
     margin-bottom: 1.5rem;
+    word-break: break-all;
   }
 
   .post-description {
     font-size: 1.7rem;
     font-weight: bold;
-    max-width: 90%;
+    max-width: 54rem;
     margin-top: 0;
     margin-bottom: 1.5rem;
+    word-break: break-all;
     .emoji {
       font-weight: normal;
     }
@@ -113,6 +115,7 @@ const Wrapper = styled.section`
   }
 
   .post-ul {
+    max-width: 54rem;
     margin: 1rem;
   }
   .post-tag {
@@ -158,9 +161,15 @@ const Wrapper = styled.section`
 
   @media screen and (min-width: 1920px) {
     max-width: 85rem;
-
     .post-title {
+      max-width: 60rem;
       font-size: 4.5rem;
+    }
+    .post-description {
+      max-width: 60rem;
+    }
+    .post-ul {
+      max-width: 60rem;
     }
     .post-image {
       max-width: 68rem;
