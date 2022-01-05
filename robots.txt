@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://gongzone.netlify.app/sitemap/sitemap-index.xml
-Host: https://gongzone.netlify.app
+Sitemap: https://gongzone.github.io/sitemap/sitemap-index.xml
+Host: https://gongzone.github.io
