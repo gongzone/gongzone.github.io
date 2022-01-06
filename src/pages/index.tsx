@@ -44,7 +44,10 @@ export const query = graphql`
         frontmatter {
           title
           description
-          tags
+          tags {
+            name
+            slug
+          }
           slug
           date(formatString: "YYYY년 MM월 DD일")
           image {

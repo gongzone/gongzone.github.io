@@ -10,29 +10,59 @@ interface TagModalProps {
   offModal: () => void;
 }
 
+interface QueryType {
+  allMdx: {
+    nodes: {
+      frontmatter: {
+        tags: {
+          name: string;
+          slug: string;
+        }[];
+      };
+    }[];
+  };
+}
+
 const query = graphql`
   {
     allMdx {
-      distinct(field: frontmatter___tags)
+      nodes {
+        frontmatter {
+          tags {
+            name
+            slug
+          }
+        }
+      }
     }
   }
 `;
 
 const TagModal: React.FC<TagModalProps> = ({ showModal, offModal }) => {
   const {
-    allMdx: { distinct: tags },
-  } = useStaticQuery(query);
+    allMdx: { nodes },
+  } = useStaticQuery<QueryType>(query);
 
-  const allTags = ["ALL", ...tags];
+  const allTags: { name: string; slug: string }[] = [{ name: "ALL", slug: "" }];
+
+  nodes.forEach((post) => {
+    post.frontmatter.tags.forEach((tag) => {
+      allTags.push(tag);
+    });
+  });
+
+  const distinctTags: { name: string; slug: string }[] = [
+    ...new Set(allTags.map((tag) => JSON.stringify(tag))),
+  ].map((result) => JSON.parse(result));
 
   return (
     <>
       <Backdrop isOpen={showModal} offModal={offModal} />
       {isMobile && (
-        <MobileModal usedFor="Tag" lists={allTags} offModal={offModal} />
+        <MobileModal usedFor="Tag" lists={distinctTags} offModal={offModal} />
       )}
       {!isMobile && (
-        <DesktopModal usedFor="Tag" lists={allTags} offModal={offModal} />
+        <DesktopModal usedFor="Tag" lists={distinctTags} offModal={offModal} />
       )}
     </>
   );

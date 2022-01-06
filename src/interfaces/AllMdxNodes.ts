@@ -5,7 +5,10 @@ export interface AllMdxNodes {
   frontmatter: {
     title: string;
     description: string;
-    tags: string[];
+    tags: {
+      name: string;
+      slug: string;
+    }[];
     slug: string;
     date: string;
     image: ImageDataLike;

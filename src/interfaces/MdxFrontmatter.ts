@@ -4,7 +4,10 @@ export interface MdxFrontmatter {
   title: string;
   description: string;
   date: string;
-  tags: string[];
+  tags: {
+    name: string;
+    slug: string;
+  }[];
   slug: string;
   image: ImageDataLike;
   embeddedImages: ImageDataLike;

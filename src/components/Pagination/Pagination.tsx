@@ -6,7 +6,7 @@ import PaginationModal from "./PaginationModal";
 import { BsTriangleFill } from "react-icons/bs";
 
 interface PaginationProps {
-  tag?: string;
+  tag?: { name: string; slug: string };
   currentPage: number;
   totalPagination: number;
 }
@@ -20,11 +20,13 @@ const Pagination: React.FC<PaginationProps> = ({
   const [showNext, setShowNext] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const nextUrl = tag ? `/${tag}/${currentPage + 1}` : `/${currentPage + 1}`;
-  let prevUrl = tag ? `/${tag}/${currentPage - 1}` : `/${currentPage - 1}`;
+  const nextUrl = tag
+    ? `/${tag.slug}/${currentPage + 1}`
+    : `/${currentPage + 1}`;
+  let prevUrl = tag ? `/${tag.slug}/${currentPage - 1}` : `/${currentPage - 1}`;
 
   if (currentPage === 2) {
-    prevUrl = tag ? `/${tag}` : `/`;
+    prevUrl = tag ? `/${tag.slug}` : `/`;
   }
 
   useEffect(() => {

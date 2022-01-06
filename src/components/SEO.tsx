@@ -34,7 +34,7 @@ const SEO: React.FC<SEOProps> = ({
       {/* meta tags */}
       <meta
         name="google-site-verification"
-        content="wGRKd0zzUdcSjGSdfT-nPEA8TqeHvu785msbGKUsbI0"
+        content="srMmPMyGbl3JvdUGsGFJUbgLrbYqQiFZtrlF3ts-_0k"
       />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />

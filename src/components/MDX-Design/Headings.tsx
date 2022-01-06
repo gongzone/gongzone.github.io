@@ -13,6 +13,7 @@ const H3Wrapper = styled.h3`
     sans-serif;
   font-weight: bold;
   text-align: center;
+  line-height: 1.5;
 
   @media screen and (min-width: 768px) {
     font-size: 2.9rem;

@@ -15,6 +15,7 @@ interface QueryType {
 
 interface PageContextType {
   tag: string;
+  tagSlug: string;
   currentPage: number;
   totalPagination: number;
 }
@@ -24,7 +25,12 @@ const PaginationTemplate: React.FC<PageProps<QueryType, PageContextType>> = ({
   pageContext,
 }) => {
   const { nodes: posts } = data.allMdx;
-  const { tag, currentPage, totalPagination } = pageContext;
+  const { tag, tagSlug, currentPage, totalPagination } = pageContext;
+
+  const tagObject = {
+    name: tag,
+    slug: tagSlug,
+  };
 
   return (
     <Layout>
@@ -33,7 +39,7 @@ const PaginationTemplate: React.FC<PageProps<QueryType, PageContextType>> = ({
       <Navigation tag={tag} />
       <Posts posts={posts} />
       <Pagination
-        tag={tag}
+        tag={tagObject}
         currentPage={currentPage}
         totalPagination={totalPagination}
       />
@@ -45,15 +51,18 @@ export const query = graphql`
   query GetPostByTag($tag: String, $skip: Int, $limit: Int) {
     allMdx(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { tags: { eq: $tag } } }
       limit: $limit
       skip: $skip
+      filter: { frontmatter: { tags: { elemMatch: { name: { eq: $tag } } } } }
     ) {
       nodes {
         id
         frontmatter {
           title
-          tags
+          tags {
+            name
+            slug
+          }
           slug
           description
           date(formatString: "YYYY년 MM월 DD일")

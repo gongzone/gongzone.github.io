@@ -5,7 +5,7 @@ import { isMobile } from "react-device-detect";
 import Backdrop from "../UI/Backdrop";
 
 interface PaginationModalProps {
-  tag?: string;
+  tag?: { name: string; slug: string };
   showModal: boolean;
   offModal: () => void;
   totalPagination: number;
@@ -17,10 +17,10 @@ const PaginationModal: React.FC<PaginationModalProps> = ({
   offModal,
   totalPagination,
 }) => {
-  const pageNumbers: number[] = [];
+  const pageNumbers: { name: number; slug: number }[] = [];
 
   for (let i = 1; i <= totalPagination; i++) {
-    pageNumbers.push(i);
+    pageNumbers.push({ name: i, slug: i });
   }
 
   return (
@@ -31,7 +31,7 @@ const PaginationModal: React.FC<PaginationModalProps> = ({
           usedFor="Page"
           lists={pageNumbers}
           offModal={offModal}
-          tag={tag}
+          tag={tag && tag.slug}
         />
       )}
       {!isMobile && (
@@ -39,7 +39,7 @@ const PaginationModal: React.FC<PaginationModalProps> = ({
           usedFor="Page"
           lists={pageNumbers}
           offModal={offModal}
-          tag={tag}
+          tag={tag && tag.slug}
         />
       )}
     </>

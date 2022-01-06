@@ -1,8 +1,10 @@
+require("dotenv").config();
+
 module.exports = {
   siteMetadata: {
     title: `GongZone DevBlog`,
     description: `웹 개발자 공존의 기술 블로그입니다. 여러가지 실험을 좋아합니다.`,
-    siteUrl: `https://gongzone.netlify.app`,
+    siteUrl: `https://gongzone.github.io`,
     image: `/profile.png`,
   },
   plugins: [
@@ -24,16 +26,20 @@ module.exports = {
     {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
-        host: `https://gongzone.netlify.app`,
-        sitemap: `https://gongzone.netlify.app/sitemap/sitemap-index.xml`,
+        host: `https://gongzone.github.io`,
+        sitemap: `https://gongzone.github.io/sitemap/sitemap-index.xml`,
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
     {
-      resolve: `gatsby-plugin-google-tagmanager`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        id: "GTM-PSX7X3K",
-        includeInDevelopment: false,
+        trackingIds: [
+          process.env.TRACKING_ID, // Google Analytics / GA
+        ],
+        pluginConfig: {
+          head: true,
+        },
       },
     },
   ],

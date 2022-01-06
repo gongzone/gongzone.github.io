@@ -45,7 +45,7 @@ const PostTemplate: React.FC<PageProps<QueryType>> = ({ data }) => {
             {tags.map((tag, index) => {
               return (
                 <li className="post-tag" key={index}>
-                  {tag}
+                  {tag.name}
                 </li>
               );
             })}
@@ -67,6 +67,7 @@ const Wrapper = styled.section`
   width: 90vw;
   margin: 3rem auto;
   margin-bottom: 5.5rem;
+  line-height: 1.5;
 
   .post-header {
     display: flex;
@@ -81,9 +82,9 @@ const Wrapper = styled.section`
   }
 
   .post-title {
-    font-family: "Dongle";
-    font-weight: lighter;
-    font-size: 3.5rem;
+    font-family: "IBM Plex Sans KR", "Noto Sans", "Noto Sans KR", arial;
+    font-weight: bold;
+    font-size: 2rem;
     max-width: 54rem;
     margin-top: 2rem;
     margin-bottom: 1.5rem;
@@ -138,7 +139,7 @@ const Wrapper = styled.section`
 
   @media screen and (min-width: 768px) {
     .post-title {
-      font-size: 4.2rem;
+      font-size: 2.5rem;
     }
 
     .post-description {
@@ -192,7 +193,10 @@ export const query = graphql`
         title
         description
         date(formatString: "YYYY년 MM월 DD일")
-        tags
+        tags {
+          name
+          slug
+        }
         slug
         image {
           childImageSharp {

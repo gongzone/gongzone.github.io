@@ -7,7 +7,7 @@ import { BsCalendar3 } from "react-icons/bs";
 interface frontmatterProps {
   title: string;
   description: string;
-  tags: string[];
+  tags: { name: string; slug: string }[];
   slug: string;
   date: string;
   image: ImageDataLike;
@@ -30,7 +30,7 @@ const Post: React.FC<{ frontmatter: frontmatterProps }> = ({ frontmatter }) => {
             {tags.map((tag, index) => {
               return (
                 <span className="tag" key={index}>
-                  {tag}
+                  {tag.name}
                 </span>
               );
             })}

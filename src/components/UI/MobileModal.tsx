@@ -6,7 +6,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 interface MobileModalProps {
   usedFor: string;
-  lists: string[] | number[];
+  lists: { name: string | number; slug: string | number }[];
   offModal: () => void;
   tag?: string | null;
 }
@@ -61,11 +61,11 @@ const MobileModal: React.FC<MobileModalProps> = ({
       return;
     }
 
-    let chosenList = lists[selectedIndex];
+    let chosenList = lists[selectedIndex].slug;
     let path: string | number = "";
 
     if (usedFor === "Tag") {
-      path = chosenList === "ALL" ? "" : chosenList;
+      path = chosenList;
     }
 
     if (usedFor === "Page") {
@@ -139,7 +139,7 @@ const MobileModal: React.FC<MobileModalProps> = ({
                 key={index}
                 ref={liRefs[index]}
               >
-                {element}
+                {element.name}
               </li>
             );
           })}

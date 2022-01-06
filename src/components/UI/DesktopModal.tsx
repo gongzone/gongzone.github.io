@@ -6,7 +6,7 @@ import { preventScroll } from "../Utils/prevent-scroll";
 
 interface DesktopModalProps {
   usedFor: string;
-  lists: string[] | number[];
+  lists: { name: string | number; slug: string | number }[];
   offModal: () => void;
   tag?: string;
 }
@@ -17,7 +17,7 @@ const setPath = (selected: selectedType, usedFor: string, tag?: string) => {
   let path: string = "";
 
   if (usedFor === "Tag") {
-    path = selected === "ALL" ? "" : `${selected}`;
+    path = `${selected}`;
   }
 
   if (usedFor === "Page") {
@@ -71,15 +71,17 @@ const DesktopModal: React.FC<DesktopModalProps> = ({
           {lists.map((element, index) => {
             return (
               <li
-                className={`main-list ${selected === element ? "active" : ""}`}
+                className={`main-list ${
+                  selected === element.slug ? "active" : ""
+                }`}
                 key={index}
                 onClick={() => {
-                  selected !== element
-                    ? onClickHandler(element)
+                  selected !== element.slug
+                    ? onClickHandler(element.slug)
                     : onClickHandler(null);
                 }}
               >
-                {element}
+                {element.name}
               </li>
             );
           })}

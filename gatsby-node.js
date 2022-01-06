@@ -16,8 +16,8 @@ const createIndexPagination = (graphQLData, createPage) => {
       component: path.resolve("./src/templates/index-pagination-template.tsx"),
       context: {
         limit: postsPerPage,
-        skip: index * postsPerPage,
-        totalPagination,
+        skip: (index + 1) * postsPerPage,
+        totalPagination: totalPagination + 1,
         currentPage: index + 2,
       },
     });
@@ -26,8 +26,6 @@ const createIndexPagination = (graphQLData, createPage) => {
 
 const createTagPagination = (graphQLData, createPage) => {
   const nodes = graphQLData.data.allMdx.nodes;
-  const distinct = graphQLData.data.allMdx.distinct;
-
   const allTags = [];
 
   nodes.forEach((post) => {
@@ -36,17 +34,22 @@ const createTagPagination = (graphQLData, createPage) => {
     });
   });
 
-  distinct.forEach((distinctTag) => {
+  const distinctTags = [...new Set(allTags.map(JSON.stringify))].map(
+    JSON.parse
+  );
+
+  distinctTags.forEach(({ name, slug }) => {
     const postsPerPage = 10;
-    const postsByTag = allTags.filter((tag) => distinctTag === tag).length;
+    const postsByTag = allTags.filter((tag) => tag.name === name).length;
     const totalPagination = Math.ceil(postsByTag / postsPerPage);
 
     Array.from({ length: totalPagination }).forEach((_, index) => {
       createPage({
-        path: index === 0 ? `/${distinctTag}` : `/${distinctTag}/${index + 1}`,
+        path: index === 0 ? `/${slug}` : `/${slug}/${index + 1}`,
         component: path.resolve("./src/templates/tag-pagination-template.tsx"),
         context: {
-          tag: distinctTag,
+          tag: name,
+          tagSlug: slug,
           limit: postsPerPage,
           skip: index * postsPerPage,
           totalPagination,
@@ -80,10 +83,12 @@ exports.createPages = async ({ graphql, actions }) => {
     {
       allMdx {
         totalCount
-        distinct(field: frontmatter___tags)
         nodes {
           frontmatter {
-            tags
+            tags {
+              name
+              slug
+            }
             slug
           }
         }
