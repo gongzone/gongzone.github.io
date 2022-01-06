@@ -4,11 +4,7 @@ import TagModal from "./TagModal";
 import SearchModal from "./SearchModal";
 import SelectorButton from "../UI/SelectorButton";
 
-interface NavigationProps {
-  tag: string;
-}
-
-const Navigation: React.FC<NavigationProps> = ({ tag }) => {
+const Navigation: React.FC<{ tag: string }> = ({ tag }) => {
   const [tagShowModal, setTagShowModal] = useState(false);
   const [searchShowModal, setSearchShowModal] = useState(false);
 

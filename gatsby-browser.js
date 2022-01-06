@@ -3,7 +3,6 @@ import "@fontsource/noto-sans";
 import "@fontsource/imprima";
 import "@fontsource/fira-code";
 import "@fontsource/carrois-gothic-sc";
-import "@fontsource/dongle";
 import "@fontsource/ibm-plex-sans-kr";
 import "./src/assets/css/normalize.css";
 import "./src/assets/css/main.css";

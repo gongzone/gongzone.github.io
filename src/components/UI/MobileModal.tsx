@@ -8,7 +8,7 @@ interface MobileModalProps {
   usedFor: string;
   lists: { name: string | number; slug: string | number }[];
   offModal: () => void;
-  tag?: string | null;
+  tag?: string;
 }
 
 const MobileModal: React.FC<MobileModalProps> = ({

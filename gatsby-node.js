@@ -34,9 +34,9 @@ const createTagPagination = (graphQLData, createPage) => {
     });
   });
 
-  const distinctTags = [...new Set(allTags.map(JSON.stringify))].map(
-    JSON.parse
-  );
+  const distinctTags = [
+    ...new Set(allTags.map((tag) => JSON.stringify(tag))),
+  ].map((result) => JSON.parse(result));
 
   distinctTags.forEach(({ name, slug }) => {
     const postsPerPage = 10;
