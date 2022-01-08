@@ -52,9 +52,7 @@ const PostTemplate: React.FC<PageProps<QueryType>> = ({ data }) => {
           </ul>
         </article>
         <article className="post-article">
-          <MDXRenderer embeddedImages={getImage(embeddedImages)}>
-            {body}
-          </MDXRenderer>
+          <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
         </article>
         <Utterance />
       </Wrapper>
@@ -121,7 +119,7 @@ const Wrapper = styled.section`
   }
   .post-tag {
     display: inline-block;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: bold;
     color: #fcfcfc;
     background: #be3535;
@@ -150,8 +148,7 @@ const Wrapper = styled.section`
       font-size: 1.8rem;
     }
     .post-tag {
-      font-size: 1.35rem;
-      padding: 0.8rem 1.1rem;
+      font-size: 1.45rem;
     }
     .post-article {
       margin-top: 2rem;

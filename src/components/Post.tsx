@@ -51,7 +51,6 @@ const Wrapper = styled.article`
   border-radius: 1rem;
   box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 25%);
   background: #ffffff;
-  line-height: 1.7;
   letter-spacing: 0.05rem;
 
   &:last-child {
@@ -82,7 +81,7 @@ const Wrapper = styled.article`
   .title {
     font-size: 1.75rem;
     font-weight: bold;
-    line-height: 1.6;
+    line-height: 1.4;
     margin: 0rem;
     word-break: break-all;
   }
@@ -90,8 +89,8 @@ const Wrapper = styled.article`
   .description {
     font-size: 1.6rem;
     font-weight: normal;
-    line-height: 1.3;
-    margin: 1.5rem 0 2rem 0;
+    line-height: 1.4;
+    margin: 1.25rem 0 1rem 0;
     word-break: break-all;
   }
 
@@ -111,7 +110,6 @@ const Wrapper = styled.article`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 1.2rem;
     margin-bottom: 1.5rem;
     font-style: italic;
     font-size: 1.3rem;
@@ -145,13 +143,13 @@ const Wrapper = styled.article`
 
     .title {
       font-size: 1.9rem;
-      margin: 4rem 6rem 2rem 6rem;
+      margin: 4rem 6rem 1.65rem 6rem;
     }
 
     .description {
       font-size: 1.65rem;
       margin: 0 2.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.3rem;
     }
 
     .post-date {
@@ -167,7 +165,6 @@ const Wrapper = styled.article`
       font-size: 1.5rem;
       margin-right: 1.3rem;
       margin-bottom: 1.3rem;
-      padding: 0.6rem 0.9rem;
     }
   }
 `;

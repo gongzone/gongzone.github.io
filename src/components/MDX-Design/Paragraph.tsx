@@ -6,13 +6,13 @@ const Paragraph: React.FC<{ children: string }> = ({ children }) => {
 };
 
 const Wrapper = styled.p`
-  font-size: 1.65rem;
+  font-size: 1.7rem;
   line-height: 1.7;
   letter-spacing: 0.05rem;
   margin: 2.5rem 0rem;
 
   @media screen and (min-width: 768px) {
-    font-size: 1.7rem;
+    font-size: 1.75rem;
     margin: 2.75rem 0rem;
   }
 
