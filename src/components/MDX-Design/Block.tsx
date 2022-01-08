@@ -83,5 +83,9 @@ const Wrapper = styled.div`
       font-size: 6rem;
     }
   }
+
+  @media (min-width: 1920px) {
+    font-size: 1.76rem;
+  }
 `;
 export default Block;

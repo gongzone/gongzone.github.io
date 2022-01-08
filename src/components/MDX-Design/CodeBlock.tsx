@@ -29,7 +29,7 @@ const Pre = styled.pre`
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   margin: 3rem 0;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-family: "Fira Code", imprima, arial, monospace;
   overflow-x: auto;
 
@@ -40,9 +40,9 @@ const Pre = styled.pre`
   .language-tab {
     color: #222222;
     display: inline-block;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 700;
-    background: #e24747;
+    background: #9bb9e0;
     padding: 0.3rem 0.5rem;
     margin-bottom: 1rem;
     border-radius: 0.5rem;

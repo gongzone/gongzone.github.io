@@ -158,26 +158,27 @@ const Wrapper = styled.section`
   }
 
   @media screen and (min-width: 1920px) {
-    max-width: 85rem;
+    max-width: 77.5rem;
     .post-title {
-      max-width: 60rem;
-      font-size: 4.5rem;
+      max-width: 55rem;
+      font-size: 2.7rem;
     }
     .post-description {
-      max-width: 60rem;
+      max-width: 55rem;
+      font-size: 2rem;
     }
     .post-ul {
-      max-width: 60rem;
+      max-width: 55rem;
     }
     .post-image {
-      max-width: 68rem;
+      max-width: 62rem;
     }
     .post-date {
       font-size: 1.9rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
     .post-tag {
-      font-size: 1.45rem;
+      font-size: 1.55rem;
     }
   }
 `;
