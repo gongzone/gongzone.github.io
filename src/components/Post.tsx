@@ -87,7 +87,7 @@ const Wrapper = styled.article`
   }
 
   .description {
-    font-size: 1.6rem;
+    font-size: 1.65rem;
     font-weight: normal;
     line-height: 1.5;
     margin: 1.25rem 0 1rem 0;
@@ -147,7 +147,7 @@ const Wrapper = styled.article`
     }
 
     .description {
-      font-size: 1.65rem;
+      font-size: 1.7rem;
       margin: 0 2.5rem;
       margin-bottom: 1.3rem;
     }
