@@ -2,7 +2,7 @@
 title: "Canvas API로 만들어보는 단진자 운동(1)"
 description: 단진자(Simple Pendulum) 운동을 발생시키는 힘의 요소에 대해 알아보고, 어떻게 구현할 것인지 생각해봅니다.
 slug: simplependulum1
-image: ./images/pendulum.png
+image: ./assets/pendulum.png
 date: 2022-01-09
 tags:
   - name: Canvas
@@ -10,9 +10,9 @@ tags:
   - name: JavaScript
     slug: javascript
 embeddedImages:
-  - ./images/entire-structure.png
-  - ./images/trig.png
-  - ./images/forces.png
+  - ./assets/entire-structure.png
+  - ./assets/trig.png
+  - ./assets/forces.png
 ---
 
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -57,7 +57,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 표시하고 있습니다. 특히 중력의 작용으로 인해 발생하는 **힘(Force)**은 우리가 나중에 눈 여겨봐야할 부분입니다만, 일단 거시적인 시각으로 우리가
 무엇에 초점을 맞추어야 할 지 생각해봅시다. **즉, 우리가 결국 산출하고자 하는 데이터가 무엇인지 고민해보는 것입니다.**
 
-픽셀이 기본 단위가 되는 2차원 좌표평면, Canvas안에서 우리가 구하고자 하는 것은 결국 추의 중심점의 위치입니다. 애니메이션 프레임을 통해
+픽셀이 기본 단위가 되는 2차원 좌표평면, Canvas안에서 우리가 구하고자 하는 것은 결국 추의 중심점의 위치입니다.
 시간이 지남에 따라 추의 중심점이 어디에 위치하고 있는지가 우리가 알고자 하는 것입니다. **즉, 추의 중심점에 대한 벡터값이라고 할 수 있겠습니다.**
 
 그렇다면 어떻게 구할 수 있을까요? 가만히 보니 Pivot(축)으로부터 추의 중심점을 이으면 삼각형의 빗변을 형성하는 것을 볼 수 있습니다.
@@ -109,7 +109,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 앞서 말한 성분 중 전자를 수직 성분, 후자를 수평 성분이라 칭하겠습니다. <br />
 먼저 수평 성분을 살펴봅시다. 이 힘은 줄과 수평으로 작용하여 추를 오른쪽 아래 방향으로 미는 역할을 합니다. 그러나 줄이 추를 잡고 있기 때문에
 반대 방향으로 같은 크기의 힘이 발생하는 데, 이것이 **중력에 의해서 발생하는 장력(Tension)**입니다. 장력과 수평 성분은 초기에 같은 크기(mg cosθ)
-를 가지고 있기 때문에 **힘이 상쇄**되어 아무런 결과를 발생시키지 않습니다. (_허나 후에 언급할 것이지만, 줄의 전체 장력은 진자가 속도를 얻음으로 인해_
+를 가지고 있기 때문에 **힘이 상쇄**되어 아무런 결과를 발생시키지 않습니다. (_허나 줄의 전체 장력은 진자가 속도를 얻는 순간부터_
 _구심력이 생겨 증가하게 됩니다._)
 
 이번엔 수직 성분입니다. 우리가 관심을 가져야 할 힘이 바로 이것입니다. 진자를 움직이게 하는 진정한 힘이죠. **뉴턴의 제 2 법칙(F = ma)**을 통해
@@ -165,3 +165,5 @@ _구심력이 생겨 증가하게 됩니다._)
   <br />
   <strong>*주기: 진자의 왕복 운동이 한번 이루어지는데 걸리는 시간</strong>
 </Block>
+
+**다음 글 링크:** <Link to="/simplependulum2">Canvas API로 만들어보는 단진자 운동(2)</Link>

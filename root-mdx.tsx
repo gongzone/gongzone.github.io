@@ -8,7 +8,7 @@ import {
   CodeBlock,
   Paragraph,
   Videos,
-  Link,
+  Links,
   Intro,
 } from "./src/components/MDX-Design";
 
@@ -19,7 +19,8 @@ const components = {
   pre: CodeBlock,
   p: Paragraph,
   h3: Headings.H3,
-  a: Link,
+  Link: Links.InternalLink,
+  a: Links.ExternalLink,
   RegVideo: Videos.RegVideo,
 };
 

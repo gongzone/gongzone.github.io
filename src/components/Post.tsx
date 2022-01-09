@@ -81,7 +81,7 @@ const Wrapper = styled.article`
   .title {
     font-size: 1.75rem;
     font-weight: bold;
-    line-height: 1.4;
+    line-height: 1.5;
     margin: 0rem;
     word-break: break-all;
   }
@@ -89,7 +89,7 @@ const Wrapper = styled.article`
   .description {
     font-size: 1.6rem;
     font-weight: normal;
-    line-height: 1.4;
+    line-height: 1.5;
     margin: 1.25rem 0 1rem 0;
     word-break: break-all;
   }
