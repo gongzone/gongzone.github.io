@@ -12,7 +12,7 @@ const createIndexPagination = (graphQLData, createPage) => {
 
   Array.from({ length: totalPagination }).forEach((_, index) => {
     createPage({
-      path: `/${index + 2}/`,
+      path: `/${index + 2}`,
       component: path.resolve("./src/templates/index-pagination-template.tsx"),
       context: {
         limit: postsPerPage,
@@ -45,7 +45,7 @@ const createTagPagination = (graphQLData, createPage) => {
 
     Array.from({ length: totalPagination }).forEach((_, index) => {
       createPage({
-        path: index === 0 ? `/${slug}/` : `/${slug}/${index + 1}/`,
+        path: index === 0 ? `/${slug}` : `/${slug}/${index + 1}`,
         component: path.resolve("./src/templates/tag-pagination-template.tsx"),
         context: {
           tag: name,
@@ -67,7 +67,7 @@ const createPostPages = (graphQLData, createPage) => {
     const slug = post.frontmatter.slug;
 
     createPage({
-      path: `/${slug}/`,
+      path: `/${slug}`,
       component: path.resolve(`src/templates/post-template.tsx`),
       context: {
         slug,
