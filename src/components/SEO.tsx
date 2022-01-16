@@ -51,7 +51,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:image" content={seo.image} />
       {/* link tags  */}
       {canonical === true && <link rel="canonical" href={seo.url} />}
-      {canonical === false && <link rel="canonical" href={siteUrl} />}
+      {canonical === false && <link rel="canonical" href={`${siteUrl}/`} />}
     </Helmet>
   );
 };
