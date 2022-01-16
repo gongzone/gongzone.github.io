@@ -53,8 +53,11 @@ const DesktopModal: React.FC<DesktopModalProps> = ({
       <div className="modal-header">
         <span className="header-info">Select {usedFor}</span>
         <div className="header-buttons">
-          {selected && (
-            <Link className="select-link" to={`/${selectedPath}`}></Link>
+          {selected !== null && (
+            <Link
+              className="select-link"
+              to={selectedPath !== "" ? `/${selectedPath}/` : `/`}
+            ></Link>
           )}
           <button className="header-button select" onClick={offModal}>
             선택

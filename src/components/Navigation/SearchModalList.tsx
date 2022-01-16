@@ -60,7 +60,7 @@ const SearchModalList: React.FC<{ searchInput: string }> = ({
 
             return (
               <li className="filter-list" key={index}>
-                <Link className="filter-link" to={`/${slug}`}>
+                <Link className="filter-link" to={`/${slug}/`}>
                   <CgList className="filter-icon" />
                   <span className="filter-title">{title}</span>
                 </Link>

@@ -17,7 +17,7 @@ const Post: React.FC<{ frontmatter: frontmatterProps }> = ({ frontmatter }) => {
   const { title, description, slug, date, image, tags } = frontmatter;
   return (
     <Wrapper>
-      <Link to={`/${slug}`} className="post-link">
+      <Link to={`/${slug}/`} className="post-link">
         <GatsbyImage
           image={getImage(image)}
           alt={title}

@@ -118,7 +118,10 @@ const MobileModal: React.FC<MobileModalProps> = ({
         <span className="header-info">Select {usedFor}</span>
         <div className="header-buttons">
           <div className="select">
-            <Link className="select-link" to={`/${selectedPath}`}>
+            <Link
+              className="select-link"
+              to={selectedPath !== "" ? `/${selectedPath}/` : `/`}
+            >
               <button className="header-button" onClick={offModal}>
                 선택
               </button>
