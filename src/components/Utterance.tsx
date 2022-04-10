@@ -1,17 +1,17 @@
-import React, { createRef, useEffect } from "react";
+import React, { createRef, useEffect } from 'react';
 
 const Utterance = () => {
   const commentRef: React.RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
-    const utterances = document.createElement("script");
+    const utterances = document.createElement('script');
 
     const attributes = {
-      src: "https://utteranc.es/client.js",
-      repo: "GongZone/Blog-Comment",
-      "issue-term": "title",
-      theme: "github-light",
-      crossorigin: "anonymous",
+      src: 'https://utteranc.es/client.js',
+      repo: 'gongzone/blog-comments',
+      'issue-term': 'title',
+      theme: 'github-light',
+      crossorigin: 'anonymous',
       async: true,
     };
     Object.entries(attributes).forEach(([key, value]) => {
