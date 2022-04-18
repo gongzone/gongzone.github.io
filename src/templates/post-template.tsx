@@ -1,13 +1,13 @@
-import React from "react";
-import { graphql, PageProps } from "gatsby";
-import styled from "styled-components";
-import Layout from "../components/Layout";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import SEO from "../components/SEO";
-import Utterance from "../components/Utterance";
+import React from 'react';
+import { graphql, PageProps } from 'gatsby';
+import styled from 'styled-components';
+import Layout from '../components/Layout';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import SEO from '../components/SEO';
+import Utterance from '../components/Utterance';
 
-import { MdxFrontmatter } from "../interfaces/MdxFrontmatter";
+import { MdxFrontmatter } from '../interfaces/MdxFrontmatter';
 
 interface QueryType {
   mdx: {
@@ -29,11 +29,7 @@ const PostTemplate: React.FC<PageProps<QueryType>> = ({ data }) => {
       <SEO title={title} description={description} article={true} />
       <Wrapper>
         <article className="post-header">
-          <GatsbyImage
-            image={getImage(image)}
-            alt={title}
-            className="post-image"
-          />
+          <GatsbyImage image={getImage(image)} alt={title} className="post-image" />
           <h1 className="post-title">{title}</h1>
           <h2 className="post-description">
             <span className="emoji">📝 </span>
@@ -80,7 +76,7 @@ const Wrapper = styled.section`
   }
 
   .post-title {
-    font-family: "IBM Plex Sans KR", "Noto Sans", "Noto Sans KR", arial;
+    font-family: 'IBM Plex Sans KR', 'Noto Sans', 'Noto Sans KR', arial;
     font-weight: bold;
     font-size: 2rem;
     max-width: 54rem;

@@ -1,6 +1,6 @@
-import React from "react";
-import { MDXProvider } from "@mdx-js/react";
-import { GatsbyBrowser } from "gatsby";
+import React from 'react';
+import { MDXProvider } from '@mdx-js/react';
+import { GatsbyBrowser } from 'gatsby';
 import {
   Headings,
   HL,
@@ -10,7 +10,7 @@ import {
   Videos,
   Links,
   Intro,
-} from "./src/components/MDX-Design";
+} from './src/components/MDX-Design';
 
 const components = {
   Block,
@@ -24,6 +24,6 @@ const components = {
   RegVideo: Videos.RegVideo,
 };
 
-export const wrapMDX: GatsbyBrowser["wrapRootElement"] = ({ element }) => {
+export const wrapMDX: GatsbyBrowser['wrapRootElement'] = ({ element }) => {
   return <MDXProvider components={components}>{element}</MDXProvider>;
 };
