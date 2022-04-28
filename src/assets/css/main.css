@@ -6,7 +6,7 @@ body {
   padding: 0px;
   background: #ffffff;
   box-sizing: border-box;
-  font-family: "Noto Sans", "Noto Sans KR", arial, sans-serif;
+  font-family: 'Noto Sans', 'Noto Sans KR', arial, sans-serif;
   color: #3d3d3d;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

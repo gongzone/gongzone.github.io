@@ -10,6 +10,8 @@ import {
   Videos,
   Links,
   Intro,
+  Ul,
+  Li,
 } from './src/components/MDX-Design';
 
 const components = {
@@ -19,6 +21,10 @@ const components = {
   pre: CodeBlock,
   p: Paragraph,
   h3: Headings.H3,
+  h4: Headings.H4,
+  h5: Headings.H5,
+  ul: Ul,
+  li: Li,
   Link: Links.InternalLink,
   a: Links.ExternalLink,
   RegVideo: Videos.RegVideo,

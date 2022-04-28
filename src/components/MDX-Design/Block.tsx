@@ -1,44 +1,41 @@
-import React from "react";
-import { FiInfo } from "react-icons/fi";
-import { TiWarningOutline } from "react-icons/ti";
-import { GoQuote } from "react-icons/go";
-import styled from "styled-components";
+import React, { ReactNode } from 'react';
+import { FiInfo } from 'react-icons/fi';
+import { TiWarningOutline } from 'react-icons/ti';
+import { GoQuote } from 'react-icons/go';
+import styled from 'styled-components';
 
-const Block: React.FC<{ children: string; display?: string }> = ({
-  children,
-  display,
-}) => {
+const Block: React.FC<{ children: ReactNode; display?: string }> = ({ children, display }) => {
   return (
     <Wrapper>
       <div
-        className={`${display === "quote" ? "quote" : "container"} ${
-          display === "warning" ? "warning" : display === "info" ? "info" : ""
+        className={`${display === 'quote' ? 'quote' : 'container'} ${
+          display === 'warning' ? 'warning' : display === 'info' ? 'info' : ''
         }`}
       >
-        {display === "warning" && <TiWarningOutline className="icon" />}
-        {display === "info" && <FiInfo className="icon" />}
-        {display === "quote" && <GoQuote className="quote-icon" />}
-        <p className="paragraph">{children}</p>
+        {display === 'warning' && <TiWarningOutline className="icon" />}
+        {display === 'info' && <FiInfo className="icon" />}
+        {display === 'quote' && <GoQuote className="quote-icon" />}
+        {children}
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
+  p {
+    margin: 1rem 0;
+  }
+
   .container {
     padding: 2rem 1.5rem;
     background: #f8f8f8;
     border-radius: 0.5rem;
     border-left: 5px solid #d4d4d4;
     position: relative;
-    margin: 3rem 0 2rem 0;
-    font-size: 1.7rem;
+    margin: 2rem 0 2rem 0;
+    font-size: 1.625rem;
     line-height: 1.7;
     letter-spacing: 0.05rem;
-  }
-
-  .paragraph {
-    margin: 0;
   }
 
   .icon {

@@ -6,5 +6,7 @@ import Paragraph from './Paragraph';
 import * as Videos from './Videos';
 import * as Links from './Links';
 import Intro from './Intro';
+import Ul from './Ul';
+import Li from './Li';
 
-export { Headings, HL, Block, CodeBlock, Paragraph, Videos, Links, Intro };
+export { Headings, HL, Block, CodeBlock, Paragraph, Videos, Links, Intro, Ul, Li };

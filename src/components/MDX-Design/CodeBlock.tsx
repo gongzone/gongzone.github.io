@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/vsDark";
+import React from 'react';
+import styled from 'styled-components';
+import Highlight, { defaultProps, Language } from 'prism-react-renderer';
+import theme from 'prism-react-renderer/themes/vsDark';
 
 const CodeBlock: React.FC<{ children: any }> = ({ children }) => {
   const code: string = children.props.children;
-  const language = children.props.className.split("-")[1] as Language;
+  const language = children.props.className.split('-')[1] as Language;
   let languageTab = language.toUpperCase();
 
-  if (languageTab === "JAVASCRIPT") {
-    languageTab = "JavaScript";
+  if (languageTab === 'JAVASCRIPT') {
+    languageTab = 'JavaScript';
   }
 
   return (
@@ -34,7 +34,7 @@ const Pre = styled.pre`
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   margin: 3rem 0;
-  font-family: "Fira Code", imprima, arial, monospace;
+  font-family: 'Fira Code', imprima, arial, monospace;
   font-size: 1.5rem;
   overflow-x: auto;
 
