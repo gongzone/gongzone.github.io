@@ -1,9 +1,9 @@
-require("dotenv").config();
+require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
     title: `GongZone DevBlog`,
-    description: `웹 개발자 공존의 기술 블로그입니다. 여러가지 실험을 좋아합니다.`,
+    description: `웹 개발자 공존의 기술 블로그입니다. 애플리케이션 설계에 관심이 많습니다.`,
     siteUrl: `https://gongzone.github.io`,
     image: `/profile.png`,
   },
@@ -14,7 +14,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-mdx`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-advanced-sitemap`,
     `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -27,8 +27,8 @@ module.exports = {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
         host: `https://gongzone.github.io`,
-        sitemap: `https://gongzone.github.io/sitemap/sitemap-index.xml`,
-        policy: [{ userAgent: "*", allow: "/" }],
+        sitemap: `https://gongzone.github.io/sitemap.xml`,
+        policy: [{ userAgent: '*', allow: '/' }],
       },
     },
     {
