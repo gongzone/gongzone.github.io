@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgong_zone_dev_blog=self.webpackChunkgong_zone_dev_blog||[]).push([[49],{8509:function(e,n,t){t.r(n);var l=t(7294),u=t(2916);n.default=function(){return l.createElement(l.Fragment,null,l.createElement(u.Z,{title:"About"}),l.createElement("h1",null,"아직 개발이 끝나지 않았습니다! 추후 업데이트!"))}}}]);
-//# sourceMappingURL=component---src-pages-about-tsx-aeb0518b2dca1f008cde.js.map

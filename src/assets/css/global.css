@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#222] text-[#e6e6e6] antialiased;
+  }
+}
+
+@layer utilities {
+  .hover-text-amber {
+    @apply cursor-pointer text-neutral-100 transition-colors duration-300 hover:text-amber-300;
+  }
+}

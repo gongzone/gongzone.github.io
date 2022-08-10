@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://gongzone.github.io/sitemap.xml
-Host: https://gongzone.github.io
