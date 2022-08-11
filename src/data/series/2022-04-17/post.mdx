@@ -1,0 +1,212 @@
+---
+title: 'Canvas API로 만들어보는 단진자 운동(1)'
+description: '단진자(Simple Pendulum) 운동을 발생시키는 힘의 요소에 대해 알아보고, 어떻게 구현할 것인지 생각해봅니다.'
+slug: 'simpsds'
+image: './assets/js.png'
+category: '자바스크립트'
+tags: ['Canvas', 'JavaScript', 'React']
+date: '2022-02-09'
+lastmod: '2022-02-10'
+series: '시리즈1'
+---
+
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+
+<div>
+  인터넷 익스플로러가 2022년 6월 15일 지원 중지되어 임종을 눈 앞에 두고 있습니다. 프론트엔드
+  개발자로서는 하나의 골칫거리가 사라진 셈이겠네요.
+</div>
+
+### 1. 자바스크립트 엔진
+
+우리가 작성한 자바스크립트 코드를 브라우저가 어떻게 해석하고 실행시키는가는 브라우저에 따라, 더 정확히는 그 브라우저가 차용하고 있는
+**자바스크립트 엔진**에 따라 그 양상이 달라집니다. 자바스크립트 엔진이란 쉽게 말해서 자바스크립트 코드를 처리하기 위한 일종의 프로그램입니다.
+모든 브라우저는 각자만의 자바스크립트 엔진을 보유하고 있어 같은 코드라도 어떤 브라우저에서 실행하느냐에 따라 성능 혹은
+호환성 등에 차이가 있을 수 있습니다.
+
+<div>
+  <strong> 🐸 브라우저마다 사용하는 자바스크립트 엔진 종류 </strong> <br />
+  - Chrome: V8 <br />
+  - Edge(Internet Explorer): Chakra <br />
+  - Firefox: Spider Monkey <br />
+  - Safari: Javascript Core Webkit <br />
+</div>
+
+#### (1) 자바스크립트 엔진의 두 가지 요소
+
+앞서 말했듯이 자바스크립트 엔진은 코드를 실행시키는 프로그램입니다. 프로그램이기 때문에 결국 **메모리를 관리**하고 **실행을 조정**하는
+큰 두개의 축으로 기능을 분리할 수 있습니다.
+
+<div>
+  <strong> 자바스크립트 엔진의 두 요소 </strong> <br />
+  - Memory Heap — long-term 데이터(객체)를 저장하는 공간 <br />
+  - Call Stack — 애플리케이션의 코드 실행 flow를 관리 <br />
+</div>
+
+#### (2) Just-In-Time Compilation
+
+자바스크립트는 **interpreted language**라고 많은 사람들이 알고 있습니다. 즉, 특정 interpreter가 자바스크립트 소스 코드를 읽어 나가면서 line-by-line
+으로 코드를 해석함과 동시에 실행시키고 **compilation** 과정은 없다고 생각했죠.
+
+<div display="info">
+  compilation: 전체 코드를 한번에 machine code로 전환하고 그 후에 코드를 실행시키는 방식
+</div>
+
+하지만 모던 자바스크립트 엔진은 컴파일 과정을 통해 최적화를 진행하여 자바스크립트의 성능을 끌어올렸습니다.
+즉, interpreter만 사용했을 시의 문제점(같은 패턴의 코드를 다시 마주쳐도 또 다시 해석한다. -> 비효율 발생)을 해결하기 위해
+interpretation과 compilation의 특징을 섞은 `JIT(Just-In-Time) compilation` 방식을 사용합니다.
+
+JIT compilation 또한 interpreter가 코드를 읽어나가며 동시에 실행시키는 것은 기존 방식과 같지만,
+**반복적으로 실행되는 코드를 찾고 그에 대한 데이터 타입 정보를 컴파일러에게 전달해, 최적화된 machine code를 만들어내는 것**이
+기존과 다른 큰 차이점입니다.
+
+#### (3) 프로세스(V8 기준)
+
+1️⃣ Parser: 자바스크립트 소스 코드를 읽어, 문법적인 문제가 있는지 파악하고, 소스코드를 **AST(Abstract Syntax Tree)**라는 자료구조 형태로 변환합니다.
+
+<div display="info">
+  AST: 프로그래밍 언어의 문법에 따라 소스 코드 구조를 표시하는 계층적 프로그램 표현
+  (respresentation)
+</div>
+
+2️⃣ interpreter: AST를 통해 **byte code**를 만들어내고, byte code를 동작시키며,
+byte code와 함께 최적화를 위한 정보들이 compiler에게 전달됩니다.
+
+3️⃣ compiler: byte code와 전달받은 정보들을 통해 **최적화된 machine code**를 만들어 냅니다. 최적화된 코드는 기존 코드와 교체 되어집니다.
+
+4️⃣ de-optimization: 최적화된 패턴의 코드가 다시 사용되었지만 다른 결과를 발생시킨다면 (ex) _다른 타입의 값을 리턴한다면_, 해당 코드는 재사용할 수 없고,
+interpreted byte code로 다시 돌아가서 피드백을 업데이트 하는 과정을 **de-optimization**이라고 합니다.
+
+### 2. 브라우저의 다른 요소들
+
+자바스크립트 엔진은 우리의 코드를 실행시키기 위한 가장 중요한 요소 중 하나이지만,
+브라우저 상에서 자바스크립트 코드가 완벽히 굴러가기 위해서는 다른 요소들 또한 필요합니다.
+
+#### (1) WEB(Browser) APIs
+
+`Web(Browser) API`란 **브라우저가 우리에게 제공해주는 기능들을 자바스크립트 코드로 사용할 수 있도록 해주는 인터페이스**
+라고 할 수 있습니다. 예를들어, DOM 노드에 접근하고 조작하는 등의 기능들은
+우리가 따로 메소드를 만들어 사용하지 않고, Web API를 통해 그러한 기능들을 그대로 사용 할 수 있습니다.
+서버에 요청을 보내기 위한 Fetch API 역시 Web API를 통해 사용할 수 있는 기능들 중 하나입니다.
+
+<div display="info">
+  우리가 자주 사용하는 <strong>console.log</strong>의 <strong>console</strong> 객체 역시 Web API를
+  통해 드러나 있기에 우리가 브라우저 디버깅 콘솔에 접근할 수 있는 것입니다. 😀
+</div>
+
+#### (2) Callback Queue
+
+`Callback Queue` 혹은 `Task Queue`는 일종의 자료구조로서 **특정 때가 되면 실행 될 콜백 함수들이 자기 차례를 기다리며 서있는 공간**
+이라 할 수 있습니다. 다음 문단에서 Call Stack과 함께 자세히 설명하도록 하겠습니다.
+
+<div display="info">
+  <strong>Promise</strong>와 <strong>Microtask Queue</strong> ❓ <br /><br />
+  🔸 그림에는 표시되지 않았지만 기존 Callback Queue에 더해 Microtask Queue(혹은 Job Queue)라는 다른 큐가 존재합니다. <br /><br/>
+  🔸 서버에서 데이터를 받아올 때 주로 사용되는 Promise 객체의 비동기 처리를 위해 Microtask Queue가 사용됩니다. <br /><br />
+  🔸 Microtask의 우선순위가 일반 Callback Queue보다 높아, 이벤트 루프가 Microtask의 콜백들을 먼저 Call Stack에 올리는 특징이 있습니다. <br />
+
+</div>
+
+### 3. 자바스크립트의 특성과 Event Loop
+
+#### (1) Single-Threaded Programming Language
+
+자바스크립트는 `single-threaded` 프로그래밍 언어이기 때문에 하나의 Call Stack에서 전체 프로그램 동작을 처리하게 됩니다.
+이말인즉슨, **한번에 하나씩만 작업을 처리**할 수 있다는 말과 같습니다. **(One task at a time)**
+
+single-thread 형식으로 코드를 처리할 때 생기는 가장 큰 문제점은 실행 시간이 긴 task가 중간에 있는 경우에 발생합니다.
+위 그림에서 만약 functionB의 처리시간이 월등히 길다면 functionB의 실행이 끝마칠 때까지 나머지 후속 코드들은 실행되지 못한 채
+프로그램이 잠시동안 멈춘 상태에 놓여지게 될 것입니다.
+
+<div>
+  <strong>처리 시간이 긴 Operations</strong>: setTimeout()과 같은 타이머 메소드, Http 요청,
+  addEventListener(특정 이벤트가 발생해야 콜백함수가 실행됨) 등.
+</div>
+
+#### (2) Asynchronous Code Execution(비동기 처리)
+
+앞서 언급한 single-thread의 문제에 대한 솔루션으로 자바스크립트는 `비동기 처리`를 제시하고 있습니다.
+비동기 처리란 시간이 오래걸리는 연산이 끝날 때까지 기다리지 않고, 그 연산과 관련이 없는 나머지 후속 코드들을 먼저 실행하는 방식을 말합니다.
+그렇다면 single-threaded 언어인 자바스크립트가 어떻게 이런 비동기 처리가 가능할까요?
+답은 **브라우저에 위임을 통해서** 가능합니다.
+
+#### (3) Call Stack과 Callback Queue 자세히 살펴보기
+
+이미 자바스크립트 엔진의 **Call stack**과 브라우저의 한 요소인 **Callback Queue**에 대해 간단히 언급하였지만,
+이 두 녀석이 실제로 어떤 역할을 하는지 살펴볼 필요가 있습니다.
+
+```js
+const functionA = () => {
+  console.log('A');
+};
+
+const showMessage = () => {
+  console.log('메세지입니다.');
+};
+
+const functionB = () => {
+  console.log('B');
+};
+
+functionA();
+setTimeout(showMessage, 3000);
+functionB();
+```
+
+위와 같은 코드가 있을 때 출력 결과는 다음과 같습니다.
+
+(1) A <br />
+(2) B <br />
+(3) Message <br />
+
+**setTimeout 메소드는 일정 시간 뒤에 콜백함수를 실행시키는 Web API 메소드**입니다. 따라서 대략 3000ms(3초) 뒤에 showMessage()라는 콜백함수가
+실행되게 되겠죠. functionB의 실행을 div하지 않고 말이죠. 이것이 **비동기 처리**입니다.
+
+Call Stack에는 functionA가 먼저 쌓이고 그 뒤를 이어 functionA 안에 있는 console.log("A")가 쌓이고 functionA와 관련된 모든 작업이 종료되어야지
+해당 작업이 Call Stack으로부터 사라지게 됩니다.
+
+그렇다면 그 다음 차례인 setTimeout()은 어떻게 실행될까요?
+
+1️⃣ 먼저 setTimeout 메소드가 Call Stack에 올라가고 **Web API를 통해 브라우저에 해당 작업을 위임**한 뒤 종료됩니다.(종료된 뒤 바로 functionB 수행)
+
+2️⃣ 그리고 브라우저가 위임된 일(3초가 지나길 기다림)을 처리하다 완료하면 **콜백함수(showMessage 함수)를 Callback Queue에 추가**합니다.
+
+3️⃣ 브라우저는 **Call Stack이 완전히 비워질 때마다 Callback Queue에서 첫번째 작업을 꺼내와(FIFO) 해당 작업에 대한 콜백을 실행**시킵니다.
+따라서 functionB와 관련된 작업이 끝나고 Call Stack에서 모든 작업들이 사라졌다면 등록해둔 showMessage 콜백 함수를 Call Stack에 올려 해당 작업을 처리하는 것입니다.
+
+4️⃣ 브라우저는 계속하여 Call Stack이 비워있는지 확인하고, Callback Queue에 처리해야할 작업들이 있는지 파악하는데,
+이를 `이벤트 루프(event loop)`라고 부르는 것입니다.
+
+<div>
+  ✅ 재밌는 점은 <strong>setTimeout(showMessage, 0)</strong>와 같이 0초 뒤에 콜백을 실행시킨다고
+  하더라도 결과는 동일하게 나타납니다. 그 이유는 위를 보시면 아시겠지만, Call Stack이 완전히
+  비워져야 해당 콜백을 Call Stack에 올리기 때문입니다. 즉, 글로벌한 실행 맥락(global execution
+  context)까지 콜 스택에서 사라져야 showMessage 함수가 처리되는 것입니다.
+</div>
+
+### 4. 마무리 & Garbage Collector
+
+앞서 얘기한 주제들을 잘 이해하셨다면, 브라우저가 어떻게 자바스크립트 코드를 받아들이고 실행시키는지 대략적으로나마
+알게 되셨을 것입니다. 이 아티클을 읽으면서 궁금한 점이 더 생겼다면 엔진 구조를 자세히 뜯어본다거나, Execution Context(실행 컨텍스트)같은 개념에
+대해 공부할 수 있겠죠.
+
+마지막으로 떠나기 전, 자바스크립트 엔진의 Heap 메모리에 대해 다루지 못해 이와 관련된 `Garbage Collection`을 간단히 소개하고 떠날까 합니다.
+
+<div display="info">
+  <strong> 💫 Garbage Collection이란? 💫(토막 상식)</strong> <br />
+  <br />
+  Garbage Collection는 메모리 관리에 도움을 주는 녀석입니다. 자바스크립트 엔진에 속해있죠. <br />
+  <br />
+  Garbage Collection은{' '}
+  <strong>
+    Heap 메모리를 주기적으로 체크해 사용하지 않는 객체들을 찾아내 삭제하는 역할을 합니다.
+  </strong>
+  <br />
+  사용하지 않는 객체들이란 참조 연결이 끊기고 접근할(도달할) 가능성이 사라진 객체들을 말합니다.
+  <br /> <br />
+  C언어와 같은 저수준 언어에서는 메모리 누수를 회피하기 위해 malloc()이나 free()와 같은 함수를
+  사용하여 Heap 메모리를 수동적으로 관리하여야 합니다. <br /> <br />
+  이런 경우와 비교했을 때 Garbage Collection은 메모리 걱정 없이 개발에 집중하게 해주는 고마운 존재이지만,
+  메모리 관리도 프로그램을 짤 때 항상 고려해야하는 중요한 요소이기에 나쁜 습관을 지니게 할 수 있는 단점이
+  있습니다.
+</div>
