@@ -32,6 +32,22 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        name: 'posts',
+        path: './src/data/posts/',
+      },
+      __key: 'posts',
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'series',
+        path: './src/data/series/',
+      },
+      __key: 'series',
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         name: 'images',
         path: './src/assets/images/',
       },
