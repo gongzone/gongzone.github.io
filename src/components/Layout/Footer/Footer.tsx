@@ -11,6 +11,7 @@ export const Footer = () => {
           <StaticImage
             src="../../../assets/images/logo-icon.png"
             alt="logo-icon"
+            placeholder="blurred"
             width={50}
             height={50}
           />
@@ -23,6 +24,7 @@ export const Footer = () => {
             <StaticImage
               src="../../../assets/images/instagram.png"
               alt="instagram"
+              placeholder="blurred"
               width={30}
               height={30}
             />
@@ -31,6 +33,7 @@ export const Footer = () => {
             <StaticImage
               src="../../../assets/images/gmail.png"
               alt="gmail"
+              placeholder="blurred"
               width={30}
               height={30}
             />
@@ -39,6 +42,7 @@ export const Footer = () => {
             <StaticImage
               src="../../../assets/images/github.png"
               alt="github"
+              placeholder="blurred"
               width={30}
               height={30}
             />

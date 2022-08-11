@@ -14,6 +14,7 @@ export const Header = () => {
           <StaticImage
             src="../../../assets/images/logo-icon.png"
             alt="logo-icon"
+            placeholder="blurred"
             width={40}
             height={40}
           />

@@ -6,16 +6,17 @@ import { Footer } from '@/components/Layout/Footer';
 import { Hero } from '@/components/Layout/Hero';
 
 interface LayoutProps {
+  className?: string;
   children?: ReactNode;
 }
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ className, children }: LayoutProps) => {
   return (
     <>
       <Header />
       <Sidebar />
       <Hero />
-      <main className="container mx-auto" role="main">
+      <main className={`mx-auto ${className}`} role="main">
         {children}
       </main>
       <Footer />

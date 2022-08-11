@@ -4,9 +4,9 @@ export const Hero = () => {
   return (
     <div className="relative h-72 w-full">
       <StaticImage
+        className="h-full w-full"
         src="../../../assets/images/hero-bg.jpg"
         alt="hero-background"
-        className="h-72 w-full"
         objectFit="cover"
         placeholder="blurred"
       />
