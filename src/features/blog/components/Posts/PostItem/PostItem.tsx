@@ -21,11 +21,11 @@ export const PostItem = ({ post }) => {
           <h2 className="text-amber-300">{title}</h2>
         </Link>
 
-        <p className="text-ellipsis break-words line-clamp-3">{description}</p>
+        <p className="relative text-ellipsis break-words line-clamp-3">{description}</p>
 
         <div className="mt-auto flex flex-wrap gap-2">
           {tags.map((tag: string) => (
-            <Tag tagName={tag} />
+            <Tag key={tag} tagName={tag} />
           ))}
         </div>
 

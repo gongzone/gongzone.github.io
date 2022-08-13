@@ -35,7 +35,7 @@ export const SeriesItem = ({ seriesItem }) => {
 
       <div className="flex flex-wrap gap-2">
         {tags.map((tag: string) => (
-          <Tag tagName={tag} />
+          <Tag key={tag} tagName={tag} />
         ))}
       </div>
     </li>
