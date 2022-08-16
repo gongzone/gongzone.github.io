@@ -1,5 +1,6 @@
 interface TagProps {
   tagName: string | null;
+  className?: string;
 }
 
 export const tagColorSet: {
@@ -11,10 +12,12 @@ export const tagColorSet: {
   YarnBerry: 'bg-emerald-700',
 };
 
-export const Tag = ({ tagName }: TagProps) => {
+export const Tag = ({ tagName, className }: TagProps) => {
   return (
     <span
-      className={`${tagColorSet[tagName!] ?? 'bg-gray-700'} rounded-xl px-2 py-1 text-xs shadow-lg`}
+      className={`${
+        tagColorSet[tagName!] ?? 'bg-gray-700'
+      }  rounded-xl px-2 py-1 text-xs shadow-lg ${className}`}
     >
       {tagName}
     </span>
