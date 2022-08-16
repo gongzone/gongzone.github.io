@@ -2,9 +2,9 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 export const Hero = () => {
   return (
-    <div className="relative h-72 w-full  xs:h-96 md:h-[460px] lg:mt-10 lg:px-20">
+    <div className="group relative h-72 w-full overflow-hidden xs:h-96 md:h-[460px]">
       <StaticImage
-        className="h-full w-full shadow-2xl brightness-50"
+        className="h-full w-full shadow-2xl brightness-50 transition-all duration-500 group-hover:scale-110 group-hover:sepia-[.25]"
         src="../../../assets/images/hero-bg.jpg"
         alt="hero-background"
         objectFit="cover"
