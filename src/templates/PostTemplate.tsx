@@ -1,15 +1,19 @@
-import { graphql } from 'gatsby';
+import { graphql, type HeadFC, type PageProps } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-const PostTemplate = ({ data }) => {
-  const { body } = data.post;
-  const { title, description, date, lastmod, tags, image, embeddedImages } = data.post.frontmatter;
+import { Layout } from '@/components/Layout';
+import { SEO } from '@/features/SEO/components';
+
+const PostTemplate = ({ data }: PageProps<Queries.GetSinglePostQuery>) => {
+  const { body } = data.post!;
+  const { title, description, date, lastmod, tags, image, embeddedImages } =
+    data.post?.frontmatter!;
 
   return (
-    <div>
+    <Layout>
       {title} : {description}
-    </div>
+    </Layout>
   );
 };
 
@@ -39,3 +43,10 @@ export const query = graphql`
 `;
 
 export default PostTemplate;
+
+export const Head: HeadFC = ({ data }) => {
+  const { title, description, date, lastmod, tags, image, embeddedImages } =
+    data.post?.frontmatter!;
+
+  return <SEO title={title} description={description} />;
+};

@@ -1,13 +1,21 @@
-import { graphql } from 'gatsby';
-import { Posts } from '@/features/blog/components/Posts';
+import { graphql, type PageProps, type HeadFC } from 'gatsby';
 
-const PostsTemplate = ({ data }) => {
+import { Layout } from '@/components/Layout';
+import { Tags } from '@/components/Tags';
+import { Posts } from '@/features/blog/components/Posts';
+import { SEO } from '@/features/SEO/components';
+import { Pagination } from '@/features/Pagination/components';
+
+const PostsTemplate = ({ data, pageContext }: PageProps<Queries.GetPostsQuery>) => {
   const { nodes: posts } = data.posts;
+  console.log(pageContext);
 
   return (
-    <div>
+    <Layout className="py-10 px-5 xs:px-14 md:p-20">
+      <Tags />
       <Posts posts={posts} />
-    </div>
+      <Pagination pageContext={pageContext} />
+    </Layout>
   );
 };
 
@@ -35,3 +43,5 @@ export const query = graphql`
 `;
 
 export default PostsTemplate;
+
+export const Head: HeadFC = () => <SEO title="Posts | 공존의 발자취" />;
