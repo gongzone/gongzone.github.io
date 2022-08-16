@@ -8,7 +8,7 @@ export const Header = () => {
   const openSidebar = useSidebarStore((state) => state.openSidebar);
 
   return (
-    <header className="flex h-20 items-center justify-between bg-zinc-900 px-6 drop-shadow-md md:h-24 md:px-12">
+    <header className="flex h-20 items-center justify-between bg-zinc-900 px-6 shadow-lg md:h-24 md:px-12">
       <h1 className="hover-text-amber">
         <Link className="flex items-center gap-2" to="/">
           <StaticImage

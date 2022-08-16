@@ -1,11 +1,12 @@
-import type { HeadFC } from 'gatsby';
-import { Link, graphql } from 'gatsby';
+import { Link, graphql, type HeadFC, type PageProps } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 import { Layout } from '@/components/Layout';
 import { Posts } from '@/features/blog/components/Posts';
 import { Series } from '@/features/blog/components/Series';
+import { Hero } from '@/components/Layout/Hero';
+import { SEO } from '@/features/SEO/components';
 
 const SECTION_KIND = {
   posts: {
@@ -18,18 +19,26 @@ const SECTION_KIND = {
   },
 };
 
-const Section = ({ kind, data }) => {
+interface SectionProps {
+  kind: typeof SECTION_KIND.posts;
+  data: Queries.IndexPageQuery['posts']['nodes'] | Queries.IndexPageQuery['series']['group'];
+}
+
+const Section = ({ kind, data }: SectionProps) => {
   return (
     <section className="mb-8 flex flex-col justify-center">
       <div>
         <div className="mb-4">
-          <span className="font-bold">✨ 인기 {kind.name} 목록</span>
-          <span className="text-sm"> (조회순)</span>
+          <span className="font-bold">✨ 최신 {kind.name} 목록</span>
         </div>
       </div>
 
-      {kind.name === SECTION_KIND.posts.name && <Posts posts={data} />}
-      {kind.name === SECTION_KIND.series.name && <Series series={data} />}
+      {kind.name === SECTION_KIND.posts.name && (
+        <Posts posts={data as Queries.IndexPageQuery['posts']['nodes']} />
+      )}
+      {kind.name === SECTION_KIND.series.name && (
+        <Series series={data as Queries.IndexPageQuery['series']['group']} />
+      )}
 
       <div className="my-3 text-center">
         <Link className="group inline-flex items-center gap-1 p-2" to={kind.to}>
@@ -45,34 +54,37 @@ const Section = ({ kind, data }) => {
   );
 };
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
   const { nodes: posts } = data.posts;
   const { group: series } = data.series;
 
   return (
-    <Layout className="py-10 px-5 xs:px-14 lg:px-20">
-      <div className="mb-8 flex items-center justify-center gap-2 bg-gradient-to-tl from-zinc-900 to-slate-800 px-3 py-5 drop-shadow-md">
-        <StaticImage
-          src="../assets/images/blog.png"
-          alt="blog-icon"
-          placeholder="blurred"
-          width={75}
-          height={75}
-        />
-        <div className="flex flex-col gap-1">
-          <span className="text-2xl font-bold text-emerald-400">GongZone</span>
-          <p className="text-sm">웹 개발에 관한 글을 주로 씁니다.</p>
+    <Layout>
+      <Hero />
+      <div className="py-10 px-5 xs:px-14 lg:px-20">
+        <div className="mb-8 flex items-center justify-center gap-2 px-3 py-5 drop-shadow-md">
+          <StaticImage
+            src="../assets/images/blog.png"
+            alt="blog-icon"
+            placeholder="blurred"
+            width={75}
+            height={75}
+          />
+          <div className="flex flex-col gap-1">
+            <span className="text-2xl font-bold text-emerald-400">GongZone</span>
+            <p className="text-sm">웹 개발에 관한 글을 주로 씁니다.</p>
+          </div>
         </div>
-      </div>
 
-      <Section kind={SECTION_KIND.posts} data={posts} />
-      <Section kind={SECTION_KIND.series} data={series} />
+        <Section kind={SECTION_KIND.posts} data={posts} />
+        <Section kind={SECTION_KIND.series} data={series} />
+      </div>
     </Layout>
   );
 };
 
-export const getPostsQuery = graphql`
-  query {
+export const query = graphql`
+  query IndexPage {
     posts: allMdx(limit: 8, sort: { fields: frontmatter___date, order: DESC }) {
       nodes {
         id
@@ -112,4 +124,4 @@ export const getPostsQuery = graphql`
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>Home Page</title>;
+export const Head: HeadFC = () => <SEO title="공존의 발자취" />;

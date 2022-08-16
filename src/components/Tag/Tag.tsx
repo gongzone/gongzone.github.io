@@ -1,8 +1,10 @@
 interface TagProps {
-  tagName: string;
+  tagName: string | null;
 }
 
-export const tagColorSet = {
+export const tagColorSet: {
+  [key: string]: string;
+} = {
   JavaScript: 'bg-yellow-400 text-black',
   React: 'bg-blue-500 text-black',
   Canvas: 'bg-red-700',
@@ -12,7 +14,7 @@ export const tagColorSet = {
 export const Tag = ({ tagName }: TagProps) => {
   return (
     <span
-      className={`${tagColorSet[tagName] ?? 'bg-gray-700'} rounded-xl px-2 py-1 text-xs shadow-lg`}
+      className={`${tagColorSet[tagName!] ?? 'bg-gray-700'} rounded-xl px-2 py-1 text-xs shadow-lg`}
     >
       {tagName}
     </span>

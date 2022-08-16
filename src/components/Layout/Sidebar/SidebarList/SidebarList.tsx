@@ -1,13 +1,15 @@
 import { Link } from 'gatsby';
 import { AiFillHome, AiFillFileText, AiFillCopy, AiFillRobot, AiFillProfile } from 'react-icons/ai';
 
+import { useSidebarStore } from '@/store/sidebar';
+
 export const SIDEBAR_LIST_ENUM = {
   top: 'Top',
   blog: 'Blog',
   about: 'About',
 } as const;
 
-const SIDEBAR_LIST_TOP = [{ name: 'HOME', icon: AiFillHome, to: '/posts' }];
+const SIDEBAR_LIST_TOP = [{ name: 'HOME', icon: AiFillHome, to: '/' }];
 
 const SIDEBAR_LIST_BLOG = [
   { name: '글', icon: AiFillFileText, to: '/posts' },
@@ -28,6 +30,8 @@ const SIDEBAR_LIST_ITEMS = {
 type SidebarListType = typeof SIDEBAR_LIST_ENUM[keyof typeof SIDEBAR_LIST_ENUM];
 
 export const SidebarList = ({ kind }: { kind: SidebarListType }) => {
+  const closeSidebar = useSidebarStore((state) => state.closeSidebar);
+
   const items = SIDEBAR_LIST_ITEMS[kind];
 
   return (
@@ -40,7 +44,11 @@ export const SidebarList = ({ kind }: { kind: SidebarListType }) => {
       <ul className="flex flex-col gap-[0.35rem]">
         {items!.map((item) => (
           <li key={item.name}>
-            <Link className="group inline-flex items-center gap-2" to={item.to}>
+            <Link
+              onClick={closeSidebar}
+              className="group inline-flex items-center gap-2"
+              to={item.to}
+            >
               <span className="text-lg">
                 <item.icon />
               </span>
