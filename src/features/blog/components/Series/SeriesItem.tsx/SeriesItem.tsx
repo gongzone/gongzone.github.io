@@ -1,10 +1,31 @@
 import { Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import {
+  GatsbyImage,
+  getImage,
+  type ImageDataLike,
+  type IGatsbyImageData,
+} from 'gatsby-plugin-image';
 import { CgList, CgAwards } from 'react-icons/cg';
 
 import { Tag } from '@/components/Tag';
 
-export const SeriesItem = ({ seriesItem }) => {
+interface SeriesItemProps {
+  seriesItem: {
+    fieldValue: string | null;
+    totalCount: number;
+    image:
+      | {
+          readonly childImageSharp: {
+            readonly gatsbyImageData: IGatsbyImageData;
+          } | null;
+        }
+      | null
+      | undefined;
+    tags: string[];
+  };
+}
+
+export const SeriesItem = ({ seriesItem }: SeriesItemProps) => {
   const { fieldValue, totalCount, image, tags } = seriesItem;
 
   return (
@@ -12,8 +33,8 @@ export const SeriesItem = ({ seriesItem }) => {
       <Link className="group relative w-full overflow-hidden" to={`/posts/`}>
         <GatsbyImage
           className="rounded-md"
-          image={getImage(image)}
-          alt={fieldValue}
+          image={getImage(image as ImageDataLike)!}
+          alt={fieldValue!}
           objectFit="cover"
         />
         <div className="absolute top-0 bottom-0 right-0 flex w-[44.8%] items-center justify-center gap-3 rounded-r-md bg-black/80 text-xl transition-all duration-300 group-hover:text-3xl">
