@@ -1,10 +1,17 @@
 import type { GatsbyConfig } from 'gatsby';
 import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `My Gatsby Site`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `공존의 발자취`,
+    description: `공존의 개발 블로그입니다.`,
+    image: ``,
+    siteUrl: `https://gongzone.github.io`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -18,12 +25,17 @@ const config: GatsbyConfig = {
         '@': path.join(__dirname, 'src'),
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-google-analytics',
-    //   options: {
-    //     trackingId: '',
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [
+          process.env.TRACKING_ID, // Google Analytics / GA
+        ],
+        pluginConfig: {
+          head: true,
+        },
+      },
+    },
     'gatsby-plugin-image',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-mdx',

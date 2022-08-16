@@ -1,6 +1,6 @@
 import path from 'path';
 import type { CreateBabelConfigArgs, CreatePagesArgs } from 'gatsby';
-import { createPostPages, createPostsPages } from './gatsby-api';
+import { createPostPages, createPostsPages, createPostsByTagPages } from './gatsby-api';
 
 const root = process.cwd();
 
@@ -19,13 +19,19 @@ export const createPages = async ({ graphql, actions, reporter }: CreatePagesArg
 
   const graphQLData = await graphql(`
     {
-      allMdx {
+      posts: allMdx {
         totalCount
         nodes {
           frontmatter {
             slug
             series
           }
+        }
+      }
+      tags: allMdx {
+        group(field: frontmatter___tags) {
+          fieldValue
+          totalCount
         }
       }
     }
@@ -45,4 +51,5 @@ export const createPages = async ({ graphql, actions, reporter }: CreatePagesArg
 
   createPostPages(createPagesData);
   createPostsPages(createPagesData);
+  createPostsByTagPages(createPagesData);
 };
