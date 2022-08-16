@@ -60,9 +60,9 @@ const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
 
   return (
     <Layout>
-      <Hero />
       <div className="py-10 px-5 xs:px-14 lg:px-20">
-        <div className="mb-8 flex items-center justify-center gap-2 px-3 py-5 drop-shadow-md">
+        <Hero />
+        <div className="my-8 flex items-center justify-center gap-2 px-3 py-5 drop-shadow-md">
           <StaticImage
             src="../assets/images/blog.png"
             alt="blog-icon"
