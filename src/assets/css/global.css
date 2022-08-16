@@ -10,6 +10,6 @@
 
 @layer utilities {
   .hover-text-amber {
-    @apply cursor-pointer text-neutral-100 transition-colors duration-300 hover:text-amber-300;
+    @apply cursor-pointer transition-colors duration-300 hover:text-amber-300;
   }
 }
