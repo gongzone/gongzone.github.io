@@ -33,7 +33,10 @@ export const Toc = ({ tableOfContents }) => {
   const { items } = tableOfContents;
 
   return (
-    <nav className="absolute left-full ml-20 h-full w-[240px]" aria-label="table-of-contents">
+    <nav
+      className="absolute left-full ml-20 hidden h-full w-[240px] 2xl:block"
+      aria-label="table-of-contents"
+    >
       <div className="sticky top-14">
         <div className="flex items-center gap-2 text-xl">
           <span>
