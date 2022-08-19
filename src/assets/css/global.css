@@ -12,4 +12,14 @@
   .hover-text-amber {
     @apply cursor-pointer transition-colors duration-300 hover:text-amber-300;
   }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 3px;
+  }
+  .scrollbar::-webkit-scrollbar-track {
+    background: none;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded-md bg-zinc-400;
+  }
 }
