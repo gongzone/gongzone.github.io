@@ -1,11 +1,15 @@
 import path from 'path';
-import type { CreateBabelConfigArgs, CreatePagesArgs } from 'gatsby';
-import { createPostPages, createPostsPages, createPostsByTagPages } from './gatsby-api';
+import type { GatsbyNode } from 'gatsby';
+import {
+  createPostPages,
+  createPostsPages,
+  createPostsByTagPages,
+} from './gatsby-api/create-pages';
 
 const root = process.cwd();
 
 // babel config
-export const onCreateBabelConfig = ({ actions }: CreateBabelConfigArgs) => {
+export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions }) => {
   actions.setBabelPreset({
     name: 'babel-preset-gatsby',
     options: {
@@ -14,7 +18,7 @@ export const onCreateBabelConfig = ({ actions }: CreateBabelConfigArgs) => {
   });
 };
 
-export const createPages = async ({ graphql, actions, reporter }: CreatePagesArgs) => {
+export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
   const graphQLData = await graphql(`
@@ -24,7 +28,10 @@ export const createPages = async ({ graphql, actions, reporter }: CreatePagesArg
         nodes {
           frontmatter {
             slug
-            series
+            series {
+              seriesName
+              seriesIndex
+            }
           }
         }
       }

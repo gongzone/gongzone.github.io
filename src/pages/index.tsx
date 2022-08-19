@@ -104,7 +104,7 @@ export const query = graphql`
       }
     }
     series: allMdx {
-      group(field: frontmatter___series, limit: 8) {
+      group(field: frontmatter___series___seriesName, limit: 8) {
         fieldValue
         totalCount
         nodes {

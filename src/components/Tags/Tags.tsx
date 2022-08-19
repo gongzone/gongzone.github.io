@@ -7,8 +7,8 @@ interface TagsProps {
 
 export const Tags = ({ currentTag }: TagsProps) => {
   const data = useStaticQuery(query);
+  const totalCount = data.allMdx.totalCount;
   const tags = data.allMdx.group;
-  const allPostsNumber = tags.reduce((prev, { totalCount }) => prev + totalCount, 0);
 
   return (
     <div className="lg:w-2/3">
@@ -27,7 +27,7 @@ export const Tags = ({ currentTag }: TagsProps) => {
             to="/posts"
           >
             <span>All</span>
-            <span> ({allPostsNumber})</span>
+            <span> ({totalCount})</span>
           </Link>
         </li>
         {tags.map(({ fieldValue, totalCount }) => (
@@ -51,6 +51,7 @@ export const Tags = ({ currentTag }: TagsProps) => {
 const query = graphql`
   query {
     allMdx {
+      totalCount
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

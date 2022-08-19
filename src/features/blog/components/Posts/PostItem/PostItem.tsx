@@ -34,7 +34,7 @@ export const PostItem = ({ post }: PostItemProps) => {
         </div>
 
         <div className="mt-1 self-end">
-          <span className="text-sm">📅 {lastmod ? `${lastmod} (수정)` : `${date}`}</span>
+          <span className="text-sm">📅 {date}</span>
         </div>
       </div>
     </li>

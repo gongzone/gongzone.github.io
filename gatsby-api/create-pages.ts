@@ -1,4 +1,17 @@
-export const createPostPages = ({ graphQLData, createPage, path, root }) => {
+import type { Actions } from 'gatsby';
+import type { PlatformPath } from 'path';
+
+interface CreatePages {
+  graphQLData: {
+    errors?: any;
+    data?: unknown;
+  };
+  createPage: Actions['createPage'];
+  path: PlatformPath;
+  root: string;
+}
+
+export const createPostPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
   const nodes = graphQLData.data.posts.nodes;
 
   nodes.forEach((post) => {
@@ -9,13 +22,14 @@ export const createPostPages = ({ graphQLData, createPage, path, root }) => {
       component: path.join(root, 'src/templates', 'PostTemplate.tsx'),
       context: {
         slug,
-        series,
+        seriesName: series?.seriesName,
+        seriesIndex: series?.seriesIndex,
       },
     });
   });
 };
 
-export const createPostsPages = ({ graphQLData, createPage, path, root }) => {
+export const createPostsPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
   const totalCount = graphQLData.data.posts.totalCount;
   const postsPerPage = 2;
   const totalPagination = Math.ceil(totalCount / postsPerPage);
@@ -35,7 +49,7 @@ export const createPostsPages = ({ graphQLData, createPage, path, root }) => {
   });
 };
 
-export const createPostsByTagPages = ({ graphQLData, createPage, path, root }) => {
+export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
   const tags = graphQLData.data.tags.group;
   const postsPerPage = 2;
 

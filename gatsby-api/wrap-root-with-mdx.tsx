@@ -1,9 +1,13 @@
 import React from 'react';
-import type { WrapRootElementBrowserArgs } from 'gatsby';
+import type { GatsbyBrowser } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
 
-const mdxConponents = {};
+import { Paragraph } from '@/features/blog/components/Mdx';
 
-export const wrapRootWithMdx = ({ element }: WrapRootElementBrowserArgs) => {
+const mdxConponents = {
+  p: Paragraph,
+};
+
+export const wrapRootWithMdx: GatsbyBrowser['wrapRootElement'] = ({ element }) => {
   return <MDXProvider components={mdxConponents}>{element}</MDXProvider>;
 };

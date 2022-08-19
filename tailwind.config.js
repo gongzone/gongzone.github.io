@@ -18,7 +18,24 @@ module.exports = {
       fontFamily: {
         sans: ['Roboto', 'Noto Sans KR', ...defaultTheme.fontFamily.sans],
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            strong: {
+              color: theme('colors.amber.300'),
+            },
+            a: {
+              color: theme('colors.blue.500'),
+              textDecoration: 'none',
+              transition: 'color 0.3s ease',
+              '&:hover': {
+                color: theme('colors.blue.600'),
+              },
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/line-clamp')],
 };
