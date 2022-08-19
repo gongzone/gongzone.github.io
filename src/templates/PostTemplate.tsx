@@ -2,16 +2,19 @@ import { graphql, Link, type HeadFC, type PageProps } from 'gatsby';
 import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { TiArrowBack } from 'react-icons/ti';
-import { FaAsterisk, FaPencilAlt, FaPenNib } from 'react-icons/fa';
+import { FaAsterisk, FaPencilAlt, FaClock, FaPenNib } from 'react-icons/fa';
 
 import { Layout } from '@/components/Layout';
 import { SEO } from '@/features/SEO/components';
 import { Tag } from '@/components/Tag';
+import { Toc } from '@/features/blog/components/Toc';
 
-const PostTemplate = ({ data }: PageProps<Queries.GetSinglePostQuery>) => {
-  const { body } = data.post!;
+const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuery>) => {
+  const { body, tableOfContents, timeToRead } = data.post!;
   const { title, description, date, lastmod, tags, image, embeddedImages } =
     data.post?.frontmatter!;
+
+  const { seriesIndex } = pageContext;
 
   return (
     <Layout className="max-w-[768px] py-10 px-5 xs:px-14 sm:px-20 lg:max-w-[859px]">
@@ -31,62 +34,98 @@ const PostTemplate = ({ data }: PageProps<Queries.GetSinglePostQuery>) => {
         </div>
       </div>
 
-      <div>
+      <div className="relative">
+        <Toc tableOfContents={tableOfContents} />
         <div>
-          <GatsbyImage
-            className="rounded-lg"
-            image={getImage(image as ImageDataLike)!}
-            alt={title}
-          />
-        </div>
+          <div>
+            <GatsbyImage
+              className="rounded-lg"
+              image={getImage(image as ImageDataLike)!}
+              alt={title}
+            />
+          </div>
 
-        <div className="mx-auto flex flex-col sm:max-w-[90%] md:max-w-[82%] lg:max-w-[75%]">
-          <div className="my-8 flex flex-col gap-3">
-            <h2 className="flex items-center gap-2 text-2xl font-bold">
-              <span className="rounded-full bg-zinc-700 p-2 text-base text-amber-300">
-                <FaAsterisk />
-              </span>
-              <span className="">{title}</span>
-            </h2>
-            <p>{description}</p>
-            <ul className="flex flex-wrap">
-              {tags?.map((tag) => (
-                <li className="mb-2 mr-2" key={tag}>
-                  <Tag className="block rounded-3xl px-4 py-2 text-base" tagName={tag} />
-                </li>
-              ))}
-            </ul>
-            <div className="flex flex-col self-end font-bold text-zinc-400">
-              <div className="flex items-center gap-2">
-                <span>
-                  <FaPencilAlt />
+          <div className="mx-auto flex flex-col sm:max-w-[90%] md:max-w-[82%] lg:max-w-[75%]">
+            <div className="my-8 flex flex-col gap-3">
+              <div className="flex items-center gap-2 text-2xl font-bold">
+                <span className="rounded-full bg-zinc-700 p-2 text-base text-amber-300">
+                  <FaAsterisk />
                 </span>
-                <span>{date} (작성)</span>
+                <h1>{title}</h1>
               </div>
-              {lastmod && (
+              <div className="flex items-center gap-2 font-bold text-zinc-400">
                 <div className="flex items-center gap-2">
                   <span>
-                    <FaPenNib />
+                    <FaPencilAlt />
                   </span>
-                  <span>{lastmod} (수정)</span>
+                  <span>{date}</span>
                 </div>
-              )}
+                <span>/</span>
+                <div className="flex items-center gap-2">
+                  <span>
+                    <FaClock />
+                  </span>
+                  <span>{timeToRead} min read</span>
+                </div>
+              </div>
+              <h2>{description}</h2>
+              <ul className="flex flex-wrap">
+                {tags?.map((tag) => (
+                  <li className="mb-2 mr-2" key={tag}>
+                    <Tag className="block rounded-3xl px-4 py-2 text-base" tagName={tag} />
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-col self-end font-bold text-zinc-400">
+                {lastmod && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <span>
+                      <FaPenNib />
+                    </span>
+                    <span>이 게시글은 {lastmod} 수정되었습니다. </span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <article className="my-8">
-        <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
-      </article>
+          {data.series && (
+            <div className="w-full bg-zinc-800">
+              <span>{data.series.totalCount}</span>
+              <ol>
+                {data.series.nodes.map(({ id, frontmatter }, i) => {
+                  const { title, slug } = frontmatter;
+                  return (
+                    <li key={id}>
+                      <Link
+                        className={i + 1 === seriesIndex ? 'font-bold' : ''}
+                        to={`/posts/${slug}`}
+                      >
+                        {i + 1}
+                        {title}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          )}
+        </div>
+
+        <article className="prose prose-invert my-8 max-w-none">
+          <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
+        </article>
+      </div>
     </Layout>
   );
 };
 
 export const query = graphql`
-  query GetSinglePost($slug: String) {
+  query GetSinglePost($slug: String, $seriesName: String) {
     post: mdx(frontmatter: { slug: { eq: $slug } }) {
       body
+      tableOfContents
+      timeToRead
       frontmatter {
         title
         description
@@ -102,6 +141,19 @@ export const query = graphql`
           childImageSharp {
             gatsbyImageData
           }
+        }
+      }
+    }
+    series: allMdx(
+      filter: { frontmatter: { series: { seriesName: { eq: $seriesName } } } }
+      sort: { fields: frontmatter___series___seriesIndex, order: ASC }
+    ) {
+      totalCount
+      nodes {
+        id
+        frontmatter {
+          title
+          slug
         }
       }
     }
