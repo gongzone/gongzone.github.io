@@ -1,8 +1,17 @@
+import { useState } from 'react';
 import { graphql, Link, type HeadFC, type PageProps } from 'gatsby';
 import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { TiArrowBack } from 'react-icons/ti';
-import { FaAsterisk, FaPencilAlt, FaClock, FaPenNib } from 'react-icons/fa';
+import {
+  FaAsterisk,
+  FaPencilAlt,
+  FaClock,
+  FaPenNib,
+  FaChevronUp,
+  FaChevronDown,
+  FaAngleDoubleRight,
+} from 'react-icons/fa';
 
 import { Layout } from '@/components/Layout';
 import { SEO } from '@/features/SEO/components';
@@ -10,11 +19,13 @@ import { Tag } from '@/components/Tag';
 import { Toc } from '@/features/blog/components/Toc';
 
 const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuery>) => {
+  const [isSeriesOpen, setIsSeriesOpen] = useState(false);
   const { body, tableOfContents, timeToRead } = data.post!;
   const { title, description, date, lastmod, tags, image, embeddedImages } =
     data.post?.frontmatter!;
 
-  const { seriesIndex } = pageContext;
+  const { seriesName, seriesIndex } = pageContext;
+  console.log(data.series);
 
   return (
     <Layout className="max-w-[768px] py-10 px-5 xs:px-14 sm:px-20 lg:max-w-[859px]">
@@ -89,25 +100,43 @@ const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuer
             </div>
           </div>
 
-          {data.series && (
-            <div className="w-full bg-zinc-800">
-              <span>{data.series.totalCount}</span>
-              <ol>
-                {data.series.nodes.map(({ id, frontmatter }, i) => {
-                  const { title, slug } = frontmatter;
-                  return (
-                    <li key={id}>
-                      <Link
-                        className={i + 1 === seriesIndex ? 'font-bold' : ''}
-                        to={`/posts/${slug}`}
-                      >
-                        {i + 1}
-                        {title}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ol>
+          {data.series.totalCount > 1 && (
+            <div className="gap-8md:px-16 mt-10 mb-16 flex w-full justify-center">
+              <div>
+                <div className="mb-2 flex flex-col bg-zinc-800 p-5 shadow-md md:p-8">
+                  <span className="break-words text-xl font-bold text-emerald-500">
+                    {seriesName}
+                  </span>
+
+                  <button
+                    className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300"
+                    onClick={() => setIsSeriesOpen(!isSeriesOpen)}
+                  >
+                    <div className="flex items-center gap-1">
+                      <span>{data.series.totalCount}개의 게시글 (시리즈)</span>
+                      <span>{isSeriesOpen ? <FaChevronUp /> : <FaChevronDown />}</span>
+                    </div>
+                  </button>
+                </div>
+
+                {isSeriesOpen && (
+                  <ol className="flex flex-col items-center justify-center gap-1 rounded-md py-5 text-zinc-400">
+                    {data.series.nodes.map(({ id, frontmatter }, i) => {
+                      const { title, slug } = frontmatter;
+                      return (
+                        <li key={id} className="text-zinc-400 hover:text-zinc-300">
+                          <Link
+                            className={i + 1 === seriesIndex ? 'font-bold text-emerald-500' : ''}
+                            to={`/posts/${slug}`}
+                          >
+                            {i + 1}. {title}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -115,6 +144,40 @@ const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuer
         <article className="prose prose-invert my-8 max-w-none">
           <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
         </article>
+
+        {data.series.totalCount > 1 && (
+          <div className="py-4">
+            {seriesIndex > 1 && (
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-emerald-400">이전 글 링크</span>
+                <span className="text-emerald-400">
+                  <FaAngleDoubleRight />
+                </span>
+                <Link
+                  className="text-lg text-zinc-400 transition-colors duration-300 hover:text-zinc-300"
+                  to={`/posts/${data.series.nodes[seriesIndex - 2]?.frontmatter?.slug}`}
+                >
+                  {data.series.nodes[seriesIndex - 2]?.frontmatter?.title}
+                </Link>
+              </div>
+            )}
+
+            {data.series.nodes.length !== seriesIndex && (
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-emerald-400">다음 글 링크</span>
+                <span className="text-emerald-400">
+                  <FaAngleDoubleRight />
+                </span>
+                <Link
+                  className="text-lg text-zinc-400 transition-colors duration-300 hover:text-zinc-300"
+                  to={`/posts/${data.series.nodes[seriesIndex]?.frontmatter?.slug}`}
+                >
+                  {data.series.nodes[seriesIndex]?.frontmatter?.title}
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </Layout>
   );
