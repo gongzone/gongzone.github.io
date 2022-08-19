@@ -40,7 +40,7 @@ const Section = ({ kind, data }: SectionProps) => {
         <Series series={data as Queries.IndexPageQuery['series']['group']} />
       )}
 
-      <div className="my-3 text-center">
+      <div className="my-6 text-center">
         <Link className="group inline-flex items-center gap-1 p-2" to={kind.to}>
           <span>
             <FaExternalLinkAlt />
