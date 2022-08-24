@@ -1,64 +1,50 @@
 import { Link } from 'gatsby';
-import { AiFillHome, AiFillFileText, AiFillCopy, AiFillRobot, AiFillProfile } from 'react-icons/ai';
 
 import { useSidebarStore } from '@/store/sidebar';
 
-export const SIDEBAR_LIST_ENUM = {
-  top: 'Top',
-  blog: 'Blog',
-  about: 'About',
-} as const;
+import { SIDEBAR_LIST_ENUM } from '@/components/Layout/Sidebar/SidebarList/enums';
+import { SIDEBAR_LIST_ITEMS } from '@/components/Layout/Sidebar/SidebarList/constants';
+import type { SidebarItem, SidebarListType } from '@/components/Layout/Sidebar/SidebarList/types';
 
-const SIDEBAR_LIST_TOP = [{ name: 'HOME', icon: AiFillHome, to: '/' }];
+interface SidebarListProps {
+  kind: SidebarListType;
+}
 
-const SIDEBAR_LIST_BLOG = [
-  { name: '글', icon: AiFillFileText, to: '/posts' },
-  { name: '시리즈', icon: AiFillCopy, to: '/series' },
-];
-
-const SIDEBAR_LIST_ABOUT = [
-  { name: '소개', icon: AiFillRobot, to: '/aboutme' },
-  { name: '프로젝트', icon: AiFillProfile, to: '/projects' },
-];
-
-const SIDEBAR_LIST_ITEMS = {
-  [SIDEBAR_LIST_ENUM.top]: SIDEBAR_LIST_TOP,
-  [SIDEBAR_LIST_ENUM.blog]: SIDEBAR_LIST_BLOG,
-  [SIDEBAR_LIST_ENUM.about]: SIDEBAR_LIST_ABOUT,
-};
-
-type SidebarListType = typeof SIDEBAR_LIST_ENUM[keyof typeof SIDEBAR_LIST_ENUM];
-
-export const SidebarList = ({ kind }: { kind: SidebarListType }) => {
-  const closeSidebar = useSidebarStore((state) => state.closeSidebar);
-
+export const SidebarList = ({ kind }: SidebarListProps) => {
   const items = SIDEBAR_LIST_ITEMS[kind];
 
   return (
-    <nav className={`${kind === SIDEBAR_LIST_ENUM.top && 'mb-6'}`}>
-      {kind !== SIDEBAR_LIST_ENUM.top && (
+    <nav className={kind === SIDEBAR_LIST_ENUM.TOP ? 'mb-6' : ''}>
+      {kind !== SIDEBAR_LIST_ENUM.TOP && (
         <div className="mb-2 border-b-2 border-b-stone-400 pb-2">
           <span className="text-xl font-bold text-emerald-400">{kind}</span>
         </div>
       )}
       <ul className="flex flex-col gap-[0.35rem]">
-        {items!.map((item) => (
+        {items.map((item) => (
           <li key={item.name}>
-            <Link
-              onClick={closeSidebar}
-              className="group inline-flex items-center gap-2"
-              to={item.to}
-            >
-              <span className="text-lg">
-                <item.icon />
-              </span>
-              <span className="text-lg transition-colors duration-300 group-hover:text-amber-300">
-                {item.name}
-              </span>
-            </Link>
+            <SidebarListItem item={item} />
           </li>
         ))}
       </ul>
     </nav>
+  );
+};
+
+interface SidebarListItemProps {
+  item: SidebarItem;
+}
+
+const SidebarListItem = ({ item }: SidebarListItemProps) => {
+  const closeSidebar = useSidebarStore((state) => state.closeSidebar);
+  return (
+    <Link onClick={closeSidebar} className="group inline-flex items-center gap-2" to={item.to}>
+      <span className="text-lg">
+        <item.icon />
+      </span>
+      <span className="text-lg transition-colors duration-300 group-hover:text-amber-300">
+        {item.name}
+      </span>
+    </Link>
   );
 };

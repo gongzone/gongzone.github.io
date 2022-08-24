@@ -1,10 +1,22 @@
 import { Link } from 'gatsby';
 
 import { paginateUtil } from '@/features/Pagination/utils';
+import { slugifyTag } from '@/utils/slugify-tag';
 
-export const Pagination = ({ pageContext }) => {
+interface PaginationProps {
+  pageContext: {
+    tag?: string;
+    limit: number;
+    skip: number;
+    totalPagination: number;
+    postsPerPage: number;
+    currentPage: number;
+  };
+}
+
+export const Pagination = ({ pageContext }: PaginationProps) => {
   const { totalPagination, postsPerPage, currentPage } = pageContext;
-  const currentTag = pageContext.tag ? pageContext.tag.toLowerCase().replace('-', '') : undefined;
+  const currentTag = slugifyTag(pageContext.tag);
   const maxSize = 5;
 
   const { pages } = paginateUtil(

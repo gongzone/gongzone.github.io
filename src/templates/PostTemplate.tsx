@@ -15,7 +15,7 @@ import {
 
 import { Layout } from '@/components/Layout';
 import { SEO } from '@/features/SEO/components';
-import { Tag } from '@/components/Tag';
+import { ColoredTag } from '@/components/Element/Tag';
 import { Toc } from '@/features/blog/components/Toc';
 
 const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuery>) => {
@@ -83,7 +83,7 @@ const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuer
               <ul className="flex flex-wrap">
                 {tags?.map((tag) => (
                   <li className="mb-2 mr-2" key={tag}>
-                    <Tag className="block rounded-3xl px-4 py-2 text-base" tagName={tag} />
+                    <ColoredTag className="block rounded-3xl px-4 py-2 text-base" tagName={tag} />
                   </li>
                 ))}
               </ul>

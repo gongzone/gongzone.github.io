@@ -2,9 +2,10 @@ import shallow from 'zustand/shallow';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import { useSidebarStore } from '@/store/sidebar';
+import { SIDEBAR_LIST_ENUM } from '@/components/Layout/Sidebar/SidebarList/enums';
 
 import { Backdrop } from '@/components/Layout/Backdrop';
-import { SidebarList, SIDEBAR_LIST_ENUM } from '@/components/Layout/Sidebar/SidebarList';
+import { SidebarList } from '@/components/Layout/Sidebar/SidebarList';
 
 export const Sidebar = () => {
   const [isSidebarOpen, closeSidebar] = useSidebarStore(
@@ -32,9 +33,9 @@ export const Sidebar = () => {
         </div>
 
         <div className="flex flex-col gap-4 px-10 py-5">
-          <SidebarList kind={SIDEBAR_LIST_ENUM.top} />
-          <SidebarList kind={SIDEBAR_LIST_ENUM.blog} />
-          <SidebarList kind={SIDEBAR_LIST_ENUM.about} />
+          {Object.values(SIDEBAR_LIST_ENUM).map((kind) => (
+            <SidebarList key={kind} kind={kind} />
+          ))}
         </div>
       </aside>
     </>

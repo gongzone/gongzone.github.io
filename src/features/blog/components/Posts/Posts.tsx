@@ -1,7 +1,8 @@
-import { PostItem } from '@/features/blog/components/Posts/PostItem';
+import type { IndexPagePostsQuery } from '@/types/graphql';
 
+import { PostItem } from '@/features/blog/components/Posts/PostItem';
 interface PostsProps {
-  posts: Queries.IndexPageQuery['posts']['nodes'];
+  posts: IndexPagePostsQuery;
 }
 
 export const Posts = ({ posts }: PostsProps) => {

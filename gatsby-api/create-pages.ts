@@ -1,6 +1,8 @@
 import type { Actions } from 'gatsby';
 import type { PlatformPath } from 'path';
 
+import { slugifyTag } from '@/utils/slugify-tag';
+
 interface CreatePages {
   graphQLData: {
     errors?: any;
@@ -60,8 +62,8 @@ export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: C
       createPage({
         path:
           i === 0
-            ? `/posts/tags/${fieldValue.toLowerCase().replace('-', '')}`
-            : `/posts/tags/${fieldValue.toLowerCase().replace('-', '')}/${i + 1}`,
+            ? `/posts/tags/${slugifyTag(fieldValue)}`
+            : `/posts/tags/${slugifyTag(fieldValue)}/${i + 1}`,
         component: path.join(root, 'src/templates', 'PostsByTagTemplate.tsx'),
         context: {
           tag: fieldValue,

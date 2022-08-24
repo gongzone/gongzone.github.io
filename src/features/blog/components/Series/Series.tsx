@@ -1,7 +1,8 @@
-import { SeriesItem } from '@/features/blog/components/Series/SeriesItem.tsx';
+import type { IndexPageSeriesQuery } from '@/types/graphql';
 
+import { SeriesItem } from '@/features/blog/components/Series/SeriesItem.tsx';
 interface SeriesProps {
-  series: Queries.IndexPageQuery['series']['group'];
+  series: IndexPageSeriesQuery;
 }
 
 export const Series = ({ series }: SeriesProps) => {

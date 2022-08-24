@@ -1,28 +1,13 @@
 import { Link } from 'gatsby';
-import {
-  GatsbyImage,
-  getImage,
-  type ImageDataLike,
-  type IGatsbyImageData,
-} from 'gatsby-plugin-image';
+import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
 import { CgList, CgAwards } from 'react-icons/cg';
 
-import { Tag } from '@/components/Tag';
+import { IndexPageSeriesItem } from '@/types/graphql';
+
+import { ColoredTag } from '@/components/Element/Tag';
 
 interface SeriesItemProps {
-  seriesItem: {
-    fieldValue: string | null;
-    totalCount: number;
-    image:
-      | {
-          readonly childImageSharp: {
-            readonly gatsbyImageData: IGatsbyImageData;
-          } | null;
-        }
-      | null
-      | undefined;
-    tags: string[];
-  };
+  seriesItem: IndexPageSeriesItem;
 }
 
 export const SeriesItem = ({ seriesItem }: SeriesItemProps) => {
@@ -54,11 +39,13 @@ export const SeriesItem = ({ seriesItem }: SeriesItemProps) => {
         </Link>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <ul className="flex flex-wrap gap-2">
         {tags.map((tag: string) => (
-          <Tag key={tag} tagName={tag} />
+          <li key={tag}>
+            <ColoredTag tagName={tag} />
+          </li>
         ))}
-      </div>
+      </ul>
     </li>
   );
 };

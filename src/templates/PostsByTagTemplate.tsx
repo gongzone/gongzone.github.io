@@ -1,17 +1,29 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
 
 import { Layout } from '@/components/Layout';
-import { Tags } from '@/components/Tags';
+import { TagNavList } from '@/components/TagNavList';
 import { Posts } from '@/features/blog/components/Posts';
 import { SEO } from '@/features/SEO/components';
 import { Pagination } from '@/features/Pagination/components';
 
-const PostsByTagTemplate = ({ data, pageContext }: PageProps<Queries.GetPostsQuery>) => {
+interface PostByTagPageContext {
+  tag: string;
+  limit: number;
+  skip: number;
+  totalPagination: number;
+  postsPerPage: number;
+  currentPage: number;
+}
+
+const PostsByTagTemplate = ({
+  data,
+  pageContext,
+}: PageProps<Queries.GetPostsByTagQuery, PostByTagPageContext>) => {
   const { nodes: posts } = data.posts;
 
   return (
     <Layout className="py-10 px-5 xs:px-14 md:p-20">
-      <Tags currentTag={pageContext.tag} />
+      <TagNavList currentTag={pageContext.tag} />
       <Posts posts={posts} />
       <Pagination pageContext={pageContext} />
     </Layout>

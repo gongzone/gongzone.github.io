@@ -1,9 +1,12 @@
 import { Link } from 'gatsby';
 import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
-import { Tag } from '@/components/Tag';
+
+import type { IndexPagePostFrontMatter } from '@/types/graphql';
+
+import { ColoredTag } from '@/components/Element/Tag';
 
 interface PostItemProps {
-  post: Queries.IndexPageQuery['posts']['nodes'][0]['frontmatter'];
+  post: IndexPagePostFrontMatter;
 }
 
 export const PostItem = ({ post }: PostItemProps) => {
@@ -27,11 +30,13 @@ export const PostItem = ({ post }: PostItemProps) => {
 
         <p className="relative text-ellipsis break-words line-clamp-2">{description}</p>
 
-        <div className="mt-auto flex flex-wrap gap-2">
+        <ul className="mt-auto flex flex-wrap gap-2">
           {tags!.map((tag) => (
-            <Tag key={tag} tagName={tag} />
+            <li key={tag}>
+              <ColoredTag tagName={tag} />
+            </li>
           ))}
-        </div>
+        </ul>
 
         <div className="mt-1 self-end">
           <span className="text-sm">📅 {date}</span>
