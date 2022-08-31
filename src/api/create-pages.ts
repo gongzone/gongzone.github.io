@@ -1,7 +1,7 @@
 import type { Actions } from 'gatsby';
 import type { PlatformPath } from 'path';
 
-import { slugifyTag } from '@/utils/slugify-tag';
+import { slugifyTag } from '../utils/slugify-tag';
 
 interface CreatePages {
   graphQLData: {
@@ -74,6 +74,27 @@ export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: C
           currentPage: i + 1,
         },
       });
+    });
+  });
+};
+
+export const createSeriesPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
+  const totalCount = Array.from(graphQLData.data.series.group).length;
+  console.log(totalCount);
+  const postsPerPage = 2;
+  const totalPagination = Math.ceil(totalCount / postsPerPage);
+
+  Array.from({ length: totalPagination }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/series` : `/series/${i + 1}`,
+      component: path.join(root, 'src/templates', 'SeriesTemplate.tsx'),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        totalPagination,
+        postsPerPage,
+        currentPage: i + 1,
+      },
     });
   });
 };

@@ -7,6 +7,6 @@ import '@fontsource/noto-sans-kr';
 import '@fontsource/poor-story';
 
 // gatsby-api
-import { wrapRootWithMdx } from './gatsby-api/wrap-root-with-mdx';
+import { wrapRootWithMdx } from './src/api/wrap-root-with-mdx';
 
 export const wrapRootElement = wrapRootWithMdx;

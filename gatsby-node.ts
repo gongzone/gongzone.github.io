@@ -4,7 +4,9 @@ import {
   createPostPages,
   createPostsPages,
   createPostsByTagPages,
-} from './gatsby-api/create-pages';
+  createSeriesPages,
+  createSeriesByTagPages,
+} from './src/api/create-pages';
 
 const root = process.cwd();
 
@@ -41,6 +43,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
           totalCount
         }
       }
+      series: allMdx {
+        group(field: frontmatter___series___seriesName) {
+          fieldValue
+          group(field: frontmatter___tags) {
+            fieldValue
+          }
+        }
+      }
     }
   `);
 
@@ -59,4 +69,5 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   createPostPages(createPagesData);
   createPostsPages(createPagesData);
   createPostsByTagPages(createPagesData);
+  createSeriesPages(createPagesData);
 };

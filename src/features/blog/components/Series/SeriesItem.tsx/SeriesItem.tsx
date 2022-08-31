@@ -39,13 +39,13 @@ export const SeriesItem = ({ seriesItem }: SeriesItemProps) => {
         </Link>
       </div>
 
-      <ul className="flex flex-wrap gap-2">
+      {/* <ul className="flex flex-wrap gap-2">
         {tags.map((tag: string) => (
           <li key={tag}>
             <ColoredTag tagName={tag} />
           </li>
         ))}
-      </ul>
+      </ul> */}
     </li>
   );
 };

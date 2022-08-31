@@ -1,5 +1,7 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
 
+import { TAG_QUERY_KIND_ENUM } from '@/components/TagNavList/enums';
+
 import { Layout } from '@/components/Layout';
 import { TagNavList } from '@/components/TagNavList';
 import { Posts } from '@/features/blog/components/Posts';
@@ -19,11 +21,10 @@ const PostsTemplate = ({
   pageContext,
 }: PageProps<Queries.GetPostsQuery, PostsPageContext>) => {
   const { nodes: posts } = data.posts;
-  console.log(pageContext);
 
   return (
     <Layout className="py-10 px-5 xs:px-14 md:p-20">
-      <TagNavList />
+      <TagNavList kind={TAG_QUERY_KIND_ENUM.ALL} />
       <Posts posts={posts} />
       <Pagination pageContext={pageContext} />
     </Layout>

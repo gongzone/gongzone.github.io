@@ -1,9 +1,14 @@
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import { BsFillTagsFill } from 'react-icons/bs';
 
+import { useTagData } from '@/components/TagNavList/queries';
+import { TAG_QUERY_KIND_ENUM } from '@/components/TagNavList/enums';
+import type { TagQueryKind } from '@/components/TagNavList/types';
+
 import { TagLink } from '@/components/Element/Tag';
 
 interface TagsProps {
+  kind: TagQueryKind;
   currentTag?: string;
 }
 
@@ -17,10 +22,10 @@ interface TagsQuery {
   };
 }
 
-export const TagNavList = ({ currentTag }: TagsProps) => {
-  const data = useStaticQuery<TagsQuery>(query);
-  const totalCount = data.allMdx.totalCount;
-  const tags = data.allMdx.group;
+export const TagNavList = ({ kind, currentTag }: TagsProps) => {
+  const { totalCount, tags } = useTagData(kind);
+  console.log(totalCount, tags);
+  const to = kind === TAG_QUERY_KIND_ENUM.ALL ? 'posts' : 'series';
 
   return (
     <div className="lg:w-2/3">
@@ -36,7 +41,7 @@ export const TagNavList = ({ currentTag }: TagsProps) => {
             className={`rounded-3xl bg-[#2e3039] px-4 py-2 text-sm xs:text-base ${
               currentTag ?? 'bg-[#232c42] text-amber-300 shadow-xl'
             }`}
-            to="/posts"
+            to={`/${to}`}
           >
             <span>All</span>
             <span> ({totalCount})</span>
@@ -44,22 +49,15 @@ export const TagNavList = ({ currentTag }: TagsProps) => {
         </li>
         {tags.map(({ fieldValue, totalCount }) => (
           <li key={fieldValue} className="mb-2 mr-2 flex">
-            <TagLink currentTag={currentTag} fieldValue={fieldValue} totalCount={totalCount} />
+            <TagLink
+              kind={kind}
+              currentTag={currentTag}
+              fieldValue={fieldValue}
+              totalCount={totalCount}
+            />
           </li>
         ))}
       </ul>
     </div>
   );
 };
-
-const query = graphql`
-  query tags {
-    allMdx {
-      totalCount
-      group(field: frontmatter___tags) {
-        fieldValue
-        totalCount
-      }
-    }
-  }
-`;

@@ -41,5 +41,5 @@
     }
   },
   "exclude": ["./out/**/*", "./node_modules/**/*"],
-  "include": ["./src/**/*", "gatsby-node.ts", "./plugins/**/*", "./gatsby-api/**/*"]
+  "include": ["./src/**/*", "gatsby-node.ts", "./plugins/**/*"]
 }

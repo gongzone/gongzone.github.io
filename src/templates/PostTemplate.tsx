@@ -146,7 +146,7 @@ const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuer
         </article>
 
         {data.series.totalCount > 1 && (
-          <div className="py-4">
+          <div className="py-12">
             {seriesIndex > 1 && (
               <div className="flex items-center justify-center gap-2">
                 <span className="text-emerald-400">이전 글 링크</span>
