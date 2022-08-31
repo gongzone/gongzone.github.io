@@ -29,7 +29,7 @@ const SeriesTemplate = ({
       <div className="mb-4">
         <div className="mb-2 inline-flex items-center gap-2 rounded-3xl bg-[#2e3039] px-4 py-2">
           <FaLayerGroup />
-          <span className="text-xl">전체 시리즈 목록</span>
+          <span className="text-lg">전체 시리즈 목록</span>
         </div>
         <div className="pl-4">
           <span className="text-zinc-400">&bull; 시리즈 별로 포스트를 탐방해보세요.</span>
