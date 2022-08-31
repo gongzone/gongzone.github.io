@@ -2,7 +2,8 @@ import { Link } from 'gatsby';
 import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
 import { CgList, CgAwards } from 'react-icons/cg';
 
-import { IndexPageSeriesItem } from '@/types/graphql';
+import type { IndexPageSeriesItem } from '@/types/graphql';
+import { slugifySeriesName } from '@/utils/slugify-series-name';
 
 import { ColoredTag } from '@/components/Element/Tag';
 
@@ -15,7 +16,10 @@ export const SeriesItem = ({ seriesItem }: SeriesItemProps) => {
 
   return (
     <li className="flex h-full w-full flex-col rounded-md">
-      <Link className="group relative w-full overflow-hidden" to={`/posts/`}>
+      <Link
+        className="group relative w-full overflow-hidden"
+        to={`/series/${slugifySeriesName(fieldValue)}`}
+      >
         <GatsbyImage
           className="rounded-md"
           image={getImage(image as ImageDataLike)!}

@@ -2,6 +2,7 @@ import type { Actions } from 'gatsby';
 import type { PlatformPath } from 'path';
 
 import { slugifyTag } from '../utils/slugify-tag';
+import { slugifySeriesName } from '../utils/slugify-series-name';
 
 interface CreatePages {
   graphQLData: {
@@ -94,6 +95,20 @@ export const createSeriesPages = ({ graphQLData, createPage, path, root }: Creat
         totalPagination,
         postsPerPage,
         currentPage: i + 1,
+      },
+    });
+  });
+};
+
+export const createSeriesListPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
+  const nodes = graphQLData.data.series.group;
+
+  nodes.forEach(({ fieldValue }) => {
+    createPage({
+      path: `/series/${slugifySeriesName(fieldValue)}`,
+      component: path.join(root, 'src/templates', 'SeriesListTemplate.tsx'),
+      context: {
+        seriesName: fieldValue,
       },
     });
   });

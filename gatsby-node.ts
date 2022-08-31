@@ -5,7 +5,7 @@ import {
   createPostsPages,
   createPostsByTagPages,
   createSeriesPages,
-  createSeriesByTagPages,
+  createSeriesListPages,
 } from './src/api/create-pages';
 
 const root = process.cwd();
@@ -70,4 +70,5 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   createPostsPages(createPagesData);
   createPostsByTagPages(createPagesData);
   createSeriesPages(createPagesData);
+  createSeriesListPages(createPagesData);
 };
