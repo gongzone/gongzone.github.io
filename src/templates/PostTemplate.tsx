@@ -13,6 +13,8 @@ import {
   FaAngleDoubleRight,
 } from 'react-icons/fa';
 
+import { slugifySeriesName } from '@/utils/slugify-series-name';
+
 import { Layout } from '@/components/Layout';
 import { SEO } from '@/features/SEO/components';
 import { ColoredTag } from '@/components/Element/Tag';
@@ -104,9 +106,12 @@ const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuer
             <div className="gap-8md:px-16 mt-10 mb-16 flex w-full justify-center">
               <div>
                 <div className="mb-2 flex flex-col bg-zinc-800 p-5 shadow-md md:p-8">
-                  <span className="break-words text-xl font-bold text-emerald-500">
+                  <Link
+                    to={`/series/${slugifySeriesName(seriesName)}`}
+                    className="mb-2 break-words text-xl font-bold text-emerald-400"
+                  >
                     {seriesName}
-                  </span>
+                  </Link>
 
                   <button
                     className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300"
@@ -126,7 +131,7 @@ const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuer
                       return (
                         <li key={id} className="text-zinc-400 hover:text-zinc-300">
                           <Link
-                            className={i + 1 === seriesIndex ? 'font-bold text-emerald-500' : ''}
+                            className={i + 1 === seriesIndex ? 'font-bold text-emerald-400' : ''}
                             to={`/posts/${slug}`}
                           >
                             {i + 1}. {title}
