@@ -48,18 +48,18 @@
         "tailwindcss/classnames-order": "off",
         "import/no-extraneous-dependencies": "off"
       }
+    },
+    // Configuration for testing
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "plugins": ["jest", "jest-formatting", "testing-library", "jest-dom"],
+      "extends": [
+        "plugin:jest/recommended",
+        "plugin:jest-formatting/recommended",
+        "plugin:testing-library/react",
+        "plugin:jest-dom/recommended"
+      ]
     }
-    // // Configuration for testing
-    // {
-    //   "files": ["**/*.test.ts", "**/*.test.tsx"],
-    //   "plugins": ["jest", "jest-formatting", "testing-library", "jest-dom"],
-    //   "extends": [
-    //     "plugin:jest/recommended",
-    //     "plugin:jest-formatting/recommended",
-    //     "plugin:testing-library/react",
-    //     "plugin:jest-dom/recommended"
-    //   ]
-    // },
     // // Configuration for storybook
     // {
     //   "files": ["**/*.stories.ts", "**/*.stories.tsx"],
