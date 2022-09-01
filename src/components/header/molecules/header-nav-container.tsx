@@ -6,7 +6,7 @@ export const HeaderNavContainer = () => {
   const navItems = getNavItems();
 
   return (
-    <ul className="hidden items-center gap-1 md:flex">
+    <ul className="hidden items-center gap-2 md:flex">
       {navItems.map((navItem) => (
         <>
           <li key={navItem.name}>
