@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Header } from '@/components/Layout/Header';
+import { Header } from '@/components/header';
 import { Sidebar } from '@/components/Layout/Sidebar';
 import { Footer } from '@/components/Layout/Footer';
 

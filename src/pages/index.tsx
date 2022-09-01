@@ -14,7 +14,7 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
 
   return (
     <Layout>
-      <div className="py-10 px-5 xs:px-14 lg:px-20">
+      <div className="py-6 px-5 xs:px-14 lg:px-20">
         <Hero />
         <div className="my-8 flex items-center justify-center gap-2 px-3 py-5 drop-shadow-md">
           <StaticImage

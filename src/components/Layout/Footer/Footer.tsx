@@ -19,8 +19,8 @@ const Logo = () => {
     <div className="rounded-xl border-2 border-slate-500 p-3 shadow-sm shadow-neutral-500">
       <Link to="/">
         <StaticImage
-          src="../../../assets/images/logo-icon.png"
-          alt="logo-icon"
+          src="../../../assets/images/main-logo.png"
+          alt="footer-main-logo"
           placeholder="blurred"
           width={50}
           height={50}
