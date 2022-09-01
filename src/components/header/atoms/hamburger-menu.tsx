@@ -6,7 +6,7 @@ export const HamburgerMenu = () => {
   const openSidebar = useSidebarStore((state) => state.openSidebar);
 
   return (
-    <button className="hover-text-amber p-1 text-xl md:text-2xl" onClick={openSidebar}>
+    <button className="hover-text-amber p-1 text-xl md:hidden" onClick={openSidebar}>
       <AiOutlineMenu />
     </button>
   );

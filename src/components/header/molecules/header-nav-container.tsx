@@ -1,5 +1,19 @@
 import { HeaderNavLink } from '@/components/header/atoms';
 
+import { getNavItems } from '@/constants/nav-items';
+
 export const HeaderNavContainer = () => {
-  return <div></div>;
+  const navItems = getNavItems();
+
+  return (
+    <ul className="hidden items-center gap-1 md:flex">
+      {navItems.map((navItem) => (
+        <>
+          <li key={navItem.name}>
+            <HeaderNavLink navItem={navItem} />
+          </li>
+        </>
+      ))}
+    </ul>
+  );
 };
