@@ -1,10 +1,12 @@
 import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 
+import { Routing } from '@/constants/routing';
+
 export const HeaderLogo = () => {
   return (
     <div className="hover-text-amber">
-      <Link className="flex items-center gap-2" to="/">
+      <Link className="flex items-center gap-2" to={Routing.HOME.toString}>
         <StaticImage
           src="../../../assets/images/main-logo.png"
           alt="header-main-logo"

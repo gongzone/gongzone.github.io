@@ -1,6 +1,8 @@
 import type { IconType } from 'react-icons';
 import { FiPenTool, FiLayers, FiUserCheck, FiPackage } from 'react-icons/fi';
 
+import { Routing } from '@/constants/routing';
+
 // Factory Method Pattern
 abstract class Nav {
   abstract createNavLinks(): NavLink[];
@@ -13,10 +15,10 @@ abstract class Nav {
 class HeaderNav extends Nav {
   createNavLinks(): NavLink[] {
     return [
-      new NavLink('글', FiPenTool, '/posts'),
-      new NavLink('시리즈', FiLayers, '/series'),
-      new NavLink('소개', FiUserCheck, '/introduction'),
-      new NavLink('프로젝트', FiPackage, '/projects'),
+      new NavLink('글', FiPenTool, Routing.POSTS.toString),
+      new NavLink('시리즈', FiLayers, Routing.SERIES.toString),
+      new NavLink('소개', FiUserCheck, Routing.INTRODUCTION.toString),
+      new NavLink('프로젝트', FiPackage, Routing.PROJECTS.toString),
     ];
   }
 }
