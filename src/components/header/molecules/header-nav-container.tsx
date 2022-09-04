@@ -1,16 +1,14 @@
 import { HeaderNavLink } from '@/components/header/atoms';
 
-import { getNavItems } from '@/constants/nav-items';
+import { headerNavLinks } from '@/constants/nav';
 
 export const HeaderNavContainer = () => {
-  const navItems = getNavItems();
-
   return (
     <ul className="hidden items-center gap-1 rounded-2xl md:flex">
-      {navItems.map((navItem) => (
+      {headerNavLinks.map((navLink) => (
         <>
-          <li key={navItem.name}>
-            <HeaderNavLink navItem={navItem} />
+          <li key={navLink.name}>
+            <HeaderNavLink navLink={navLink} />
           </li>
         </>
       ))}
