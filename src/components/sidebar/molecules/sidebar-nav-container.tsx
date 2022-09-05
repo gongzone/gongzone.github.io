@@ -1,3 +1,5 @@
+import { useSidebarStore } from '@/store/sidebar';
+
 import { CustomLink } from '@/components/@shared/custom-link';
 import { NavLink } from '@/constants/nav';
 
@@ -7,6 +9,8 @@ interface SidebarNavContainerProps {
 }
 
 export const SidebarNavContainer = ({ name, sidebarNavLinks }: SidebarNavContainerProps) => {
+  const closeSidebar = useSidebarStore((state) => state.closeSidebar);
+
   return (
     <nav className={`${!name && 'mb-6'}`}>
       {name && (
@@ -17,12 +21,14 @@ export const SidebarNavContainer = ({ name, sidebarNavLinks }: SidebarNavContain
       <ul className="flex flex-col gap-[0.35rem]">
         {sidebarNavLinks.map((sidebarNavLink) => (
           <li key={sidebarNavLink.name}>
-            <CustomLink
-              name={sidebarNavLink.name}
-              icon={<sidebarNavLink.icon />}
-              to={sidebarNavLink.to}
-              className="px-0"
-            />
+            <button onClick={closeSidebar}>
+              <CustomLink
+                name={sidebarNavLink.name}
+                icon={<sidebarNavLink.icon />}
+                to={sidebarNavLink.to}
+                className="px-0"
+              />
+            </button>
           </li>
         ))}
       </ul>
