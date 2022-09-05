@@ -1,12 +1,13 @@
 import { graphql, type HeadFC, type PageProps } from 'gatsby';
 
-import { SECTION_KIND_ENUM } from '@/components/PageComponent/IndexPage/Section/enums';
 import type { IndexPageQuery } from '@/types/graphql';
+import { Routing } from '@/constants/routing';
 
 import { SEO } from '@/features/SEO/components';
 import { Layout } from '@/components/layout';
-import { Hero, SiteInfo } from '@/components/@page-components/index-page';
-import { Section } from '@/components/PageComponent/IndexPage';
+import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index-page';
+import { Posts } from '@/features/blog/components/Posts';
+import { Series } from '@/features/blog/components/Series';
 
 const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
   const { nodes: posts } = data.posts;
@@ -17,8 +18,13 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
       <Hero />
       <SiteInfo />
 
-      <Section kind={SECTION_KIND_ENUM.POSTS} data={posts} />
-      <Section kind={SECTION_KIND_ENUM.SERIES} data={series} />
+      <HomeSection name="글" to={Routing.POSTS.toString}>
+        <Posts posts={posts} />
+      </HomeSection>
+
+      <HomeSection name="시리즈" to={Routing.SERIES.toString}>
+        <Series series={series} />
+      </HomeSection>
     </Layout>
   );
 };
