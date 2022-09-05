@@ -1,12 +1,11 @@
 import { graphql, type HeadFC, type PageProps } from 'gatsby';
-import { StaticImage } from 'gatsby-plugin-image';
 
 import { SECTION_KIND_ENUM } from '@/components/PageComponent/IndexPage/Section/enums';
 import type { IndexPageQuery } from '@/types/graphql';
 
 import { SEO } from '@/features/SEO/components';
 import { Layout } from '@/components/layout';
-import { Hero } from '@/components/@page-components/index-page/hero';
+import { Hero, SiteInfo } from '@/components/@page-components/index-page';
 import { Section } from '@/components/PageComponent/IndexPage';
 
 const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
@@ -16,19 +15,7 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
   return (
     <Layout className="py-10 px-5 xs:px-14 lg:px-20">
       <Hero />
-      <div className="my-8 flex items-center justify-center gap-2 px-3 py-5 drop-shadow-md">
-        <StaticImage
-          src="../assets/images/blog.png"
-          alt="blog-icon"
-          placeholder="blurred"
-          width={75}
-          height={75}
-        />
-        <div className="flex flex-col gap-1">
-          <span className="text-2xl font-bold text-emerald-400">GongZone</span>
-          <p className="text-sm">웹 개발에 관한 글을 주로 씁니다.</p>
-        </div>
-      </div>
+      <SiteInfo />
 
       <Section kind={SECTION_KIND_ENUM.POSTS} data={posts} />
       <Section kind={SECTION_KIND_ENUM.SERIES} data={series} />
