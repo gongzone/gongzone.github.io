@@ -1,5 +1,5 @@
 import type { IconType } from 'react-icons';
-import { FiPenTool, FiLayers, FiUserCheck, FiPackage } from 'react-icons/fi';
+import { FiHome, FiPenTool, FiLayers, FiUserCheck, FiPackage } from 'react-icons/fi';
 
 import { Routing } from '@/constants/routing';
 
@@ -23,6 +23,30 @@ class HeaderNav extends Nav {
   }
 }
 
+class SidebarBaseNav extends Nav {
+  createNavLinks(): NavLink[] {
+    return [new NavLink('HOME', FiHome, Routing.HOME.toString)];
+  }
+}
+
+class SidebarBlogNav extends Nav {
+  createNavLinks(): NavLink[] {
+    return [
+      new NavLink('글', FiPenTool, Routing.POSTS.toString),
+      new NavLink('시리즈', FiLayers, Routing.SERIES.toString),
+    ];
+  }
+}
+
+class SidebarAboutNav extends Nav {
+  createNavLinks(): NavLink[] {
+    return [
+      new NavLink('소개', FiUserCheck, Routing.INTRODUCTION.toString),
+      new NavLink('프로젝트', FiPackage, Routing.PROJECTS.toString),
+    ];
+  }
+}
+
 export class NavLink {
   constructor(private _name: string, private _icon: IconType, private _to: string) {}
 
@@ -40,3 +64,6 @@ export class NavLink {
 }
 
 export const headerNavLinks = new HeaderNav().navLinks;
+export const sidebarBaseNavLinks = new SidebarBaseNav().navLinks;
+export const sidebarBlogNav = new SidebarBlogNav().navLinks;
+export const sidebarAboutNav = new SidebarAboutNav().navLinks;
