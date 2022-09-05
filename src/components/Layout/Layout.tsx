@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 import { Header } from '@/components/header';
 import { Sidebar } from '@/components/sidebar';
-import { Footer } from '@/components/Layout/Footer';
+import { Footer } from '@/components/footer';
 
 interface LayoutProps {
   className?: string;
