@@ -3,7 +3,7 @@ import shallow from 'zustand/shallow';
 import { useSidebarStore } from '@/store/sidebar';
 import { sidebarBaseNavLinks, sidebarBlogNav, sidebarAboutNav } from '@/constants/nav';
 
-import { Backdrop } from '@/components/Layout/Backdrop';
+import { Backdrop } from '@/components/@shared/backdrop';
 import { SidebarCloseBtn } from '@/components/sidebar/atoms';
 import { SidebarNavContainer } from '@/components/sidebar/molecules';
 
