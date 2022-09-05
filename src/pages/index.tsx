@@ -6,7 +6,8 @@ import type { IndexPageQuery } from '@/types/graphql';
 
 import { SEO } from '@/features/SEO/components';
 import { Layout } from '@/components/layout';
-import { Hero, Section } from '@/components/PageComponent/IndexPage';
+import { Hero } from '@/components/@page-components/index-page/hero';
+import { Section } from '@/components/PageComponent/IndexPage';
 
 const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
   const { nodes: posts } = data.posts;
