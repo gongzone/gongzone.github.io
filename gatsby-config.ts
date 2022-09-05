@@ -9,8 +9,8 @@ dotenv.config({
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `공존의 발자취`,
-    description: `공존의 개발 블로그입니다.`,
-    image: ``,
+    description: `공존의 개발 블로그입니다. 웹 애플리케이션 설계 및 구현에 관심이 많습니다.`,
+    image: `/meta-image.png`,
     siteUrl: `https://gongzone.github.io`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
@@ -18,6 +18,19 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `공존의 발자취`,
+        short_name: `공존의 발자취`,
+        start_url: `/`,
+        background_color: `#f7f0eb`,
+        theme_color: `#a2466c`,
+        display: `standalone`,
+        icon: `src/assets/images/main-logo.png`,
+      },
+    },
+    `gatsby-plugin-offline`,
     'gatsby-plugin-postcss',
     {
       resolve: 'gatsby-plugin-root-import',

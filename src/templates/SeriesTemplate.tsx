@@ -64,4 +64,4 @@ export const query = graphql`
 
 export default SeriesTemplate;
 
-export const Head: HeadFC = () => <SEO title="Series | 공존의 발자취" />;
+export const Head: HeadFC = () => <SEO title="Series - 공존의 발자취" />;

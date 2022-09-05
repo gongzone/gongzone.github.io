@@ -79,4 +79,6 @@ export const query = graphql`
 
 export default SeriesListTemplate;
 
-export const Head: HeadFC = () => <SEO title="Series | 공존의 발자취" />;
+export const Head: HeadFC = ({ pageContext }) => (
+  <SEO title={`${pageContext.seriesName} - 공존의 발자취`} />
+);

@@ -1,7 +1,7 @@
 import { HeadFC } from 'gatsby';
 
 const NotFoundPage = () => {
-  return <div></div>;
+  return <div>NotFound</div>;
 };
 
 export default NotFoundPage;
