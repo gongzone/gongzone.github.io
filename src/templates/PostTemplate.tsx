@@ -15,7 +15,7 @@ import {
 
 import { slugifySeriesName } from '@/utils/slugify-series-name';
 
-import { Layout } from '@/components/Layout';
+import { Layout } from '@/components/layout';
 import { SEO } from '@/features/SEO/components';
 import { ColoredTag } from '@/components/Element/Tag';
 import { Toc } from '@/features/blog/components/Toc';

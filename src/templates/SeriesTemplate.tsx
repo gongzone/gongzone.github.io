@@ -3,7 +3,7 @@ import { FaLayerGroup } from 'react-icons/fa';
 
 import { TAG_QUERY_KIND_ENUM } from '@/components/TagNavList/enums';
 
-import { Layout } from '@/components/Layout';
+import { Layout } from '@/components/layout';
 import { TagNavList } from '@/components/TagNavList';
 import { Series } from '@/features/blog/components/Series';
 import { SEO } from '@/features/SEO/components';

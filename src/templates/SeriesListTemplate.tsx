@@ -3,7 +3,7 @@ import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { TiArrowBack } from 'react-icons/ti';
 
-import { Layout } from '@/components/Layout';
+import { Layout } from '@/components/layout';
 import { SEO } from '@/features/SEO/components';
 import { SeriesList } from '@/features/blog/components/SeriesList';
 

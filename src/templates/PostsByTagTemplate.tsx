@@ -2,7 +2,7 @@ import { graphql, type PageProps, type HeadFC } from 'gatsby';
 
 import { TAG_QUERY_KIND_ENUM } from '@/components/TagNavList/enums';
 
-import { Layout } from '@/components/Layout';
+import { Layout } from '@/components/layout';
 import { TagNavList } from '@/components/TagNavList';
 import { Posts } from '@/features/blog/components/Posts';
 import { SEO } from '@/features/SEO/components';
