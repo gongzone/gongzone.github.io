@@ -6,7 +6,8 @@ import { Routing } from '@/constants/routing';
 import { SEO } from '@/features/SEO/components';
 import { Layout } from '@/components/layout';
 import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index-page';
-import { Posts } from '@/features/blog/components/Posts';
+import { GridLayoutForCard } from '@/layout/grid-layout-for-card';
+import { PostCard } from '@/features/@post/components/post-card';
 import { Series } from '@/features/blog/components/Series';
 
 const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
@@ -18,11 +19,15 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
       <Hero />
       <SiteInfo />
 
-      <HomeSection name="글" to={Routing.POSTS.toString}>
-        <Posts posts={posts} />
+      <HomeSection name="글" to={Routing.POSTS.toString()}>
+        <GridLayoutForCard>
+          {posts.map((p) => (
+            <PostCard key={p.id} frontmatter={p.frontmatter} />
+          ))}
+        </GridLayoutForCard>
       </HomeSection>
 
-      <HomeSection name="시리즈" to={Routing.SERIES.toString}>
+      <HomeSection name="시리즈" to={Routing.SERIES.toString()}>
         <Series series={series} />
       </HomeSection>
     </Layout>
@@ -34,19 +39,7 @@ export const query = graphql`
     posts: allMdx(limit: 8, sort: { fields: frontmatter___date, order: DESC }) {
       nodes {
         id
-        frontmatter {
-          title
-          description
-          slug
-          tags
-          date(formatString: "YYYY년 MM월 DD일")
-          lastmod(formatString: "YYYY년 MM월 DD일")
-          image {
-            childImageSharp {
-              gatsbyImageData(placeholder: TRACED_SVG, width: 517, height: 380)
-            }
-          }
-        }
+        ...PostCardData
       }
     }
     series: allMdx {

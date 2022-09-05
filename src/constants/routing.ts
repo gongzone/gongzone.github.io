@@ -7,7 +7,7 @@ export class Routing {
 
   private constructor(private targetLink: string) {}
 
-  get toString(): string {
-    return this.targetLink;
+  toString(addedLink?: string | null): string {
+    return `${this.targetLink}/${addedLink}`;
   }
 }

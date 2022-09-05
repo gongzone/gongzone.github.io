@@ -6,7 +6,7 @@ import { Routing } from '@/constants/routing';
 export const HeaderLogo = () => {
   return (
     <div className="hover-text-amber">
-      <Link className="flex items-center gap-2" to={Routing.HOME.toString}>
+      <Link className="flex items-center gap-2" to={Routing.HOME.toString()}>
         <StaticImage
           src="../../../assets/images/main-logo.png"
           alt="header-main-logo"
