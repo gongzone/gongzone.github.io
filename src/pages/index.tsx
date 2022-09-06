@@ -4,7 +4,7 @@ import type { IndexPageQuery } from '@/types/graphql';
 import { Routing } from '@/constants/routing';
 
 import { SEO } from '@/features/SEO/components';
-import { Layout } from '@/components/layout';
+import { BaseLayout } from '@/layout/base-layout';
 import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index-page';
 import { GridLayoutForCard } from '@/layout/grid-layout-for-card';
 import { PostCard } from '@/features/@post/components/post-card';
@@ -15,7 +15,7 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
   const { group: series } = data.series;
 
   return (
-    <Layout className="py-10 px-5 xs:px-14 lg:px-20">
+    <BaseLayout className="py-10 px-5 xs:px-14 lg:px-20">
       <Hero />
       <SiteInfo />
 
@@ -30,7 +30,7 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
       <HomeSection name="시리즈" to={Routing.SERIES.toString()}>
         <Series series={series} />
       </HomeSection>
-    </Layout>
+    </BaseLayout>
   );
 };
 

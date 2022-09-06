@@ -12,7 +12,7 @@ interface ColorTagProps {
   className?: string;
 }
 
-export const ColoredTag = ({ tagName, className }: ColorTagProps) => {
+export const ColorTag = ({ tagName, className }: ColorTagProps) => {
   const tagColor = tagColorSet[tagName!] ?? 'bg-gray-700';
 
   return (
