@@ -1,4 +1,4 @@
-import { useSiteMetadata } from '@/features/SEO/hooks';
+import { useSiteMetadata } from '@/features/seo/hooks';
 import type { ReactNode } from 'react';
 
 interface SEOProps {
