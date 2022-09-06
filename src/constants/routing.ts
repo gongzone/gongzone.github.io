@@ -9,7 +9,6 @@ export class Routing {
 
   toString(addedLink?: string | null): string {
     const to = !addedLink ? this.targetLink : `${this.targetLink}${addedLink}`;
-
     return to;
   }
 
@@ -22,5 +21,14 @@ export class Routing {
       default:
         return '';
     }
+  }
+
+  static slugifyTag(tagName: string): string {
+    if (tagName === 'ALL') {
+      return Routing.POSTS.toString();
+    }
+
+    const tagRoute = Routing.POSTS.toString('/tags');
+    return tagRoute + '/' + tagName.toLowerCase().replace('-', '');
   }
 }

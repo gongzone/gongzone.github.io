@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 
 import { Routing } from '@/constants/routing';
-import { ColorTag } from '@/components/tag';
+import { ColorTag } from '@/features/tag/components/tag';
 import { PostTitle, PostDescription, PostDate } from '@/features/@post/components/post-card/atoms';
 
 interface PostContents {

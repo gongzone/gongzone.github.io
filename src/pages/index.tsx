@@ -6,9 +6,8 @@ import { Routing } from '@/constants/routing';
 import { SEO } from '@/features/SEO/components';
 import { BaseLayout } from '@/layout/base-layout';
 import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index-page';
-import { GridLayoutForCard } from '@/layout/grid-layout-for-card';
-import { PostCard } from '@/features/@post/components/post-card';
-import { SeriesCard } from '@/features/@series/components/series-card';
+import { Posts } from '@/features/@post/components/posts';
+import { SeriesList } from '@/features/@series/components/series-list';
 
 const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
   const { nodes: posts } = data.posts;
@@ -20,24 +19,11 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
       <SiteInfo />
 
       <HomeSection name="글" to={Routing.POSTS.toString()}>
-        <GridLayoutForCard>
-          {posts.map((p) => (
-            <PostCard key={p.id} frontmatter={p.frontmatter} />
-          ))}
-        </GridLayoutForCard>
+        <Posts posts={posts} />
       </HomeSection>
 
       <HomeSection name="시리즈" to={Routing.SERIES.toString()}>
-        <GridLayoutForCard>
-          {series.map((s) => (
-            <SeriesCard
-              key={s.fieldValue}
-              title={s.fieldValue!}
-              totalCount={s.totalCount}
-              image={s.nodes[0]!.frontmatter?.image}
-            />
-          ))}
-        </GridLayoutForCard>
+        <SeriesList series={series} />
       </HomeSection>
     </BaseLayout>
   );
@@ -46,24 +32,10 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
 export const query = graphql`
   query IndexPage {
     posts: allMdx(limit: 8, sort: { fields: frontmatter___date, order: DESC }) {
-      nodes {
-        id
-        ...PostCardData
-      }
+      ...PostsData
     }
     series: allMdx(sort: { fields: frontmatter___date, order: DESC }) {
-      group(field: frontmatter___series___seriesName, limit: 8) {
-        ...SeriesCardData
-        nodes {
-          frontmatter {
-            image {
-              childImageSharp {
-                gatsbyImageData(placeholder: TRACED_SVG, width: 517, height: 380)
-              }
-            }
-          }
-        }
-      }
+      ...SeriesListData
     }
   }
 `;

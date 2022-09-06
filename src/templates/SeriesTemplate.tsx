@@ -1,11 +1,8 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
 import { FaLayerGroup } from 'react-icons/fa';
 
-import { TAG_QUERY_KIND_ENUM } from '@/components/TagNavList/enums';
-
 import { Layout } from '@/components/layout';
-import { TagNavList } from '@/components/TagNavList';
-import { Series } from '@/features/blog/components/Series';
+import { SeriesCard } from '@/features/@series/components/series-card';
 import { SEO } from '@/features/SEO/components';
 import { Pagination } from '@/features/Pagination/components';
 
@@ -35,7 +32,16 @@ const SeriesTemplate = ({
           <span className="text-zinc-400">&bull; 시리즈 별로 포스트를 탐방해보세요.</span>
         </div>
       </div>
-      <Series series={series} />
+      {/* <GridLayoutForCard>
+        {series.map((s) => (
+          <SeriesCard
+            key={s.fieldValue}
+            title={s.fieldValue!}
+            totalCount={s.totalCount}
+            image={s.nodes[0]!.frontmatter?.image}
+          />
+        ))}
+      </GridLayoutForCard> */}
       <Pagination pageContext={pageContext} />
     </Layout>
   );

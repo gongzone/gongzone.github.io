@@ -1,10 +1,8 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
 
-import { TAG_QUERY_KIND_ENUM } from '@/components/TagNavList/enums';
-
 import { Layout } from '@/components/layout';
-import { TagNavList } from '@/components/TagNavList';
-import { Posts } from '@/features/blog/components/Posts';
+import { TagNav } from '@/features/tag/components/tag-nav';
+import { Posts } from '@/features/@post/components/posts';
 import { SEO } from '@/features/SEO/components';
 import { Pagination } from '@/features/Pagination/components';
 
@@ -25,7 +23,7 @@ const PostsByTagTemplate = ({
 
   return (
     <Layout className="py-10 px-5 xs:px-14 md:p-20">
-      <TagNavList kind={TAG_QUERY_KIND_ENUM.ALL} currentTag={pageContext.tag} />
+      <TagNav currentTag={pageContext.tag} />
       <Posts posts={posts} />
       <Pagination pageContext={pageContext} />
     </Layout>
@@ -40,22 +38,7 @@ export const query = graphql`
       sort: { fields: frontmatter___date, order: DESC }
       filter: { frontmatter: { tags: { eq: $tag } } }
     ) {
-      nodes {
-        id
-        frontmatter {
-          title
-          description
-          date(formatString: "YYYY년 MM월 DD일")
-          lastmod(formatString: "YYYY년 MM월 DD일")
-          slug
-          tags
-          image {
-            childImageSharp {
-              gatsbyImageData(placeholder: TRACED_SVG, width: 517, height: 380)
-            }
-          }
-        }
-      }
+      ...PostsData
     }
   }
 `;
