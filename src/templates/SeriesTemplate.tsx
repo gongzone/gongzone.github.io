@@ -1,10 +1,9 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
-import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { TiArrowBack } from 'react-icons/ti';
 
 import { Layout } from '@/components/layout';
-import { SEO } from '@/features/SEO/components';
+import { SEO } from '@/features/seo/components';
 import { SeriesList } from '@/features/blog/components/SeriesList';
 
 interface SeriesPageContext {
@@ -13,6 +12,7 @@ interface SeriesPageContext {
   totalPagination: number;
   postsPerPage: number;
   currentPage: number;
+  seriesName: string;
 }
 
 const SeriesListTemplate = ({
@@ -78,6 +78,6 @@ export const query = graphql`
 
 export default SeriesListTemplate;
 
-export const Head: HeadFC = ({ pageContext }) => (
+export const Head: HeadFC<Queries.GetPostsBySeriesQuery, SeriesPageContext> = ({ pageContext }) => (
   <SEO title={`${pageContext.seriesName} - 공존의 발자취`} />
 );

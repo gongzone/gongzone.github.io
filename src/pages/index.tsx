@@ -3,7 +3,7 @@ import { graphql, type HeadFC, type PageProps } from 'gatsby';
 import type { IndexPageQuery } from '@/types/graphql';
 import { Routing } from '@/constants/routing';
 
-import { SEO } from '@/features/SEO/components';
+import { SEO } from '@/features/seo/components';
 import { BaseLayout } from '@/layout/base-layout';
 import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index-page';
 import { Posts } from '@/features/@post/components/posts';

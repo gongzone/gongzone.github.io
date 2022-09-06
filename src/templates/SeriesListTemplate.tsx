@@ -3,10 +3,10 @@ import { FaLayerGroup } from 'react-icons/fa';
 
 import { Layout } from '@/components/layout';
 import { SeriesList } from '@/features/@series/components/series-list';
-import { SEO } from '@/features/SEO/components';
+import { SEO } from '@/features/seo/components';
 import { Pagination } from '@/features/Pagination/components';
 
-interface SeriesPageContext {
+interface SeriesListPageContext {
   limit: number;
   skip: number;
   totalPagination: number;
@@ -17,7 +17,7 @@ interface SeriesPageContext {
 const SeriesListTemplate = ({
   data,
   pageContext,
-}: PageProps<Queries.GetSeriesListQuery, SeriesPageContext>) => {
+}: PageProps<Queries.GetSeriesListQuery, SeriesListPageContext>) => {
   const { group: series } = data.series;
 
   return (

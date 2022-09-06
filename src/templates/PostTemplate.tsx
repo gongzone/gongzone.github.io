@@ -16,11 +16,20 @@ import {
 import { slugifySeriesName } from '@/utils/slugify-series-name';
 
 import { Layout } from '@/components/layout';
-import { SEO } from '@/features/SEO/components';
+import { SEO } from '@/features/seo/components';
 import { ColorTag } from '@/features/tag/components/tag';
 import { Toc } from '@/features/blog/components/Toc';
 
-const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuery>) => {
+interface PostPageContext {
+  slug: string;
+  seriesName: string;
+  seriesIndex: number;
+}
+
+const PostTemplate = ({
+  data,
+  pageContext,
+}: PageProps<Queries.GetSinglePostQuery, PostPageContext>) => {
   const [isSeriesOpen, setIsSeriesOpen] = useState(false);
   const { body, tableOfContents, timeToRead } = data.post!;
   const { title, description, date, lastmod, tags, image, embeddedImages } =
@@ -127,14 +136,13 @@ const PostTemplate = ({ data, pageContext }: PageProps<Queries.GetSinglePostQuer
                 {isSeriesOpen && (
                   <ol className="flex flex-col items-center justify-center gap-1 rounded-md py-5 text-zinc-400">
                     {data.series.nodes.map(({ id, frontmatter }, i) => {
-                      const { title, slug } = frontmatter;
                       return (
                         <li key={id} className="text-zinc-400 hover:text-zinc-300">
                           <Link
                             className={i + 1 === seriesIndex ? 'font-bold text-emerald-400' : ''}
-                            to={`/posts/${slug}`}
+                            to={`/posts/${frontmatter?.slug}`}
                           >
-                            {i + 1}. {title}
+                            {i + 1}. {frontmatter?.title}
                           </Link>
                         </li>
                       );
@@ -201,6 +209,7 @@ export const query = graphql`
         lastmod(formatString: "YYYY년 MM월 DD일")
         tags
         image {
+          publicURL
           childImageSharp {
             gatsbyImageData(placeholder: TRACED_SVG)
           }
@@ -230,9 +239,8 @@ export const query = graphql`
 
 export default PostTemplate;
 
-export const Head: HeadFC = ({ data }) => {
-  const { title, description, date, lastmod, tags, image, embeddedImages } =
-    data.post?.frontmatter!;
+export const Head: HeadFC<Queries.GetSinglePostQuery, PostPageContext> = ({ data }) => {
+  const { title, description, image } = data.post?.frontmatter!;
 
-  return <SEO title={title} description={description} />;
+  return <SEO title={title} description={description!} image={image?.publicURL!} />;
 };

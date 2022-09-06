@@ -3,7 +3,7 @@ import { graphql, type PageProps, type HeadFC } from 'gatsby';
 import { Layout } from '@/components/layout';
 import { TagNav } from '@/features/tag/components/tag-nav';
 import { Posts } from '@/features/@post/components/posts';
-import { SEO } from '@/features/SEO/components';
+import { SEO } from '@/features/seo/components';
 import { Pagination } from '@/features/Pagination/components';
 
 interface PostsPageContext {

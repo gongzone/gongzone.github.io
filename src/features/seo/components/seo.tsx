@@ -4,22 +4,23 @@ import type { ReactNode } from 'react';
 interface SEOProps {
   title?: string;
   description?: string;
+  image?: string;
   pathname?: string;
   children?: ReactNode;
 }
 
-export const SEO = ({ title, description, pathname, children }: SEOProps) => {
+export const SEO = ({ title, description, image, pathname, children }: SEOProps) => {
   const {
     title: defaultTitle,
     description: defaultDescription,
-    image,
+    image: defaultImage,
     siteUrl,
   } = useSiteMetadata();
 
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: `${siteUrl}${image}`,
+    image: image ? `${siteUrl}${image}` : `${siteUrl}${defaultImage}`,
     url: `${siteUrl}${pathname || ``}`,
   };
 
