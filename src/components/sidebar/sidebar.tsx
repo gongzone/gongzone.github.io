@@ -13,16 +13,15 @@ export const Sidebar = () => {
     shallow
   );
 
-  const sidebarDuration = 800;
   const sidebarTransform = isSidebarOpen ? 'translate-x-0' : 'translate-x-full';
 
   return (
     <>
-      <Backdrop state={isSidebarOpen} closeHandler={closeSidebar} duration={sidebarDuration} />
+      <Backdrop state={isSidebarOpen} closeHandler={closeSidebar} duration={800} />
       <aside
         className={`
       ease fixed top-0 right-0 z-50 h-screen w-[270px] bg-gradient-to-b from-zinc-900 
-      to-slate-800 transition-transform duration-[${sidebarDuration}ms] ${sidebarTransform}`}
+      to-slate-800 transition-transform duration-[800ms] ${sidebarTransform}`}
       >
         <div className="h-20">
           <div className="absolute top-0 right-0 m-4">
