@@ -8,7 +8,7 @@ import { BaseLayout } from '@/layout/base-layout';
 import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index-page';
 import { GridLayoutForCard } from '@/layout/grid-layout-for-card';
 import { PostCard } from '@/features/@post/components/post-card';
-import { Series } from '@/features/blog/components/Series';
+import { SeriesCard } from '@/features/@series/components/series-card';
 
 const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
   const { nodes: posts } = data.posts;
@@ -28,7 +28,16 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
       </HomeSection>
 
       <HomeSection name="시리즈" to={Routing.SERIES.toString()}>
-        <Series series={series} />
+        <GridLayoutForCard>
+          {series.map((s) => (
+            <SeriesCard
+              key={s.fieldValue}
+              title={s.fieldValue!}
+              totalCount={s.totalCount}
+              image={s.nodes[0]!.frontmatter?.image}
+            />
+          ))}
+        </GridLayoutForCard>
       </HomeSection>
     </BaseLayout>
   );
@@ -42,13 +51,11 @@ export const query = graphql`
         ...PostCardData
       }
     }
-    series: allMdx {
+    series: allMdx(sort: { fields: frontmatter___date, order: DESC }) {
       group(field: frontmatter___series___seriesName, limit: 8) {
-        fieldValue
-        totalCount
+        ...SeriesCardData
         nodes {
           frontmatter {
-            tags
             image {
               childImageSharp {
                 gatsbyImageData(placeholder: TRACED_SVG, width: 517, height: 380)

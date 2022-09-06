@@ -15,25 +15,25 @@ abstract class Nav {
 class HeaderNav extends Nav {
   createNavLinks(): NavLink[] {
     return [
-      new NavLink('글', FiPenTool, Routing.POSTS.toString),
-      new NavLink('시리즈', FiLayers, Routing.SERIES.toString),
-      new NavLink('소개', FiUserCheck, Routing.INTRODUCTION.toString),
-      new NavLink('프로젝트', FiPackage, Routing.PROJECTS.toString),
+      new NavLink('글', FiPenTool, Routing.POSTS.toString()),
+      new NavLink('시리즈', FiLayers, Routing.SERIES.toString()),
+      new NavLink('소개', FiUserCheck, Routing.INTRODUCTION.toString()),
+      new NavLink('프로젝트', FiPackage, Routing.PROJECTS.toString()),
     ];
   }
 }
 
 class SidebarBaseNav extends Nav {
   createNavLinks(): NavLink[] {
-    return [new NavLink('HOME', FiHome, Routing.HOME.toString)];
+    return [new NavLink('HOME', FiHome, Routing.HOME.toString())];
   }
 }
 
 class SidebarBlogNav extends Nav {
   createNavLinks(): NavLink[] {
     return [
-      new NavLink('글', FiPenTool, Routing.POSTS.toString),
-      new NavLink('시리즈', FiLayers, Routing.SERIES.toString),
+      new NavLink('글', FiPenTool, Routing.POSTS.toString()),
+      new NavLink('시리즈', FiLayers, Routing.SERIES.toString()),
     ];
   }
 }
@@ -41,8 +41,8 @@ class SidebarBlogNav extends Nav {
 class SidebarAboutNav extends Nav {
   createNavLinks(): NavLink[] {
     return [
-      new NavLink('소개', FiUserCheck, Routing.INTRODUCTION.toString),
-      new NavLink('프로젝트', FiPackage, Routing.PROJECTS.toString),
+      new NavLink('소개', FiUserCheck, Routing.INTRODUCTION.toString()),
+      new NavLink('프로젝트', FiPackage, Routing.PROJECTS.toString()),
     ];
   }
 }

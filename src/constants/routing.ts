@@ -8,6 +8,19 @@ export class Routing {
   private constructor(private targetLink: string) {}
 
   toString(addedLink?: string | null): string {
-    return `${this.targetLink}/${addedLink}`;
+    const to = !addedLink ? this.targetLink : `${this.targetLink}${addedLink}`;
+
+    return to;
+  }
+
+  static slugifySeries(seriesName?: string): string {
+    const seriesRoute = Routing.SERIES.toString();
+
+    switch (seriesName) {
+      case 'Canvas API로 만들어보는 단진자 운동':
+        return `${seriesRoute}/canvas-api-simple-pendulum`;
+      default:
+        return '';
+    }
   }
 }

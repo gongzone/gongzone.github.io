@@ -11,7 +11,7 @@ interface PostCardProps {
 export const PostCard = ({ frontmatter }: PostCardProps) => {
   return (
     <li className="flex h-full w-full flex-col rounded-md  bg-gradient-to-tl from-zinc-900 to-slate-800">
-      <Link className="group" to={Routing.POSTS.toString(frontmatter?.slug)}>
+      <Link className="group" to={Routing.POSTS.toString(`/${frontmatter?.slug}`)}>
         <CardImage title={frontmatter?.title} image={frontmatter?.image} />
       </Link>
 

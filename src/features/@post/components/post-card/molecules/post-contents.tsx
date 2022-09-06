@@ -15,7 +15,7 @@ interface PostContents {
 export const PostContents = ({ title, description, slug, date, tags }: PostContents) => {
   return (
     <div className="flex flex-1 flex-col gap-2 p-5">
-      <Link className="flex items-center gap-2" to={Routing.POSTS.toString(slug)}>
+      <Link className="flex items-center gap-2" to={Routing.POSTS.toString(`/${slug}`)}>
         <PostTitle title={title} />
       </Link>
 

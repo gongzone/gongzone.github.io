@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import {
   GatsbyImage,
   getImage,
@@ -10,9 +11,10 @@ interface CardImageProps {
   image?: {
     readonly childImageSharp: { readonly gatsbyImageData: IGatsbyImageData } | null;
   } | null;
+  children?: ReactNode;
 }
 
-export const CardImage = ({ title, image }: CardImageProps) => {
+export const CardImage = ({ title, image, children }: CardImageProps) => {
   return (
     <div className="relative w-full overflow-hidden">
       <GatsbyImage
@@ -21,6 +23,7 @@ export const CardImage = ({ title, image }: CardImageProps) => {
         alt={title!}
         objectFit="cover"
       />
+      {children}
     </div>
   );
 };
