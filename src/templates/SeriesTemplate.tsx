@@ -1,10 +1,11 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
-import { FaLayerGroup } from 'react-icons/fa';
+import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
+import { Link } from 'gatsby';
+import { TiArrowBack } from 'react-icons/ti';
 
 import { Layout } from '@/components/layout';
-import { SeriesCard } from '@/features/@series/components/series-card';
 import { SEO } from '@/features/SEO/components';
-import { Pagination } from '@/features/Pagination/components';
+import { SeriesList } from '@/features/blog/components/SeriesList';
 
 interface SeriesPageContext {
   limit: number;
@@ -14,52 +15,59 @@ interface SeriesPageContext {
   currentPage: number;
 }
 
-const SeriesTemplate = ({
+const SeriesListTemplate = ({
   data,
   pageContext,
-}: PageProps<Queries.GetSeriesQuery, SeriesPageContext>) => {
-  console.log(data);
-  const { group: series } = data.series;
+}: PageProps<Queries.GetPostsBySeriesQuery, SeriesPageContext>) => {
+  const {
+    allMdx: { nodes },
+  } = data;
+
+  const { seriesName } = pageContext;
 
   return (
-    <Layout className="py-10 px-5 xs:px-14 md:p-20">
-      <div className="mb-4">
-        <div className="mb-2 inline-flex items-center gap-2 rounded-3xl bg-[#2e3039] px-4 py-2">
-          <FaLayerGroup />
-          <span className="text-lg">전체 시리즈 목록</span>
+    <Layout className="py-10 px-5 xs:px-14 md:max-w-[768px] md:p-20 lg:max-w-[850px]">
+      <div className="">
+        <div className="flex flex-col gap-4">
+          <Link className="group inline-flex items-center gap-3" to="/series">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-700 text-3xl shadow-lg duration-300 group-hover:-translate-x-1.5">
+              <TiArrowBack />
+            </span>
+            <div className="flex flex-col text-sm text-zinc-200">
+              <span>시리즈 목록으로</span>
+              <span>돌아가기</span>
+            </div>
+          </Link>
+          <div className="mx-4 my-6 border-b-[3px] border-b-zinc-400 pb-4">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-2xl font-bold text-emerald-400">{seriesName}</h1>
+              <span>&bull; {nodes.length}개의 포스트</span>
+            </div>
+          </div>
         </div>
-        <div className="pl-4">
-          <span className="text-zinc-400">&bull; 시리즈 별로 포스트를 탐방해보세요.</span>
-        </div>
+        <SeriesList posts={nodes} />
       </div>
-      {/* <GridLayoutForCard>
-        {series.map((s) => (
-          <SeriesCard
-            key={s.fieldValue}
-            title={s.fieldValue!}
-            totalCount={s.totalCount}
-            image={s.nodes[0]!.frontmatter?.image}
-          />
-        ))}
-      </GridLayoutForCard> */}
-      <Pagination pageContext={pageContext} />
     </Layout>
   );
 };
 
 export const query = graphql`
-  query GetSeries($limit: Int, $skip: Int) {
-    series: allMdx {
-      group(field: frontmatter___series___seriesName, limit: $limit, skip: $skip) {
-        fieldValue
-        totalCount
-        nodes {
-          frontmatter {
-            tags
-            image {
-              childImageSharp {
-                gatsbyImageData(placeholder: TRACED_SVG, width: 517, height: 380)
-              }
+  query GetPostsBySeries($seriesName: String) {
+    allMdx(
+      filter: { frontmatter: { series: { seriesName: { eq: $seriesName } } } }
+      sort: { fields: frontmatter___series___seriesIndex, order: ASC }
+    ) {
+      totalCount
+      nodes {
+        id
+        frontmatter {
+          title
+          slug
+          date(formatString: "YYYY년 MM월 DD일")
+          description
+          image {
+            childImageSharp {
+              gatsbyImageData
             }
           }
         }
@@ -68,6 +76,8 @@ export const query = graphql`
   }
 `;
 
-export default SeriesTemplate;
+export default SeriesListTemplate;
 
-export const Head: HeadFC = () => <SEO title="Series - 공존의 발자취" />;
+export const Head: HeadFC = ({ pageContext }) => (
+  <SEO title={`${pageContext.seriesName} - 공존의 발자취`} />
+);

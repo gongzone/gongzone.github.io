@@ -24,7 +24,7 @@ export const SeriesList = ({ series }: SeriesCardProps) => {
 
 export const query = graphql`
   fragment SeriesListData on MdxConnection {
-    group(field: frontmatter___series___seriesName, limit: 8) {
+    group(field: frontmatter___series___seriesName, limit: $limit, skip: $skip) {
       ...SeriesCardData
       nodes {
         frontmatter {

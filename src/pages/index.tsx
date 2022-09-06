@@ -30,8 +30,8 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
 };
 
 export const query = graphql`
-  query IndexPage {
-    posts: allMdx(limit: 8, sort: { fields: frontmatter___date, order: DESC }) {
+  query IndexPage($limit: Int = 8, $skip: Int = 0) {
+    posts: allMdx(limit: $limit, sort: { fields: frontmatter___date, order: DESC }) {
       ...PostsData
     }
     series: allMdx(sort: { fields: frontmatter___date, order: DESC }) {
