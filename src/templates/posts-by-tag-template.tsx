@@ -1,6 +1,8 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
 
-import { Layout } from '@/components/layout';
+import { Routing } from '@/constants/routing';
+
+import { BaseLayout } from '@/layout/base-layout';
 import { TagNav } from '@/features/tag/components/tag-nav';
 import { Posts } from '@/features/@post/components/posts';
 import { SEO } from '@/features/seo/components';
@@ -22,11 +24,11 @@ const PostsByTagTemplate = ({
   const { nodes: posts } = data.posts;
 
   return (
-    <Layout className="py-10 px-5 xs:px-14 md:p-20">
+    <BaseLayout className="py-10 px-5 xs:px-14 md:p-20">
       <TagNav currentTag={pageContext.tag} />
       <Posts posts={posts} />
-      <Pagination pageContext={pageContext} />
-    </Layout>
+      <Pagination target={Routing.POSTS.toString()} pageContext={pageContext} />
+    </BaseLayout>
   );
 };
 

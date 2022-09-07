@@ -15,7 +15,7 @@ import {
 
 import { Routing } from '@/constants/routing';
 
-import { Layout } from '@/components/layout';
+import { BaseLayout } from '@/layout/base-layout';
 import { SEO } from '@/features/seo/components';
 import { ColorTag } from '@/features/tag/components/tag';
 import { Toc } from '@/features/@post/components/toc';
@@ -38,7 +38,7 @@ const PostTemplate = ({
   const { seriesName, seriesIndex } = pageContext;
 
   return (
-    <Layout className="max-w-[768px] py-10 px-5 xs:px-14 sm:px-20 lg:max-w-[859px]">
+    <BaseLayout className="max-w-[768px] py-10 px-5 xs:px-14 sm:px-20 lg:max-w-[859px]">
       <div className="mb-8 flex items-center justify-between">
         <Link className="group inline-flex items-center gap-3" to="/posts">
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-700 text-3xl shadow-lg duration-300 group-hover:-translate-x-1.5">
@@ -191,7 +191,7 @@ const PostTemplate = ({
           </div>
         )}
       </div>
-    </Layout>
+    </BaseLayout>
   );
 };
 

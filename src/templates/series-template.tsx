@@ -1,7 +1,9 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
 import { FaLayerGroup } from 'react-icons/fa';
 
-import { Layout } from '@/components/layout';
+import { Routing } from '@/constants/routing';
+
+import { BaseLayout } from '@/layout/base-layout';
 import { SeriesCards } from '@/features/@series/components/series-cards';
 import { SEO } from '@/features/seo/components';
 import { Pagination } from '@/features/pagination/components';
@@ -21,7 +23,7 @@ const SeriesTemplate = ({
   const { group: series } = data.series;
 
   return (
-    <Layout className="py-10 px-5 xs:px-14 md:p-20">
+    <BaseLayout className="py-10 px-5 xs:px-14 md:p-20">
       <div className="mb-4">
         <div className="mb-2 inline-flex items-center gap-2 rounded-3xl bg-[#2e3039] px-4 py-2">
           <FaLayerGroup />
@@ -33,8 +35,8 @@ const SeriesTemplate = ({
       </div>
 
       <SeriesCards series={series} />
-      <Pagination pageContext={pageContext} />
-    </Layout>
+      <Pagination target={Routing.SERIES.toString()} pageContext={pageContext} />
+    </BaseLayout>
   );
 };
 

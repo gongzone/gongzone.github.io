@@ -10,13 +10,12 @@ export const SeriesList = ({ posts }: SeriesListProps) => {
     <ul className="my-8">
       {posts.map(({ id, frontmatter }, i) => (
         <li key={id} className="mb-16 flex flex-col gap-4 sm:flex-row">
-          <div className="flex flex-col gap-2 sm:self-center">
-            <h2 className="">
-              <Link className="hover-text-amber" to={`/posts/${frontmatter.slug}`}>
-                <span className="text-2xl font-bold">{i + 1}. </span>
-                <span className="text-lg font-bold">{frontmatter.title}</span>
-              </Link>
-            </h2>
+          <div className="flex flex-col sm:self-center">
+            <Link className="hover-text-amber p-2" to={`/posts/${frontmatter.slug}`}>
+              <span className="text-2xl font-bold">{i + 1}. </span>
+              <span className="text-lg font-bold">{frontmatter.title}</span>
+            </Link>
+
             <span className="hidden text-sm text-zinc-400 sm:block">
               &bull; {frontmatter.date} 작성
             </span>

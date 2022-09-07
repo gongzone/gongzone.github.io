@@ -4,8 +4,9 @@ import { Routing } from '@/constants/routing';
 import { paginateUtil } from '@/features/pagination/utils';
 
 interface PaginationProps {
+  target: string;
   pageContext: {
-    tag: string;
+    tag?: string;
     limit: number;
     skip: number;
     totalPagination: number;
@@ -14,7 +15,7 @@ interface PaginationProps {
   };
 }
 
-export const Pagination = ({ pageContext }: PaginationProps) => {
+export const Pagination = ({ target, pageContext }: PaginationProps) => {
   const { totalPagination, postsPerPage, currentPage } = pageContext;
   const currentTag = Routing.slugifyTag(pageContext.tag);
   const maxSize = 5;
@@ -31,10 +32,10 @@ export const Pagination = ({ pageContext }: PaginationProps) => {
   const numLink = (num: number) => {
     if (!!currentTag) return num === 1 ? `${currentTag}` : `${currentTag}/${num}`;
 
-    return num === 1 ? '/posts' : `/posts/${num}`;
+    return num === 1 ? `${target}` : `${target}/${num}`;
   };
-  let prev = currentPage === 2 ? '/posts' : `/posts/${currentPage - 1}`;
-  let next = `/posts/${currentPage + 1}`;
+  let prev = currentPage === 2 ? `${target}` : `${target}/${currentPage - 1}`;
+  let next = `${target}/${currentPage + 1}`;
 
   if (!!currentTag) {
     prev = currentPage === 2 ? `${currentTag}` : `${currentTag}/${currentPage - 1}`;
@@ -66,7 +67,7 @@ export const Pagination = ({ pageContext }: PaginationProps) => {
       </ul>
 
       {!isLast && (
-        <Link className="hover-text-amber px-1 tracking-wider" to={`/posts/${next}`} rel="next">
+        <Link className="hover-text-amber px-1 tracking-wider" to={`${next}`} rel="next">
           Next
         </Link>
       )}

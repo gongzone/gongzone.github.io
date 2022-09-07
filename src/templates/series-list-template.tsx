@@ -2,7 +2,7 @@ import { graphql, type PageProps, type HeadFC } from 'gatsby';
 import { Link } from 'gatsby';
 import { TiArrowBack } from 'react-icons/ti';
 
-import { Layout } from '@/components/layout';
+import { BaseLayout } from '@/layout/base-layout';
 import { SEO } from '@/features/seo/components';
 import { SeriesList } from '@/features/@series/components/series-list';
 
@@ -26,7 +26,7 @@ const SeriesListTemplate = ({
   const { seriesName } = pageContext;
 
   return (
-    <Layout className="py-10 px-5 xs:px-14 md:max-w-[768px] md:p-20 lg:max-w-[850px]">
+    <BaseLayout className="py-10 px-5 xs:px-14 md:max-w-[768px] md:p-20 lg:max-w-[850px]">
       <div className="">
         <div className="flex flex-col gap-4">
           <Link className="group inline-flex items-center gap-3" to="/series">
@@ -47,7 +47,7 @@ const SeriesListTemplate = ({
         </div>
         <SeriesList posts={nodes} />
       </div>
-    </Layout>
+    </BaseLayout>
   );
 };
 
