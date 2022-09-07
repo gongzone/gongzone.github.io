@@ -7,7 +7,7 @@ import { SEO } from '@/features/seo/components';
 import { BaseLayout } from '@/layout/base-layout';
 import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index-page';
 import { Posts } from '@/features/@post/components/posts';
-import { SeriesList } from '@/features/@series/components/series-list';
+import { SeriesCards } from '@/features/@series/components/series-cards';
 
 const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
   const { nodes: posts } = data.posts;
@@ -23,7 +23,7 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
       </HomeSection>
 
       <HomeSection name="시리즈" to={Routing.SERIES.toString()}>
-        <SeriesList series={series} />
+        <SeriesCards series={series} />
       </HomeSection>
     </BaseLayout>
   );
@@ -35,7 +35,7 @@ export const query = graphql`
       ...PostsData
     }
     series: allMdx(sort: { fields: frontmatter___date, order: DESC }) {
-      ...SeriesListData
+      ...SeriesCardsData
     }
   }
 `;

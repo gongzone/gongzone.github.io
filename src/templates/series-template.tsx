@@ -2,11 +2,11 @@ import { graphql, type PageProps, type HeadFC } from 'gatsby';
 import { FaLayerGroup } from 'react-icons/fa';
 
 import { Layout } from '@/components/layout';
-import { SeriesList } from '@/features/@series/components/series-list';
+import { SeriesCards } from '@/features/@series/components/series-cards';
 import { SEO } from '@/features/seo/components';
-import { Pagination } from '@/features/Pagination/components';
+import { Pagination } from '@/features/pagination/components';
 
-interface SeriesListPageContext {
+interface SeriesPageContext {
   limit: number;
   skip: number;
   totalPagination: number;
@@ -14,10 +14,10 @@ interface SeriesListPageContext {
   currentPage: number;
 }
 
-const SeriesListTemplate = ({
+const SeriesTemplate = ({
   data,
   pageContext,
-}: PageProps<Queries.GetSeriesListQuery, SeriesListPageContext>) => {
+}: PageProps<Queries.GetSeriesQuery, SeriesPageContext>) => {
   const { group: series } = data.series;
 
   return (
@@ -31,20 +31,21 @@ const SeriesListTemplate = ({
           <span className="text-zinc-400">&bull; 시리즈 별로 포스트를 탐방해보세요.</span>
         </div>
       </div>
-      <SeriesList series={series} />
+
+      <SeriesCards series={series} />
       <Pagination pageContext={pageContext} />
     </Layout>
   );
 };
 
 export const query = graphql`
-  query GetSeriesList($limit: Int = 8, $skip: Int = 0) {
+  query GetSeries($limit: Int = 8, $skip: Int = 0) {
     series: allMdx {
-      ...SeriesListData
+      ...SeriesCardsData
     }
   }
 `;
 
-export default SeriesListTemplate;
+export default SeriesTemplate;
 
 export const Head: HeadFC = () => <SEO title="Series - 공존의 발자취" />;

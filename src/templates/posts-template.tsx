@@ -4,9 +4,10 @@ import { Layout } from '@/components/layout';
 import { TagNav } from '@/features/tag/components/tag-nav';
 import { Posts } from '@/features/@post/components/posts';
 import { SEO } from '@/features/seo/components';
-import { Pagination } from '@/features/Pagination/components';
+import { Pagination } from '@/features/pagination/components';
 
 interface PostsPageContext {
+  tag: string;
   limit: number;
   skip: number;
   totalPagination: number;
@@ -22,7 +23,7 @@ const PostsTemplate = ({
 
   return (
     <Layout className="py-10 px-5 xs:px-14 md:p-20">
-      <TagNav currentTag="ALL" />
+      <TagNav currentTag={pageContext.tag} />
       <Posts posts={posts} />
       <Pagination pageContext={pageContext} />
     </Layout>

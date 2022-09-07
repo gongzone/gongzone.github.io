@@ -1,11 +1,11 @@
 import { Link } from 'gatsby';
 
-import { paginateUtil } from '@/features/Pagination/utils';
-import { slugifyTag } from '@/utils/slugify-tag';
+import { Routing } from '@/constants/routing';
+import { paginateUtil } from '@/features/pagination/utils';
 
 interface PaginationProps {
   pageContext: {
-    tag?: string;
+    tag: string;
     limit: number;
     skip: number;
     totalPagination: number;
@@ -16,7 +16,7 @@ interface PaginationProps {
 
 export const Pagination = ({ pageContext }: PaginationProps) => {
   const { totalPagination, postsPerPage, currentPage } = pageContext;
-  const currentTag = slugifyTag(pageContext.tag);
+  const currentTag = Routing.slugifyTag(pageContext.tag);
   const maxSize = 5;
 
   const { pages } = paginateUtil(
@@ -29,8 +29,7 @@ export const Pagination = ({ pageContext }: PaginationProps) => {
   const isFirst = currentPage === 1;
   const isLast = currentPage === totalPagination;
   const numLink = (num: number) => {
-    if (!!currentTag)
-      return num === 1 ? `/posts/tags/${currentTag}` : `/posts/tags/${currentTag}/${num}`;
+    if (!!currentTag) return num === 1 ? `${currentTag}` : `${currentTag}/${num}`;
 
     return num === 1 ? '/posts' : `/posts/${num}`;
   };
@@ -38,11 +37,9 @@ export const Pagination = ({ pageContext }: PaginationProps) => {
   let next = `/posts/${currentPage + 1}`;
 
   if (!!currentTag) {
-    prev =
-      currentPage === 2
-        ? `/posts/tags/${currentTag}`
-        : `/posts/tags/${currentTag}/${currentPage - 1}`;
-    next = `posts/tags/${currentTag}/${currentPage + 1}`;
+    prev = currentPage === 2 ? `${currentTag}` : `${currentTag}/${currentPage - 1}`;
+
+    next = `${currentTag}/${currentPage + 1}`;
   }
 
   return (
@@ -58,7 +55,7 @@ export const Pagination = ({ pageContext }: PaginationProps) => {
           <li key={num}>
             <Link
               className={`hover-text-amber px-2 py-1 ${
-                num === currentPage ? 'rounded-md bg-[#232c42]' : ''
+                num === currentPage ? 'rounded-md bg-[#2e3039]' : ''
               }`}
               to={numLink(num)}
             >

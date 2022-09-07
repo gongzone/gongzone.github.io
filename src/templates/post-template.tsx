@@ -13,12 +13,12 @@ import {
   FaAngleDoubleRight,
 } from 'react-icons/fa';
 
-import { slugifySeriesName } from '@/utils/slugify-series-name';
+import { Routing } from '@/constants/routing';
 
 import { Layout } from '@/components/layout';
 import { SEO } from '@/features/seo/components';
 import { ColorTag } from '@/features/tag/components/tag';
-import { Toc } from '@/features/blog/components/Toc';
+import { Toc } from '@/features/@post/components/toc';
 
 interface PostPageContext {
   slug: string;
@@ -36,7 +36,6 @@ const PostTemplate = ({
     data.post?.frontmatter!;
 
   const { seriesName, seriesIndex } = pageContext;
-  console.log(data.series);
 
   return (
     <Layout className="max-w-[768px] py-10 px-5 xs:px-14 sm:px-20 lg:max-w-[859px]">
@@ -116,7 +115,7 @@ const PostTemplate = ({
               <div>
                 <div className="mb-2 flex flex-col bg-zinc-800 p-5 shadow-md md:p-8">
                   <Link
-                    to={`/series/${slugifySeriesName(seriesName)}`}
+                    to={Routing.slugifySeries(seriesName)}
                     className="mb-2 break-words text-xl font-bold text-emerald-400"
                   >
                     {seriesName}

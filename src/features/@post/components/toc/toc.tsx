@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'gatsby';
 
-import { useIntersectionObserver } from '@/features/blog/hooks/use-intersection-observer';
+import { useIntersectionObserver } from '@/features/@post/hooks/use-intersection-observer';
 
 import { FaAlignLeft } from 'react-icons/fa';
 

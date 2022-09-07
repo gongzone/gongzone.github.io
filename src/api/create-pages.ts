@@ -1,8 +1,7 @@
 import type { Actions } from 'gatsby';
 import type { PlatformPath } from 'path';
 
-import { slugifyTag } from '../utils/slugify-tag';
-import { slugifySeriesName } from '../utils/slugify-series-name';
+import { Routing } from '../constants/routing';
 
 interface CreatePages {
   graphQLData: {
@@ -22,7 +21,7 @@ export const createPostPages = ({ graphQLData, createPage, path, root }: CreateP
 
     createPage({
       path: `/posts/${slug}`,
-      component: path.join(root, 'src/templates', 'PostTemplate.tsx'),
+      component: path.join(root, 'src/templates', 'post-template.tsx'),
       context: {
         slug,
         seriesName: series?.seriesName,
@@ -40,8 +39,9 @@ export const createPostsPages = ({ graphQLData, createPage, path, root }: Create
   Array.from({ length: totalPagination }).forEach((_, i) => {
     createPage({
       path: i === 0 ? `/posts` : `/posts/${i + 1}`,
-      component: path.join(root, 'src/templates', 'PostsTemplate.tsx'),
+      component: path.join(root, 'src/templates', 'posts-template.tsx'),
       context: {
+        tag: 'ALL',
         limit: postsPerPage,
         skip: i * postsPerPage,
         totalPagination,
@@ -63,9 +63,9 @@ export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: C
       createPage({
         path:
           i === 0
-            ? `/posts/tags/${slugifyTag(fieldValue)}`
-            : `/posts/tags/${slugifyTag(fieldValue)}/${i + 1}`,
-        component: path.join(root, 'src/templates', 'PostsByTagTemplate.tsx'),
+            ? `${Routing.slugifyTag(fieldValue)}`
+            : `${Routing.slugifyTag(fieldValue)}/${i + 1}`,
+        component: path.join(root, 'src/templates', 'posts-by-tag-template.tsx'),
         context: {
           tag: fieldValue,
           limit: postsPerPage,
@@ -80,35 +80,35 @@ export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: C
 };
 
 export const createSeriesPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
-  const nodes = graphQLData.data.series.group;
-
-  nodes.forEach(({ fieldValue }) => {
-    createPage({
-      path: `/series/${slugifySeriesName(fieldValue)}`,
-      component: path.join(root, 'src/templates', 'SeriesTemplate.tsx'),
-      context: {
-        seriesName: fieldValue,
-      },
-    });
-  });
-};
-
-export const createSeriesListPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
   const totalCount = Array.from(graphQLData.data.series.group).length;
-  console.log(totalCount);
+
   const postsPerPage = 2;
   const totalPagination = Math.ceil(totalCount / postsPerPage);
 
   Array.from({ length: totalPagination }).forEach((_, i) => {
     createPage({
       path: i === 0 ? `/series` : `/series/${i + 1}`,
-      component: path.join(root, 'src/templates', 'SeriesListTemplate.tsx'),
+      component: path.join(root, 'src/templates', 'series-template.tsx'),
       context: {
         limit: postsPerPage,
         skip: i * postsPerPage,
         totalPagination,
         postsPerPage,
         currentPage: i + 1,
+      },
+    });
+  });
+};
+
+export const createSeriesListPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
+  const nodes = graphQLData.data.series.group;
+
+  nodes.forEach(({ fieldValue }) => {
+    createPage({
+      path: `${Routing.slugifySeries(fieldValue)}`,
+      component: path.join(root, 'src/templates', 'series-list-template.tsx'),
+      context: {
+        seriesName: fieldValue,
       },
     });
   });

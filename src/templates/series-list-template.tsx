@@ -4,9 +4,9 @@ import { TiArrowBack } from 'react-icons/ti';
 
 import { Layout } from '@/components/layout';
 import { SEO } from '@/features/seo/components';
-import { SeriesList } from '@/features/blog/components/SeriesList';
+import { SeriesList } from '@/features/@series/components/series-list';
 
-interface SeriesPageContext {
+interface SeriesListPageContext {
   limit: number;
   skip: number;
   totalPagination: number;
@@ -18,9 +18,9 @@ interface SeriesPageContext {
 const SeriesListTemplate = ({
   data,
   pageContext,
-}: PageProps<Queries.GetPostsBySeriesQuery, SeriesPageContext>) => {
+}: PageProps<Queries.GetPostsBySeriesQuery, SeriesListPageContext>) => {
   const {
-    allMdx: { nodes },
+    allMdx: { totalCount, nodes },
   } = data;
 
   const { seriesName } = pageContext;
@@ -41,7 +41,7 @@ const SeriesListTemplate = ({
           <div className="mx-4 my-6 border-b-[3px] border-b-zinc-400 pb-4">
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-bold text-emerald-400">{seriesName}</h1>
-              <span>&bull; {nodes.length}개의 포스트</span>
+              <span>&bull; {totalCount}개의 포스트</span>
             </div>
           </div>
         </div>
@@ -58,26 +58,13 @@ export const query = graphql`
       sort: { fields: frontmatter___series___seriesIndex, order: ASC }
     ) {
       totalCount
-      nodes {
-        id
-        frontmatter {
-          title
-          slug
-          date(formatString: "YYYY년 MM월 DD일")
-          description
-          image {
-            childImageSharp {
-              gatsbyImageData
-            }
-          }
-        }
-      }
+      ...SeriesListData
     }
   }
 `;
 
 export default SeriesListTemplate;
 
-export const Head: HeadFC<Queries.GetPostsBySeriesQuery, SeriesPageContext> = ({ pageContext }) => (
-  <SEO title={`${pageContext.seriesName} - 공존의 발자취`} />
-);
+export const Head: HeadFC<Queries.GetPostsBySeriesQuery, SeriesListPageContext> = ({
+  pageContext,
+}) => <SEO title={`${pageContext.seriesName} - 공존의 발자취`} />;

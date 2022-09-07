@@ -23,7 +23,11 @@ export class Routing {
     }
   }
 
-  static slugifyTag(tagName: string): string {
+  static slugifyTag(tagName?: string): string {
+    if (!tagName) {
+      return '';
+    }
+
     if (tagName === 'ALL') {
       return Routing.POSTS.toString();
     }
