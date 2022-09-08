@@ -14,6 +14,7 @@ interface CreatePages {
 }
 
 export const createPostPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
+  const postTemplate = path.resolve(`./src/templates/post-template.jsx`);
   const nodes = graphQLData.data.posts.nodes;
 
   nodes.forEach((post) => {
@@ -21,9 +22,9 @@ export const createPostPages = ({ graphQLData, createPage, path, root }: CreateP
 
     createPage({
       path: `/posts/${slug}`,
-      component: path.join(root, 'src/templates', 'post-template.tsx'),
+      component: `${postTemplate}?__contentFilePath=${post.internal.contentFilePath}`,
       context: {
-        slug,
+        id: post.id,
         seriesName: series?.seriesName,
         seriesIndex: series?.seriesIndex,
       },

@@ -2,6 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
+.gatsby-highlight-code-line {
+  background-color: #3d3d3d;
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  /* border-left: 0.25em solid #2d3d3d; */
+}
+
+.gatsby-highlight {
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  background-color: #2d2d2d;
+  border-radius: 0.3em;
+  margin: 0.5em 0;
+  padding: 2em 1em;
+  overflow: auto;
+}
+
+.gatsby-highlight pre[class*='language-'] {
+  -webkit-overflow-scrolling: touch;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  overflow: initial;
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
+}
+
+.gatsby-highlight pre[class*='language-']:after {
+  background: black;
+  border-radius: 0 0 0.25rem 0.25rem;
+  color: white;
+  font-size: 12px;
+  letter-spacing: 0.025rem;
+  padding: 0.1rem 0.5rem;
+  position: absolute;
+  right: 1rem;
+  text-align: right;
+  text-transform: uppercase;
+  top: -30px;
+}
+
+.gatsby-highlight pre[class*='language-js']:after {
+  content: 'js';
+  background: #f7df1e;
+  color: black;
+}
+
+.gatsby-highlight pre[class*='language-jsx']:after {
+  content: 'jsx';
+  background: #f7df1e;
+  color: black;
+}
+
+.gatsby-highlight pre[class*='language-ts']:after {
+  content: 'ts';
+  background: #005a9c;
+  color: white;
+}
+
+.gatsby-highlight pre[class*='language-tsx']:after {
+  content: 'tsx';
+  background: #005a9c;
+  color: white;
+}
+
+.gatsby-highlight pre[class*='language-html']:after {
+  content: 'html';
+  background: #cb3837;
+  color: white;
+}
+
+.gatsby-highlight pre[class*='language-css']:after {
+  content: 'css';
+  background: #2887cd;
+  color: white;
+}
+
+.gatsby-highlight pre[class*='language-'].line-numbers {
+  padding-left: 2.8em;
+}
+
+.command-line-prompt > span:before {
+  color: #999;
+  content: ' ';
+  display: block;
+  padding-right: 0.8em;
+}
+
+/* Prompt for all users */
+.command-line-prompt > span[data-user]:before {
+  content: '[' attr(data-user) '@' attr(data-host) '] $';
+}
+
+/* Prompt for root */
+.command-line-prompt > span[data-user='root']:before {
+  content: '[' attr(data-user) '@' attr(data-host) '] #';
+}
+
+.command-line-prompt > span[data-prompt]:before {
+  content: attr(data-prompt);
+}
+
 @layer base {
   body {
     @apply bg-[#222] text-[#e6e6e6] antialiased;

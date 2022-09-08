@@ -7,7 +7,6 @@ import { FaAlignLeft } from 'react-icons/fa';
 
 const Heading = ({ entry, activeId }) => {
   const activeStyle = activeId === `${entry.url.replace('#', '')}` ? 'text-[#d1d5db]' : '';
-  console.log(activeStyle);
   return (
     <>
       <Link className={`transition-colors duration-300 ${activeStyle}`} to={entry.url}>

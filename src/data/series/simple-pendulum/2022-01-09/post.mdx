@@ -3,9 +3,7 @@ title: 'Canvas API로 만들어보는 단진자 운동(1)'
 description: '단진자(Simple Pendulum) 운동을 발생시키는 힘의 요소에 대해 알아보고, 어떻게 구현할 것인지 생각해봅니다.'
 slug: 'simple-pendulum-theory'
 image: './assets/pendulum.png'
-embeddedImages: ['./assets/entire-structure.png', './assets/trig.png', './assets/forces.png']
-category: '자바스크립트'
-tags: ['Canvas, JavaScript']
+tags: ['Canvas', 'JavaScript']
 date: '2022-01-09'
 lastmod: '2022-01-15'
 series:
@@ -13,19 +11,12 @@ series:
   seriesIndex: 1
 ---
 
-import { Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-
 > 그네를 타거나, 놀이공원에서 바이킹을 탈 때, 그 움직임에 대해 깊게 생각해 본 적이 있으신가요? 그저
 > 사는대로 살았던 저로서는 이 포스트를 작성하기 전까지, 깊게 생각하고 고민했던 적은 없었던 것
 > 같습니다. 따라서 이번 기회에 자연계에서 일어나는 이러한 아름다운 현상을 코드 속으로 옮겨 보는
 > 시간을 가져 보겠습니다.
 
 ## 1. 단진자란?
-
-### 푸헤헤
-
-### 단진자에 대해서 자세히 알아보실 분 계신가요?
 
 **단진자(Simple Pendulum)**란 간단하게 말해서, 줄 끝에 추를 매달고 반대 편을 축 또는 점에 고정 시킨 구조를 말합니다.
 이러한 구조에 처음 힘을 가하게 되면 앞,뒤로 왔다 갔다 하는 **진동 운동(Oscillatory Motion)** 양상을 보이게 됩니다.
@@ -44,13 +35,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 우리가 만들고자 하는 것은 진자의 움직임을 그래픽으로 표현하는 것입니다. 어떤 프로그램을 만들든간에 먼저 어떤 식으로 접근해야 할지 고민하는
 시간이 필요합니다.
 
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-  <GatsbyImage
-    image={getImage(props.embeddedImages[0])}
-    alt="pendulum-img1"
-    style={{ maxWidth: '40rem', marginBottom: '2rem' }}
-  />
-</div>
+![entire-structure](./assets/entire-structure.png)
 
 위 그림은 단진자가 운동하는 모습을 간략히 나타낸 것입니다. 또한, 줄의 길이, 각, 중력의 작용 등 기초적인 정보를
 표시하고 있습니다. 특히 중력의 작용으로 인해 발생하는 **힘(Force)**은 우리가 나중에 눈 여겨봐야할 부분입니다만, 일단 거시적인 시각으로 우리가
@@ -61,13 +46,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 그렇다면 어떻게 구할 수 있을까요? 가만히 보니 Pivot(축)으로부터 추의 중심점을 이으면 삼각형의 빗변을 형성하는 것을 볼 수 있습니다.
 
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-  <GatsbyImage
-    image={getImage(props.embeddedImages[1])}
-    alt="trig"
-    style={{ maxWidth: '40rem', marginBottom: '2rem' }}
-  />
-</div>
+- 이미지2
 
 이제 삼각법의 사인함수와 코사인함수를 이용하여 x,y 좌표의 값을 구해봅시다. <br />
 `sin(θ) = x / Length` 이고 `cos(θ) = y / Length` 이기 때문에..
@@ -91,13 +70,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 ## 3. 진자를 움직이는 힘, 중력
 
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-  <GatsbyImage
-    image={getImage(props.embeddedImages[2])}
-    alt="forces"
-    style={{ maxWidth: '40rem', marginBottom: '2rem' }}
-  />
-</div>
+- 이미지3
 
 초기에 진자에 작용하는 힘은 중력 밖에 존재하지 않습니다. 이 중력이 진자를 움직이게 하는 원동력인 셈이죠.
 위 그림에서 중력은 `mg`로 표현되어 있습니다. m은 추의 질량을 나타내며, g는 중력가속도를 의미합니다. 빗면에 놓인 물체에 작용하는
@@ -155,6 +128,57 @@ _구심력이 생겨 증가하게 됩니다._)
   중력 수직 성분의 힘(F) = mg * sin(θ) <br />
   <strong>각가속도</strong> = F / m = (mg * sin(θ)) / m = <strong>g * sin(θ)</strong>
 </div>
+
+```js{1,4-6}
+const hi: string = 'hi';
+console.log('sds');
+
+function drama(fd): void {
+  let key = fd;
+  console.log(key);
+}
+```
+
+```jsx
+const HomeIndex = () => {
+  return <div></div>;
+};
+```
+
+```ts{1,4-6}
+const hi: string = 'hi';
+console.log('sds');
+
+function drama(fd): void {
+  let key = fd;
+  console.log(key);
+}
+```
+
+```tsx
+const HomeIndex: PageProps<regt> = () => {
+  return <div></div>;
+};
+```
+
+```html
+<body>
+  <div></div>
+</body>
+```
+
+```css
+.body {
+  position: absolute;
+}
+```
+
+```bash{promptUser: alice}{promptHost: dev.localhost}
+npm install react
+curl -o htttp://sdsd.com
+```
+
+`const name= "name";`
 
 <div display="info">
   재밌는 사실을 하나 발견할 수 있습니다. <br />위 공식에서 알 수 있다싶이 추의 질량은 각이 변하는

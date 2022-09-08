@@ -1,6 +1,5 @@
 import { graphql, type HeadFC, type PageProps } from 'gatsby';
 
-import type { IndexPageQuery } from '@/types/graphql';
 import { Routing } from '@/constants/routing';
 
 import { SEO } from '@/features/seo/components';
@@ -9,7 +8,7 @@ import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index
 import { Posts } from '@/features/@post/components/posts';
 import { SeriesCards } from '@/features/@series/components/series-cards';
 
-const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
+const IndexPage = ({ data }: PageProps<Queries.GetIndexQuery>) => {
   const { nodes: posts } = data.posts;
   const { group: series } = data.series;
 
@@ -30,7 +29,7 @@ const IndexPage = ({ data }: PageProps<IndexPageQuery>) => {
 };
 
 export const query = graphql`
-  query IndexPage($limit: Int = 8, $skip: Int = 0) {
+  query GetIndex($limit: Int = 8, $skip: Int = 0) {
     posts: allMdx(limit: $limit, sort: { fields: frontmatter___date, order: DESC }) {
       ...PostsData
     }

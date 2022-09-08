@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { graphql, Link, type HeadFC, type PageProps } from 'gatsby';
-import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { MDXProvider } from '@mdx-js/react';
+
+import React, { useState } from 'react';
+import { graphql, Link } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { TiArrowBack } from 'react-icons/ti';
 import {
   FaAsterisk,
@@ -20,25 +21,28 @@ import { SEO } from '@/features/seo/components';
 import { ColorTag } from '@/features/tag/components/tag';
 import { Toc } from '@/features/@post/components/toc';
 
-interface PostPageContext {
-  slug: string;
-  seriesName: string;
-  seriesIndex: number;
-}
+const mdxComponents = {
+  Link,
+};
 
-const PostTemplate = ({
-  data,
-  pageContext,
-}: PageProps<Queries.GetSinglePostQuery, PostPageContext>) => {
+// interface PostPageContext {
+//   slug: string;
+//   seriesName: string;
+//   seriesIndex: number;
+// }
+
+const PostTemplate = ({ data, pageContext, children }) => {
   const [isSeriesOpen, setIsSeriesOpen] = useState(false);
-  const { body, tableOfContents, timeToRead } = data.post!;
-  const { title, description, date, lastmod, tags, image, embeddedImages } =
-    data.post?.frontmatter!;
+  const { tableOfContents } = data.post;
+  const {
+    fields: { timeToRead },
+  } = data.post;
+  const { title, description, date, lastmod, tags, image } = data.post?.frontmatter;
 
   const { seriesName, seriesIndex } = pageContext;
 
   return (
-    <BaseLayout className="max-w-[768px] py-10 px-5 xs:px-14 sm:px-20 lg:max-w-[859px]">
+    <BaseLayout className="max-w-[712px] py-10 px-5 xs:px-14 3xl:max-w-[768px] sm:px-16 lg:px-0">
       <div className="mb-8 flex items-center justify-between">
         <Link className="group inline-flex items-center gap-3" to="/posts">
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-700 text-3xl shadow-lg duration-300 group-hover:-translate-x-1.5">
@@ -59,11 +63,7 @@ const PostTemplate = ({
         <Toc tableOfContents={tableOfContents} />
         <div>
           <div>
-            <GatsbyImage
-              className="rounded-lg"
-              image={getImage(image as ImageDataLike)!}
-              alt={title}
-            />
+            <GatsbyImage className="rounded-lg" image={getImage(image)} alt={title} />
           </div>
 
           <div className="mx-auto flex flex-col sm:max-w-[90%] md:max-w-[82%] lg:max-w-[75%]">
@@ -86,7 +86,7 @@ const PostTemplate = ({
                   <span>
                     <FaClock />
                   </span>
-                  <span>{timeToRead} min read</span>
+                  <span>{timeToRead.text}</span>
                 </div>
               </div>
               <h2>{description}</h2>
@@ -154,7 +154,7 @@ const PostTemplate = ({
         </div>
 
         <article className="prose prose-invert my-8 max-w-none">
-          <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
+          <MDXProvider components={mdxComponents}>{children}</MDXProvider>
         </article>
 
         {data.series.totalCount > 1 && (
@@ -196,11 +196,14 @@ const PostTemplate = ({
 };
 
 export const query = graphql`
-  query GetSinglePost($slug: String, $seriesName: String) {
-    post: mdx(frontmatter: { slug: { eq: $slug } }) {
-      body
+  query ($id: String!, $seriesName: String) {
+    post: mdx(id: { eq: $id }) {
       tableOfContents
-      timeToRead
+      fields {
+        timeToRead {
+          text
+        }
+      }
       frontmatter {
         title
         description
@@ -211,11 +214,6 @@ export const query = graphql`
           publicURL
           childImageSharp {
             gatsbyImageData(placeholder: TRACED_SVG)
-          }
-        }
-        embeddedImages {
-          childImageSharp {
-            gatsbyImageData
           }
         }
       }
@@ -238,8 +236,8 @@ export const query = graphql`
 
 export default PostTemplate;
 
-export const Head: HeadFC<Queries.GetSinglePostQuery, PostPageContext> = ({ data }) => {
-  const { title, description, image } = data.post?.frontmatter!;
+export const Head = ({ data }) => {
+  const { title, description, image } = data.post.frontmatter;
 
-  return <SEO title={title} description={description!} image={image?.publicURL!} />;
+  return <SEO title={title} description={description} image={image?.publicURL} />;
 };

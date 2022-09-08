@@ -1,4 +1,5 @@
 import path from 'path';
+import readingTime from 'reading-time';
 import type { GatsbyNode } from 'gatsby';
 import {
   createPostPages,
@@ -20,6 +21,17 @@ export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions
   });
 };
 
+export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions }) => {
+  const { createNodeField } = actions;
+  if (node.internal.type === `Mdx`) {
+    createNodeField({
+      node,
+      name: `timeToRead`,
+      value: readingTime(node.body as string),
+    });
+  }
+};
+
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
@@ -28,12 +40,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       posts: allMdx {
         totalCount
         nodes {
+          id
           frontmatter {
             slug
             series {
               seriesName
               seriesIndex
             }
+          }
+          internal {
+            contentFilePath
           }
         }
       }

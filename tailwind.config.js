@@ -13,6 +13,7 @@ module.exports = {
   theme: {
     screens: {
       xs: '520px',
+      '3xl': '1920px',
       ...defaultTheme.screens,
     },
     extend: {
@@ -22,9 +23,6 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            strong: {
-              color: theme('colors.amber.300'),
-            },
             a: {
               color: theme('colors.blue.500'),
               textDecoration: 'none',
