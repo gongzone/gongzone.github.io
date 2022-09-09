@@ -13,7 +13,7 @@ const IndexPage = ({ data }: PageProps<Queries.GetIndexQuery>) => {
   const { group: series } = data.series;
 
   return (
-    <BaseLayout className="py-10 px-5 xs:px-14 lg:px-20">
+    <BaseLayout className="py-10 px-5 xs:px-14 lg:px-20 2xl:max-w-[1382px] 2xl:px-0">
       <Hero />
       <SiteInfo />
 
