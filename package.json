@@ -11,7 +11,7 @@
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "gatsby build && gh-pages -d public -b main",
+    "deploy": "gatsby clean && gatsby build && gh-pages -f -d public -b main",
     "test": "jest --watch",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
