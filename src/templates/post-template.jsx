@@ -156,7 +156,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
           )}
         </div>
 
-        <article className="prose prose-invert my-8 max-w-none">
+        <article className="prose prose-invert mt-8 mb-12 max-w-none">
           <MDXProvider components={mdxComponents}>{children}</MDXProvider>
         </article>
 
