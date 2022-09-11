@@ -2,6 +2,8 @@ import { graphql, type PageProps, type HeadFC } from 'gatsby';
 import { Link } from 'gatsby';
 import { TiArrowBack } from 'react-icons/ti';
 
+import { Routing } from '@/constants/routing';
+
 import { BaseLayout } from '@/layout/base-layout';
 import { SEO } from '@/features/seo/components';
 import { SeriesList } from '@/features/@series/components/series-list';
@@ -67,4 +69,9 @@ export default SeriesListTemplate;
 
 export const Head: HeadFC<Queries.GetPostsBySeriesQuery, SeriesListPageContext> = ({
   pageContext,
-}) => <SEO title={`${pageContext.seriesName} - 공존의 발자취`} />;
+}) => (
+  <SEO
+    title={`${pageContext.seriesName} - 공존의 발자취`}
+    pathname={Routing.slugifySeries(pageContext.seriesName)}
+  />
+);

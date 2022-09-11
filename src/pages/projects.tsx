@@ -9,4 +9,4 @@ const ProjectsPage = () => {
 
 export default ProjectsPage;
 
-export const Head: HeadFC = () => <SEO title="공존의 발자취" />;
+export const Head: HeadFC = () => <SEO title="공존의 발자취" pathname="/projects" />;

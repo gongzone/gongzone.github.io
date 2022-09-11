@@ -6,12 +6,14 @@ dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+const siteUrl = 'https://gongzone.github.io';
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `공존의 발자취`,
     description: `공존의 개발 블로그입니다. 웹 애플리케이션 설계 및 구현에 관심이 많습니다.`,
     image: `/meta-image.png`,
-    siteUrl: `https://gongzone.github.io`,
+    siteUrl: siteUrl,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -35,7 +37,32 @@ const config: GatsbyConfig = {
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        excludes: ['/dev-404-page', '/404/', '/404.html'],
+        query: `
+        {
+          allSitePage {
+            nodes {
+              path
+              pageContext
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({ allSitePage: { nodes: allPages } }) => allPages,
+        filterPages: ({ pageContext }) => pageContext.isCanonical === false,
+        serialize: ({ path }) => {
+          return {
+            url: siteUrl + path,
+            changefreq: 'daily',
+            priority: 0.7,
+          };
+        },
+      },
+    },
     {
       resolve: 'gatsby-plugin-root-import',
       options: {

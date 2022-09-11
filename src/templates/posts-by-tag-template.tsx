@@ -47,4 +47,6 @@ export const query = graphql`
 
 export default PostsByTagTemplate;
 
-export const Head: HeadFC = () => <SEO title="Posts - 공존의 발자취" />;
+export const Head: HeadFC = () => (
+  <SEO title="Posts - 공존의 발자취" pathname={Routing.POSTS.toString()} />
+);

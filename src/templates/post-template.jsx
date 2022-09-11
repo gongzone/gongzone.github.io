@@ -209,6 +209,7 @@ export const query = graphql`
       frontmatter {
         title
         description
+        slug
         date(formatString: "YYYY년 MM월 DD일")
         lastmod(formatString: "YYYY년 MM월 DD일")
         tags
@@ -239,7 +240,14 @@ export const query = graphql`
 export default PostTemplate;
 
 export const Head = ({ data }) => {
-  const { title, description, image } = data.post.frontmatter;
+  const { title, description, image, slug } = data.post.frontmatter;
 
-  return <SEO title={title} description={description} image={image?.publicURL} />;
+  return (
+    <SEO
+      title={title}
+      description={description}
+      image={image?.publicURL}
+      pathname={Routing.POSTS.toString(`/${slug}`)}
+    />
+  );
 };

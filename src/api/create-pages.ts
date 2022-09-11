@@ -43,6 +43,7 @@ export const createPostsPages = ({ graphQLData, createPage, path, root }: Create
       component: path.join(root, 'src/templates', 'posts-template.tsx'),
       context: {
         tag: 'ALL',
+        isCanonical: i === 0 ? true : false,
         limit: postsPerPage,
         skip: i * postsPerPage,
         totalPagination,
@@ -69,6 +70,7 @@ export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: C
         component: path.join(root, 'src/templates', 'posts-by-tag-template.tsx'),
         context: {
           tag: fieldValue,
+          isCanonical: false,
           limit: postsPerPage,
           skip: i * postsPerPage,
           totalPagination,
@@ -91,6 +93,7 @@ export const createSeriesPages = ({ graphQLData, createPage, path, root }: Creat
       path: i === 0 ? `/series` : `/series/${i + 1}`,
       component: path.join(root, 'src/templates', 'series-template.tsx'),
       context: {
+        isCanonical: i === 0 ? true : false,
         limit: postsPerPage,
         skip: i * postsPerPage,
         totalPagination,

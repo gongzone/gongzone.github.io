@@ -41,6 +41,8 @@ export const SEO = ({ title, description, image, pathname, children }: SEOProps)
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
 
+      <link rel="canonical" href={seo.url} />
+
       {children}
     </>
   );
