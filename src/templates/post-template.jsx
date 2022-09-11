@@ -20,6 +20,7 @@ import { BaseLayout } from '@/layout/base-layout';
 import { SEO } from '@/features/seo/components';
 import { ColorTag } from '@/features/tag/components/tag';
 import { Toc } from '@/features/@post/components/toc';
+import { Comments } from '@/features/@post/components/comments';
 import { Callout } from '@/features/@post/components/mdx-components';
 
 const mdxComponents = {
@@ -193,6 +194,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
           </div>
         )}
       </div>
+      <Comments />
     </BaseLayout>
   );
 };
