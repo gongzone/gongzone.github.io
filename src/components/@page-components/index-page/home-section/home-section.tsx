@@ -17,7 +17,7 @@ export const HomeSection = ({ name, to, children }: SectionProps) => {
 
       {children}
 
-      <div className="my-6 text-center">
+      <div className="my-6 text-center 2xl:my-8">
         <Link className="group inline-flex items-center gap-1 p-2" to={to}>
           <span>
             <FaExternalLinkAlt />

@@ -2,7 +2,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 export const SiteInfo = () => {
   return (
-    <div className="my-8 flex select-none items-center justify-center gap-2 px-3 py-5 drop-shadow-md">
+    <div className="my-8 flex select-none items-center justify-center gap-2 px-3 py-5 drop-shadow-md 2xl:my-10">
       <StaticImage
         src="../../../../assets/images/blog.png"
         alt="blog-icon"

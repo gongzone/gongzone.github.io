@@ -46,7 +46,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
   const { seriesName, seriesIndex } = pageContext;
 
   return (
-    <BaseLayout className="max-w-[712px] py-10 px-5 xs:px-14 3xl:max-w-[768px] sm:px-16 lg:px-0">
+    <BaseLayout className="max-w-[712px] py-10 px-5 xs:px-14 sm:px-16 lg:px-0 2xl:max-w-[812px]">
       <div className="mb-8 flex items-center justify-between">
         <Link className="group inline-flex items-center gap-3" to="/posts">
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-700 text-3xl shadow-lg duration-300 group-hover:-translate-x-1.5">
