@@ -34,7 +34,7 @@ export const createPostPages = ({ graphQLData, createPage, path, root }: CreateP
 
 export const createPostsPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
   const totalCount = graphQLData.data.posts.totalCount;
-  const postsPerPage = 2;
+  const postsPerPage = 8;
   const totalPagination = Math.ceil(totalCount / postsPerPage);
 
   Array.from({ length: totalPagination }).forEach((_, i) => {
@@ -56,7 +56,7 @@ export const createPostsPages = ({ graphQLData, createPage, path, root }: Create
 
 export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
   const tags = graphQLData.data.tags.group;
-  const postsPerPage = 2;
+  const postsPerPage = 8;
 
   Array.from(tags).forEach(({ fieldValue, totalCount }) => {
     const totalPagination = Math.ceil(totalCount / postsPerPage);
@@ -85,7 +85,7 @@ export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: C
 export const createSeriesPages = ({ graphQLData, createPage, path, root }: CreatePages) => {
   const totalCount = Array.from(graphQLData.data.series.group).length;
 
-  const postsPerPage = 2;
+  const postsPerPage = 8;
   const totalPagination = Math.ceil(totalCount / postsPerPage);
 
   Array.from({ length: totalPagination }).forEach((_, i) => {
