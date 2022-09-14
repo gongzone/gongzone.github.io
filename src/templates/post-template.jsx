@@ -21,11 +21,12 @@ import { SEO } from '@/features/seo/components';
 import { ColorTag } from '@/features/tag/components/tag';
 import { Toc } from '@/features/@post/components/toc';
 import { Comments } from '@/features/@post/components/comments';
-import { Callout } from '@/features/@post/components/mdx-components';
+import { Callout, Video } from '@/features/@post/components/mdx-components';
 
 const mdxComponents = {
   Link,
   Callout,
+  Video,
 };
 
 // interface PostPageContext {
@@ -62,7 +63,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
         </div>
       </div>
 
-      <div className="relative">
+      <div className="relative mb-4">
         <Toc tableOfContents={tableOfContents} />
         <div>
           <div>
@@ -156,7 +157,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
           )}
         </div>
 
-        <article className="prose prose-invert mt-8 mb-12 max-w-none">
+        <article className="prose prose-invert mt-8 mb-8 max-w-none">
           <MDXProvider components={mdxComponents}>{children}</MDXProvider>
         </article>
 
