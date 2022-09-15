@@ -13,10 +13,12 @@ module.exports = {
   theme: {
     screens: {
       xs: '520px',
-      '3xl': '1920px',
       ...defaultTheme.screens,
     },
     extend: {
+      screens: {
+        '3xl': '1720px',
+      },
       fontFamily: {
         sans: ['Roboto', 'Noto Sans KR', ...defaultTheme.fontFamily.sans],
       },
