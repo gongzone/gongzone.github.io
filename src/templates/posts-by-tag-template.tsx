@@ -24,7 +24,7 @@ const PostsByTagTemplate = ({
   const { nodes: posts } = data.posts;
 
   return (
-    <BaseLayout className="py-10 px-5 xs:px-14 md:p-20">
+    <BaseLayout className="max-w-[1720px] py-10 px-5 xs:px-14 md:p-20">
       <TagNav currentTag={pageContext.tag} />
       <Posts posts={posts} />
       <Pagination target={Routing.POSTS.toString()} pageContext={pageContext} />

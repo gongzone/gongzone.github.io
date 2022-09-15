@@ -14,7 +14,7 @@ export const BaseLayout = ({ className, children }: BaseLayoutProps) => {
     <>
       <Header />
       <Sidebar />
-      <main className={`mx-auto ${className}`} role="main">
+      <main className={`mx-auto ${className ? className : ''}`} role="main">
         {children}
       </main>
       <Footer />

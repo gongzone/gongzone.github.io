@@ -23,7 +23,7 @@ const SeriesTemplate = ({
   const { group: series } = data.series;
 
   return (
-    <BaseLayout className="py-10 px-5 xs:px-14 md:p-20">
+    <BaseLayout className="max-w-[1720px] py-10 px-5 xs:px-14 md:p-20">
       <div className="mb-4">
         <div className="mb-2 inline-flex items-center gap-2 rounded-3xl bg-[#2e3039] px-4 py-2">
           <FaLayerGroup />

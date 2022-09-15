@@ -4,7 +4,7 @@ import { Routing } from '@/constants/routing';
 
 import { SEO } from '@/features/seo/components';
 import { BaseLayout } from '@/layout/base-layout';
-import { Hero, SiteInfo, HomeSection } from '@/components/@page-components/index-page';
+import { Hero, HomeSection } from '@/components/@page-components/index-page';
 import { Posts } from '@/features/@post/components/posts';
 import { SeriesCards } from '@/features/@series/components/series-cards';
 
@@ -13,11 +13,10 @@ const IndexPage = ({ data }: PageProps<Queries.GetIndexQuery>) => {
   const { group: series } = data.series;
 
   return (
-    <BaseLayout className="">
+    <BaseLayout>
       <Hero />
-      <SiteInfo />
 
-      <div className="mx-auto px-5 xs:px-10 md:px-14 2xl:px-20">
+      <div className="mx-auto max-w-[1420px] px-5 xs:px-14 md:px-14">
         <HomeSection name="글" to={Routing.POSTS.toString()}>
           <Posts posts={posts} />
         </HomeSection>
