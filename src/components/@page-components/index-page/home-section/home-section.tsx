@@ -11,11 +11,11 @@ interface SectionProps {
 export const HomeSection = ({ name, to, children }: SectionProps) => {
   return (
     <section className="mb-8 flex flex-col justify-center">
-      <div className="mb-4 flex items-center gap-2">
+      <div className="mb-5 flex items-center gap-2">
         <span className="text-xl 2xl:text-2xl">
           <FiAlignLeft />
         </span>
-        <span className="text-lg font-bold 2xl:text-xl">최신 {name} 목록</span>
+        <span className="text-lg font-bold 3xl:text-xl">최신 {name} 목록</span>
       </div>
 
       {children}
