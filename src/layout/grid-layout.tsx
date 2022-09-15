@@ -6,7 +6,7 @@ interface GridLayoutProps {
 
 export const GridLayout = ({ children }: GridLayoutProps) => {
   return (
-    <ul className="grid w-full grid-cols-1 gap-5 drop-shadow-lg sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:gap-7">
+    <ul className="grid w-full grid-cols-1 gap-5 drop-shadow-lg sm:grid-cols-2 md:gap-7 lg:grid-cols-3 xl:grid-cols-4">
       {children}
     </ul>
   );

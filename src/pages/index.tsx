@@ -13,17 +13,19 @@ const IndexPage = ({ data }: PageProps<Queries.GetIndexQuery>) => {
   const { group: series } = data.series;
 
   return (
-    <BaseLayout className="py-10 px-5 xs:px-14 lg:px-20 2xl:py-20">
+    <BaseLayout className="">
       <Hero />
       <SiteInfo />
 
-      <HomeSection name="글" to={Routing.POSTS.toString()}>
-        <Posts posts={posts} />
-      </HomeSection>
+      <div className="mx-auto px-5 xs:px-10 md:px-14 2xl:px-20">
+        <HomeSection name="글" to={Routing.POSTS.toString()}>
+          <Posts posts={posts} />
+        </HomeSection>
 
-      <HomeSection name="시리즈" to={Routing.SERIES.toString()}>
-        <SeriesCards series={series} />
-      </HomeSection>
+        <HomeSection name="시리즈" to={Routing.SERIES.toString()}>
+          <SeriesCards series={series} />
+        </HomeSection>
+      </div>
     </BaseLayout>
   );
 };
