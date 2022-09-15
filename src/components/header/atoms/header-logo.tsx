@@ -15,7 +15,7 @@ export const HeaderLogo = () => {
           height={40}
           loading="eager"
         />
-        <span className="font-['Poor_Story'] text-lg shadow-lg md:text-xl">공존의 발자취</span>
+        <span className="font-['Poor_Story'] text-lg md:text-xl">공존의 발자취</span>
       </Link>
     </div>
   );

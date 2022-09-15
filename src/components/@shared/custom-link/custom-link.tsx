@@ -16,7 +16,7 @@ export const CustomLink = ({ name, icon, to, className }: CustomLinkProps) => {
       to={to}
     >
       {icon && <span className="text-xl">{icon}</span>}
-      <span className="text-base font-bold">{name}</span>
+      <span className="font-bold">{name}</span>
     </Link>
   );
 };
