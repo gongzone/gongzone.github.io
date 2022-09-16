@@ -48,7 +48,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
   return (
     <BaseLayout className="max-w-[712px] py-10 px-5 xs:px-14 sm:px-16 lg:px-0 2xl:max-w-[812px]">
       <div className="mb-8 flex items-center justify-between">
-        <Link className="group inline-flex items-center gap-3" to="/posts">
+        <Link className="group inline-flex items-center gap-3" to={Routing.POSTS.toString()}>
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-700 text-3xl shadow-lg duration-300 group-hover:-translate-x-1.5">
             <TiArrowBack />
           </span>
@@ -143,7 +143,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
                         <li key={id} className="text-zinc-400 hover:text-zinc-300">
                           <Link
                             className={i + 1 === seriesIndex ? 'font-bold text-emerald-400' : ''}
-                            to={`/posts/${frontmatter?.slug}`}
+                            to={Routing.POSTS.toString(frontmatter?.slug)}
                           >
                             {i + 1}. {frontmatter?.title}
                           </Link>
@@ -164,14 +164,16 @@ const PostTemplate = ({ data, pageContext, children }) => {
         {data.series.totalCount > 1 && (
           <div className="py-12">
             {seriesIndex > 1 && (
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-emerald-400">이전 글 링크</span>
-                <span className="text-emerald-400">
-                  <FaAngleDoubleRight />
-                </span>
+              <div className="flex flex-col items-center justify-center gap-2 ">
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-400">이전 글 링크</span>
+                  <span className="text-emerald-400">
+                    <FaAngleDoubleRight />
+                  </span>
+                </div>
                 <Link
                   className="text-lg text-zinc-400 transition-colors duration-300 hover:text-zinc-300"
-                  to={`/posts/${data.series.nodes[seriesIndex - 2]?.frontmatter?.slug}`}
+                  to={Routing.POSTS.toString(data.series.nodes[seriesIndex - 2]?.frontmatter?.slug)}
                 >
                   {data.series.nodes[seriesIndex - 2]?.frontmatter?.title}
                 </Link>
@@ -179,14 +181,16 @@ const PostTemplate = ({ data, pageContext, children }) => {
             )}
 
             {data.series.nodes.length !== seriesIndex && (
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-emerald-400">다음 글 링크</span>
-                <span className="text-emerald-400">
-                  <FaAngleDoubleRight />
-                </span>
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-400">다음 글 링크</span>
+                  <span className="text-emerald-400">
+                    <FaAngleDoubleRight />
+                  </span>
+                </div>
                 <Link
                   className="text-lg text-zinc-400 transition-colors duration-300 hover:text-zinc-300"
-                  to={`/posts/${data.series.nodes[seriesIndex]?.frontmatter?.slug}`}
+                  to={Routing.POSTS.toString(data.series.nodes[seriesIndex]?.frontmatter?.slug)}
                 >
                   {data.series.nodes[seriesIndex]?.frontmatter?.title}
                 </Link>
@@ -225,7 +229,7 @@ export const query = graphql`
       }
     }
     series: allMdx(
-      filter: { frontmatter: { series: { seriesName: { eq: $seriesName } } } }
+      filter: { frontmatter: { series: { seriesName: { eq: $seriesName, ne: null } } } }
       sort: { fields: frontmatter___series___seriesIndex, order: ASC }
     ) {
       totalCount
@@ -250,7 +254,7 @@ export const Head = ({ data }) => {
       title={title}
       description={description}
       image={image?.publicURL}
-      pathname={Routing.POSTS.toString(`/${slug}`)}
+      pathname={Routing.POSTS.toString(slug)}
     />
   );
 };

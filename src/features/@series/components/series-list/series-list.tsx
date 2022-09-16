@@ -1,4 +1,6 @@
 import { Link, graphql } from 'gatsby';
+import { Routing } from '@/constants/routing';
+
 import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
 
 interface SeriesListProps {
@@ -11,7 +13,7 @@ export const SeriesList = ({ posts }: SeriesListProps) => {
       {posts.map(({ id, frontmatter }, i) => (
         <li key={id} className="mb-16 flex flex-col gap-4 sm:flex-row">
           <div className="flex flex-col sm:self-center">
-            <Link className="hover-text-amber p-2" to={`/posts/${frontmatter.slug}`}>
+            <Link className="hover-text-amber p-2" to={Routing.POSTS.toString(frontmatter.slug)}>
               <span className="text-2xl font-bold">{i + 1}. </span>
               <span className="text-lg font-bold">{frontmatter.title}</span>
             </Link>
@@ -22,7 +24,7 @@ export const SeriesList = ({ posts }: SeriesListProps) => {
           </div>
 
           <div className="mx-auto flex w-[90%] flex-col gap-3">
-            <Link to={`/posts/${frontmatter.slug}`}>
+            <Link to={Routing.POSTS.toString(frontmatter.slug)}>
               <GatsbyImage
                 className="rounded-lg"
                 image={getImage(frontmatter.image as ImageDataLike)!}

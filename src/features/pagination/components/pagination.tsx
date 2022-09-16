@@ -30,17 +30,16 @@ export const Pagination = ({ target, pageContext }: PaginationProps) => {
   const isFirst = currentPage === 1;
   const isLast = currentPage === totalPagination;
   const numLink = (num: number) => {
-    if (!!currentTag) return num === 1 ? `${currentTag}` : `${currentTag}/${num}`;
+    if (!!currentTag) return num === 1 ? `${currentTag}` : `${currentTag}${num}/`;
 
-    return num === 1 ? `${target}` : `${target}/${num}`;
+    return num === 1 ? `${target}` : `${target}${num}/`;
   };
-  let prev = currentPage === 2 ? `${target}` : `${target}/${currentPage - 1}`;
-  let next = `${target}/${currentPage + 1}`;
+  let prev = currentPage === 2 ? `${target}` : `${target}${currentPage - 1}/`;
+  let next = `${target}${currentPage + 1}/`;
 
   if (!!currentTag) {
-    prev = currentPage === 2 ? `${currentTag}` : `${currentTag}/${currentPage - 1}`;
-
-    next = `${currentTag}/${currentPage + 1}`;
+    prev = currentPage === 2 ? `${currentTag}` : `${currentTag}${currentPage - 1}/`;
+    next = `${currentTag}${currentPage + 1}/`;
   }
 
   return (

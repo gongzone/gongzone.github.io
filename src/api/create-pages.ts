@@ -21,12 +21,12 @@ export const createPostPages = ({ graphQLData, createPage, path, root }: CreateP
     const { slug, series } = post.frontmatter;
 
     createPage({
-      path: `/posts/${slug}`,
+      path: `/posts/${slug}/`,
       component: `${postTemplate}?__contentFilePath=${post.internal.contentFilePath}`,
       context: {
         id: post.id,
-        seriesName: series?.seriesName,
-        seriesIndex: series?.seriesIndex,
+        seriesName: series ? series.seriesName : null,
+        seriesIndex: series ? series.seriesIndex : null,
       },
     });
   });
@@ -39,7 +39,7 @@ export const createPostsPages = ({ graphQLData, createPage, path, root }: Create
 
   Array.from({ length: totalPagination }).forEach((_, i) => {
     createPage({
-      path: i === 0 ? `/posts` : `/posts/${i + 1}`,
+      path: i === 0 ? `/posts/` : `/posts/${i + 1}/`,
       component: path.join(root, 'src/templates', 'posts-template.tsx'),
       context: {
         tag: 'ALL',
@@ -66,7 +66,7 @@ export const createPostsByTagPages = ({ graphQLData, createPage, path, root }: C
         path:
           i === 0
             ? `${Routing.slugifyTag(fieldValue)}`
-            : `${Routing.slugifyTag(fieldValue)}/${i + 1}`,
+            : `${Routing.slugifyTag(fieldValue)}${i + 1}/`,
         component: path.join(root, 'src/templates', 'posts-by-tag-template.tsx'),
         context: {
           tag: fieldValue,
@@ -90,7 +90,7 @@ export const createSeriesPages = ({ graphQLData, createPage, path, root }: Creat
 
   Array.from({ length: totalPagination }).forEach((_, i) => {
     createPage({
-      path: i === 0 ? `/series` : `/series/${i + 1}`,
+      path: i === 0 ? `/series/` : `/series/${i + 1}/`,
       component: path.join(root, 'src/templates', 'series-template.tsx'),
       context: {
         isCanonical: i === 0 ? true : false,

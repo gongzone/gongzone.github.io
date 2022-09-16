@@ -31,7 +31,7 @@ const SeriesListTemplate = ({
     <BaseLayout className="py-10 px-5 xs:px-14 md:max-w-[768px] md:p-20 lg:max-w-[850px]">
       <div className="">
         <div className="flex flex-col gap-4">
-          <Link className="group inline-flex items-center gap-3" to="/series">
+          <Link className="group inline-flex items-center gap-3" to={Routing.SERIES.toString()}>
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-700 text-3xl shadow-lg duration-300 group-hover:-translate-x-1.5">
               <TiArrowBack />
             </span>
