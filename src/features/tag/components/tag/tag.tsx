@@ -7,6 +7,7 @@ const tagColorSet: {
   JavaScript: 'bg-yellow-400 text-black',
   React: 'bg-blue-500 text-black',
   Canvas: 'bg-red-700',
+  Browser: 'bg-teal-600',
   YarnBerry: 'bg-emerald-700',
 };
 
