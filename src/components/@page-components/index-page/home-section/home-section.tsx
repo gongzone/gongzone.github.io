@@ -1,6 +1,6 @@
 import { Link } from 'gatsby';
 import type { ReactNode } from 'react';
-import { FiAlignLeft, FiArrowRightCircle } from 'react-icons/fi';
+import { FiPackage, FiArrowRightCircle } from 'react-icons/fi';
 
 interface SectionProps {
   name: string;
@@ -13,7 +13,7 @@ export const HomeSection = ({ name, to, children }: SectionProps) => {
     <section className="mb-8 flex flex-col justify-center">
       <div className="mb-5 flex items-center gap-2">
         <span className="text-xl 2xl:text-2xl">
-          <FiAlignLeft />
+          <FiPackage />
         </span>
         <span className="text-lg font-bold 3xl:text-xl">최신 {name} 목록</span>
       </div>

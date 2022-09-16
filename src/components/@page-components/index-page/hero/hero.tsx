@@ -28,8 +28,8 @@ export const Hero = () => {
               <span className="text-2xl font-bold text-emerald-400 2xl:text-3xl">GongZone</span>
             </div>
             <div className="text-lg font-bold">
-              <p className="text-lg font-bold">who mainly writes</p>
-              <p className="text-lg font-bold">about web development.</p>
+              <p>who mainly writes</p>
+              <p>about web development.</p>
             </div>
           </div>
         </div>
