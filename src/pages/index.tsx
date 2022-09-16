@@ -16,7 +16,7 @@ const IndexPage = ({ data }: PageProps<Queries.GetIndexQuery>) => {
     <BaseLayout>
       <Hero />
 
-      <div className="mx-auto max-w-[1420px] px-5 xs:px-14 md:px-14">
+      <div className="mx-auto max-w-[1478px] px-5 xs:px-14">
         <HomeSection name="글" to={Routing.POSTS.toString()}>
           <Posts posts={posts} />
         </HomeSection>
