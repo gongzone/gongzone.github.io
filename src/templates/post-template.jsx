@@ -66,7 +66,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
       <div className="relative mb-4">
         <Toc tableOfContents={tableOfContents} />
         <div>
-          <div>
+          <div className="flex items-center justify-center">
             <GatsbyImage className="rounded-lg" image={getImage(image)} alt={title} />
           </div>
 
