@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { FiInfo, FiHexagon } from 'react-icons/fi';
+import { FiInfo, FiHexagon, FiHelpCircle } from 'react-icons/fi';
 
 interface CalloutProps {
   kind?: string;
@@ -20,10 +20,19 @@ const infoStyle = {
   icon: FiInfo,
 };
 
+const questionStyle = {
+  bgColor: 'bg-cyan-900',
+  borderColor: 'border-cyan-700',
+  iconColor: 'text-cyan-700',
+  icon: FiHelpCircle,
+};
+
 function getCalloutUIData(kind?: string) {
   switch (kind) {
     case 'info':
       return infoStyle;
+    case 'question':
+      return questionStyle;
     default:
       return defaultStyle;
   }
