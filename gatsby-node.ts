@@ -9,18 +9,6 @@ import {
   createSeriesListPages,
 } from './src/api/create-pages';
 
-const root = process.cwd();
-
-// babel config
-export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions }) => {
-  actions.setBabelPreset({
-    name: 'babel-preset-gatsby',
-    options: {
-      reactRuntime: 'automatic',
-    },
-  });
-};
-
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
@@ -79,7 +67,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     graphQLData,
     createPage,
     path,
-    root,
   };
 
   createPostPages(createPagesData);
