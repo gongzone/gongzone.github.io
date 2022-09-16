@@ -8,8 +8,3 @@ import 'prismjs/plugins/command-line/prism-command-line.css';
 import '@fontsource/roboto';
 import '@fontsource/noto-sans-kr';
 import '@fontsource/poor-story';
-
-// gatsby-api
-// import { wrapRootWithMdx } from './src/api/wrap-root-with-mdx';
-
-// export const wrapRootElement = wrapRootWithMdx;
