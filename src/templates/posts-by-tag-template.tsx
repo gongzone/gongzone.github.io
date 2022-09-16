@@ -21,7 +21,7 @@ const PostsByTagTemplate = ({
   data,
   pageContext,
 }: PageProps<Queries.GetPostsByTagQuery, PostByTagPageContext>) => {
-  const { nodes: posts } = data.posts;
+  const { nodes: posts } = data.allMdx;
 
   return (
     <BaseLayout className="max-w-[1720px] py-10 px-5 xs:px-14 md:p-20">
@@ -34,7 +34,7 @@ const PostsByTagTemplate = ({
 
 export const query = graphql`
   query GetPostsByTag($tag: String, $limit: Int, $skip: Int) {
-    posts: allMdx(
+    allMdx(
       limit: $limit
       skip: $skip
       sort: { fields: frontmatter___date, order: DESC }
