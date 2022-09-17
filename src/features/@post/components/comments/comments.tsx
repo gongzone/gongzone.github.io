@@ -5,11 +5,21 @@ const COMMENTS_ID = 'comments-container';
 export const Comments = () => {
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://utteranc.es/client.js';
-    script.setAttribute('repo', 'gongzone/blog-comments');
-    script.setAttribute('issue-term', 'pathname');
-    script.setAttribute('theme', 'dark-blue');
-    script.setAttribute('crossorigin', 'anonymous');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'gongzone/gongzone.github.io');
+    script.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnk0MDA1NzgwMjU=');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDOF-BV6c4CRe7B');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '1');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', 'dark');
+    script.setAttribute('data-lang', 'ko');
+    script.setAttribute('data-loading', 'lazy');
+    script.setAttribute('data-input-position', 'top');
+    script.crossOrigin = 'anonymous';
     script.async = true;
 
     const comments = document.getElementById(COMMENTS_ID);
