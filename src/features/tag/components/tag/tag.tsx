@@ -9,6 +9,7 @@ const tagColorSet: {
   Canvas: 'bg-red-700',
   Browser: 'bg-teal-600',
   YarnBerry: 'bg-emerald-700',
+  'Package-Manager': 'bg-orange-700',
 };
 
 interface ColorTagProps {
