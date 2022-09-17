@@ -1,0 +1,254 @@
+---
+title: 'Node.js 패키지 매니저, yarn berry'
+description: 'Node.js 기반 패키지 매니저들을 살펴보고, Plug’n’Play(PnP) 기능을 핵심으로 하는 yarn berry를 집중적으로 탐구해봅니다.'
+slug: 'yarnberry'
+image: './assets/yarnberry.png'
+tags: ['Package-Manager']
+date: '2022-09-18'
+---
+
+## 1. 패키지 매니저란?
+
+모든 기능을 나 혼자만의 힘으로 구현하고자 하는 것은 굉장히 지치고 어려운 일이 될 것이다.
+만약 외부 생태계에서 목적에 맞는 적절한 기술을 끌어다가 사용할 수 있다면 개발의 속도나 퀄리티 측면에서 더 좋은 퍼포먼스를 발휘할 수 있을 것이다.
+
+그렇다면 **외부의 패키지화된 기술(라이브러리)들을 사용하고 관리할 수 있는 적절한 도구**가 필요한데,
+바로 그것이 **패키지 매니저**이다. 이 글에서는 자바스크립트 기반 **Node.js 패키지 매니저**에 초점을 맞춰 살펴보겠다.
+
+> 패키지 매니저(package manager): 외부 기술(라이브러리)을 내 프로젝트에 사용하고 관리하는데 도움을 주는 기술, 
+> 혹은 내 프로젝트의 의존성(dependencies)을 관리하는 시스템
+
+
+## 2. Node.js 패키지 매니저
+
+대표적인 Node.js 기반 패키지 매니저로는 `npm`과 `yarn`이 있다.
+
+### npm (node package manager)
+
+- npm은 자바스크립트 런타임인 Node.js를 설치하게 되면 자동적으로 사용할 수 있는 디폴트 패키지 매니저이다.
+- npm은 초기에 그렇다할 경쟁자가 없었기에 개발자들로부터 아래와 같은 문제점을 지적당했으나 빠른 업데이트가 이루어지지 않았다.
+    1. 전반적인 패키지 설치 프로세스가 굉장히 느리다.
+    2. cache의 이점을 제대로 활용하지 않아 첫번째 설치와 두 번째 설치간의 속도 차이가 거의 없었다.
+    3. lock file이 자동적으로 생성되지 않아 `npm shrinkwrap` 명령어로 해당 프로젝트의 의존성 버전을 고정시켜야 했다.
+- yarn이 출시된 이후 현재 npm은 많은 개선과정을 거쳐 기존 문제점 다수를 해결하였다.
+
+
+### yarn (yet another resource negotiator) v1
+
+- yarn은 Facebook에서 2016년에 출시한 패키지 매니저이다.
+- yarn은 위에서 언급한 npm의 고질적 문제를 해결한 솔루션이였기에, 많은 개발자들이 npm에서 yarn을 이용하는 것으로 옮겨갔다.
+- yarn 역시 기존 **npm registry(패키지 에코시스템)** 를 사용할 수 있었기에, npm에서 yarn으로 쉽게 전환할 수 있었다.
+- yarn version 1(classic)은 공식적으로 지원이 중지된 상태이다.
+
+### 새로 등장한 패키지 매니저: yarn v2+, pnpm
+
+- npm과 yarn v1은 현재에 와서 특정 성능이나 기능이 다소 다를지라도, 기본적으로 같은 맥락을 공유하고 있다.
+  바로 **node_modules 폴더를 중심으로 패키지를 관리**한다는 것이다.
+
+- 이러한 환경에서 패키지를 관리하다보니 다양한 문제점들이 발견할 수 있었다. 따라서 새로운 방식의 패키지 매니저가 등장하게 되었다.
+대표적으로 version 2 이상의 yarn(yarn berry)과 pnpm이 있다.
+
+- 모던 프론트엔드 환경 구축을 위해 알아두면 좋은 주제이기에, 
+  다음 문단에서 yarn v2+ (yarn berry)를 중심으로 관련 내용을 자세히 작성해보도록 하겠다.
+
+<Callout kind="question">
+**npx와 yarn dlx**
+
+React를 처음 접할 때 다음과 같은 명령어를 많이 보셨을겁니다.
+> `npx create-react-app`
+
+**npx(node package execute)** 는 5.2.0 version 이상의 npm을 설치할 시 자동적으로 설치가 되는 **CLI(Command Line Interface)** 입니다.
+npx은 간단히 말해서, 특정 패키지를 실행시키는 역할을 수행합니다. 심지어 node_modules 폴더에 필요한 의존성을 설치하지 않더라도 말이죠.
+따라서 보통의 경우 버전 업데이트가 잦은 모듈을 npm registry에 접근하여 일회성 명령으로 실행시킬 때 주로 사용합니다.
+npm에 npx가 있다면 yarn에는 그와 같은 유사한 도구로 **yarn dlx**가 존재합니다.
+</Callout>
+
+<Callout kind="question">
+**nvm**
+
+Node.js를 여러 버전으로 설치 가능하게 하고 추가적으로 관리까지 해주는 도구입니다. 
+협업시 같은 Node 버전으로 맞춰서 진행한다거나 다양한 Node 버전의 프로젝트를 동시에 진행할 때 사용합니다.
+</Callout>
+
+## 3. yarn v2+ (yarn berry)
+
+### 기존 npm과 yarn v1의 문제점: node_modules
+
+어떤 새로운 기술이 등장했을 때, 우리가 먼저 살펴볼 사항은 **‘어떤 문제를 해결하기 위한 솔루션인가?’** 를 파악하는 것이다.
+
+**yarn berry**는 **node_modules 폴더에 의존성 파일들을 생성하여 관리하는 방식**을 회피하고자 나타났다.
+그렇다면 node_modules 폴더의 문제점들에 대해 알아보자.
+
+1. **거대하고 복잡하다.**
+    - node_modules 폴더는 작은 프로젝트를 진행하더라도 용량이 크기 때문에 
+      **많은 양의 디스크 용량을 차지함으로 자원의 낭비를 발생**시킨다.
+
+    - 의존성들은 서로가 서로를 의존하며 깊이가 깊은 의존성 트리 구조를 만들어내는데,
+      이 상태에서 패키지 매니저가 **복잡한 의존성들을 잘 관리하고 확인하기 위해서는 많은 양의 시스템 호출이 요구**되어진다.
+      띠라서 node_modules 폴더를  **오로지 I/O-heavy operation에 의존하여 생성하는 작업은 비효율적**으로 일어날 수 밖에 없다.
+
+2. **최적화의 어려움.**
+    - 기존 node_modules 폴더로 의존성을 관리하다보면 **같은 패키지를 중복으로 설치할 위험**이 존재한다.
+  
+    - 기존 패키지 매니저들은 **hoisting 알고리즘**을 통해 중복 설치를 방지하고자 하나, 특정 패턴에는 적용되지 못하며, 
+      적용되었다고 해도 **유령 의존성 (Phantom Dependency)** 의 문제가 발생할 수 있다.
+
+<Callout kind="question">
+**유령 의존성 👻**
+
+**유령 의존성**이란 package.json에 명시해 놓지 않았으나(내 프로젝트가 직접 의존하지 않으나) 사용할 수 있는 의존성을 말합니다.
+
+**hoisting 알고리즘**을 통하여 어떤 의존성 A가 의존하는 의존성 B(package.json에 명시 X)가 트리 구조 상 최상단으로 끌어 올라와졌을 때,
+우리는 그 의존성 B를 직접 사용할 수 있게 됩니다. 
+그리고 의존성 A를 삭제한 순간 의존성 B도 조용히 사라져 사용할 수 없게 됩니다.
+
+이러한 통제와 예측이 불가능한 상황을 야기할 수 있기에 유령 의존성은 문제가 될 수 있습니다.
+</Callout>
+
+### yarn berry의 특징
+
+상기한 node_modules관련 문제들을 yarn berry에서는 **Plug’n’Play(PnP)** 과 **Zero-Installs**를 도입하여 해결하였다.
+
+1. **Plug’n’Play (PnP)**
+    - PnP기능을 사용하면 중첩된 폴더 구조인 node_modules 폴더를 만들지 않고, **.pnp.cjs** 파일을 생성하여 의존성들을 관리한다.
+
+    - .pnp.cjs 파일은 **Node가 의존성을 쉽게 찾을 수 있게하는 정보**를 담고 있다. (lookup table)  
+      예를들어, 해당 패키지의 이름과 버전, 경로에 대한 정보를 담고 있으며,
+      해당 패키지가 어떤 패키지에 의존하는지에 대해서도 기록되어 있다.
+
+    - .pnp.cjs 파일을 이용하면 디스크 I/O에 크게 의존하지 않아도 되기 때문에, 안정적이며 더욱 속도가 빠르다.
+
+    - Node가 의존성 검색을 위해 파일시스템 계층을 반복하며 탐색할 필요가 없어졌다.
+
+    - 의존성 트리에 대한 완벽한 최적화가 가능하며, 예측 가능해진다.
+
+2. **Zero-Installs**
+    - yarn berry는 의존성 관리를 **.yarn/cache** 디렉토리내에 **zip파일**로 관리한다.
+
+    - 하나의 패키지 당 하나의 zip파일로 구성된다.
+
+    - yarn 공식 홈페이지에 따르면 1.2GB의 압축되지 않은 node_modules 폴더를 대략 139MB의 zip 파일들로 구축할 수 있다고 나와있다.
+      전자는 git에서 지원하지 않는 용량이지만, 후자는 지원하기에 원격 리포에 push가 가능하다.
+      따라서 다른 개발자가 별도로 yarn install를 할 필요가 없이 셋팅된 프로젝트를 그대로 받아올 수 있음을 의미한다.
+
+    - 어떤 패키지를 지우거나 업데이트 할 시, 단 하나의 파일의 변화만 생기기 때문에 속도가 빠르고 안정적이다.
+      (기존 node_modules에서는 많은 파일들이 지워지거나 새로 생성되어야 했기 때문에 비효율적이었다.)
+
+<Callout kind="info">
+  yarn의 최신 버전은 유지하고 싶지만, PnP 방식은 원치 않는다면 **.yarnrc.yml** 파일에 다음 구문을 추가하면 됩니다.
+  (node_modules 폴더를 생성하여 기존 방식대로 의존성들을 관리하게 된다.)
+
+  `nodeLinker: node-modules`
+</Callout>
+
+<Callout>
+  추가적으로 실무에서도 yarn berry를 적용하는 사례들을 확인할 수 있습니다.
+
+  [토스 기술 블로그](https://toss.tech/article/node-modules-and-yarn-berry)  
+  [원티드 제품 팀 블로그](https://medium.com/wantedjobs/yarn-berry-%EC%A0%81%EC%9A%A9%EA%B8%B0-1-e4347be5987)
+</Callout>
+
+### yarn berry 내 프로젝트에 적용하기
+
+**🔹 기본 설정**
+
+yarn berry를 내 프로젝트에 적용하는 것 자체는 굉장히 간단하다.
+Node와 npm이 미리 설치되었다고 가정하면 다음 몇 줄의 커맨드로 yarn berry의 **Plug’n’Play** 기능을 사용할 수 있다.
+
+```bash
+$ npm install -g yarn
+$ yarn set version berry
+```
+
+눈 여겨 볼 만한 점은, 기존 npm과 yarn classic과 다르게 패키지 매니저 버전을 프로젝트(혹은 패키지) 별로 설정한다는 것이다.
+만약 기존에 node_modules 폴더와 package-lock.json 파일이 존재하는 프로젝트에 yarn berry를 적용하려면
+미리 해당 폴더와 파일을 삭제하고 적용하길 바란다.
+
+해당 프로젝트에 yarn berry가 잘 적용되었는지 확인하려면 `yarn -v` 명령어를 통해 yarn 버전을 파악할 수 있다.
+작성일 기준 yarn 버전은 3.2.0이다.
+
+**🔹 .gitignore 설정**
+
+기존 패키지 매니저에서는 node_modules 폴더를 ignore 시키는게 일반적이었다. yarn berry의 경우는 아래와 같다.
+
+> [Which file should be ignored? - yarn 공식 홈페이지](https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored)
+
+<Callout>
+🔺 Zero-Installs 사용 시
+
+.yarn/*   
+!.yarn/cache   
+!.yarn/patches   
+!.yarn/plugins   
+!.yarn/releases   
+!.yarn/sdks   
+!.yarn/versions
+
+🔺 Zero-Installs를 사용하지 않을 시
+
+  .pnp.*   
+  .yarn/*   
+  !.yarn/patches   
+  !.yarn/plugins   
+  !.yarn/releases   
+  !.yarn/sdks   
+  !.yarn/versions  
+</Callout> 
+
+**🔹 타입스크립트 적용**
+
+PnP 기능과 타입스크립트를 원활히 사용하기 위해서 별도의 설정이 필요하다.
+아래에 서술될 설정들을 하지 않으면 타입 체킹이나 에러 체킹이 정상적으로 이루어지지 않고 포맷 기능도 활성화 되지 않는 상황을 맞닥뜨릴 수 있다.
+(대표적으로 **Cannot find module...** 문제), 아래 글은 vscode를 사용한다는 가정하에 작성한다.
+
+> [Editor SDKs - yarn 공식 홈페이지](https://yarnpkg.com/getting-started/editor-sdks)
+
+1. 먼저 typescript를 package.json dependencies에 추가한다.
+
+```bash
+$ yarn add -D typescript
+```
+
+2. [ZipFS 링크](https://marketplace.visualstudio.com/items?itemName=arcanis.vscode-zipfs)라는 vscode 확장 프로그램을 설치한다.
+
+3. 아래의 명령어를 사용하여 .yarn/sdks 폴더를 생성한다.
+
+```bash
+$ yarn dlx @yarnpkg/sdks vscode
+```
+
+4. typescript 파일 안에서 ctrl+shift+p 눌러 “Select TypeScript Version” 입력하고 선택한다.
+
+5. "Use Workspace Version” 을 선택한다.
+
+<Callout kind="question">
+  **"Use Workspace Version”을 선택하는 창이 뜨지 않는 경우**
+  
+  지금 vscode에서 작업하고 있는 폴더가 해당 작업 폴더인지 확인해보시길 바랍니다. 
+  저의 경우 상위 폴더 혹은 workspace를 open하여 작업을 할 때, 해당 선택 창이 뜨지 않았습니다.
+  그리고 vscode를 reload 해보시길 바랍니다.
+</Callout>
+
+<Callout kind="info">
+**typescript plugin 설치 (option)**
+
+yarn berry는 plugin을 통하여 그 기능을 확장할 수 있습니다. 
+그 중 typescript plugin을 설치하면 유용한데, 이 플러그인은 자체적으로 타입을 포함하지 않은 패키지를 설치할 때 
+자동적으로 그와 관련된 @types 패키지들을 설치할 수 있도록 도와주는 역할을 합니다.
+
+```bash
+$ yarn plugin import typescript
+```
+</Callout>
+
+## 4. 마무리
+
+**Plug’n’Play** 은 기존 의존성 관리 시스템의 방향을 따르지 않고 있기 때문에 
+아직까지 지원이 되지 않는 영역 또한 존재한다. (대표적으로 React Native, 작성일 기준)
+
+따라서 나는 개인 프로젝트를 진행할 때 yarn berry를 사용하지 않기로 하였다. 
+내 경험상 특정 라이브러리를 이용할 때, yarn berry와 호환이 되는지 먼저 확인하는 작업이 필요했고 (호환이 안된다면 어떻게 우회하는지), 
+무언가 문제가 발생할 때 마다 이것이 yarn berry가 초래한 문제일 수도 있다는 생각에 디버깅 시간이 더 걸리는 문제가 있었다. (문제 원인의 범위를 확장)
+
+그러나 yarn berry를 사용하면 가져올 수 있는 이점도 확실히 있다는 것을 분명히 하고싶다. 
+좀 더 큰 규모의 프로젝트를 하게된다면 그 때 다시 사용해보고 싶은 생각이다.
