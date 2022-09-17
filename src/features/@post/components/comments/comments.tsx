@@ -33,5 +33,5 @@ export const Comments = () => {
     };
   }, []);
 
-  return <div id={COMMENTS_ID} />;
+  return <div className="my-20" id={COMMENTS_ID} />;
 };
