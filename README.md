@@ -17,7 +17,7 @@
 
 <br />
 
-[블로그 보러가기](https://gongzone.github.io/)
+[https://gongzone.github.io/](https://gongzone.github.io/)
 
 <br />
 </div>
