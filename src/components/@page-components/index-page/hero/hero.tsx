@@ -3,7 +3,7 @@ import { FiFeather, FiCoffee } from 'react-icons/fi';
 
 export const Hero = () => {
   return (
-    <div className="relative mx-auto my-8 flex w-full select-none flex-col items-center justify-center gap-6 px-5 md:my-16 md:flex-row lg:my-20 xl:my-24 3xl:my-28">
+    <div className="relative mx-auto my-8 flex w-full select-none flex-col items-center justify-center gap-6 px-6 md:my-16 md:flex-row lg:my-20 xl:my-24 3xl:my-28">
       <div className="w-56 xs:w-72 md:w-96">
         <StaticImage
           className="w-full"

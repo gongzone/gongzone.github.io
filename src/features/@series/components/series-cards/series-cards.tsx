@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 
-import { GridLayout } from '@/layout/grid-layout';
+import { GridLayout } from '@/components/layout/grid-layout';
 import { SeriesCard } from '@/features/@series/components/series-card';
 
 interface SeriesCardsProps {

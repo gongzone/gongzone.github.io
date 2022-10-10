@@ -24,7 +24,7 @@ const PostsTemplate = ({
   const { nodes: posts } = data.allMdx;
 
   return (
-    <BaseLayout className="max-w-[1720px] py-10 px-5 xs:px-14 md:p-20">
+    <BaseLayout className="max-w-[1720px] py-10 px-6 sm:px-10 md:p-20">
       <TagNav currentTag={pageContext.tag} />
       <Posts posts={posts} />
       <Pagination target={Routing.POSTS.toString()} pageContext={pageContext} />
