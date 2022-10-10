@@ -18,7 +18,7 @@ module.exports = {
     extend: {
       screens: {
         '3xl': '1720px',
-        '4xl': '1922px',
+        '4xl': '1920px',
       },
       fontFamily: {
         sans: ['Roboto', 'Noto Sans KR', ...defaultTheme.fontFamily.sans],
