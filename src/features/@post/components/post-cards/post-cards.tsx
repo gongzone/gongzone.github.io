@@ -1,24 +1,24 @@
 import { graphql } from 'gatsby';
 
 import { GridLayout } from '@/components/layout/grid-layout';
-import { PostCard } from '@/features/@post/components/post-card';
+import { PostCard } from './post-card';
 
-interface PostsProps {
+interface PostCardsProps {
   posts: Queries.PostsDataFragment['nodes'];
 }
 
-export const Posts = ({ posts }: PostsProps) => {
+export const PostCards = ({ posts }: PostCardsProps) => {
   return (
     <GridLayout>
-      {posts.map((p) => (
-        <PostCard key={p.id} frontmatter={p.frontmatter} />
+      {posts.map((post) => (
+        <PostCard key={post.id} frontmatter={post.frontmatter} />
       ))}
     </GridLayout>
   );
 };
 
 export const query = graphql`
-  fragment PostsData on MdxConnection {
+  fragment PostCardsData on MdxConnection {
     nodes {
       id
       ...PostCardData

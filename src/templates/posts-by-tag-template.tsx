@@ -5,7 +5,7 @@ import { Routing } from '@/fixtures/routing';
 import { SEO } from '@/features/seo/components';
 import { BaseLayout } from '@/components/layout/base-layout';
 import { TagNav } from '@/features/tag/components/tag-nav';
-import { Posts } from '@/features/@post/components/posts';
+import { PostCards } from '@/features/@post/components/post-cards';
 import { Pagination } from '@/features/pagination/components';
 
 interface PostByTagPageContext {
@@ -26,7 +26,7 @@ const PostsByTagTemplate = ({
   return (
     <BaseLayout className="max-w-[1720px] py-10 px-6 sm:px-10 md:p-20">
       <TagNav currentTag={pageContext.tag} />
-      <Posts posts={posts} />
+      <PostCards posts={posts} />
       <Pagination target={Routing.POSTS.toString()} pageContext={pageContext} />
     </BaseLayout>
   );
@@ -40,7 +40,7 @@ export const query = graphql`
       sort: { fields: frontmatter___date, order: DESC }
       filter: { frontmatter: { tags: { eq: $tag } } }
     ) {
-      ...PostsData
+      ...PostCardsData
     }
   }
 `;

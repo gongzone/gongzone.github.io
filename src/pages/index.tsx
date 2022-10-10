@@ -4,11 +4,11 @@ import { Routing } from '@/fixtures/routing';
 
 import { SEO } from '@/features/seo/components';
 import { BaseLayout } from '@/components/layout/base-layout';
-import { Hero, HomeSection } from '@/components/@page-components/index-page';
-import { Posts } from '@/features/@post/components/posts';
+import { Hero, HomeSection } from '@/components/page/index-page/index';
+import { PostCards } from '@/features/@post/components/post-cards';
 import { SeriesCards } from '@/features/@series/components/series-cards';
 
-const IndexPage = ({ data }: PageProps<Queries.GetIndexQuery>) => {
+const IndexPage = ({ data }: PageProps<Queries.GetIndexPageDataQuery>) => {
   const { nodes: posts } = data.posts;
   const { group: series } = data.series;
 
@@ -18,7 +18,7 @@ const IndexPage = ({ data }: PageProps<Queries.GetIndexQuery>) => {
 
       <div className="mx-auto max-w-[1720px] px-6 sm:px-10 md:px-14 lg:px-[66px]">
         <HomeSection name="글" to={Routing.POSTS.toString()}>
-          <Posts posts={posts} />
+          <PostCards posts={posts} />
         </HomeSection>
 
         <HomeSection name="시리즈" to={Routing.SERIES.toString()}>
@@ -30,9 +30,9 @@ const IndexPage = ({ data }: PageProps<Queries.GetIndexQuery>) => {
 };
 
 export const query = graphql`
-  query GetIndex($limit: Int = 8, $skip: Int = 0) {
+  query GetIndexPageData($limit: Int = 8, $skip: Int = 0) {
     posts: allMdx(limit: $limit, sort: { fields: frontmatter___date, order: DESC }) {
-      ...PostsData
+      ...PostCardsData
     }
     series: allMdx(sort: { fields: frontmatter___date, order: DESC }) {
       ...SeriesCardsData

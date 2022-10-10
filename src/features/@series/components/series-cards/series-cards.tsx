@@ -1,11 +1,11 @@
 import { graphql } from 'gatsby';
 
 import { GridLayout } from '@/components/layout/grid-layout';
-import { SeriesCard } from '@/features/@series/components/series-card';
+import { SeriesCard } from './series-card';
 
-interface SeriesCardsProps {
+type SeriesCardsProps = {
   series: Queries.SeriesCardsDataFragment['group'];
-}
+};
 
 export const SeriesCards = ({ series }: SeriesCardsProps) => {
   return (
