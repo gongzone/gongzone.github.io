@@ -66,11 +66,11 @@ const PostTemplate = ({ data, pageContext, children }) => {
 
           <div className="mx-auto flex flex-col sm:max-w-[90%] md:max-w-[82%] lg:max-w-[75%]">
             <div className="my-8 flex flex-col gap-3">
-              <div className="flex items-center gap-2 text-2xl font-bold">
+              <div className="flex items-center gap-2">
                 <span className="rounded-full bg-zinc-700 p-2 text-base text-amber-300">
                   <FaAsterisk />
                 </span>
-                <h1>{title}</h1>
+                <h1 className="text-2xl font-bold md:text-3xl">{title}</h1>
               </div>
               <div className="flex items-center gap-2 font-bold text-zinc-400">
                 <div className="flex items-center gap-2">
@@ -87,7 +87,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
                   <span>{timeToRead.text}</span>
                 </div>
               </div>
-              <h2>{description}</h2>
+              <h2 className="md:text-lg">{description}</h2>
               <ul className="flex flex-wrap">
                 {tags?.map((tag) => (
                   <li className="mb-2 mr-2" key={tag}>
@@ -151,7 +151,7 @@ const PostTemplate = ({ data, pageContext, children }) => {
           )}
         </div>
 
-        <article className="prose prose-invert mt-8 mb-8 max-w-none">
+        <article className="prose prose-invert mt-8 mb-8 max-w-none md:prose-lg">
           <MDXProvider components={mdxComponents}>{children}</MDXProvider>
         </article>
 
