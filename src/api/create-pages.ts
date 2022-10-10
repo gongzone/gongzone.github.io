@@ -1,7 +1,7 @@
 import type { Actions } from 'gatsby';
 import type { PlatformPath } from 'path';
 
-import { Routing } from '../constants/routing';
+import { Routing } from '../fixtures/routing';
 
 interface CreatePages {
   graphQLData: {

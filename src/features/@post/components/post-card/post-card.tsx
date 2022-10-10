@@ -1,6 +1,6 @@
 import { Link, graphql } from 'gatsby';
 
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 import { CardImage } from '@/components/@shared/card-image';
 import { PostContents } from '@/features/@post/components/post-card/molecules';
 

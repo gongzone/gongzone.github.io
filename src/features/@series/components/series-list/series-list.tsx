@@ -1,5 +1,5 @@
 import { Link, graphql } from 'gatsby';
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 
 import { GatsbyImage, getImage, type ImageDataLike } from 'gatsby-plugin-image';
 

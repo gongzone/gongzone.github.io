@@ -1,6 +1,6 @@
 import { Link } from 'gatsby';
 
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 import { paginateUtil } from '@/features/pagination/utils';
 
 interface PaginationProps {
@@ -17,7 +17,8 @@ interface PaginationProps {
 
 export const Pagination = ({ target, pageContext }: PaginationProps) => {
   const { totalPagination, postsPerPage, currentPage } = pageContext;
-  const currentTag = Routing.slugifyTag(pageContext.tag);
+  let currentTag = '';
+  if (pageContext.tag) currentTag = Routing.slugifyTag(pageContext.tag);
   const maxSize = 5;
 
   const { pages } = paginateUtil(

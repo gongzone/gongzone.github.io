@@ -1,7 +1,7 @@
 import { Link, graphql } from 'gatsby';
 import type { IGatsbyImageData } from 'gatsby-plugin-image';
 
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 
 import { CardImage } from '@/components/@shared/card-image';
 import { CountOverlay, SeriesTitle } from '@/features/@series/components/series-card/atoms';

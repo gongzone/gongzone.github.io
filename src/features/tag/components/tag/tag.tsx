@@ -1,5 +1,5 @@
 import { Link } from 'gatsby';
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 
 const tagColorSet: {
   [key: string]: string;
