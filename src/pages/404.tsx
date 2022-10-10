@@ -1,7 +1,7 @@
 import { HeadFC, Link } from 'gatsby';
 
 import { SEO } from '@/features/seo/components';
-import { HeaderLogo } from '@/components/header/atoms';
+import { HeaderLogo } from '@/components/layout/base-layout/header/header-logo';
 
 const NotFoundPage = () => {
   return (

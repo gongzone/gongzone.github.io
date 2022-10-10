@@ -1,9 +1,9 @@
 import { graphql, type HeadFC, type PageProps } from 'gatsby';
 
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 
 import { SEO } from '@/features/seo/components';
-import { BaseLayout } from '@/layout/base-layout';
+import { BaseLayout } from '@/components/layout/base-layout';
 import { Hero, HomeSection } from '@/components/@page-components/index-page';
 import { Posts } from '@/features/@post/components/posts';
 import { SeriesCards } from '@/features/@series/components/series-cards';
