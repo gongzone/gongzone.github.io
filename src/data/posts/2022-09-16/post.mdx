@@ -88,7 +88,9 @@ Web API를 통해 그러한 기능들을 간편하게 사용 할 수 있다.
 이라 할 수 있다. 다음 문단에서 Call Stack과 함께 자세히 설명하도록 하겠다.
 
 <Callout kind="question">
-  **Promise**와 **Microtask Queue** 그림에는 표시되지 않았지만 기존 Callback Queue에 더해 Microtask
+  **Promise**와 **Microtask Queue**  
+  
+  그림에는 표시되지 않았지만 기존 Callback Queue에 더해 Microtask
   Queue(혹은 Job Queue)라는 다른 큐가 존재합니다. 서버에서 데이터를 받아올 때 주로 사용되는 Promise
   객체의 비동기 처리를 위해 Microtask Queue가 사용됩니다. Microtask의 우선순위가 일반 Callback
   Queue보다 높아, 이벤트 루프가 Microtask의 콜백들을 먼저 Call Stack에 올리는 특징이 있습니다.
