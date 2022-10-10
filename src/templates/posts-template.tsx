@@ -1,11 +1,11 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
 
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 
-import { BaseLayout } from '@/layout/base-layout';
+import { SEO } from '@/features/seo/components';
+import { BaseLayout } from '@/components/layout/base-layout';
 import { TagNav } from '@/features/tag/components/tag-nav';
 import { Posts } from '@/features/@post/components/posts';
-import { SEO } from '@/features/seo/components';
 import { Pagination } from '@/features/pagination/components';
 
 interface PostsPageContext {

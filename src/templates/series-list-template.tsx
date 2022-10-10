@@ -2,10 +2,10 @@ import { graphql, type PageProps, type HeadFC } from 'gatsby';
 import { Link } from 'gatsby';
 import { TiArrowBack } from 'react-icons/ti';
 
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 
-import { BaseLayout } from '@/layout/base-layout';
 import { SEO } from '@/features/seo/components';
+import { BaseLayout } from '@/components/layout/base-layout';
 import { SeriesList } from '@/features/@series/components/series-list';
 
 interface SeriesListPageContext {

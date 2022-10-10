@@ -14,10 +14,10 @@ import {
   FaAngleDoubleRight,
 } from 'react-icons/fa';
 
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 
-import { BaseLayout } from '@/layout/base-layout';
 import { SEO } from '@/features/seo/components';
+import { BaseLayout } from '@/components/layout/base-layout';
 import { ColorTag } from '@/features/tag/components/tag';
 import { Toc } from '@/features/@post/components/toc';
 import { Comments } from '@/features/@post/components/comments';

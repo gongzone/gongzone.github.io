@@ -1,11 +1,11 @@
 import { graphql, type PageProps, type HeadFC } from 'gatsby';
 import { FaLayerGroup } from 'react-icons/fa';
 
-import { Routing } from '@/constants/routing';
+import { Routing } from '@/fixtures/routing';
 
-import { BaseLayout } from '@/layout/base-layout';
-import { SeriesCards } from '@/features/@series/components/series-cards';
 import { SEO } from '@/features/seo/components';
+import { BaseLayout } from '@/components/layout/base-layout';
+import { SeriesCards } from '@/features/@series/components/series-cards';
 import { Pagination } from '@/features/pagination/components';
 
 interface SeriesPageContext {
