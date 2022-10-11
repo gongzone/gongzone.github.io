@@ -56,7 +56,7 @@ export const query = graphql`
         description
         image {
           childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, width: 517, height: 380)
+            gatsbyImageData(placeholder: TRACED_SVG, width: 517, height: 380)
           }
         }
       }
