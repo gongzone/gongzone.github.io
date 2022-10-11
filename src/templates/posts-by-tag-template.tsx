@@ -2,20 +2,20 @@ import { graphql, type PageProps, type HeadFC } from 'gatsby';
 
 import { Routing } from '@/fixtures/routing';
 
-import { SEO } from '@/features/seo/components';
-import { BaseLayout } from '@/components/layout/base-layout';
-import { TagNav } from '@/features/tag/components/tag-nav';
-import { PostCards } from '@/features/@post/components/post-cards';
-import { Pagination } from '@/features/pagination/components';
+import { SEO } from '@/components/seo';
+import { BaseLayout } from '@/components/@layout/base-layout';
+import { TagNavigation } from '@/components/tag-navigation';
+import { PostCards } from '@/features/post/components/post-cards';
+import { Pagination } from '@/components/pagination';
 
-interface PostByTagPageContext {
+type PostByTagPageContext = {
   tag: string;
   limit: number;
   skip: number;
   totalPagination: number;
   postsPerPage: number;
   currentPage: number;
-}
+};
 
 const PostsByTagTemplate = ({
   data,
@@ -25,9 +25,9 @@ const PostsByTagTemplate = ({
 
   return (
     <BaseLayout className="max-w-[1720px] py-10 px-6 sm:px-10 md:p-20">
-      <TagNav currentTag={pageContext.tag} />
+      <TagNavigation currentTag={pageContext.tag} />
       <PostCards posts={posts} />
-      <Pagination target={Routing.POSTS.toString()} pageContext={pageContext} />
+      <Pagination to={Routing.POSTS.toString()} pageContext={pageContext} />
     </BaseLayout>
   );
 };
@@ -48,5 +48,5 @@ export const query = graphql`
 export default PostsByTagTemplate;
 
 export const Head: HeadFC = () => (
-  <SEO title="Posts - 공존의 발자취" pathname={Routing.POSTS.toString()} />
+  <SEO title="포스트 | 공존의 발자취" pathname={Routing.POSTS.toString()} />
 );

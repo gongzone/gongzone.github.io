@@ -1,198 +1,49 @@
+import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
-
-import React, { useState } from 'react';
-import { graphql, Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { TiArrowBack } from 'react-icons/ti';
-import {
-  FaAsterisk,
-  FaPencilAlt,
-  FaClock,
-  FaPenNib,
-  FaChevronUp,
-  FaChevronDown,
-  FaAngleDoubleRight,
-} from 'react-icons/fa';
+import { graphql } from 'gatsby';
 
 import { Routing } from '@/fixtures/routing';
 
-import { SEO } from '@/features/seo/components';
-import { BaseLayout } from '@/components/layout/base-layout';
-import { ColorTag } from '@/features/tag/components/tag';
-import { Toc } from '@/features/@post/components/toc';
-import { Comments } from '@/features/@post/components/comments';
-import { Callout, Video } from '@/features/@post/components/mdx-components';
-
-const mdxComponents = {
-  Link,
-  Callout,
-  Video,
-};
+import { SEO } from '@/components/seo';
+import { BaseLayout } from '@/components/@layout/base-layout';
+import { PostHeader } from '@/features/post/components/post-header';
+import { PostImage } from '@/features/post/components/post-image';
+import { PostInfo } from '@/features/post/components/post-info';
+import { Toc } from '@/features/post/components/toc';
+import { Comments } from '@/features/post/components/comments';
+import { SeriesBox } from '@/features/series/components/series-box';
+import { SeriesNextPrev } from '@/features/series/components/series-next-prev';
+import { mdxComponents } from '@/features/post/components/mdx-components';
 
 const PostTemplate = ({ data, pageContext, children }) => {
-  const [isSeriesOpen, setIsSeriesOpen] = useState(false);
-  const { tableOfContents } = data.post;
   const {
+    tableOfContents,
     fields: { timeToRead },
   } = data.post;
+
   const { title, description, date, lastmod, tags, image } = data.post?.frontmatter;
 
   const { seriesName, seriesIndex } = pageContext;
 
   return (
     <BaseLayout className="max-w-[712px] py-10 px-5 xs:px-14 sm:px-16 lg:px-0 2xl:max-w-[768px] 3xl:max-w-[812px]">
-      <div className="mb-8 flex items-center justify-between">
-        <Link className="group inline-flex items-center gap-3" to={Routing.POSTS.toString()}>
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-700 text-3xl shadow-lg duration-300 group-hover:-translate-x-1.5">
-            <TiArrowBack />
-          </span>
-          <div className="flex flex-col text-sm text-zinc-200">
-            <span>글 목록으로</span>
-            <span>돌아가기</span>
-          </div>
-        </Link>
-        <div className="flex flex-col">
-          <span className="text-sm">Written by</span>
-          <span className="text-lg font-bold">GongZone</span>
-        </div>
-      </div>
+      <PostHeader />
 
       <div className="relative mb-4">
         <Toc tableOfContents={tableOfContents} />
-        <div>
-          <div className="flex items-center justify-center">
-            <GatsbyImage className="rounded-lg" image={getImage(image)} alt={title} />
-          </div>
-
-          <div className="mx-auto flex flex-col sm:max-w-[90%] md:max-w-[82%] lg:max-w-[75%]">
-            <div className="my-8 flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <span className="rounded-full bg-zinc-700 p-2 text-base text-amber-300">
-                  <FaAsterisk />
-                </span>
-                <h1 className="text-2xl font-bold md:text-3xl">{title}</h1>
-              </div>
-              <div className="flex items-center gap-2 font-bold text-zinc-400">
-                <div className="flex items-center gap-2">
-                  <span>
-                    <FaPencilAlt />
-                  </span>
-                  <span>{date}</span>
-                </div>
-                <span>/</span>
-                <div className="flex items-center gap-2">
-                  <span>
-                    <FaClock />
-                  </span>
-                  <span>{timeToRead.text}</span>
-                </div>
-              </div>
-              <h2 className="md:text-lg">{description}</h2>
-              <ul className="flex flex-wrap">
-                {tags?.map((tag) => (
-                  <li className="mb-2 mr-2" key={tag}>
-                    <ColorTag className="block rounded-3xl px-4 py-2 text-base" tagName={tag} />
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-col self-end font-bold text-zinc-400">
-                {lastmod && (
-                  <div className="flex items-center gap-2 text-sm">
-                    <span>
-                      <FaPenNib />
-                    </span>
-                    <span>이 게시글은 {lastmod} 수정되었습니다. </span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {data.series.totalCount > 1 && (
-            <div className="gap-8md:px-16 mt-10 mb-16 flex w-full justify-center">
-              <div>
-                <div className="mb-2 flex flex-col bg-zinc-800 p-5 shadow-md md:p-8">
-                  <Link
-                    to={Routing.slugifySeries(seriesName)}
-                    className="mb-2 break-words text-xl font-bold text-emerald-400"
-                  >
-                    {seriesName}
-                  </Link>
-
-                  <button
-                    className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300"
-                    onClick={() => setIsSeriesOpen(!isSeriesOpen)}
-                  >
-                    <div className="flex items-center gap-1">
-                      <span>{data.series.totalCount}개의 게시글 (시리즈)</span>
-                      <span>{isSeriesOpen ? <FaChevronUp /> : <FaChevronDown />}</span>
-                    </div>
-                  </button>
-                </div>
-
-                {isSeriesOpen && (
-                  <ol className="flex flex-col items-center justify-center gap-1 rounded-md py-5 text-zinc-400">
-                    {data.series.nodes.map(({ id, frontmatter }, i) => {
-                      return (
-                        <li key={id} className="text-zinc-400 hover:text-zinc-300">
-                          <Link
-                            className={i + 1 === seriesIndex ? 'font-bold text-emerald-400' : ''}
-                            to={Routing.POSTS.toString(frontmatter?.slug)}
-                          >
-                            {i + 1}. {frontmatter?.title}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
+        <PostImage title={title} image={image} />
+        <PostInfo
+          postInfoData={{ title, description, date, lastmod, tags, timeToRead: timeToRead.text }}
+        />
+        <SeriesBox seriesName={seriesName} seriesIndex={seriesIndex} seriesData={data.series} />
 
         <article className="prose prose-invert mt-8 mb-8 max-w-none md:prose-lg">
           <MDXProvider components={mdxComponents}>{children}</MDXProvider>
         </article>
 
-        {data.series.totalCount > 1 && (
-          <div className="py-12">
-            {seriesIndex > 1 && (
-              <div className="flex flex-col items-center justify-center gap-2 ">
-                <div className="flex items-center gap-2">
-                  <span className="text-emerald-400">이전 글 링크</span>
-                  <span className="text-emerald-400">
-                    <FaAngleDoubleRight />
-                  </span>
-                </div>
-                <Link
-                  className="text-lg text-zinc-400 transition-colors duration-300 hover:text-zinc-300"
-                  to={Routing.POSTS.toString(data.series.nodes[seriesIndex - 2]?.frontmatter?.slug)}
-                >
-                  {data.series.nodes[seriesIndex - 2]?.frontmatter?.title}
-                </Link>
-              </div>
-            )}
-
-            {data.series.nodes.length !== seriesIndex && (
-              <div className="flex flex-col items-center justify-center gap-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-emerald-400">다음 글 링크</span>
-                  <span className="text-emerald-400">
-                    <FaAngleDoubleRight />
-                  </span>
-                </div>
-                <Link
-                  className="text-lg text-zinc-400 transition-colors duration-300 hover:text-zinc-300"
-                  to={Routing.POSTS.toString(data.series.nodes[seriesIndex]?.frontmatter?.slug)}
-                >
-                  {data.series.nodes[seriesIndex]?.frontmatter?.title}
-                </Link>
-              </div>
-            )}
-          </div>
-        )}
+        <SeriesNextPrev seriesIndex={seriesIndex} seriesData={data.series} />
       </div>
+
       <Comments />
     </BaseLayout>
   );
