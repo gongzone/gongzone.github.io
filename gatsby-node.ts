@@ -1,4 +1,3 @@
-import path from 'path';
 import readingTime from 'reading-time';
 import type { GatsbyNode } from 'gatsby';
 import {
@@ -7,7 +6,7 @@ import {
   createPostsByTagPages,
   createSeriesPages,
   createSeriesListPages,
-} from './src/api/create-pages';
+} from './gatsby-node-apis/create-pages';
 
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions }) => {
   const { createNodeField } = actions;
@@ -20,15 +19,57 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions }
   }
 };
 
+type PostsData = {
+  allMdx: {
+    totalCount: number;
+    nodes: {
+      id: string;
+      internal: {
+        contentFilePath: string;
+      };
+      frontmatter: {
+        slug: string;
+        series: {
+          seriesName: string;
+          seriesIndex: number;
+        };
+      };
+    }[];
+  };
+};
+
+type TagsData = {
+  allMdx: {
+    group: {
+      fieldValue: string;
+      totalCount: number;
+    }[];
+  };
+};
+
+type SeriesData = {
+  allMdx: {
+    group: {
+      fieldValue: string;
+      group: {
+        fieldValue: string;
+      }[];
+    }[];
+  };
+};
+
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
-  const graphQLData = await graphql(`
+  const postsData = await graphql<PostsData>(`
     {
-      posts: allMdx {
+      allMdx {
         totalCount
         nodes {
           id
+          internal {
+            contentFilePath
+          }
           frontmatter {
             slug
             series {
@@ -36,18 +77,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
               seriesIndex
             }
           }
-          internal {
-            contentFilePath
-          }
         }
       }
-      tags: allMdx {
+    }
+  `);
+
+  const tagsData = await graphql<TagsData>(`
+    {
+      allMdx {
         group(field: frontmatter___tags) {
           fieldValue
           totalCount
         }
       }
-      series: allMdx {
+    }
+  `);
+
+  const seriesData = await graphql<SeriesData>(`
+    {
+      allMdx {
         group(field: frontmatter___series___seriesName) {
           fieldValue
           group(field: frontmatter___tags) {
@@ -58,20 +106,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     }
   `);
 
-  if (graphQLData.errors) {
+  if (postsData.errors || tagsData.errors || seriesData.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
     return;
   }
 
-  const createPagesData = {
-    graphQLData,
-    createPage,
-    path,
-  };
-
-  createPostPages(createPagesData);
-  createPostsPages(createPagesData);
-  createPostsByTagPages(createPagesData);
-  createSeriesPages(createPagesData);
-  createSeriesListPages(createPagesData);
+  createPostPages({ createPage, posts: postsData.data?.allMdx.nodes });
+  createPostsPages({ createPage, totalCount: postsData.data?.allMdx.totalCount });
+  createPostsByTagPages({ createPage, tags: tagsData.data?.allMdx.group });
+  createSeriesPages({ createPage, totalCount: seriesData.data?.allMdx.group.length });
+  createSeriesListPages({ createPage, series: seriesData.data?.allMdx.group });
 };
