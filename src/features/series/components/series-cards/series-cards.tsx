@@ -30,7 +30,7 @@ export const query = graphql`
         frontmatter {
           image {
             childImageSharp {
-              gatsbyImageData(placeholder: TRACED_SVG, width: 517, height: 380)
+              gatsbyImageData(placeholder: BLURRED, width: 517, height: 380)
             }
           }
         }

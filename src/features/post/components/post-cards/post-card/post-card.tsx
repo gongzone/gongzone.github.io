@@ -51,7 +51,7 @@ export const query = graphql`
       date(formatString: "YYYY년 MM월 DD일")
       image {
         childImageSharp {
-          gatsbyImageData(placeholder: TRACED_SVG, width: 517, height: 380)
+          gatsbyImageData(placeholder: BLURRED, width: 517, height: 380)
         }
       }
     }
