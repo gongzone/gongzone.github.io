@@ -4,7 +4,7 @@ import { DesktopNavs } from './desktop-navs';
 
 export const Header = () => {
   return (
-    <header className="flex h-24 items-center justify-between bg-zinc-900 px-6 xs:px-8 md:h-28 md:px-10 lg:px-20 4xl:h-36 4xl:px-32">
+    <header className="flex h-24 items-center justify-between bg-zinc-900 px-6 xs:px-8 md:h-28 md:px-10 lg:px-20 4xl:h-32 4xl:px-28">
       <HeaderLogo />
       <MobileNavButton />
       <DesktopNavs />
