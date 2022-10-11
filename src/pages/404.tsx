@@ -1,7 +1,7 @@
 import { HeadFC, Link } from 'gatsby';
 
-import { SEO } from '@/features/seo/components';
-import { HeaderLogo } from '@/components/layout/base-layout/header/header-logo';
+import { SEO } from '@/components/seo';
+import { HeaderLogo } from '@/components/@layout/base-layout/header/header-logo';
 
 const NotFoundPage = () => {
   return (
@@ -25,4 +25,4 @@ const NotFoundPage = () => {
 
 export default NotFoundPage;
 
-export const Head: HeadFC = () => <SEO title="공존의 발자취" />;
+export const Head: HeadFC = () => <SEO title="404 | 공존의 발자취" />;

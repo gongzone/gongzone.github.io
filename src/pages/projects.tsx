@@ -1,7 +1,9 @@
 import { HeadFC } from 'gatsby';
 
+import { Routing } from '@/fixtures/routing';
+
+import { SEO } from '@/components/seo';
 import { UnderDevelopment } from '@/components/under-development';
-import { SEO } from '@/features/seo/components';
 
 const ProjectsPage = () => {
   return <UnderDevelopment />;
@@ -9,4 +11,6 @@ const ProjectsPage = () => {
 
 export default ProjectsPage;
 
-export const Head: HeadFC = () => <SEO title="공존의 발자취" pathname="/projects" />;
+export const Head: HeadFC = () => (
+  <SEO title="프로젝트 | 공존의 발자취" pathname={Routing.PROJECTS.toString()} />
+);

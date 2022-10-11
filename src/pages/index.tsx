@@ -2,11 +2,12 @@ import { graphql, type HeadFC, type PageProps } from 'gatsby';
 
 import { Routing } from '@/fixtures/routing';
 
-import { SEO } from '@/features/seo/components';
-import { BaseLayout } from '@/components/layout/base-layout';
-import { Hero, HomeSection } from '@/components/page/index-page/index';
-import { PostCards } from '@/features/@post/components/post-cards';
-import { SeriesCards } from '@/features/@series/components/series-cards';
+import { SEO } from '@/components/seo';
+import { BaseLayout } from '@/components/@layout/base-layout';
+import { Hero } from '@/components/home-hero';
+import { HomeSection } from '@/components/home-section';
+import { PostCards } from '@/features/post/components/post-cards';
+import { SeriesCards } from '@/features/series/components/series-cards';
 
 const IndexPage = ({ data }: PageProps<Queries.GetIndexPageDataQuery>) => {
   const { nodes: posts } = data.posts;
@@ -42,4 +43,4 @@ export const query = graphql`
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <SEO title="공존의 발자취" />;
+export const Head: HeadFC = () => <SEO title="공존의 발자취" pathname={Routing.HOME.toString()} />;
