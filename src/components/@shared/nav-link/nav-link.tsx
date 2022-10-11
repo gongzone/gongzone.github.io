@@ -15,7 +15,7 @@ export const NavLink = ({ name, icon, to, className }: NavLinkProps) => {
       to={to}
     >
       {icon && <span className="text-xl">{icon}</span>}
-      <span className="font-bold 4xl:text-xl">{name}</span>
+      <span className="font-bold">{name}</span>
     </Link>
   );
 };
