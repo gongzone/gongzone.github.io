@@ -1,4 +1,4 @@
-import { BaseLayout } from '@/components/layout/base-layout';
+import { BaseLayout } from '@/components/@layout/base-layout';
 
 export const UnderDevelopment = () => {
   return (

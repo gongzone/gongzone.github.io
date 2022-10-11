@@ -2,18 +2,18 @@ import { Link } from 'gatsby';
 
 import { Routing } from '@/fixtures/routing';
 
-interface LinkTagProps {
+type FilteringTagProps = {
   currentTag?: string;
   tagName: string;
   totalCount: number;
-}
+};
 
-export const LinkTag = ({ currentTag, tagName, totalCount }: LinkTagProps) => {
-  const currentStyle = currentTag === tagName && 'bg-[#232c42] text-amber-300';
-
+export const FilteringTag = ({ currentTag, tagName, totalCount }: FilteringTagProps) => {
   return (
     <Link
-      className={`hover-text-amber rounded-3xl bg-[#2e3039] px-4 py-2 text-sm shadow-xl xs:text-base ${currentStyle} `}
+      className={`hover-text-amber rounded-3xl bg-[#2e3039] px-4 py-2 text-sm shadow-xl xs:text-base ${
+        currentTag === tagName ? 'bg-[#232c42] text-amber-300' : ''
+      }`}
       to={Routing.slugifyTag(tagName)}
     >
       <span>{tagName}</span>
