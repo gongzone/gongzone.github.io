@@ -4,9 +4,9 @@ import { TiArrowBack } from 'react-icons/ti';
 
 import { Routing } from '@/fixtures/routing';
 
-import { SEO } from '@/features/seo/components';
-import { BaseLayout } from '@/components/layout/base-layout';
-import { SeriesList } from '@/features/@series/components/series-list';
+import { SEO } from '@/components/seo';
+import { BaseLayout } from '@/components/@layout/base-layout';
+import { SeriesList } from '@/features/series/components/series-list';
 
 interface SeriesListPageContext {
   limit: number;
@@ -71,7 +71,7 @@ export const Head: HeadFC<Queries.GetPostsBySeriesQuery, SeriesListPageContext> 
   pageContext,
 }) => (
   <SEO
-    title={`${pageContext.seriesName} - 공존의 발자취`}
+    title={`${pageContext.seriesName} | 공존의 발자취`}
     pathname={Routing.slugifySeries(pageContext.seriesName)}
   />
 );

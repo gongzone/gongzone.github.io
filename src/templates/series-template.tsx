@@ -3,10 +3,10 @@ import { FaLayerGroup } from 'react-icons/fa';
 
 import { Routing } from '@/fixtures/routing';
 
-import { SEO } from '@/features/seo/components';
-import { BaseLayout } from '@/components/layout/base-layout';
-import { SeriesCards } from '@/features/@series/components/series-cards';
-import { Pagination } from '@/features/pagination/components';
+import { SEO } from '@/components/seo';
+import { BaseLayout } from '@/components/@layout/base-layout';
+import { SeriesCards } from '@/features/series/components/series-cards';
+import { Pagination } from '@/components/pagination';
 
 interface SeriesPageContext {
   limit: number;
@@ -35,7 +35,7 @@ const SeriesTemplate = ({
       </div>
 
       <SeriesCards series={series} />
-      <Pagination target={Routing.SERIES.toString()} pageContext={pageContext} />
+      <Pagination to={Routing.SERIES.toString()} pageContext={pageContext} />
     </BaseLayout>
   );
 };
@@ -51,5 +51,5 @@ export const query = graphql`
 export default SeriesTemplate;
 
 export const Head: HeadFC = () => (
-  <SEO title="Series - 공존의 발자취" pathname={Routing.SERIES.toString()} />
+  <SEO title="시리즈 | 공존의 발자취" pathname={Routing.SERIES.toString()} />
 );
