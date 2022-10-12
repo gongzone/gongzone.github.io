@@ -39,8 +39,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["cypress", "node"]
+    "types": ["cypress"]
   },
-  "exclude": ["./out/**/*", "./node_modules/**/*", "./gatsby-config.ts"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"]
+  "include": ["./cypress.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
+  "exclude": ["./out/**/*", "./node_modules/**/*", "./gatsby-config.ts"]
 }
