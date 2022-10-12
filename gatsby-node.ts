@@ -7,6 +7,7 @@ import {
   createSeriesPages,
   createSeriesListPages,
 } from './gatsby-node-apis/create-pages';
+import cloneDeep from 'lodash/cloneDeep';
 
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions }) => {
   const { createNodeField } = actions;
@@ -15,6 +16,19 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions }
       node,
       name: `timeToRead`,
       value: readingTime(node.body as string),
+    });
+  }
+};
+
+export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page, actions }) => {
+  if (page?.context?.frontmatter && !page?.context?.didCreateClone) {
+    actions.createPage({
+      ...page,
+      context: {
+        ...page.context,
+        frontmatter: cloneDeep(page.context.frontmatter),
+        didCreateClone: true,
+      },
     });
   }
 };
