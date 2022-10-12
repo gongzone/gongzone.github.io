@@ -13,6 +13,8 @@
     "build": "gatsby build",
     "deploy": "gatsby clean && gatsby build && gh-pages -f -d public -b main",
     "test": "jest --watch",
+    "cy:open": "cypress open",
+    "test:e2e": "cypress open --e2e",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit"
@@ -59,6 +61,7 @@
     "autoprefixer": "^10.4.8",
     "babel-jest": "^29.0.1",
     "babel-preset-gatsby": "^2.22.0",
+    "cypress": "^10.10.0",
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
