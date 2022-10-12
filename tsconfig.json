@@ -38,7 +38,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["cypress", "node"]
   },
   "exclude": ["./out/**/*", "./node_modules/**/*", "./gatsby-config.ts"],
   "include": ["**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"]
