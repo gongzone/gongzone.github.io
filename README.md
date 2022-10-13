@@ -62,6 +62,18 @@
 
 ## 🖌️ UI / UX
 
+<img src="https://user-images.githubusercontent.com/84328632/195601562-950af33c-18fd-4d90-81a9-c50d42ac0538.PNG">
+
+<br />
+
+<img src="https://user-images.githubusercontent.com/84328632/195602929-85de185a-f5ac-4b0e-8ebb-3319bfb04643.PNG">
+
+<br />
+
+<img src="https://user-images.githubusercontent.com/84328632/195602976-c43b01ad-5bf2-40c1-b056-ed0763797611.PNG" >
+
+<br />
+
 간단하고 직관적인 UI / UX 구축하는 것을 목표로 하였습니다.
 
 - **tailwind css** 이용하여 전반적인 스타일 구축
