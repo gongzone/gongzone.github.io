@@ -92,7 +92,7 @@
 - TOC(Table of Contents)
   - Intersection Observer API 활용
 - MDX 커스터마이징
-  - custom components 구현
+  - 포스트 작성 시 사용할 수 있는 custom components 구현
   - 코드 하이라이팅
 - 댓글
   - giscus 이용
