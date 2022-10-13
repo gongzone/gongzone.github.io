@@ -1,4 +1,5 @@
 <div align="center">
+![main-logo](https://user-images.githubusercontent.com/84328632/195548728-312f7f9b-5ed8-4831-9507-85b9f4b7a7ce.png)
 <h1>공존의 발자취</h1>
 
 <p>Mdx 기반의 기술 블로그입니다.
