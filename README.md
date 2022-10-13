@@ -89,6 +89,7 @@
 
 - 태그 필터링
 - 페이지네이션
+- 시리즈 별 모아보기
 - TOC(Table of Contents)
   - Intersection Observer API 활용
 - MDX 커스터마이징
@@ -101,7 +102,6 @@
 - PWA (Progressive Web App)
   - web app manifest
   - service worker
-- 시리즈 별 모아보기
 
 <br />
 
