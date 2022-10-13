@@ -16,9 +16,7 @@
 </div>
 
 <br />
-
 <strong>Made by GongZone</strong>
-
 <br />
 
 [https://gongzone.github.io/](https://gongzone.github.io/)
