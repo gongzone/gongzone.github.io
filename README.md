@@ -30,6 +30,8 @@
 - [📃 프로젝트의 목적](#-프로젝트의-목적)
 - [🎃 기술 선택의 이유](#-기술-선택의-이유)
 - [🖌️ UI / UX](#️-ui--ux)
+- [🎈 기능 구현 사항](#-기능-구현-사항)
+- [🔧 개발 예정 사항](#-개발-예정-사항)
 
 <br />
 
@@ -49,7 +51,7 @@
 
 1. 데이터베이스 및 api 서버 구축 (Remix or Next.js + db)
 2. Headless CMS (Gatsby + sanity or strapi or contentful ...)
-3. **Local data (Gatsby or Next.js)**
+3. **Local MDX data (Gatsby or Next.js)**
 
 제가 가장 이상적이라 생각하는 선택지는 1번이였습니다. 왜냐하면 유연하게 데이터 모델을 작성할 수 있고, 기능 추가에 있어 확장성이 높은 블로그를 구축할 수 있기 때문입니다. 한마디로 **완전한 커스터마이징**이 가능하다는 것이 그 이유입니다.
 
@@ -82,3 +84,29 @@
 - 반응형 구현
 
 <br />
+
+## 🎈 기능 구현 사항
+
+- 태그 필터링
+- 페이지네이션
+- TOC(Table of Contents)
+  - Intersection Observer API 활용
+- MDX 커스텀 컴포넌트
+- 댓글
+  - giscus 이용
+- SEO 최적화
+  - 필수 메타 태그 + robots.txt + sitemap.xml, 구글 서치 콘솔, 구글 아날리틱스
+- PWA (Progressive Web App)
+  - web app manifest
+  - service worker
+- 시리즈 별 모아보기
+
+<br />
+
+## 🔧 개발 예정 사항
+
+- 소개 페이지
+- 프로젝트 페이지
+- Testing
+  - unit testing: pagination, toc (jest + testing-library)
+  - e2e testing (cypress)
