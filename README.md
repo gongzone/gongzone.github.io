@@ -91,7 +91,9 @@
 - 페이지네이션
 - TOC(Table of Contents)
   - Intersection Observer API 활용
-- MDX 커스텀 컴포넌트
+- MDX 커스터마이징
+  - custom components 구현
+  - 코드 하이라이팅
 - 댓글
   - giscus 이용
 - SEO 최적화
