@@ -20,6 +20,7 @@
   margin: 0.5em 0;
   padding: 2em 1em;
   overflow: auto;
+  font-size: 1rem;
 }
 
 .gatsby-highlight::-webkit-scrollbar {
