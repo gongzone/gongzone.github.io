@@ -10,14 +10,16 @@ type SeriesCardsProps = {
 export const SeriesCards = ({ series }: SeriesCardsProps) => {
   return (
     <GridLayout>
-      {series.map((s) => (
-        <SeriesCard
-          key={s.fieldValue}
-          title={s.fieldValue!}
-          totalCount={s.totalCount}
-          image={s.nodes[0]!.frontmatter?.image}
-        />
-      ))}
+      <ul>
+        {series.map((s) => (
+          <SeriesCard
+            key={s.fieldValue}
+            title={s.fieldValue!}
+            totalCount={s.totalCount}
+            image={s.nodes[0]!.frontmatter?.image}
+          />
+        ))}
+      </ul>
     </GridLayout>
   );
 };

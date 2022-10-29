@@ -4,15 +4,17 @@ import { GridLayout } from '@/components/@layout/grid-layout';
 import { PostCard } from './post-card';
 
 interface PostCardsProps {
-  posts: Queries.PostsDataFragment['nodes'];
+  posts: Queries.PostCardsDataFragment['nodes'];
 }
 
 export const PostCards = ({ posts }: PostCardsProps) => {
   return (
     <GridLayout>
-      {posts.map((post) => (
-        <PostCard key={post.id} frontmatter={post.frontmatter} />
-      ))}
+      <ul>
+        {posts.map((post) => (
+          <PostCard key={post.id} frontmatter={post.frontmatter} />
+        ))}
+      </ul>
     </GridLayout>
   );
 };
