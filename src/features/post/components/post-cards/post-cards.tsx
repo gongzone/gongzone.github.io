@@ -10,11 +10,9 @@ interface PostCardsProps {
 export const PostCards = ({ posts }: PostCardsProps) => {
   return (
     <GridLayout>
-      <ul>
-        {posts.map((post) => (
-          <PostCard key={post.id} frontmatter={post.frontmatter} />
-        ))}
-      </ul>
+      {posts.map((post) => (
+        <PostCard key={post.id} frontmatter={post.frontmatter} />
+      ))}
     </GridLayout>
   );
 };
